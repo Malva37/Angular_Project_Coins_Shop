@@ -1,0 +1,24 @@
+a {
+  color: black;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  color: black;
+}
+
+a.nav-link::after {
+  content: '';
+  display: block;
+  width: 100%;
+  background-color: #207141;
+  height: 1px;
+  transform: scale(0);
+  transition: all .3s;
+  text-align: center;
+}
+
+.nav-link:hover::after {
+  transform: scale(1);
+
+}

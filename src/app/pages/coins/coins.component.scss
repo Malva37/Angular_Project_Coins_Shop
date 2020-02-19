@@ -1,0 +1,48 @@
+// .container {
+//   margin: 0 5%;
+//   overflow: hidden;
+// }
+
+.main{
+    display: flex;
+
+}
+.row .card {
+  padding: 10px;
+  margin: 0 1%;
+  width: 216px;
+  height: 250px;
+  text-align: center;
+  
+}
+h6{
+    width: inherit;
+height: inherit;
+
+}
+
+.row .card img {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  // padding: 0 15%;
+  margin-bottom: 20px;
+  margin-left: 20%;
+}
+
+.filters {
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 25%;
+
+}
+.catalog{
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: 65%; 
+}
