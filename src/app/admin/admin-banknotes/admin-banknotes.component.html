@@ -1,1 +1,175 @@
-<p>admin-banknotes works!</p>
+
+<div class="container">
+    <form class="mb-2">
+      <div class="form-row mt-4">
+        <div class="col-11">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+  
+        <div class="col">
+          <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
+        </div>
+  
+      </div>
+    </form>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Image</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let banknote of arrBanknotes; let i=index">
+          <td>{{ i+1 }}</td>
+          <td>{{ banknote.name }}</td>
+          <td>{{ banknote.price}}  грн</td>
+          <td>
+            <img [attr.src]="banknote.image" class="card-img-top" alt="...">
+          </td>
+          <td>
+           <input type="button" value="edit" (click)="editBanknotes(banknote,template)" class="btn btn-light btn-outline-dark">
+          </td>
+          <td>
+          <input type="button" value="delete" (click)="deleteBanknotes(banknote)" class="btn btn-dark btn-outline-red">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add new banknote</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <input ng type="text" [(ngModel)]="productName" name="productName" class="form-control"
+            placeholder="Product Name" id="productName">
+        </div>
+  
+        <div class="form-group bootstrap-select show-tick open">    
+          <select class="custom-select" [(ngModel)]="productSignature" name="productSignature" required>
+            <option [attr.selected] [attr.disabled]> — будь-який підпис — </option>
+            <option>  без підпису </option>
+            <option> Матвієнко Володимир Павлович </option>
+            <option> Гетьман Вадим Петрович </option>
+            <option> Ющенко Віктор Андрійович</option>
+            <option> Стельмах Володимир Семенович</option>
+            <option> Тігіпко Сергій Леонідович</option>
+            <option> Арбузов Сергій Геннадійович </option>
+            <option> Соркін Ігор В'ячеславович</option>
+            <option> Кубів Степан Іванович</option>
+            <option> Гонтарева Валерія Олексіївна</option>
+            <option> Смолій Яків Васильович</option>
+          </select>
+        </div>
+  
+        <div class="form-group bootstrap-select show-tick open">
+          <select class="custom-select" id="years" [(ngModel)]="productYear" name="productYear" required>
+            <option selected="" value="-1"> — будь-який рік — </option>
+            <option>1991</option>
+            <option>1992</option>
+            <option>1993</option>
+            <option>1994</option>
+            <option>1995</option>
+            <option>1996</option>
+            <option>1997</option>
+            <option>1998</option>
+            <option>1999</option>
+            <option>2000</option>
+            <option>2001</option>
+            <option>2002</option>
+            <option>2003</option>
+            <option>2004</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>
+            <option>2024</option>
+            <option>2025</option>
+          </select>
+        </div>
+
+  
+        <div class="form-group bootstrap-select show-tick open">
+          <select class="custom-select" [(ngModel)]="productDenomination" name="productDenomination" id="demonstration"
+            required>
+            <option selected="" value="-1"> — будь-який номінал — </option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+            <option>125</option>
+            <option>180</option>
+            <option>200</option>
+            <option>250</option>
+            <option>540</option>
+            <option>1080</option>
+            <option>200 000</option>
+            <option>1 000 000</option>
+            <option>2 000 000</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <textarea [(ngModel)]="productDescription" placeholder="Description" name="productDescription" type="text"
+            class="form-control" id="productDescription"></textarea>
+        </div>
+  
+        <div class="form-group">
+          <input type="number" [(ngModel)]="productPrice" name="productPrice" class="form-control"
+            placeholder="Product Price" id="productPrice">
+        </div>
+  
+  
+        <div class="form-group row">
+          <div class="card-body">
+            <h5 class="card-title">Select a file for upload:</h5>
+            <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+            <br><br>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+              File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="mr-auto">
+        <button type="button" class="btn btn-light btn-outline-dark" (click)="addBanknotes()">Add new coin</button>
+      </div>
+    </div>
+  </ng-template>

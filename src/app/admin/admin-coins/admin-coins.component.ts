@@ -1,11 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ProductsService } from 'src/app/shared/services/coins.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 import { Coin } from 'src/app/shared/classes/coins.model';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
+import { ProductsService } from 'src/app/shared/services/coins.service';
+// import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-admin-coins',
@@ -52,7 +53,7 @@ export class AdminCoinsComponent implements OnInit {
       data => {
         this.arrCoins = data;
       }
-    )
+    );
   }
 
   openModal(template: TemplateRef<any>) {
@@ -104,13 +105,15 @@ export class AdminCoinsComponent implements OnInit {
     this.productImage = '';
   }
 
-deleteCoins(id:number){
-  this.prService.deleteJSONCoins(id).subscribe(
-    () => {
-      this.getCoins();
-    }
-  )
-}
+  deleteCoins(coin: ICoin) :void{
+    console.log(coin.id);
+    
+    this.prService.deleteJSONCoins(coin.id).subscribe(
+      () => {
+        this.getCoins();
+      }
+    )
+  }
   editCoins(coin: ICoin, template: TemplateRef<any>) {
     console.log(coin);
     this.modalRef = this.modalService.show(template);
@@ -156,6 +159,9 @@ deleteCoins(id:number){
     });
     return uuid;
   }
+
+
+
 
 
 }
