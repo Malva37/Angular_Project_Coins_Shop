@@ -11,6 +11,7 @@ export class CoinsComponent implements OnInit {
 
   constructor(private prService:ProductsService) { }
 coins:Array<ICoin>=[];
+buttonsShow:boolean;
   ngOnInit() {
     this.getCoins()
   }

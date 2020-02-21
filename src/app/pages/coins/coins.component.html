@@ -4,565 +4,575 @@
   </div>
   <div class="main">
     <!-- <div class="col-6 col-md-3"> -->
-    
+
+    <div class="filters">
+
       <div class="filters">
+        <div class="h2 filter_name">
+          <span data-language="features_price">Ціна</span>
+        </div>
+        <div class="filter_group">
 
-        <div class="filters">
-          <div class="h2 filter_name">
-            <span data-language="features_price">Ціна</span>
+          <div id="fn_slider_price" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span
+              class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span
+              class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
           </div>
-          <div class="filter_group">
-
-            <div id="fn_slider_price" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-              <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span
-                class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span
-                class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
-            </div>
 
 
-            <div class="price_range">
-              <div class="price_label">
-                <input class="min_input" id="fn_slider_min" name="p[min]" value="0" data-price="0" type="text">
-              </div>
-
-              <div class="price_label max_price">
-                <input class="max_input" id="fn_slider_max" name="p[max]" value="268650" data-price="268650"
-                  type="text">
-              </div>
-            </div>
-          </div>
-          <div class="h2 filter_name">
-            <span data-language="features_other_filter">Інші фільтри</span>
-          </div>
-          <div class="filter_group">
-
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link  checked"
-                  value="https://monety.pro/catalog/monety-ua">
-                  <i class="filter_indicator"></i>
-                  <span data-language="features_all">Всі</span>
-                </button>
-              </form>
+          <div class="price_range">
+            <div class="price_label">
+              <input class="min_input" id="fn_slider_min" name="p[min]" value="0" data-price="0" type="text">
             </div>
 
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/filter-discounted">
-                <i class="filter_indicator"></i>
-                <span data-language="features_filter_discounted">Зі знижкою</span>
-              </a>
+            <div class="price_label max_price">
+              <input class="max_input" id="fn_slider_max" name="p[max]" value="268650" data-price="268650" type="text">
             </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/filter-featured">
-                <i class="filter_indicator"></i>
-                <span data-language="features_filter_featured">Хіти продажу</span>
-              </a>
-            </div>
-          </div>
-          <div class="h2 filter_name">
-            <span data-language="features_manufacturer">Вид монет</span>
-          </div>
-          <div class="filter_group">
-
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link  checked"
-                  value="https://monety.pro/catalog/monety-ua">
-                  <i class="filter_indicator"></i>
-                  <span data-language="features_all">Всі</span>
-                </button>
-              </form>
-            </div>
-
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-sribni">
-                <i class="filter_indicator"></i>
-                <span>Срібні монети</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-nedorogotsinnijspmetal">
-                <i class="filter_indicator"></i>
-                <span>З недорогоцінних металів</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-bimetalevi">
-                <i class="filter_indicator"></i>
-                <span>Біметалеві (недорог.)</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-zoloti">
-                <i class="filter_indicator"></i>
-                <span>Золоті</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-sribnomzoloti">
-                <i class="filter_indicator"></i>
-                <span>Срібно-Золоті</span>
-              </a>
-            </div>
-          </div>
-          <div class="h2 filter_name" data-feature="1">Серія</div>
-          <div class="filter_group">
-
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link  checked"
-                  value="https://monety.pro/catalog/monety-ua">
-                  <i class="filter_indicator"></i>
-                  <span data-language="features_all">Всі</span>
-                </button>
-              </form>
-            </div>
-
-            <div class="filter_item">
-              <a class="filter_link"
-                href="https://monety.pro/catalog/monety-ua/seriya-peremogaspuspvelikijspvitchiznyanijspvijnisp1941m1945sprrd">
-                <i class="filter_indicator"></i>
-                <span>Перемога у Великій Вітчизняній війні 1941-1945 рр.</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-vidatnisposobistostispukraini">
-                <i class="filter_indicator"></i>
-                <span>Видатні особистості України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-mistamgeroispukraini">
-                <i class="filter_indicator"></i>
-                <span>Міста-герої України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-inshispmoneti">
-                <i class="filter_indicator"></i>
-                <span>Інші монети</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-sport">
-                <i class="filter_indicator"></i>
-                <span>Спорт</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link"
-                href="https://monety.pro/catalog/monety-ua/seriya-vidrodzhennyaspukrainskoispderzhavnosti">
-                <i class="filter_indicator"></i>
-                <span>Відродження української державності</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-duhovnispskarbispukraini">
-                <i class="filter_indicator"></i>
-                <span>Духовні скарби України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-geroispkozatskoispdobi">
-                <i class="filter_indicator"></i>
-                <span>Герої козацької доби</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-floraspispfauna">
-                <i class="filter_indicator"></i>
-                <span>Флора і фауна</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-knyazhaspukraina">
-                <i class="filter_indicator"></i>
-                <span>Княжа Україна</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link"
-                href="https://monety.pro/catalog/monety-ua/seriya-vischispnavchalnispzakladispukraini">
-                <i class="filter_indicator"></i>
-                <span>Вищі навчальні заклади України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-starodavnispmistaspukraini">
-                <i class="filter_indicator"></i>
-                <span>Стародавні міста України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-2000mlittyasprizdvasphristovogo">
-                <i class="filter_indicator"></i>
-                <span>2000-ліття Різдва Христового</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link"
-                href="https://monety.pro/catalog/monety-ua/seriya-pamyatkispdavnihspkulturspukraini">
-                <i class="filter_indicator"></i>
-                <span>Пам’ятки давніх культур України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-naspmezhisptisyacholit">
-                <i class="filter_indicator"></i>
-                <span>На межі тисячоліть</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-pamyatkisparhitekturispukraini">
-                <i class="filter_indicator"></i>
-                <span>Пам’ятки архітектури України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-litakispukraini">
-                <i class="filter_indicator"></i>
-                <span>Літаки України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-obryadovispsvyataspukraini">
-                <i class="filter_indicator"></i>
-                <span>Обрядові свята України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-najmenshaspzolotaspmoneta">
-                <i class="filter_indicator"></i>
-                <span>Найменша золота монета</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-narodnispmuzichnispinstrumenti">
-                <i class="filter_indicator"></i>
-                <span>Народні музичні інструменти</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-slavetnisprodispukraini">
-                <i class="filter_indicator"></i>
-                <span>Славетні роди України</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-ukrainskaspspadschina">
-                <i class="filter_indicator"></i>
-                <span>Українська спадщина</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-getmanskispstolitsi">
-                <i class="filter_indicator"></i>
-                <span>Гетьманські столиці</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-shidnijspkalendar">
-                <i class="filter_indicator"></i>
-                <span>Східний календар</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-znakispzodiaku">
-                <i class="filter_indicator"></i>
-                <span>Знаки зодіаку</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-oblastispukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Області України</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-vidrodzhennyasphristiyanskoispduhovnostispvspukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Відродження християнської духовності в Україні</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-narodnisppromislisptaspremesla">
-                  <i class="filter_indicator"></i>
-                  <span>Народні промисли та ремесла</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-antichnisppamyatkispukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Античні пам’ятки України</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-morskaspistoriyaspukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Морська історія України</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-dityachijspzodiak">
-                  <i class="filter_indicator"></i>
-                  <span>Дитячий Зодіак</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-geroyamspmajdanu">
-                  <i class="filter_indicator"></i>
-                  <span>Героям Майдану</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-zbrojnispsilispukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Збройні Сили України</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-faunaspvsppamyatkahspkulturispukraini">
-                  <i class="filter_indicator"></i>
-                  <span>Фауна в пам’ятках культури України</span>
-                </button>
-              </form>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/seriya-ukrainaspkosmichna">
-                  <i class="filter_indicator"></i>
-                  <span>Україна космічна</span>
-                </button>
-              </form>
-            </div>
-
-          </div>
-          <div class="h2 filter_name" data-feature="2">Рік</div>
-          <div class="filter_group">
-
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link  checked"
-                  value="https://monety.pro/catalog/monety-ua">
-                  <i class="filter_indicator"></i>
-                  <span data-language="features_all">Всі</span>
-                </button>
-              </form>
-            </div>
-
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1995">
-                <i class="filter_indicator"></i>
-                <span>1995</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1996">
-                <i class="filter_indicator"></i>
-                <span>1996</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1997">
-                <i class="filter_indicator"></i>
-                <span>1997</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1998">
-                <i class="filter_indicator"></i>
-                <span>1998</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1999">
-                <i class="filter_indicator"></i>
-                <span>1999</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2000">
-                <i class="filter_indicator"></i>
-                <span>2000</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2001">
-                <i class="filter_indicator"></i>
-                <span>2001</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2002">
-                <i class="filter_indicator"></i>
-                <span>2002</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2003">
-                <i class="filter_indicator"></i>
-                <span>2003</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2004">
-                <i class="filter_indicator"></i>
-                <span>2004</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2005">
-                <i class="filter_indicator"></i>
-                <span>2005</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2006">
-                <i class="filter_indicator"></i>
-                <span>2006</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2007">
-                <i class="filter_indicator"></i>
-                <span>2007</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2008">
-                <i class="filter_indicator"></i>
-                <span>2008</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2009">
-                <i class="filter_indicator"></i>
-                <span>2009</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2010">
-                <i class="filter_indicator"></i>
-                <span>2010</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2011">
-                <i class="filter_indicator"></i>
-                <span>2011</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2012">
-                <i class="filter_indicator"></i>
-                <span>2012</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2013">
-                <i class="filter_indicator"></i>
-                <span>2013</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2014">
-                <i class="filter_indicator"></i>
-                <span>2014</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2015">
-                <i class="filter_indicator"></i>
-                <span>2015</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2016">
-                <i class="filter_indicator"></i>
-                <span>2016</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2017">
-                <i class="filter_indicator"></i>
-                <span>2017</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2018">
-                <i class="filter_indicator"></i>
-                <span>2018</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2019">
-                <i class="filter_indicator"></i>
-                <span>2019</span>
-              </a>
-            </div>
-            <div class="filter_item">
-              <form method="post">
-                <button type="submit" name="prg_seo_hide" class="filter_link"
-                  value="https://monety.pro/catalog/monety-ua/rik-2020">
-                  <i class="filter_indicator"></i>
-                  <span>2020</span>
-                </button>
-              </form>
-            </div>
-
           </div>
         </div>
+        <div class="h2 filter_name">
+          <span data-language="features_other_filter">Інші фільтри</span>
+        </div>
+        <div class="filter_group">
 
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link  checked"
+                value="https://monety.pro/catalog/monety-ua">
+                <i class="filter_indicator"></i>
+                <span data-language="features_all">Всі</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/filter-discounted">
+              <i class="filter_indicator"></i>
+              <span data-language="features_filter_discounted">Зі знижкою</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/filter-featured">
+              <i class="filter_indicator"></i>
+              <span data-language="features_filter_featured">Хіти продажу</span>
+            </a>
+          </div>
+        </div>
+        <div class="h2 filter_name">
+          <span data-language="features_manufacturer">Вид монет</span>
+        </div>
+        <div class="filter_group">
+
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link  checked"
+                value="https://monety.pro/catalog/monety-ua">
+                <i class="filter_indicator"></i>
+                <span data-language="features_all">Всі</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-sribni">
+              <i class="filter_indicator"></i>
+              <span>Срібні монети</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-nedorogotsinnijspmetal">
+              <i class="filter_indicator"></i>
+              <span>З недорогоцінних металів</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-bimetalevi">
+              <i class="filter_indicator"></i>
+              <span>Біметалеві (недорог.)</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-zoloti">
+              <i class="filter_indicator"></i>
+              <span>Золоті</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/brand-sribnomzoloti">
+              <i class="filter_indicator"></i>
+              <span>Срібно-Золоті</span>
+            </a>
+          </div>
+        </div>
+        <div class="h2 filter_name" data-feature="1">Серія</div>
+        <div class="filter_group">
+
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link  checked"
+                value="https://monety.pro/catalog/monety-ua">
+                <i class="filter_indicator"></i>
+                <span data-language="features_all">Всі</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="filter_item">
+            <a class="filter_link"
+              href="https://monety.pro/catalog/monety-ua/seriya-peremogaspuspvelikijspvitchiznyanijspvijnisp1941m1945sprrd">
+              <i class="filter_indicator"></i>
+              <span>Перемога у Великій Вітчизняній війні 1941-1945 рр.</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-vidatnisposobistostispukraini">
+              <i class="filter_indicator"></i>
+              <span>Видатні особистості України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-mistamgeroispukraini">
+              <i class="filter_indicator"></i>
+              <span>Міста-герої України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-inshispmoneti">
+              <i class="filter_indicator"></i>
+              <span>Інші монети</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-sport">
+              <i class="filter_indicator"></i>
+              <span>Спорт</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link"
+              href="https://monety.pro/catalog/monety-ua/seriya-vidrodzhennyaspukrainskoispderzhavnosti">
+              <i class="filter_indicator"></i>
+              <span>Відродження української державності</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-duhovnispskarbispukraini">
+              <i class="filter_indicator"></i>
+              <span>Духовні скарби України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-geroispkozatskoispdobi">
+              <i class="filter_indicator"></i>
+              <span>Герої козацької доби</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-floraspispfauna">
+              <i class="filter_indicator"></i>
+              <span>Флора і фауна</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-knyazhaspukraina">
+              <i class="filter_indicator"></i>
+              <span>Княжа Україна</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link"
+              href="https://monety.pro/catalog/monety-ua/seriya-vischispnavchalnispzakladispukraini">
+              <i class="filter_indicator"></i>
+              <span>Вищі навчальні заклади України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-starodavnispmistaspukraini">
+              <i class="filter_indicator"></i>
+              <span>Стародавні міста України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-2000mlittyasprizdvasphristovogo">
+              <i class="filter_indicator"></i>
+              <span>2000-ліття Різдва Христового</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-pamyatkispdavnihspkulturspukraini">
+              <i class="filter_indicator"></i>
+              <span>Пам’ятки давніх культур України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-naspmezhisptisyacholit">
+              <i class="filter_indicator"></i>
+              <span>На межі тисячоліть</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-pamyatkisparhitekturispukraini">
+              <i class="filter_indicator"></i>
+              <span>Пам’ятки архітектури України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-litakispukraini">
+              <i class="filter_indicator"></i>
+              <span>Літаки України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-obryadovispsvyataspukraini">
+              <i class="filter_indicator"></i>
+              <span>Обрядові свята України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-najmenshaspzolotaspmoneta">
+              <i class="filter_indicator"></i>
+              <span>Найменша золота монета</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-narodnispmuzichnispinstrumenti">
+              <i class="filter_indicator"></i>
+              <span>Народні музичні інструменти</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-slavetnisprodispukraini">
+              <i class="filter_indicator"></i>
+              <span>Славетні роди України</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-ukrainskaspspadschina">
+              <i class="filter_indicator"></i>
+              <span>Українська спадщина</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-getmanskispstolitsi">
+              <i class="filter_indicator"></i>
+              <span>Гетьманські столиці</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-shidnijspkalendar">
+              <i class="filter_indicator"></i>
+              <span>Східний календар</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/seriya-znakispzodiaku">
+              <i class="filter_indicator"></i>
+              <span>Знаки зодіаку</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-oblastispukraini">
+                <i class="filter_indicator"></i>
+                <span>Області України</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-vidrodzhennyasphristiyanskoispduhovnostispvspukraini">
+                <i class="filter_indicator"></i>
+                <span>Відродження християнської духовності в Україні</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-narodnisppromislisptaspremesla">
+                <i class="filter_indicator"></i>
+                <span>Народні промисли та ремесла</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-antichnisppamyatkispukraini">
+                <i class="filter_indicator"></i>
+                <span>Античні пам’ятки України</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-morskaspistoriyaspukraini">
+                <i class="filter_indicator"></i>
+                <span>Морська історія України</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-dityachijspzodiak">
+                <i class="filter_indicator"></i>
+                <span>Дитячий Зодіак</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-geroyamspmajdanu">
+                <i class="filter_indicator"></i>
+                <span>Героям Майдану</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-zbrojnispsilispukraini">
+                <i class="filter_indicator"></i>
+                <span>Збройні Сили України</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-faunaspvsppamyatkahspkulturispukraini">
+                <i class="filter_indicator"></i>
+                <span>Фауна в пам’ятках культури України</span>
+              </button>
+            </form>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/seriya-ukrainaspkosmichna">
+                <i class="filter_indicator"></i>
+                <span>Україна космічна</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+        <div class="h2 filter_name" data-feature="2">Рік</div>
+        <div class="filter_group">
+
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link  checked"
+                value="https://monety.pro/catalog/monety-ua">
+                <i class="filter_indicator"></i>
+                <span data-language="features_all">Всі</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1995">
+              <i class="filter_indicator"></i>
+              <span>1995</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1996">
+              <i class="filter_indicator"></i>
+              <span>1996</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1997">
+              <i class="filter_indicator"></i>
+              <span>1997</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1998">
+              <i class="filter_indicator"></i>
+              <span>1998</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-1999">
+              <i class="filter_indicator"></i>
+              <span>1999</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2000">
+              <i class="filter_indicator"></i>
+              <span>2000</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2001">
+              <i class="filter_indicator"></i>
+              <span>2001</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2002">
+              <i class="filter_indicator"></i>
+              <span>2002</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2003">
+              <i class="filter_indicator"></i>
+              <span>2003</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2004">
+              <i class="filter_indicator"></i>
+              <span>2004</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2005">
+              <i class="filter_indicator"></i>
+              <span>2005</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2006">
+              <i class="filter_indicator"></i>
+              <span>2006</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2007">
+              <i class="filter_indicator"></i>
+              <span>2007</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2008">
+              <i class="filter_indicator"></i>
+              <span>2008</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2009">
+              <i class="filter_indicator"></i>
+              <span>2009</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2010">
+              <i class="filter_indicator"></i>
+              <span>2010</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2011">
+              <i class="filter_indicator"></i>
+              <span>2011</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2012">
+              <i class="filter_indicator"></i>
+              <span>2012</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2013">
+              <i class="filter_indicator"></i>
+              <span>2013</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2014">
+              <i class="filter_indicator"></i>
+              <span>2014</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2015">
+              <i class="filter_indicator"></i>
+              <span>2015</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2016">
+              <i class="filter_indicator"></i>
+              <span>2016</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2017">
+              <i class="filter_indicator"></i>
+              <span>2017</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2018">
+              <i class="filter_indicator"></i>
+              <span>2018</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <a class="filter_link" href="https://monety.pro/catalog/monety-ua/rik-2019">
+              <i class="filter_indicator"></i>
+              <span>2019</span>
+            </a>
+          </div>
+          <div class="filter_item">
+            <form method="post">
+              <button type="submit" name="prg_seo_hide" class="filter_link"
+                value="https://monety.pro/catalog/monety-ua/rik-2020">
+                <i class="filter_indicator"></i>
+                <span>2020</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
       </div>
-    
+
+    </div>
+
 
     <!-- <div class="row row-cols-1 row-cols-md-3 catalog"> -->
     <div class="catalog">
       <!-- <div class="col mb-4"> -->
 
-        <!-- <div class="col-sm-6 col-md-8"> -->
+      <!-- <div class="col-sm-6 col-md-8"> -->
 
-        <!-- <div class="row h-100"> -->
-          <div class="coin" *ngFor="let coin of coins">
-            <img [attr.src]="coin.image" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h6 class="card-title">{{ coin.name }}</h6>
-              <h5 class="text-danger">{{ coin.price }} грн</h5>
-              <div class="d-flex justify-content-between">
+      <!-- <div class="row h-100"> -->
+      <div class="coin" *ngFor="let coin of coins">
+        <img [attr.src]="coin.image" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="title">{{ coin.name }}</p>
+          <!-- <h6 class="card-title">{{ coin.name }}</h6> -->
+          <p class="price">{{ coin.price }} грн</p>
+
+          <!-- <h5 class="text-danger">{{ coin.price }} грн</h5> -->
+          <!-- <div *ngIf="buttonsShow" class="d-flex justify-content-between button-group">
                 <a href="#" class="btn btn-light btn-sm">more</a>
                 <a href="#" class="btn btn-secondary btn-sm">Купити</a>
               </div>
-            </div>
-          </div>
+ -->
 
-        <!-- </div> -->
+  
+            <div class="button-group">
+              <a href="#" class="moreDetails">Детальніше</a>
+              <a href="#" class="buy">Купити</a>
+            </div>
+
+          </div>
+        </div>
+      <!-- </div> -->
+
+      <!-- </div> -->
       <!-- </div> -->
     </div>
 

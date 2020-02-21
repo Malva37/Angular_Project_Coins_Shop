@@ -17,14 +17,80 @@
   height: 250px;
   text-align: center;
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
-// h6{
-//     width: inherit;
-// height: inherit;
+.coin:hover {
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
+  min-height: 260px;
+    min-width: 210px;
+}
 
-// }
+
+
+
+.button-group {
+  display: none;
+}
+
+.coin:hover {
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+
+  }
+}
+
+.card-body {
+  padding: 0;
+}
+.card-body p{
+  margin: 2% 0;
+  font-size: 13px;
+  font-weight: 700;
+  vertical-align: middle
+}
+
+.title {
+  display: block;
+  text-overflow: inherit;
+  height: 40px;
+  // line-height: 40px;
+  overflow: hidden;
+}
+
+.title:hover {
+  color: red;
+  height: 60px;
+  // line-height: 60px;
+
+}
+
+
+.moreDetails,
+.buy {
+  height: 20px;
+  width: 40%;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: lightgreen;
+  color: black;
+  text-decoration: none;
+  font-size: 10px;
+  align-items: 20px;
+  text-align: center;
+
+}
+
+.buy {
+  background-color: green;
+}
+
+
+
+
+
 
 .coin img {
   width: 115px;
@@ -62,7 +128,8 @@
   .catalog {
     max-width: 600px;
   }
-  .search{
+
+  .search {
     max-width: 750px;
     margin-left: 0;
 
@@ -87,9 +154,11 @@
   .catalog {
     max-width: 350px;
   }
-  .search{
+
+  .search {
     max-width: 450px;
   }
+
   .filters {
     width: 100px;
   }
@@ -103,13 +172,16 @@
   .catalog {
     max-width: 270px;
   }
+
   .filters {
     width: 270px;
   }
-  .search{
+
+  .search {
     max-width: 270px;
   }
-  .main{
+
+  .main {
     display: block;
   }
 
