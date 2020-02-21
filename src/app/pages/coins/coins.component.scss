@@ -3,46 +3,117 @@
 //   overflow: hidden;
 // }
 
-.main{
-    display: flex;
+.main {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 2%;
 
 }
-.row .card {
+
+.coin {
   padding: 10px;
-  margin: 0 1%;
-  width: 216px;
+  margin: 1% 2%;
+  width: 20%;
   height: 250px;
   text-align: center;
-  
-}
-h6{
-    width: inherit;
-height: inherit;
-
+  border: 1px solid lightgrey;
+  border-radius: 2px;
 }
 
-.row .card img {
-  width: 130px;
-  height: 130px;
+// h6{
+//     width: inherit;
+// height: inherit;
+
+// }
+
+.coin img {
+  width: 115px;
+  height: 120px;
   margin: 0 auto
 }
 
 .search {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   // padding: 0 15%;
   margin-bottom: 20px;
   margin-left: 20%;
+  padding: 0px 3%;
 }
 
 .filters {
   border: 1px solid lightgrey;
   border-radius: 2px;
-  width: 25%;
+  width: 200px;
 
 }
-.catalog{
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    width: 65%; 
+
+.catalog {
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  max-width: 1000px;
+  margin: 0 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@media screen and (max-width:769px) {
+  .catalog {
+    max-width: 600px;
+  }
+  .search{
+    max-width: 750px;
+    margin-left: 0;
+
+  }
+
+  .filters {
+    width: 150px;
+  }
+
+  .coin {
+    width: 28%;
+  }
+
+  .coin img {
+    width: 80px;
+    height: 80px;
+
+  }
+}
+
+@media screen and (max-width:480px) {
+  .catalog {
+    max-width: 350px;
+  }
+  .search{
+    max-width: 450px;
+  }
+  .filters {
+    width: 100px;
+  }
+
+  .coin {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width:320px) {
+  .catalog {
+    max-width: 270px;
+  }
+  .filters {
+    width: 270px;
+  }
+  .search{
+    max-width: 270px;
+  }
+  .main{
+    display: block;
+  }
+
+  .coin {
+    width: 80%;
+  }
 }

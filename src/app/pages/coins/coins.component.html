@@ -7,7 +7,7 @@
     
       <div class="filters">
 
-        <div class="filters tablet-hidden">
+        <div class="filters">
           <div class="h2 filter_name">
             <span data-language="features_price">Ціна</span>
           </div>
@@ -543,26 +543,27 @@
       </div>
     
 
-    <div class="row row-cols-1 row-cols-md-3 catalog">
-      <div class="col mb-4">
+    <!-- <div class="row row-cols-1 row-cols-md-3 catalog"> -->
+    <div class="catalog">
+      <!-- <div class="col mb-4"> -->
 
         <!-- <div class="col-sm-6 col-md-8"> -->
 
-        <div class="row h-100">
-          <div class="card" *ngFor="let coin of coins">
+        <!-- <div class="row h-100"> -->
+          <div class="coin" *ngFor="let coin of coins">
             <img [attr.src]="coin.image" class="card-img-top" alt="...">
             <div class="card-body">
               <h6 class="card-title">{{ coin.name }}</h6>
               <h5 class="text-danger">{{ coin.price }} грн</h5>
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-light btn-sm">Більше інформації</a>
+                <a href="#" class="btn btn-light btn-sm">more</a>
                 <a href="#" class="btn btn-secondary btn-sm">Купити</a>
               </div>
             </div>
           </div>
 
-        </div>
-      </div>
+        <!-- </div> -->
+      <!-- </div> -->
     </div>
 
 
