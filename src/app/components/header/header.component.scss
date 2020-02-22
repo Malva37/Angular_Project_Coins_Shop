@@ -46,8 +46,6 @@ header .nav-item a::after {
   background-color: #207141;
   height: 2px;
   transform: scale(0);
-  text-shadow: -5px 0px 4px 0px #787272;
-  // box-shadow: -1px 0px 4px 0px #787272;
   transition: all .3s;
 }
 header .nav-item a:hover::after {
