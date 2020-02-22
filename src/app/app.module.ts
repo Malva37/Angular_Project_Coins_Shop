@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng5SliderModule } from 'ng5-slider';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +61,8 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/stor
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    Ng5SliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

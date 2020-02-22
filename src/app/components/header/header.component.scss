@@ -20,10 +20,8 @@ a :hover {
 }
 
 header{
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   background-color: #f8f5f5;
-  // position: fixed;
-  // top: 0;
   width: 100%;
   padding: 20px;
 }
@@ -46,8 +44,10 @@ header .nav-item a::after {
   display: block;
   width: 100%;
   background-color: #207141;
-  height: 1px;
+  height: 2px;
   transform: scale(0);
+  text-shadow: -5px 0px 4px 0px #787272;
+  // box-shadow: -1px 0px 4px 0px #787272;
   transition: all .3s;
 }
 header .nav-item a:hover::after {

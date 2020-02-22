@@ -1,7 +1,69 @@
-// .container {
-//   margin: 0 5%;
-//   overflow: hidden;
-// }
+.container-fluid {
+  margin-bottom: 25%;
+}
+
+.filters {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  width: 300px;
+  padding: 2%;
+  height: 455px;
+}
+
+::ng-deep {
+  .custom-slider .ng5-slider .ng5-slider-bar {
+    display: none;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-selection {
+    background: orange;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-pointer {
+    width: 8px;
+    height: 16px;
+    top: auto;
+    bottom: 0;
+    background-color: #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-pointer:after {
+    display: none;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-bubble {
+    bottom: 14px;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-limit {
+    font-weight: bold;
+    color: darkgreen;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-tick {
+    width: 1px;
+    height: 8px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #9cc59d;
+    top: -1px;
+  }
+
+  .custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+    background: darkgreen;
+  }
+}
+
+.filter-name {
+  margin: 1% 0;
+}
+
+.filter-name:hover {
+  font-size: 20px;
+
+}
 
 .main {
   display: flex;
@@ -12,40 +74,39 @@
 
 .coin {
   padding: 10px;
-  margin: 1% 2%;
+  margin: 2% 2%;
   width: 20%;
   height: 250px;
   text-align: center;
   border: 1px solid lightgrey;
   border-radius: 5px;
-}
-
-.coin:hover {
-  z-index: 1;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
-  min-height: 260px;
-    min-width: 210px;
-}
-
-
-
-
-.button-group {
-  display: none;
+  transition: 0.7s;
+  transition-property: transform;
 }
 
 .coin:hover {
   .button-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
   }
+
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
+  transform: scale(1.2);
+
 }
+
+.button-group {
+  display: none;
+}
+
 
 .card-body {
   padding: 0;
 }
-.card-body p{
+
+.card-body p {
   margin: 2% 0;
   font-size: 13px;
   font-weight: 700;
@@ -56,40 +117,36 @@
   display: block;
   text-overflow: inherit;
   height: 40px;
-  // line-height: 40px;
   overflow: hidden;
 }
 
 .title:hover {
-  color: red;
-  height: 60px;
-  // line-height: 60px;
-
+  color: darkgreen;
 }
-
 
 .moreDetails,
 .buy {
-  height: 20px;
-  width: 40%;
-  border: 1px solid #000;
+  height: 25px;
+  width: 47%;
+  line-height: 25px;
+  border: 1px solid #848282;
   border-radius: 3px;
-  background-color: lightgreen;
+  background-color: #f1e8e8;
   color: black;
+  box-shadow: -1px 0px 4px 0px #787272;
+  margin-top: 3px;
   text-decoration: none;
   font-size: 10px;
+  -webkit-box-align: 20px;
   align-items: 20px;
   text-align: center;
-
 }
 
 .buy {
-  background-color: green;
+  background-color: #b6dcb6;
+  margin-left: 2%;
+ 
 }
-
-
-
-
 
 
 .coin img {
@@ -101,46 +158,38 @@
 .search {
   display: flex;
   justify-content: center;
-  // padding: 0 15%;
   margin-bottom: 20px;
   margin-left: 20%;
   padding: 0px 3%;
 }
 
-.filters {
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 200px;
 
-}
 
 .catalog {
-  border: 1px solid lightgrey;
-  border-radius: 2px;
   max-width: 1000px;
   margin: 0 2%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  transition-duration: 0.7;
+  transition-property: transform;
 }
 
-@media screen and (max-width:769px) {
+@media screen and (max-width:992px) {
   .catalog {
-    max-width: 600px;
+    max-width: 650px;
   }
 
   .search {
-    max-width: 750px;
     margin-left: 0;
-
   }
 
   .filters {
-    width: 150px;
+    width: 300px;
   }
 
   .coin {
-    width: 28%;
+    width: 29%;
   }
 
   .coin img {
@@ -150,22 +199,39 @@
   }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width:768px) {
   .catalog {
-    max-width: 350px;
-  }
-
-  .search {
-    max-width: 450px;
+    max-width: 500px;
   }
 
   .filters {
-    width: 100px;
+    width: 250px;
   }
 
   .coin {
     width: 40%;
   }
+
+}
+
+
+@media screen and (max-width:480px) {
+  .catalog {
+    max-width: 420px;
+  }
+
+  .search {
+    max-width: 420px;
+  }
+
+  .filters {
+    width: 420px;
+  }
+
+  .coin {
+    width: 80%;
+  }
+
 }
 
 @media screen and (max-width:320px) {
@@ -185,7 +251,4 @@
     display: block;
   }
 
-  .coin {
-    width: 80%;
-  }
 }
