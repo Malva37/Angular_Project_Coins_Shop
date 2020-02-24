@@ -29,6 +29,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
+import { SearchCoinPipe } from './shared/pipes/searchCoin.pipe';
+import { FilterYearPipe } from './shared/pipes/filter-year.pipe';
+import { FilterSeriesPipe } from './shared/pipes/filter-series.pipe';
+import { FilterDenominationPipe } from './shared/pipes/filter-denomination.pipe';
+import { FilterMetalPipe } from './shared/pipes/filter-metal.pipe';
+import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
 
 
 @NgModule({
@@ -48,6 +54,12 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/stor
     AdminBanknotesComponent,
     AdminMedalsComponent,
     AdminAccessoriesComponent,
+    SearchCoinPipe,
+    FilterYearPipe,
+    FilterSeriesPipe,
+    FilterDenominationPipe,
+    FilterMetalPipe,
+    FilterPricePipe,
   
 
   ],

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <section class="search">
-    <input type="text" class="form-control" placeholder="Search">
+    <input type="text" [(ngModel)]="searchName" name="searchName" class="form-control" placeholder="Search">
   </section>
 
   <div class="main">
@@ -12,9 +12,9 @@
           <span data-language="features_other_filter">Ціна</span>
         </div>
         <div class="filter_group price-slider">
-          <div class="custom-slider">
-            <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
-          </div>
+          <p>Min: <input type="number" name='minValue' [(ngModel)]="minValue"></p>
+          <p>Max: <input type="number" name='maxValue' [(ngModel)]="maxValue"></p>
+          <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
         </div>
 
         <div class="h5 filter_name">
@@ -24,7 +24,7 @@
           <!-- <select class="custom-select" id="series" [(ngModel)]="productSeries" name="productSeries" required> -->
           <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required>
             <!-- <select (change)="selectChangeHandler($event)"  class="custom-select" id="series" required> -->
-            <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
+            <option [attr.selected] value="-1"> — будь-яка серія — </option>
             <option> Видатні особистості України</option>
             <option> Античні пам`ятки України</option>
             <option> Вищі навчальні заклади України</option>
@@ -112,7 +112,7 @@
           <span data-language="features_other_filter">Метал</span>
         </div>
         <div class="form-group bootstrap-select show-tick open">
-          <select class="custom-select" [(ngModel)]="productMetal" name="productMetal" id="metal" required>
+          <select class="custom-select" [(ngModel)]="productMetal" name="productMetal" required>
             <option selected="" value="-1"> — будь-який метал — </option>
             <option>біметалеві із дорогоцінних металів</option>
             <option>біметалеві із недорогоцінних металів</option>
@@ -156,7 +156,8 @@
     </section>
 
     <section class="catalog">
-      <figure class="coin" *ngFor="let coin of coins">
+      <figure class="coin"
+        *ngFor="let coin of coins | searchCoin:searchName | filterPrice:minValue:maxValue | filterYear:productYear | filterSeries:productSeries | filterDenomination:productDenomination | filterMetal:productMetal ">
         <img [attr.src]="coin.image" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="title">{{ coin.name }}</p>

@@ -69,6 +69,7 @@
   display: flex;
   justify-content: space-around;
   margin: 0 2%;
+  width: 100%;
 
 }
 
@@ -166,7 +167,7 @@
 
 
 .catalog {
-  max-width: 1000px;
+  width: 1000px;
   margin: 0 2%;
   display: flex;
   flex-wrap: wrap;
@@ -177,7 +178,7 @@
 
 @media screen and (max-width:992px) {
   .catalog {
-    max-width: 650px;
+    width: 650px;
   }
 
   .search {
@@ -201,7 +202,7 @@
 
 @media screen and (max-width:768px) {
   .catalog {
-    max-width: 500px;
+    width: 500px;
   }
 
   .filters {
@@ -217,11 +218,11 @@
 
 @media screen and (max-width:480px) {
   .catalog {
-    max-width: 420px;
+    width: 420px;
   }
 
   .search {
-    max-width: 420px;
+    width: 420px;
   }
 
   .filters {
@@ -236,7 +237,7 @@
 
 @media screen and (max-width:320px) {
   .catalog {
-    max-width: 270px;
+    width: 270px;
   }
 
   .filters {
@@ -244,7 +245,7 @@
   }
 
   .search {
-    max-width: 270px;
+  width: 270px;
   }
 
   .main {
