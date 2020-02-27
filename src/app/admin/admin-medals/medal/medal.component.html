@@ -1,0 +1,208 @@
+<h1 class="display-4">EMP. Register</h1>-
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+  <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
+  <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
+
+  <div class="form-group">
+    <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
+      placeholder="Product Name" required>
+    <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
+  </div>
+
+  <div class="form-group">
+    <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+      class="form-control" placeholder="Description">
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+      placeholder="Product Price" required>
+  </div>
+
+  <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
+
+
+  <div class="form-group row">
+    <div class="card-body">
+      <h5 class="card-title">Select a file for upload:</h5>
+      <input name="image" #image="ngModel" [(ngModel)]="service.formData.image" class="form-control"
+        placeholder="Product image" required type="file" (change)="upload($event)" accept=".png,.jpg" />
+      <br><br>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+          [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+          aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <br>
+      <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+        File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+  </div>
+
+
+</form>
+
+<!-- 
+  <div class="form-group bootstrap-select show-tick open">
+
+    <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required>
+      <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
+      <option> Видатні особистості України</option>
+      <option> Античні пам`ятки України</option>
+      <option> Вищі навчальні заклади України</option>
+      <option> Відродження української державності</option>
+      <option> Відродження християнської духовності в Україні</option>
+      <option> Герої козацької доби </option>
+      <option> Героям Майдану</option>
+      <option> Гетьманські столиці</option>
+      <option> Дитячий Зодіак</option>
+      <option> Друга світова війна</option>
+      <option> Духовні скарби України</option>
+      <option> Збройні Сили України</option>
+      <option> Знаки зодіаку</option>
+      <option> Інші монети</option>
+      <option> Княжа Україна</option>
+      <option> Літаки України</option>
+      <option> Міста-герої України</option>
+      <option> Морська історія України</option>
+      <option> На межі тисячоліть</option>
+      <option> Найменша золота монета</option>
+      <option> Народні музичні інструменти</option>
+      <option> Народні промисли та ремесла</option>
+      <option> Області України</option>
+      <option> Обрядові свята України</option>
+      <option> Пам'ятки архітектури України</option>
+      <option> Пам'ятки давніх культур України</option>
+      <option> Славетні роди України</option>
+      <option> Спорт </option>
+      <option> Стародавні міста України </option>
+      <option> Сувенірна продукція </option>
+      <option> Східний календар </option>
+      <option> Україна космічна </option>
+      <option> Українська спадщина </option>
+      <option> Фауна в пам`ятках культури України</option>
+      <option>Флора і фауна</option>
+      <option> 2000-ліття Різдва Христового</option>
+    </select>
+  </div>
+
+  <div class="form-group bootstrap-select show-tick open">
+    <select class="custom-select" id="years" [(ngModel)]="productYear" name="productYear" required>
+      <option selected="" value="-1"> — будь-який рік — </option>
+      <option>1991</option>
+      <option>1992</option>
+      <option>1993</option>
+      <option>1994</option>
+      <option>1995</option>
+      <option>1996</option>
+      <option>1997</option>
+      <option>1998</option>
+      <option>1999</option>
+      <option>2000</option>
+      <option>2001</option>
+      <option>2002</option>
+      <option>2003</option>
+      <option>2004</option>
+      <option>2005</option>
+      <option>2006</option>
+      <option>2007</option>
+      <option>2008</option>
+      <option>2009</option>
+      <option>2010</option>
+      <option>2011</option>
+      <option>2012</option>
+      <option>2013</option>
+      <option>2014</option>
+      <option>2015</option>
+      <option>2016</option>
+      <option>2017</option>
+      <option>2018</option>
+      <option>2019</option>
+      <option>2020</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option>2024</option>
+      <option>2025</option>
+    </select>
+  </div>
+
+  <div class="form-group bootstrap-select show-tick open">
+    <select class="custom-select" [(ngModel)]="productMetal" name="productMetal" id="metal" required>
+      <option selected="" value="-1"> — будь-який метал — </option>
+      <option>біметалеві із дорогоцінних металів</option>
+      <option>біметалеві із недорогоцінних металів</option>
+      <option>золото</option>
+      <option>інша нумізматична продукція</option>
+      <option>мельхіор</option>
+      <option>нейзильбер</option>
+      <option>сплав на основі цинку</option>
+      <option>срібло</option>
+    </select>
+  </div>
+
+  <div class="form-group bootstrap-select show-tick open">
+    <select class="custom-select" [(ngModel)]="productDenomination" name="productDenomination" id="demonstration"
+      required>
+      <option selected="" value="-1"> — будь-який номінал — </option>
+      <option>0</option>
+      <option>1</option>
+      <option>2</option>
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
+      <option>125</option>
+      <option>180</option>
+      <option>200</option>
+      <option>250</option>
+      <option>540</option>
+      <option>1080</option>
+      <option>200 000</option>
+      <option>1 000 000</option>
+      <option>2 000 000</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <textarea [(ngModel)]="productDescription" placeholder="Description" name="productDescription" type="text"
+      class="form-control" id="productDescription"></textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="number" [(ngModel)]="productPrice" name="productPrice" class="form-control"
+      placeholder="Product Price" id="productPrice">
+  </div>
+
+
+  <div class="form-group row">
+    <div class="card-body">
+      <h5 class="card-title">Select a file for upload:</h5>
+      <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+      <br><br>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+          [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+          aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <br>
+      <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+        File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="mr-auto">
+  <button type="button" class="btn btn-light btn-outline-dark" (click)="addCoins()">Add new coin</button>
+</div>
+</div> -->

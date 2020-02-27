@@ -2,7 +2,7 @@ import { ICoin } from '../interfaces/coins.interfaces';
 
 export class Coin implements ICoin{
     constructor(
-            public id:number,
+            public id:string,
             public categoryId:number,
             public categoryName:string,
             public name:string,

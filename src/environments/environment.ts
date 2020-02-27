@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyDhL_ca3A2f6mLW8qXKzNvfIQv-g7p7F7I",
-    authDomain: "coins-shop-7b076.firebaseapp.com",
-    databaseURL: "https://coins-shop-7b076.firebaseio.com",
-    projectId: "coins-shop-7b076",
-    storageBucket: "coins-shop-7b076.appspot.com",
-    messagingSenderId: "991286585101",
-    appId: "1:991286585101:web:fe2a0418952510ffb93244"
+    apiKey: "AIzaSyBIYEWzEqjrd465Xd9NL4CLqDjJ5hop-Eo",
+    authDomain: "test-dd969.firebaseapp.com",
+    databaseURL: "https://test-dd969.firebaseio.com",
+    projectId: "test-dd969",
+    storageBucket: "test-dd969.appspot.com",
+    messagingSenderId: "1014095114178",
+    appId: "1:1014095114178:web:fda6ff009394f8f6cbb05b",
+    measurementId: "G-06Z4941EG9"
   }
 };
 

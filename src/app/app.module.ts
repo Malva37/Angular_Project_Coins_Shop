@@ -19,22 +19,35 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminCoinsComponent } from './admin/admin-coins/admin-coins.component';
 import { AdminBanknotesComponent } from './admin/admin-banknotes/admin-banknotes.component';
-import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.component';
+
 import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
 
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { loaderConfig} from './preloader-config';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
+
+import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.component';
+import { MedalComponent } from './admin/admin-medals/medal/medal.component';
+import { MedalListComponent } from './admin/admin-medals/medal-list/medal-list.component';
+import { MedalService } from './shared/services/medal.service';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+
 import { SearchCoinPipe } from './shared/pipes/searchCoin.pipe';
 import { FilterYearPipe } from './shared/pipes/filter-year.pipe';
 import { FilterSeriesPipe } from './shared/pipes/filter-series.pipe';
 import { FilterDenominationPipe } from './shared/pipes/filter-denomination.pipe';
 import { FilterMetalPipe } from './shared/pipes/filter-metal.pipe';
 import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 
 @NgModule({
@@ -60,6 +73,8 @@ import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
     FilterDenominationPipe,
     FilterMetalPipe,
     FilterPricePipe,
+    MedalComponent,
+    MedalListComponent,
   
 
   ],
@@ -74,9 +89,12 @@ import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
     ModalModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    CommonModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [MedalService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

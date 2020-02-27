@@ -1,4 +1,229 @@
+<div class="container">
+  <form class="mb-2">
+    <div class="form-row mt-4">
+      <div class="col-11">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
 
+      <div class="col">
+        <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
+      </div>
+
+    </div>
+  </form>
+  <app-medal-list></app-medal-list>
+  <!-- <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coin of arrCoins; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ coin.name }}</td>
+        <td>{{ coin.price}}  грн</td>
+        <td>
+          <img [attr.src]="coin.image" class="card-img-top" alt="...">
+        </td>
+        <td>
+         <input type="button" value="edit" (click)="editCoins(coin,template)" class="btn btn-light btn-outline-dark">
+        </td>
+        <td>
+        <input type="button" value="delete" (click)="deleteCoins(coin)" class="btn btn-dark btn-outline-red">
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add new coin</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <app-medal></app-medal>
+    <!-- <div class="mr-auto">
+      <button type="button" class="btn btn-light btn-outline-dark" (click)="addCoins()">Add new coin</button>
+    </div> -->
+  </div>
+</ng-template>
+<!-- 
+    <form>
+
+
+      <div class="form-group">
+        <input ng type="text" [(ngModel)]="productName" name="productName" class="form-control"
+          placeholder="Product Name" id="productName">
+      </div>
+
+      <div class="form-group bootstrap-select show-tick open">
+
+        <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required>
+          <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
+          <option> Видатні особистості України</option>
+          <option> Античні пам`ятки України</option>
+          <option> Вищі навчальні заклади України</option>
+          <option> Відродження української державності</option>
+          <option> Відродження християнської духовності в Україні</option>
+          <option> Герої козацької доби </option>
+          <option> Героям Майдану</option>
+          <option> Гетьманські столиці</option>
+          <option> Дитячий Зодіак</option>
+          <option> Друга світова війна</option>
+          <option> Духовні скарби України</option>
+          <option> Збройні Сили України</option>
+          <option> Знаки зодіаку</option>
+          <option> Інші монети</option>
+          <option> Княжа Україна</option>
+          <option> Літаки України</option>
+          <option> Міста-герої України</option>
+          <option> Морська історія України</option>
+          <option> На межі тисячоліть</option>
+          <option> Найменша золота монета</option>
+          <option> Народні музичні інструменти</option>
+          <option> Народні промисли та ремесла</option>
+          <option> Області України</option>
+          <option> Обрядові свята України</option>
+          <option> Пам'ятки архітектури України</option>
+          <option> Пам'ятки давніх культур України</option>
+          <option> Славетні роди України</option>
+          <option> Спорт </option>
+          <option> Стародавні міста України </option>
+          <option> Сувенірна продукція </option>
+          <option> Східний календар </option>
+          <option> Україна космічна </option>
+          <option> Українська спадщина </option>
+          <option> Фауна в пам`ятках культури України</option>
+          <option>Флора і фауна</option>
+          <option> 2000-ліття Різдва Христового</option>
+        </select>
+      </div>
+
+      <div class="form-group bootstrap-select show-tick open">
+        <select class="custom-select" id="years" [(ngModel)]="productYear" name="productYear" required>
+          <option selected="" value="-1"> — будь-який рік — </option>
+          <option>1991</option>
+          <option>1992</option>
+          <option>1993</option>
+          <option>1994</option>
+          <option>1995</option>
+          <option>1996</option>
+          <option>1997</option>
+          <option>1998</option>
+          <option>1999</option>
+          <option>2000</option>
+          <option>2001</option>
+          <option>2002</option>
+          <option>2003</option>
+          <option>2004</option>
+          <option>2005</option>
+          <option>2006</option>
+          <option>2007</option>
+          <option>2008</option>
+          <option>2009</option>
+          <option>2010</option>
+          <option>2011</option>
+          <option>2012</option>
+          <option>2013</option>
+          <option>2014</option>
+          <option>2015</option>
+          <option>2016</option>
+          <option>2017</option>
+          <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
+      </div>
+
+      <div class="form-group bootstrap-select show-tick open">
+        <select class="custom-select" [(ngModel)]="productMetal" name="productMetal" id="metal" required>
+          <option selected="" value="-1"> — будь-який метал — </option>
+          <option>біметалеві із дорогоцінних металів</option>
+          <option>біметалеві із недорогоцінних металів</option>
+          <option>золото</option>
+          <option>інша нумізматична продукція</option>
+          <option>мельхіор</option>
+          <option>нейзильбер</option>
+          <option>сплав на основі цинку</option>
+          <option>срібло</option>
+        </select>
+      </div>
+
+      <div class="form-group bootstrap-select show-tick open">
+        <select class="custom-select" [(ngModel)]="productDenomination" name="productDenomination" id="demonstration"
+          required>
+          <option selected="" value="-1"> — будь-який номінал — </option>
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+          <option>125</option>
+          <option>180</option>
+          <option>200</option>
+          <option>250</option>
+          <option>540</option>
+          <option>1080</option>
+          <option>200 000</option>
+          <option>1 000 000</option>
+          <option>2 000 000</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <textarea [(ngModel)]="productDescription" placeholder="Description" name="productDescription" type="text"
+          class="form-control" id="productDescription"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input type="number" [(ngModel)]="productPrice" name="productPrice" class="form-control"
+          placeholder="Product Price" id="productPrice">
+      </div>
+
+
+      <div class="form-group row">
+        <div class="card-body">
+          <h5 class="card-title">Select a file for upload:</h5>
+          <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+          <br><br>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <br>
+          <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+            File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    <div class="mr-auto">
+      <button type="button" class="btn btn-light btn-outline-dark" (click)="addCoins()">Add new coin</button>
+    </div>
+  </div>
+</ng-template> -->
+
+<!-- 
 <div class="container">
     <form class="mb-2">
       <div class="form-row mt-4">
@@ -91,4 +316,4 @@
         <button type="button" class="btn btn-light btn-outline-dark" (click)="addMedals()">Add new coin</button>
       </div>
     </div>
-  </ng-template>
+  </ng-template> -->
