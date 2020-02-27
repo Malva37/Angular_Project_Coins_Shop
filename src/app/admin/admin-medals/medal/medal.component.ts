@@ -58,7 +58,7 @@ export class MedalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const data: IMedal = Object.assign({}, form.value);
+    const data: Medal = Object.assign({}, form.value);
     debugger
     // const data: IMedal = new Medal(null, form.value.categoryId, form.value.categoryName, form.value.name, form.value.description,
     //   form.value.price, null);

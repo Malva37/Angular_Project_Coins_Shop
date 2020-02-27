@@ -1,1 +1,47 @@
-<p>medal-list works!</p>
+<!-- <table class="table table-hover">
+    <thead>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Mobile</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of list">
+        <td (click)="onEdit(emp)">{{emp.empCode}} - {{emp.fullName}}</td>
+        <td (click)="onEdit(emp)">{{emp.position}}</td>
+        <td (click)="onEdit(emp)">{{emp.mobile}}</td>
+        <td><a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fas fa-trash"></i></a></td>
+      </tr>
+    </tbody>
+  </table> -->
+
+
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let medal of list; let i=index">
+        <td (click)="onEdit(medal)" >{{ i+1 }}</td>
+        <td (click)="onEdit(medal)">{{ medal.name }}</td>
+        <td (click)="onEdit(medal)">{{ medal.price}}  грн</td>
+        <td (click)="onEdit(medal)">
+          <img [attr.src]="medal.image" class="card-img-top" alt="...">
+        </td>
+        <td>
+          <input type="button" value="delete" (click)="onDelete(medal.id)" class="btn btn-dark btn-outline-red">
+          
+          <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
+        
+        
+        </td>
+      </tr>
+    </tbody>
+  </table>
