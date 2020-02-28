@@ -33,7 +33,7 @@
         <td (click)="onEdit(medal)">{{ medal.name }}</td>
         <td (click)="onEdit(medal)">{{ medal.price}}  грн</td>
         <td (click)="onEdit(medal)">
-          <img [attr.src]="medal.image" class="card-img-top" alt="...">
+          <img [attr.src]="medal.image" class="card-img-top" >
         </td>
         <td>
           <input type="button" value="delete" (click)="onDelete(medal.id)" class="btn btn-dark btn-outline-red">

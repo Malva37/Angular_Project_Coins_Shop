@@ -16,12 +16,7 @@ export class MedalListComponent implements OnInit {
 
   ngOnInit() {
     this.service.getMedals().subscribe(actionArray  => {
-      console.log(actionArray);
-      
       this.list = actionArray.map(item => {
-        console.log(item);
-        console.log(item.payload.doc.data());
-        
         return {
           id: item.payload.doc.id, ...item.payload.doc.data()
         } as Medal;

@@ -26,17 +26,22 @@ export class MedalComponent implements OnInit {
   description: string;
   price: number;
   image: string;
+    downloadSrc: string;
+
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
+
   searchName: string;
 
   constructor(private service: MedalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage,
     private toastr: ToastrService) { }
+
+
 
   ngOnInit() {
     this.resetForm();
@@ -54,16 +59,16 @@ export class MedalComponent implements OnInit {
       description: '',
       price: null,
       image: ''
+
+      // image: 'https://peaktime.com.ua/image/cache/catalog/sportivnie-nagradi/gramoti-medali-diplomi/23.05.2018/products_366e6de7eaa20a83ab4750bbb108d359-500x500.jpg'
     };
   }
 
   onSubmit(form: NgForm) {
+    form.value.image = form.value.downloadSrc;
+    delete form.value.downloadSrc;
     const data: Medal = Object.assign({}, form.value);
     debugger
-    // const data: IMedal = new Medal(null, form.value.categoryId, form.value.categoryName, form.value.name, form.value.description,
-    //   form.value.price, null);
-    console.log(data);
-
     delete data.id;
     if (form.value.id == null) {
       this.firestore.collection('medals').add(data);
@@ -75,9 +80,8 @@ export class MedalComponent implements OnInit {
 
 
   public upload(event: any): void {
-    console.log(event);
     const file = event.target.files[0];
-    const filePath = `images/${this.createUUID()}.${file.type.split('/')[1]}`;
+    const filePath = `images/medals/${this.createUUID()}.${file.type.split('/')[1]}`;
     this.task = this.afStorage.upload(filePath, file);
     this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
     this.uploadProgress = this.task.percentageChanges();
@@ -85,8 +89,12 @@ export class MedalComponent implements OnInit {
       .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
       .subscribe();
     this.task.then((e) => {
-      this.afStorage.ref(`images/${e.metadata.name}`).getDownloadURL().subscribe(
-        data => { this.image = data; }
+      this.afStorage.ref(`images/medals/${e.metadata.name}`).getDownloadURL().subscribe(
+        data => {
+          this.image = data;
+          console.log(data.downloadSrc);
+          
+        }
       );
     }
     );

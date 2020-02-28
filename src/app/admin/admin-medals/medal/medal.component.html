@@ -38,7 +38,8 @@
       </div>
       <br>
       <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
-        File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
+        File uploaded: 
+        <a  [(ngModel)]="downloadSrc" name= "downloadSrc" [href]="downloadSrc">{{downloadSrc}}</a>
       </div>
     </div>
   </div>
