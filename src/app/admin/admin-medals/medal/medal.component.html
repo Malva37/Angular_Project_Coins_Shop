@@ -23,13 +23,10 @@
   </div>
 
   <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
-
-
   <div class="form-group row">
     <div class="card-body">
       <h5 class="card-title">Select a file for upload:</h5>
-      <input name="image" #image="ngModel" [(ngModel)]="service.formData.image" class="form-control"
-        placeholder="Product image" required type="file" (change)="upload($event)" accept=".png,.jpg" />
+      <input class="form-control"  placeholder="Product image" required type="file" [value]="service.formData.image" (change)="upload($event)" accept=".png,.jpg">
       <br><br>
       <div class="progress">
         <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
@@ -39,7 +36,8 @@
       <br>
       <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
         File uploaded: 
-        <a  [(ngModel)]="downloadSrc" name= "downloadSrc" [href]="downloadSrc">{{downloadSrc}}</a>
+        <input *ngIf="downloadURL | async; let downloadSrc" type="hidden">
+        <a [href]="downloadSrc">{{downloadSrc}}</a> 
       </div>
     </div>
   </div>

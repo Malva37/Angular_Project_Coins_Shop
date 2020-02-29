@@ -16,32 +16,98 @@
   </table> -->
 
 
-  
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Image</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let medal of list; let i=index">
-        <td (click)="onEdit(medal)" >{{ i+1 }}</td>
-        <td (click)="onEdit(medal)">{{ medal.name }}</td>
-        <td (click)="onEdit(medal)">{{ medal.price}}  грн</td>
-        <td (click)="onEdit(medal)">
-          <img [attr.src]="medal.image" class="card-img-top" >
-        </td>
-        <td>
-          <input type="button" value="delete" (click)="onDelete(medal.id)" class="btn btn-dark btn-outline-red">
-          
-          <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
-        
-        
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let medal of list; let i=index">
+      <!-- <td (click)="onEdite(template)" >{{ i+1 }}</td> -->
+      <td (click)="onEdit(medal, template)">{{ i+1 }}</td>
+      <td (click)="onEdit(medal, template)">{{ medal.name }}</td>
+      <td (click)="onEdit(medal, template)">{{ medal.price}} грн</td>
+      <td (click)="onEdit(medal, template)">
+        <img [attr.src]="medal.image" class="card-img-top">
+      </td>
+      <td>
+        <input type="button" value="delete" (click)="onDelete(medal)" class="btn btn-dark btn-outline-red">
+        <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<ng-template #template>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add new medal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+      <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
+      <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
+
+      <div class="form-group">
+        <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
+          placeholder="Product Name" required>
+        <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
+      </div>
+
+      <div class="form-group">
+        <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+          class="form-control" placeholder="Description">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+          placeholder="Product Price" required>
+      </div>
+      <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
+      <div class="form-group row" *ngIf="!editImageStatus">
+        <div class="card-body">
+          <h5 class="card-title">Select a file for upload:</h5>
+          <input class="form-control" placeholder="Product image" required type="file" (change)="upload($event)" accept=".png,.jpg" />
+          <br><br>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <br>
+          <div class="alert alert-info" role="alert">
+            File uploaded:
+            <a [href]="downloadSrc">{{ service.formData.downloadSrc }}</a>
+            <input type="hidden" [(ngModel)]="service.formData.downloadSrc" #downloadSrc="ngModel" name="downloadSrc">
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-row" *ngIf="editImageStatus">
+        <img [src]="service.formData.image" alt="">
+        <button type="button" class="btn btn-lg btn-block btn-danger" (click)="deleteImage(service.formData)">delete</button>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+      </div>
+
+
+    </form>
+  </div>
+</ng-template>

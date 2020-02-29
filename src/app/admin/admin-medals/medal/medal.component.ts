@@ -15,18 +15,15 @@ import { Medal } from 'src/app/shared/classes/medals.model';
   styleUrls: ['./medal.component.scss']
 })
 export class MedalComponent implements OnInit {
-  // fullName: string;
-  // position: string;
-  // empCode: string;
-  // mobile: string;
-
   categoryId: number;
   categoryName: string;
   name: string;
   description: string;
   price: number;
   image: string;
-    downloadSrc: string;
+  downloadSrc: string;
+  searchName: string;
+
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -34,7 +31,6 @@ export class MedalComponent implements OnInit {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
 
-  searchName: string;
 
   constructor(private service: MedalService,
     private firestore: AngularFirestore,
@@ -59,14 +55,13 @@ export class MedalComponent implements OnInit {
       description: '',
       price: null,
       image: ''
-
-      // image: 'https://peaktime.com.ua/image/cache/catalog/sportivnie-nagradi/gramoti-medali-diplomi/23.05.2018/products_366e6de7eaa20a83ab4750bbb108d359-500x500.jpg'
     };
   }
 
   onSubmit(form: NgForm) {
-    form.value.image = form.value.downloadSrc;
-    delete form.value.downloadSrc;
+    debugger
+    form.value.image = this.image;
+    // delete form.value.downloadSrc;
     const data: Medal = Object.assign({}, form.value);
     debugger
     delete data.id;
@@ -103,14 +98,15 @@ export class MedalComponent implements OnInit {
   private createUUID(): string {
     let dt = new Date().getTime();
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      // tslint:disable-next-line:no-bitwise
       const r = (dt + Math.random() * 16) % 16 | 0;
       dt = Math.floor(dt / 16);
-      // tslint:disable-next-line:no-bitwise
       return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
   }
 
+  delete(downloadUrl) {
+    return this.afStorage.storage.refFromURL(downloadUrl).delete();
+  }
 
 }
