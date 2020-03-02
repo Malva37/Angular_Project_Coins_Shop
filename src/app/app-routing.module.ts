@@ -13,6 +13,7 @@ import { AdminBanknotesComponent } from './admin/admin-banknotes/admin-banknotes
 import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.component';
 import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'medals', component: MedalsComponent},
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'basket', component: BasketComponent},
+  {path: 'product/:id', component: ProductDetailsComponent},
  
   {path: 'admin', component: AdminComponent,children:[
   {path: '', redirectTo: 'coins', pathMatch:'full'},
@@ -32,8 +34,9 @@ const routes: Routes = [
   {path: 'medals', component: AdminMedalsComponent},
   {path: 'accessories', component: AdminAccessoriesComponent},
   {path: 'orders', component: AdminOrdersComponent},
-
   ]},
+  
+
 ];
 
 @NgModule({

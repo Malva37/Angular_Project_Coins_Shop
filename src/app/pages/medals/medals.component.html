@@ -17,13 +17,13 @@
             <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
           </div>
   
-          <div class="h5 filter_name">
+          <!-- <div class="h5 filter_name">
             <span data-language="features_other_filter">Серія</span>
           </div>
-          <div class="form-group bootstrap-select show-tick open">
+          <div class="form-group bootstrap-select show-tick open"> -->
             <!-- <select class="custom-select" id="series" [(ngModel)]="productSeries" name="productSeries" required> -->
-            <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required>
-              <!-- <select (change)="selectChangeHandler($event)"  class="custom-select" id="series" required> -->
+            <!-- <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required> -->
+              <!-- <select (change)="selectChangeHandler($event)"  class="custom-select" id="series" required>
               <option [attr.selected] value="-1"> — будь-яка серія — </option>
               <option> Видатні особистості України</option>
               <option> Античні пам`ятки України</option>
@@ -150,21 +150,23 @@
               <option>1 000 000</option>
               <option>2 000 000</option>
             </select>
-          </div>
+          </div> -->
         </form>
   
       </section>
   
       <section class="catalog">
-        <figure class="coin"
-          *ngFor="let coin of list ">
-          <img [attr.src]="coin.image" class="card-img-top" alt="...">
+        <figure class="medal"
+          *ngFor="let medal of list | searchCoin:searchName | filterPrice:minValue:maxValue">
+          <img [attr.src]="medal.image" class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="title">{{ coin.name }}</p>
-            <p class="price">{{ coin.price }} грн</p>
+            <p class="title">{{ medal.name }}</p>
+            <p class="price">{{ medal.price }} грн</p>
             <div class="button-group">
-              <a href="#" class="moreDetails h6">Детальніше</a>
-              <a href="#" class="buy h6">Купити</a>
+              <!-- <button href="#" class="moreDetails h6">Детальніше</a> -->
+                <input type="button" [routerLink]="[ '/product', medal.id ]" class="moreDetails h6" value="Детальніше">
+                <input type="button" class="buy h6" (click)="buyProduct(medal)" value="Купити">
+              <!-- <a href="#" class="buy h6">Купити</a> -->
             </div>
           </div>
         </figure>

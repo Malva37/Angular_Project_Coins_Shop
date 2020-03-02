@@ -60,4 +60,10 @@ export class MedalsComponent implements OnInit {
       this.options.floor = min;
       this.minValue = min;
     }
+
+    
+buyProduct(medal:Medal){
+  console.log(medal);
+}
+
 }

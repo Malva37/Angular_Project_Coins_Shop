@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
+  userPage: boolean;
+  guestpage: boolean;
   constructor() { }
 
   ngOnInit() {
   }
+
+  showUserFields() {
+    this.userPage = true;
+    this.guestpage = true;
+  }
+
+
+
 
 }

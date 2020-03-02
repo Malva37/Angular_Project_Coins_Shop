@@ -47,6 +47,7 @@ import { FilterDenominationPipe } from './shared/pipes/filter-denomination.pipe'
 import { FilterMetalPipe } from './shared/pipes/filter-metal.pipe';
 import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 
 
@@ -75,6 +76,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     FilterPricePipe,
     MedalComponent,
     MedalListComponent,
+    ProductDetailsComponent,
   
 
   ],

@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPricePipe implements PipeTransform {
 
-  transform(arrCoins: Array<any>, min: number, max: number): any {
-    const result = arrCoins.filter(coin =>
-      (coin.price >= min && coin.price <= max))
+  transform(list: Array<any>, min: number, max: number): any {
+    const result = list.filter(product =>
+      (product.price >= min && product.price <= max))
     return result;
   }
 
