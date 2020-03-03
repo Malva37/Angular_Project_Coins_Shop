@@ -12,14 +12,15 @@ import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage 
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  
- nameUser:string;
+
+  nameUser: string;
   userPage: boolean;
+  adminPage: boolean;
   guestpage: boolean;
   registrationOn: boolean;
   registrationOff: boolean
   passwordField: boolean;
-  titleButton :string = 'Змінити пароль';
+  titleButton: string = 'Змінити пароль';
 
   id: string;
   firstName: string;
@@ -28,7 +29,10 @@ export class AdminComponent implements OnInit {
   password: string;
   phone: number;
   address: string;
-   
+  emailUser: string;
+  passwordUser: string;
+
+
 
 
 
@@ -53,45 +57,66 @@ export class AdminComponent implements OnInit {
       address: ''
     };
   }
-
-  showUserFields() {
-    this.userPage = true;
-    this.guestpage = true;
-  }
-
-  onSubmit(form: NgForm) {
-    debugger
-
-    const data: User = Object.assign({}, form.value);
- 
-    delete data.id;
-    if (form.value.id == null) {
-      this.firestore.collection('users').add(data);
-      this.registrationOn = true;
-      this.registrationOff = true;
-      this.passwordField = true;
-      this.titleButton = 'Змінити пароль';
-      return this.nameUser= data.firstName;
-
-    } else {
-      this.passwordField = false;
-      this.firestore.doc('users/' + form.value.id).update(data);
+  enter() {
+    if (this.emailUser == 'a' && this.passwordUser == 'a') {
+      this.guestpage = true;
+      this.adminPage = true;
     }
-    // this.resetForm(form);
-  }
-  // changePassword(event) {
-  //   this.passwordField = false;
-  //   this.service.formData.password = '';
-  //   this.titleButton = event.target.innerText;
-  //  return this.titleButton = 'Зберегти пароль';
-  //   // console.log(event);
+    if (this.emailUser) {
 
-  // }
-
-  delete(downloadUrl) {
-    return this.afStorage.storage.refFromURL(downloadUrl).delete();
+      // getData():void{
+      //   const id = this.route.snapshot.paramMap.get('id');
+      //   this.medalService.userRef.doc(id).valueChanges().subscribe(
+      //     data => {
+      //       this.product = data
+      //       // console.log(this.medal)
+      //     })
+      // }
+    }
   }
-  
+
+
+
+
+
+showUserFields() {
+  this.userPage = true;
+  this.guestpage = true;
+}
+
+onSubmit(form: NgForm) {
+  debugger
+
+  const data: User = Object.assign({}, form.value);
+
+  delete data.id;
+  if (form.value.id == null) {
+    this.firestore.collection('users').add(data);
+    this.registrationOn = true;
+    this.registrationOff = true;
+    this.passwordField = true;
+    this.titleButton = 'Змінити пароль';
+    return this.nameUser = data.firstName;
+
+  } else {
+    this.passwordField = false;
+    this.firestore.doc('users/' + form.value.id).update(data);
+  }
+  // this.resetForm(form);
+}
+// changePassword(event) {
+//   this.passwordField = false;
+//   this.service.formData.password = '';
+//   this.titleButton = event.target.innerText;
+//  return this.titleButton = 'Зберегти пароль';
+//   // console.log(event);
+
+// }
+
+delete (downloadUrl) {
+  return this.afStorage.storage.refFromURL(downloadUrl).delete();
+}
+
 
 
 

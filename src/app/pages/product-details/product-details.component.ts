@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MedalService } from 'src/app/shared/services/medal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Medal } from 'src/app/shared/classes/medals.model';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-product-details',
@@ -11,7 +13,8 @@ import { Medal } from 'src/app/shared/classes/medals.model';
 export class ProductDetailsComponent implements OnInit {
 product:any;
   constructor(private medalService:MedalService,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
     this.getData()
@@ -25,6 +28,10 @@ getData():void{
       // console.log(this.medal)
     })
 }
+back(): void {
+  this.location.back();
+}
+
   
 
 buyProduct(medal:Medal){
