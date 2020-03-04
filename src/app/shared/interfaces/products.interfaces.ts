@@ -3,6 +3,7 @@ export interface IProduct{
     categoryId:number;
     categoryName:string;
     name:string;
+    counter:number;
     description:string;
     price:number;
     image:any;

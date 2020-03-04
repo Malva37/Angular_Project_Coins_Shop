@@ -6,6 +6,7 @@ export class Product implements IProduct{
         public categoryId:number,
         public categoryName:string,
         public name:string,
+        public counter:number,
         public description:string,
         public price:number,
         public image:any

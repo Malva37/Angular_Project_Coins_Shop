@@ -58,64 +58,91 @@ export class AdminComponent implements OnInit {
     };
   }
   enter() {
+
+  
     if (this.emailUser == 'a' && this.passwordUser == 'a') {
       this.guestpage = true;
       this.adminPage = true;
     }
-    if (this.emailUser) {
+    // this.service.getUsers().snapshotChanges().pipe(
+    //   map(changes => changes.map(
+    //     c => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
+    //   )
+    // ).subscribe(users => {
+    //   users.forEach(element => {
+    //     // debugger
+    //     console.log(element.email, element.password);
+    //     console.log(this.emailUser, this.passwordUser);
+    //     if (element.password == this.passwordUser) {
+    //       if (element.email == this.emailUser) {
+    //         this.service.updateUser(element.key, { loginStatus: true })
+    //         this.currentUser.userEmail = element.userEmail;
+    //         this.currentUser.userName = element.userName;
+    //         this.currentUser.userAdmin = element.userAdmin;
+    //         this.currentUser.loginStatus = element.loginStatus;
+    //         this.modalRef.hide()
+    //         console.log('log true');
+    //       }
+    //     }
+    //   })
 
-      // getData():void{
-      //   const id = this.route.snapshot.paramMap.get('id');
-      //   this.medalService.userRef.doc(id).valueChanges().subscribe(
-      //     data => {
-      //       this.product = data
-      //       // console.log(this.medal)
-      //     })
-      // }
     }
+
+
+    // if (this.emailUser) {
+
+    //   // getData():void{
+    //   //   const id = this.route.snapshot.paramMap.get('id');
+    //   //   this.medalService.userRef.doc(id).valueChanges().subscribe(
+    //   //     data => {
+    //   //       this.product = data
+    //   //       // console.log(this.medal)
+    //   //     })
+    //   // }
+    // }
+  
+
+
+
+
+
+  showUserFields() {
+    this.userPage = true;
+    this.guestpage = true;
   }
 
+  onSubmit(form: NgForm) {
+    debugger
 
+    const data: User = Object.assign({}, form.value);
 
+    delete data.id;
+    if (form.value.id == null) {
+      this.firestore.collection('users').add(data);
+      this.registrationOn = true;
+      this.registrationOff = true;
+      this.passwordField = true;
+      this.titleButton = 'Змінити пароль';
+      return this.nameUser = data.firstName;
 
-
-showUserFields() {
-  this.userPage = true;
-  this.guestpage = true;
-}
-
-onSubmit(form: NgForm) {
-  debugger
-
-  const data: User = Object.assign({}, form.value);
-
-  delete data.id;
-  if (form.value.id == null) {
-    this.firestore.collection('users').add(data);
-    this.registrationOn = true;
-    this.registrationOff = true;
-    this.passwordField = true;
-    this.titleButton = 'Змінити пароль';
-    return this.nameUser = data.firstName;
-
-  } else {
-    this.passwordField = false;
-    this.firestore.doc('users/' + form.value.id).update(data);
+    } else {
+      this.passwordField = false;
+      this.firestore.doc('users/' + form.value.id).update(data);
+    }
+    // this.resetForm(form);
   }
-  // this.resetForm(form);
-}
-// changePassword(event) {
-//   this.passwordField = false;
-//   this.service.formData.password = '';
-//   this.titleButton = event.target.innerText;
-//  return this.titleButton = 'Зберегти пароль';
-//   // console.log(event);
+  // changePassword(event) {
+  //   this.passwordField = false;
+  //   this.service.formData.password = '';
+  //   this.titleButton = event.target.innerText;
+  //  return this.titleButton = 'Зберегти пароль';
+  //   // console.log(event);
 
-// }
+  // }
 
-delete (downloadUrl) {
-  return this.afStorage.storage.refFromURL(downloadUrl).delete();
-}
+  delete(downloadUrl) {
+    return this.afStorage.storage.refFromURL(downloadUrl).delete();
+  }
 
 
 

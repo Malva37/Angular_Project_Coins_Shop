@@ -7,36 +7,48 @@
     </div>
     <div class="col-5">
       <h5 class="text-danger">Card price {{ product?.price }}</h5>
-      <div class="d-flex justify-content-between">
-        <span class="col ">
-          Кількість:
-        </span>
-        <div class="counter ">
-          <span class="minus">−</span>
-          <input class="input_amount" type="text" name="amount" value="1">
-          <span class="plus">+</span>
+
+
+     
+      <div class="form-group">
+        <div class="row">
+          <div class="col-5">Кількість:</div>
+          <div class="col-5 d-inline-flex">
+            <button (click)="statusCounter(false)">-</button>
+            <input name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="counter"  class="form-control">
+            <button (click)="statusCounter(true)">+</button>
+          </div>
         </div>
       </div>
-      <!-- <a href="#" class="btn btn-primary" (click)="buyProduct(product)">Купити</a> -->
-     <input type="button"  class="btn btn-primary" (click)="buyProduct(product)" value="Купити">
+
+      <input type="button" class="btn btn-primary" (click)="buyProduct(product)" value="Купити">
     </div>
   </div>
 
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab"
+  <!-- <nav> -->
+  <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist"> -->
+
+
+  <div>
+    <tabset>
+      <tab heading="Опис" id="tab1"> {{ product?.description }}</tab>
+      <tab heading="Характеристики">Basic content 1</tab>
+    </tabset>
+  </div>
+
+  <!-- <a class="nav-item nav-link active"  [routerLink]="[ 'description' ]" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab"
         aria-controls="nav-description" aria-selected="true">Опис</a>
-      <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab"
+      <a class="nav-item nav-link" [routerLink]="[ 'characteristics' ]" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab"
         aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
+    </div> -->
+  <!-- </nav> -->
+  <!-- <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active mt-4" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
       {{ product?.description }}</div>
     <div class="tab-pane fade mt-4" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
 
 
     </div>
-  </div>
+  </div> -->
 
 </div>

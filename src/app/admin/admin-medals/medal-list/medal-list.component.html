@@ -67,6 +67,12 @@
       </div>
 
       <div class="form-group">
+        <input type="number" pattern="[1-9]{1,}" name="counter" #counter="ngModel"
+          [(ngModel)]="service.formData.counter" class="form-control" placeholder="Counter" required>
+        <!-- <div *ngIf="counter.invalid && counter.touched" class="validation-error">Введіть кількість відмінну від 0</div> -->
+      </div>
+
+      <div class="form-group">
         <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
           class="form-control" placeholder="Description">
         </textarea>
@@ -76,11 +82,11 @@
         <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
           placeholder="Product Price" required>
       </div>
-      <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
       <div class="form-group row" *ngIf="!editImageStatus">
         <div class="card-body">
           <h5 class="card-title">Select a file for upload:</h5>
-          <input class="form-control" placeholder="Product image" required type="file" (change)="upload($event)" accept=".png,.jpg" />
+          <input class="form-control" placeholder="Product image" required type="file" (change)="upload($event)"
+            accept=".png,.jpg" />
           <br><br>
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
@@ -91,16 +97,16 @@
           <div class="alert alert-info" role="alert">
             File uploaded:
             <a [href]="downloadSrc">{{ service.formData.downloadSrc }}</a>
-            <input type="hidden" [(ngModel)]="service.formData.downloadSrc" #downloadSrc="ngModel" name="downloadSrc">
+            <input type="hidden" [(ngModel)]="service.formData.image" #image="ngModel" name="image">
           </div>
         </div>
       </div>
 
 
-
       <div class="form-row" *ngIf="editImageStatus">
         <img [src]="service.formData.image" alt="">
-        <button type="button" class="btn btn-lg btn-block btn-danger" (click)="deleteImage(service.formData)">delete</button>
+        <button type="button" class="btn btn-lg btn-block btn-danger"
+          (click)="deleteImage(service.formData)">delete</button>
       </div>
 
       <div class="form-group">

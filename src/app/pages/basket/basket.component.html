@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="basket col-12">
+    <table class="table-row">
+      <thead>
+        <tr>
+          <th scope="col">Фото</th>
+          <th scope="col">Найменування</th>
+          <th scope="col">Ціна</th>
+          <th scope="col">Кількість</th>
+          <th scope="col">Сумма</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="table-bordered">
+        <tr *ngFor="let article of articles; let i=index">
+          <td>
+            <img [attr.src]="article.article.image" class="card-img-top">
+          </td>
+
+          <td>{{ article.article.name }}</td>
+          <td>{{ article.article.price }} </td>
+          <td>
+            <div class="form-group">
+                <!-- <div class="row"> -->
+                  <div class="d-inline-flex">
+                    <button (click)="statusCounter(false)">-</button>
+                    <input name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="counter"  class="form-control">
+                    <button (click)="statusCounter(true)">+</button>
+                  </div>
+                <!-- </div> -->
+              </div>
+          </td>
+          <td> {{ article.totalSum }}</td>
+
+          <td>
+            <input type="button" value="delete" (click)="deleteArticle(article)" class="btn btn-dark btn-outline-red">
+            <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
+          </td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12 main">
+    <div class="dataUser col-6">
+
+
+    </div>
+    <div class="deliveryPayment col-6">
+      <div class="delivery"></div>
+      <div class="payment"></div>
+    </div>
+
+  </div>
+
+
+</div>

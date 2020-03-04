@@ -7,6 +7,7 @@ export class Banknote implements IProduct{
             public categoryId:number,
             public categoryName:string,
             public name:string,
+            public counter:number,
             public year:number,
             public denomination:number,
             public signature:string,

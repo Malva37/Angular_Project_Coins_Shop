@@ -18,6 +18,7 @@ export class MedalComponent implements OnInit {
   categoryId: number;
   categoryName: string;
   name: string;
+  counter: number;
   description: string;
   price: number;
   image: string;
@@ -52,6 +53,7 @@ export class MedalComponent implements OnInit {
       categoryId: 3,
       categoryName: 'medals',
       name: '',
+      counter: null,
       description: '',
       price: null,
       image: ''
@@ -88,7 +90,7 @@ export class MedalComponent implements OnInit {
         data => {
           this.image = data;
           console.log(data.downloadSrc);
-          
+
         }
       );
     }

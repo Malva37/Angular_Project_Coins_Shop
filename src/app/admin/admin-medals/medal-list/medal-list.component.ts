@@ -19,6 +19,7 @@ export class MedalListComponent implements OnInit {
   categoryId: number;
   categoryName: string;
   name: string;
+  counter: number;
   description: string;
   price: number;
   image: string;
@@ -31,7 +32,6 @@ export class MedalListComponent implements OnInit {
   downloadURL: Observable<string>;
 
   modalRef: BsModalRef;
-
   editImageStatus: boolean
 
   constructor(private service: MedalService,
@@ -64,6 +64,7 @@ export class MedalListComponent implements OnInit {
       categoryId: 3,
       categoryName: 'medals',
       name: '',
+      counter: null,
       description: '',
       price: null,
       image: ''
@@ -73,18 +74,13 @@ export class MedalListComponent implements OnInit {
   onEdit(medal: Medal, template) {
     debugger
     this.openModal(template);
-    console.log(medal);
     this.service.formData = Object.assign({}, medal);
     this.editImageStatus = true;
-    // return this.image = medal.image;
   }
 
 
   onSubmit(form: NgForm) {
-    console.log(form);
     const data: Medal = Object.assign({}, form.value);
-    debugger
-    console.log(data);
     this.firestore.doc('medals/' + form.value.id).update(data);
     this.resetForm(form);
   }
@@ -92,12 +88,14 @@ export class MedalListComponent implements OnInit {
   onDelete(medal: Medal) {
     if (confirm('Are you sure to delete this medal?')) {
       this.firestore.doc('medals/' + medal.id).delete();
+      this.afStorage.storage.refFromURL(medal.image).delete();
     }
   }
 
 
 
   public upload(event: any): void {
+    debugger
     const file = event.target.files[0];
     const filePath = `images/medals/${this.createUUID()}.${file.type.split('/')[1]}`;
     this.task = this.afStorage.upload(filePath, file);
@@ -109,7 +107,7 @@ export class MedalListComponent implements OnInit {
     this.task.then((e) => {
       this.afStorage.ref(`images/medals/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          this.image = data;
+          this.service.formData.image = data;
         });
     });
   }
@@ -126,9 +124,8 @@ export class MedalListComponent implements OnInit {
 
   public deleteImage(medal: Medal) {
     this.editImageStatus = false;
-    console.log(medal);
-    
-    return this.afStorage.storage.refFromURL(medal.image).delete();
+    this.afStorage.storage.refFromURL(medal.image).delete();
+    this.service.formData.image = ''
   }
 
 

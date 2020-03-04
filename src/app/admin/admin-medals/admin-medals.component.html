@@ -12,34 +12,7 @@
     </div>
   </form>
   <app-medal-list></app-medal-list>
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Image</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let coin of arrCoins; let i=index">
-        <td>{{ i+1 }}</td>
-        <td>{{ coin.name }}</td>
-        <td>{{ coin.price}}  грн</td>
-        <td>
-          <img [attr.src]="coin.image" class="card-img-top" alt="...">
-        </td>
-        <td>
-         <input type="button" value="edit" (click)="editCoins(coin,template)" class="btn btn-light btn-outline-dark">
-        </td>
-        <td>
-        <input type="button" value="delete" (click)="deleteCoins(coin)" class="btn btn-dark btn-outline-red">
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
+
 </div>
 
 <ng-template #template>
@@ -50,11 +23,7 @@
     </button>
   </div>
   <div class="modal-body">
-
     <app-medal></app-medal>
-    <!-- <div class="mr-auto">
-      <button type="button" class="btn btn-light btn-outline-dark" (click)="addCoins()">Add new coin</button>
-    </div> -->
   </div>
 </ng-template>
 <!-- 
