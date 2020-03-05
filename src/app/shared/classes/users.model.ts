@@ -8,9 +8,10 @@ export class User implements IUser {
         public firstName: string,
         public lastName: string,
         public email: string,
-        public password: string,
         public phone: number,
-        public address: string
+        public address: string,
+        public password?: string,
+        public comment?:string
 
 
     ) { }

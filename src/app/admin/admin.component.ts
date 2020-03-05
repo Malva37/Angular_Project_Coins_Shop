@@ -43,6 +43,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
   }
+  
   resetForm(form?: NgForm) {
     if (form != null) {
       form.resetForm();
@@ -52,14 +53,13 @@ export class AdminComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
       phone: null,
-      address: ''
+      address: '',
+      password: ''
     };
   }
-  enter() {
 
-  
+  enter() {
     if (this.emailUser == 'a' && this.passwordUser == 'a') {
       this.guestpage = true;
       this.adminPage = true;

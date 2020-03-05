@@ -1,3 +1,63 @@
-.main{
-    display: flex;
+.main {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2%;
+}
+
+.imageArtilce {
+  height: 100px;
+  width: 100px;
+}
+
+.dataUser {
+  padding: 5%;
+  border: 1px solid #000;
+  //   margin: 2% 2% 0 0;
+  width: 49%;
+  //   height:initial;
+
+}
+
+.deliveryPayment {
+  width: 49%;
+}
+
+.delivery {
+  height: auto;
+  border: 1px solid black;
+  padding: 5%;
+}
+.payment{
+    height: auto;
+    border: 1px solid black;
+    padding: 5%;
+    margin: 3% 0 0 ;
+
+}
+
+.tableBasket {
+  width: 100%;
+  border: 1px solid #000;
+}
+
+.tableBasket tr,
+td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 1% 2%;
+}
+
+.counter {
+  width: 40px;
+}
+
+.checkLabel {
+  display: flex;
+}
+
+.checkLabel img {
+  width: 53px;
+  height: 33px;
+  margin-right: 1%;
 }
