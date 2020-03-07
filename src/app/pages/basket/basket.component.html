@@ -1,160 +1,165 @@
 <div class="container">
+  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-  <div class="basket container-fluid">
-    <table class="tableBasket">
-      <thead>
-        <tr>
-          <th scope="col">Фото</th>
-          <th scope="col">Найменування</th>
-          <th scope="col">Ціна</th>
-          <th scope="col">Кількість</th>
-          <th scope="col">Сумма</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <!-- <tbody class="table-bordered"> -->
-      <tbody>
-        <tr *ngFor="let article of articles; let i=index">
-          <td>
-            <img [attr.src]="article.article.image" class="imageArtilce">
-          </td>
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
 
-          <td>{{ article.article.name }}</td>
-          <td>{{ article.article.price }} грн </td>
-          <td>
-            <div class="d-inline-flex">
-              <button (click)="statusCounter(false)">-</button>
-              <input class="counter" name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="counter">
-              <button (click)="statusCounter(true)">+</button>
-            </div>
-          </td>
-          <td> {{ article.totalSum }} грн</td>
-
-          <td>
-
-
-
-            <!-- <a href="" (click)="deleteArticle(article)"><b>X</b></a> -->
-
-
-            <input type="button" value="X" (click)="deleteArticle(article)" class="btn btn-dark btn-outline-red">
-            <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
-          </td>
-
-
-        </tr>
-        <tr>
-          <td colspan="6" class="text-right">Разом грн</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="basket container-fluid">
+      <table class="tableBasket">
+        <thead>
+          <tr>
+            <th scope="col">Фото</th>
+            <th scope="col">Найменування</th>
+            <th scope="col">Ціна</th>
+            <th scope="col">Кількість</th>
+            <th scope="col">Сумма</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of articles; let i=index">
+            <td>
+              <img [attr.src]="article.article.image" class="imageArtilce">
+            </td>
+            <td>{{ article.article.name }}</td>
+            <td>{{ article.article.price }} грн </td>
+            <td>
+              <div class="d-inline-flex">
+                <button (click)="statusCounter(false)">-</button>
+                <input class="counter" name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="article.article.counter">
+                
+                <button (click)="statusCounter(true)">+</button>
+              </div>
+            </td>
+            <td> {{ article.totalSum }} грн</td>
+            <td>
+              <input type="button" value="delete" (click)="deleteArticle(article)" class="btn btn-dark btn-outline-red">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" class="text-right">Сума замовлення : 
+              <input type="number"  name="totalSumOrder" #totalSumOrder="ngModel"
+              [(ngModel)]="service.formData.totalSumOrder" value="Разом {{ totalSumOrder }}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
-  <div class="main">
+    <div class="main">
 
-    <div class="dataUser">
-      <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <div class="dataUser">
+        <!-- <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)"> -->
         <p> Контактні дані</p>
-        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
-
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.user.id">
         <div class="form-group row">
           <input type="text" class="form-control" name="firstName" required #firstName="ngModel"
-            [(ngModel)]="service.formData.firstName" id="firstName" placeholder="Ім'я">
-
+            [(ngModel)]="service.formData.user.firstName" id="firstName" placeholder="Ім'я">
         </div>
-
         <div class="form-group row">
           <input type="text" class="form-control" name="lastName" required #lastName="ngModel"
-            [(ngModel)]="service.formData.lastName" id="lastName" placeholder="Прізвище">
+            [(ngModel)]="service.formData.user.lastName" id="lastName" placeholder="Прізвище">
         </div>
-
+        <div class="form-group row">
+          <input type="email" required class="form-control" #email="ngModel" [(ngModel)]="service.formData.user.email" name="email" placeholder="Email*">
+        </div>
         <div class="form-group row">
           <input type="number" class="form-control" name="phone" required #phone="ngModel"
-            [(ngModel)]="service.formData.phone" id="phone" placeholder="Номер телефону">
+            [(ngModel)]="service.formData.user.phone" id="phone" placeholder="Номер телефону">
         </div>
-
         <div class="form-group row">
           <input type="text" class="form-control" name="address" required #address="ngModel"
-            [(ngModel)]="service.formData.address" id="address" placeholder="Адреса доставки">
+            [(ngModel)]="service.formData.user.address" id="address" placeholder="Адреса доставки">
         </div>
-
-         <input type="hidden" name="password"  #password="ngModel" [(ngModel)]="service.formData.password" id="password">
-       
-
+        <input type="hidden" name="password" #password="ngModel" [(ngModel)]="service.formData.user.password"
+          id="password">
         <div class="form-group row">
-          <textarea type="text" name="comment" #comment="ngModel" [(ngModel)]="service.formData.comment"
+          <textarea type="text" name="comment" #comment="ngModel" [(ngModel)]="service.formData.user.comment"
             class="form-control" placeholder="Коментар до замовлення">
           </textarea>
         </div>
 
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button>
-        </div>
-      </form>
-    </div>
+        </div> -->
+        <!-- </form> -->
+      </div>
 
 
-    <div class="deliveryPayment">
-      <div class="delivery">
-        <form>
+      <div class="deliveryPayment">
+        <div class="payment">
+          <!-- <form> -->
           <p>Спосіб оплати</p>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label checkLabel" for="exampleRadios1">
-              <img src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105" alt="" >
-             <h6> На Карту Приватбанку</h6>
-            </label>
+            <input type="radio" value="Приват Банк" name="payment" [ngModel]="service.formData.payment"
+              #payment="ngModel" checked>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105"
+              alt="">
+            <h6> На Карту Приватбанку</h6>
             <p>Оплата на карту Приватбанку 5169 3600 0287 5825 (отримувач Кучма Володимир Олегович).
               Комісія з переказу в системі Privat24 - 0%</p>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label checkLabel" for="exampleRadios2">
-              <img src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fcash.50x50.jpg?alt=media&token=3de901e1-46f1-4b13-9098-6cfdf6724356" alt="" >
-             <h6> Оплата при отриманні (Післяплата, Наложений платіж)</h6>
-            </label>
-          </div>
-        </form>
-      </div>
 
-      <div class="payment">
-        <form>
+          <div class="form-check">
+            <input type="radio" value="Оплата при отриманні" name="payment" [ngModel]="service.formData.payment"
+              #payment="ngModel">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fcash.50x50.jpg?alt=media&token=3de901e1-46f1-4b13-9098-6cfdf6724356"
+              alt="">
+            <h6> Оплата при отриманні (Післяплата, Наложений платіж)</h6>
+          </div>
+          <!-- </form> -->
+        </div>
+
+        <div class="delivery">
+          <!-- <form> -->
           <p>Спосіб доставки</p>
+
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label checkLabel" for="exampleRadios1">
-              <img src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c" alt="" >
-             <h6> Нова Пошта (Сплачується окремо при отриманні посилки)</h6>
-            </label>
-            <p>
-              Доставка товару на склад «Нова Пошта» в Вашому населеному пункті.</p>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label checkLabel" for="exampleRadios2">
-              <img src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fukrposhta.50x50.png?alt=media&token=3b242f9a-dee9-43ff-af17-0c3538fd57a4" alt="" >
-             <h6> Укрпошта (Сплачується окремо при отриманні посилки)</h6>
-            </label>
-            <p>В средньому, доставка займає 2-7 днів. Тимчасово немає доставки в зону проведення АТО і Крим <br>
-             <b>Замовлення понад 1000 грн. доставляється безкоштовно.</b> </p>
+            <input type="radio" value="Нова пошта" name="delivery" [ngModel]="service.formData.delivery"
+              #delivery="ngModel" checked>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
+              alt="">
+            <h6> Нова Пошта (Сплачується окремо при отриманні посилки)</h6>
+            <p>Доставка товару на склад «Нова Пошта» в Вашому населеному пункті</p>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label checkLabel" for="exampleRadios2">
-              <img src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsamovyvoz.50x50.png?alt=media&token=c3082cee-26a9-4f77-b120-238613d0b78c" alt="" >
-             <h6> Особиста зустріч(в Києві)</h6>
-            </label>
+            <input type="radio" value="Укрпошта" name="delivery" [ngModel]="service.formData.delivery"
+              #delivery="ngModel">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fukrposhta.50x50.png?alt=media&token=3b242f9a-dee9-43ff-af17-0c3538fd57a4"
+              alt="">
+            <h6> Укрпошта (Сплачується окремо при отриманні посилки)</h6>
+            <p>В средньому, доставка займає 2-7 днів. Тимчасово немає доставки в зону проведення АТО і Крим <br>
+              <b>Замовлення понад 1000 грн. доставляється безкоштовно.</b> </p>
+          </div>
+
+          <div class="form-check">
+            <input type="radio" value="Особиста зустріч" name="delivery" [ngModel]="service.formData.delivery"
+              #delivery="ngModel">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsamovyvoz.50x50.png?alt=media&token=c3082cee-26a9-4f77-b120-238613d0b78c"
+              alt="">
+            <h6> Особиста зустріч(в Києві)</h6>
             <p>Зручний, безкоштовний і швидкий спосіб отримання замовлення.<br>
               <b>Адреса: м.Суми, вул.Івана Сірка, 6а</b> </p>
           </div>
-        </form>
-
+          <!-- </form> -->
+        </div>
       </div>
+
+
     </div>
 
-  </div>
+    <div class="form-group row">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button>
+    </div>
+    
+
+  </form>
 
 
 </div>

@@ -17,7 +17,6 @@ export class UserServiceService {
 
   getUsers() {
     return this.firestore.collection('users').snapshotChanges();
-
-
   }
+  
 }

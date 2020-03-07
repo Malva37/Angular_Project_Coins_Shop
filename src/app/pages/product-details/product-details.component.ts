@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MedalService } from 'src/app/shared/services/medal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Medal } from 'src/app/shared/classes/medals.model';
@@ -6,7 +6,6 @@ import { Location } from '@angular/common';
 import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
 import { Article } from 'src/app/shared/classes/articles.model';
 import { NgForm } from '@angular/forms';
-import { IMedal } from 'src/app/shared/interfaces/medals.interfaces';
 import { ArticleService } from 'src/app/shared/services/article.service';
 
 
@@ -18,10 +17,8 @@ import { ArticleService } from 'src/app/shared/services/article.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: any;
-  counter: number = 1;
-  // newArticle: IArticle;
+  counter: number;
   articles: Array<IArticle> = [];
-  // @Output() status = new EventEmitter<boolean>;
 
 
   constructor(private medalService: MedalService,
@@ -31,9 +28,9 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.getArticles();
-  }
+    // this.getArticles();
 
+  }
   getData(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.medalService.userRef.doc(id).valueChanges().subscribe(
@@ -50,25 +47,36 @@ export class ProductDetailsComponent implements OnInit {
     }
     else this.counter--
   }
-  private getArticles(): void {
-    this.articleService.getJSONArticle().subscribe(
-      data => {
-        this.articles = data;
-      }
-    );
-  }
+  // private getArticles(): void {
+  //   this.articleService.getJSONArticle().subscribe(
+  //     data => {
+  //       this.articles = data;
+  //     }
+  //   );
+  // }
+ 
   buyProduct(medal: Medal): void {
-    const newA: IArticle = new Article(1, medal, this.counter, medal.price, medal.price);
+    let idLocal = localStorage.length+1;
+    const newA: IArticle = new Article(idLocal, medal, this.counter, medal.price, medal.price);
     newA.totalSum = this.counter * medal.price;
-    if (this.articles.length > 0) {
-      newA.id = this.articles.slice(-1)[0].id + 1;
-    } else {
-      this.articleService.postJSONArticle(newA).subscribe(
-        () => {
-          this.getArticles();
-        })
-    }
-    console.log(newA.id);
+    localStorage.setItem(`article: ${idLocal}`, JSON.stringify(newA));
+
+
+
+    // const newA: IArticle = new Article(1, medal, this.counter, medal.price, medal.price);
+    // newA.totalSum = this.counter * medal.price;
+    // if (this.articles.length > 0) {
+    //   newA.id = this.articles.slice(-1)[0].id + 1;
+    //   this.articleService.postJSONArticle(newA).subscribe(
+    //     () => {
+    //       this.getArticles();
+    //     })
+    // } else {
+    //   this.articleService.postJSONArticle(newA).subscribe(
+    //     () => {
+    //       this.getArticles();
+    //     })
+    // }
   }
 
 
