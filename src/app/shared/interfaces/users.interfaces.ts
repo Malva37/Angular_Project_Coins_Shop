@@ -4,9 +4,9 @@ export interface IUser{
     firstName: string;
     lastName: string;
     email: string;
-    phone: number;
+    phone: string;
     address: string,
-    password?: string;
-    comment?:string;
+    password: string
+ 
 
 }

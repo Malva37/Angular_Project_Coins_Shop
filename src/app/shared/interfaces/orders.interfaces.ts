@@ -1,15 +1,21 @@
-import { IUser } from './users.interfaces';
-import { IArticle } from './articles.interfaces';
-import { Article } from '../classes/articles.model';
+import { ProductOrder } from '../classes/productOrder.model';
 
 
 export interface IOrder {
     id: string;
-    user: IUser;
-    article:Array<Article>;
-    totalSumOrder:number,
-    payment:string;
-    delivery:string
+    user: {
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        phone: string;
+        address: string,
+        comment: string;
+    };
+    items: Array<ProductOrder>;
+    totalSumOrder: number,
+    payment: string;
+    delivery: string
 }
 
 

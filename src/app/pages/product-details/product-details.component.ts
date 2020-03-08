@@ -7,6 +7,8 @@ import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
 import { Article } from 'src/app/shared/classes/articles.model';
 import { NgForm } from '@angular/forms';
 import { ArticleService } from 'src/app/shared/services/article.service';
+import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
+import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 
 
 
@@ -17,8 +19,8 @@ import { ArticleService } from 'src/app/shared/services/article.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: any;
-  counter: number;
-  articles: Array<IArticle> = [];
+  count: number=1;
+  articles: Array<ProductOrder> = [];
 
 
   constructor(private medalService: MedalService,
@@ -41,11 +43,14 @@ export class ProductDetailsComponent implements OnInit {
   back(): void {
     this.location.back();
   }
-  statusCounter(bool: boolean) {
+  statusCount(bool: boolean) {
     if (bool == true) {
-      this.counter++
+      this.count++;
+      console.log(this.count);
+      
     }
-    else this.counter--
+    else {this.count--;
+    console.log(this.count);}
   }
   // private getArticles(): void {
   //   this.articleService.getJSONArticle().subscribe(
@@ -56,10 +61,11 @@ export class ProductDetailsComponent implements OnInit {
   // }
  
   buyProduct(medal: Medal): void {
-    let idLocal = localStorage.length+1;
-    const newA: IArticle = new Article(idLocal, medal, this.counter, medal.price, medal.price);
-    newA.totalSum = this.counter * medal.price;
-    localStorage.setItem(`article: ${idLocal}`, JSON.stringify(newA));
+    // let idLocal = (localStorage.length+1).toString();
+    // idLocal.toString();
+    const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
+    newItem.amount = this.count * medal.price;
+    localStorage.setItem( medal.id, JSON.stringify(newItem));
 
 
 

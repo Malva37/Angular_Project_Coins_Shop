@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
   lastName: string;
   email: string;
   password: string;
-  phone: number;
+  phone: string;
   address: string;
   emailUser: string;
   passwordUser: string;
@@ -53,7 +53,7 @@ export class AdminComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      phone: null,
+      phone: '',
       address: '',
       password: ''
     };

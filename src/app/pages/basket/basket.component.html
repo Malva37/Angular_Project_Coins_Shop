@@ -16,29 +16,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let article of articles; let i=index">
+          <tr *ngFor="let item of articles; let i=index">
             <td>
-              <img [attr.src]="article.article.image" class="imageArtilce">
+              <img [attr.src]="item.image" class="imageArtilce">
             </td>
-            <td>{{ article.article.name }}</td>
-            <td>{{ article.article.price }} грн </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }} грн </td>
             <td>
               <div class="d-inline-flex">
-                <button (click)="statusCounter(false)">-</button>
-                <input class="counter" name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="article.article.counter">
-                
-                <button (click)="statusCounter(true)">+</button>
+                <button (click)="statusCount(false,item)">-</button>
+                <input class="count" name='count' #count = 'ngModel' type="number"[(ngModel)]="item.count">
+                <button (click)="statusCount(true,item)">+</button>
               </div>
             </td>
-            <td> {{ article.totalSum }} грн</td>
+            <td> {{ item.price * item.count }} грн</td>
             <td>
-              <input type="button" value="delete" (click)="deleteArticle(article)" class="btn btn-dark btn-outline-red">
+              <input type="button" value="delete" (click)="deleteItem(item)" class="btn btn-dark btn-outline-red">
             </td>
           </tr>
           <tr>
-            <td colspan="6" class="text-right">Сума замовлення : 
-              <input type="number"  name="totalSumOrder" #totalSumOrder="ngModel"
-              [(ngModel)]="service.formData.totalSumOrder" value="Разом {{ totalSumOrder }}">
+            <td colspan="6" class="text-right">
+              Сума замовлення :
+
+              <span> {{ totalSumOrder }} грн</span>
+              <!-- <input type="number"  name="totalSumOrder" #totalSumOrder="ngModel"
+              [(ngModel)]="service.formData.totalSumOrder" value="Разом {{ totalSumOrder }}"> -->
             </td>
           </tr>
         </tbody>
@@ -61,10 +63,11 @@
             [(ngModel)]="service.formData.user.lastName" id="lastName" placeholder="Прізвище">
         </div>
         <div class="form-group row">
-          <input type="email" required class="form-control" #email="ngModel" [(ngModel)]="service.formData.user.email" name="email" placeholder="Email*">
+          <input type="email" required class="form-control" #email="ngModel" [(ngModel)]="service.formData.user.email"
+            name="email" placeholder="Email*">
         </div>
         <div class="form-group row">
-          <input type="number" class="form-control" name="phone" required #phone="ngModel"
+          <input type="text" class="form-control" name="phone" required #phone="ngModel"
             [(ngModel)]="service.formData.user.phone" id="phone" placeholder="Номер телефону">
         </div>
         <div class="form-group row">
@@ -90,18 +93,15 @@
         <div class="payment">
           <!-- <form> -->
           <p>Спосіб оплати</p>
-          <div class="form-check">
+          <div class="form-group">
             <input type="radio" value="Приват Банк" name="payment" [ngModel]="service.formData.payment"
-              #payment="ngModel" checked>
+              #payment="ngModel">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105"
               alt="">
             <h6> На Карту Приватбанку</h6>
             <p>Оплата на карту Приватбанку 5169 3600 0287 5825 (отримувач Кучма Володимир Олегович).
               Комісія з переказу в системі Privat24 - 0%</p>
-          </div>
-
-          <div class="form-check">
             <input type="radio" value="Оплата при отриманні" name="payment" [ngModel]="service.formData.payment"
               #payment="ngModel">
             <img
@@ -118,7 +118,7 @@
 
           <div class="form-check">
             <input type="radio" value="Нова пошта" name="delivery" [ngModel]="service.formData.delivery"
-              #delivery="ngModel" checked>
+              #paym:NgForm="ngModel">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
               alt="">
@@ -155,9 +155,10 @@
     </div>
 
     <div class="form-group row">
-      <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button>
+      <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button> -->
+      <button type="submit" (click)="add(delivery,payment,form)" class="btn btn-info">Оформити замовлення</button>
     </div>
-    
+
 
   </form>
 

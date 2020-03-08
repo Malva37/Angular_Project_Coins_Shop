@@ -12,9 +12,9 @@
         <div class="row">
           <div class="col-5">Кількість:</div>
           <div class="col-5 d-inline-flex">
-            <button (click)="statusCounter(false)">-</button>
-            <input name='counter' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="counter"  class="form-control">
-            <button (click)="statusCounter(true)">+</button>
+            <button (click)="statusCount(false)">-</button>
+            <input name='count' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="count"  class="form-control">
+            <button (click)="statusCount(true)">+</button>
           </div>
         </div>
       </div>

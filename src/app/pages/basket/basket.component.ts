@@ -7,6 +7,8 @@ import { OrderService } from 'src/app/shared/services/order.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Order } from 'src/app/shared/classes/orders.model';
+import { Product } from 'src/app/shared/classes/products.model';
+import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 
 @Component({
   selector: 'app-basket',
@@ -14,7 +16,7 @@ import { Order } from 'src/app/shared/classes/orders.model';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-  articles: Array<IArticle> = [];
+  articles: Array<ProductOrder> = [];
   counter: number = 1;
 
   id: string;
@@ -22,12 +24,14 @@ export class BasketComponent implements OnInit {
   lastName: string;
   email: string;
   password: string;
-  phone: number;
+  phone: string;
   address: string;
   emailUser: string;
   passwordUser: string;
   comment: string;
-  totalSumOrder: number;
+  totalSumOrder: number = 0;
+  payment = "Приват Банк";
+  delivery = "Нова пошта";
 
 
 
@@ -43,21 +47,21 @@ export class BasketComponent implements OnInit {
   }
 
   getArticles() {
-    let archive = [],
-      keys = Object.keys(localStorage),
-      i = 0, key;
+
+    let keys = Object.keys(localStorage);
+    let i = 0;
+    let key;
     for (; key = keys[i]; i++) {
       let item = JSON.parse(localStorage.getItem(key));
-      archive.push(item);
+      this.articles.push(item);
+      this.totalSumOrder += item.amount;
     }
-     this.articles = archive;
-     console.log(this.articles);
-     
-    return this.articles = archive;
+    console.log(this.articles);
+    return this.totalSumOrder;
   }
 
 
-  resetForm(form?: NgForm ) {
+  resetForm(form?: NgForm) {
     console.log(form);
     if (form != null) {
       form.resetForm();
@@ -69,26 +73,18 @@ export class BasketComponent implements OnInit {
         firstName: '',
         lastName: '',
         email: '',
-        phone: null,
+        phone: '',
         address: '',
-        password: '',
         comment: ''
       },
-      article: [{
-        id: null,
-        article: {
-          id: '',
-          categoryId: null,
-          categoryName: '',
-          name: '',
-          counter: null,
-          description: '',
-          price: null,
-          image: null
-        },
-        counter: null,
-        currentPrice: null,
-        totalSum: null,
+      items: [{
+        id: '',
+        categoryId: null,
+        name: '',
+        image: '',
+        price: null,
+        count: null,
+        amount: null
       }
       ],
       totalSumOrder: null,
@@ -97,43 +93,55 @@ export class BasketComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-   console.log(form);
-   
-    // form.value.image = this.image;
-    // delete form.value.downloadSrc;
-    const data: Order = Object.assign({}, form.value);
-    debugger
-    delete data.id;
-    if (form.value.id == null) {
-      this.firestore.collection('orders').add(data);
-    } 
-    this.resetForm(form);
-  }
-
-
-
-  // statusCounter(bool: boolean) {
+  // statusCount(bool: boolean, item) {
   //   if (bool == true) {
-  //     this.counter++
+  //     item.count++;
+  //     let editItem = JSON.stringify(item)
+  //     localStorage.setItem(item.id, editItem);
+  //     this.getArticles()
   //   }
-  //   else this.counter--
+  //   else {
+  //     item.count++;
+  //     let editItem = JSON.stringify(item)
+  //     localStorage.setItem(item.id, editItem);
+  //     this.getArticles()
+  //   }
   // }
 
-  // private getArticles(): void {
-  //   this.articleService.getJSONArticle().subscribe(
-  //     data => {
-  //       this.articles = data;
-  //     }
-  //   );
+
+
+  add(payment: NgForm, delivery: NgForm, form: NgForm) {
+    console.log(payment.value);
+    console.log(delivery.value);
+    console.log(form.value);
+    const data: Order = Object.assign({}, form.value);
+
+
+  }
+  // onSubmit(form: NgForm, payment: NgForm, delivery: NgForm) {
+  //   console.log(form);
+
+  //   const data: Order = Object.assign({}, form.value);
+  //   // debugger
+  //   delete data.id;
+  //   if (form.value.id == null) {
+  //     this.firestore.collection('orders').add(data);
+  //   }
+  //   this.resetForm(form);
   // }
-  // deleteArticle(product: Article): void {
-  //   this.articleService.deleteJSONArticle(product.id).subscribe(
-  //     () => {
-  //       this.getArticles();
-  //     }
-  //   );
-  // }
+
+
+
+  deleteItem(item: Product): void {
+    console.log(item);
+    localStorage.removeItem(item.id);
+    for (let i = 0; i < this.articles.length; i++) {
+      if (this.articles[i].id == item.id) {
+        this.articles.splice(i, 1);
+        break;
+      }
+    }
+  }
 
 
 
