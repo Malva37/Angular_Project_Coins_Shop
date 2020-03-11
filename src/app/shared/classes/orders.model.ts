@@ -6,7 +6,7 @@ export class Order implements IOrder{
     constructor(
        public id: string,
        public user: {
-        id: string;
+        idUser: number;
         firstName: string;
         lastName: string;
         email: string;

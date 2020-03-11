@@ -4,7 +4,7 @@ import { ProductOrder } from '../classes/productOrder.model';
 export interface IOrder {
     id: string;
     user: {
-        id: string;
+        idUser: number;
         firstName: string;
         lastName: string;
         email: string;

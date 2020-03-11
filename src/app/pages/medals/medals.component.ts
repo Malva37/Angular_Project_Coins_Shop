@@ -7,6 +7,8 @@ import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage 
 import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
 import { Article } from 'src/app/shared/classes/articles.model';
 import { IOrder } from 'src/app/shared/interfaces/orders.interfaces';
+import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
+import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 
 @Component({
   selector: 'app-medals',
@@ -23,7 +25,8 @@ export class MedalsComponent implements OnInit {
     floor: 0,
     ceil: 250
   };
-  newArticle:IArticle;
+  newArticle: IArticle;
+  count: number = 1;
 
   constructor(
     private service: MedalService,
@@ -44,6 +47,11 @@ export class MedalsComponent implements OnInit {
     });
   }
 
+  buyProduct(medal: Medal): void {
+    const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
+    newItem.amount = this.count * medal.price;
+    localStorage.setItem(medal.id, JSON.stringify(newItem));
+  }
 
   getMaxPrice(list) {
     let max = list[0].price;

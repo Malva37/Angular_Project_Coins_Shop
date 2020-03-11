@@ -1,8 +1,7 @@
 <div class="container">
-  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <!-- <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)"> -->
 
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
-
+    <input type="hidden" name="id" [(ngModel)]="id">
     <div class="basket container-fluid">
       <table class="tableBasket">
         <thead>
@@ -24,9 +23,9 @@
             <td>{{ item.price }} грн </td>
             <td>
               <div class="d-inline-flex">
-                <button (click)="statusCount(false,item)">-</button>
-                <input class="count" name='count' #count = 'ngModel' type="number"[(ngModel)]="item.count">
-                <button (click)="statusCount(true,item)">+</button>
+                <button type="button" (click)="statusCount(false,item)">-</button>
+                <input class="count" name='count' type="number" [(ngModel)]="item.count">
+                <button type="button" (click)="statusCount(true,item)">+</button>
               </div>
             </td>
             <td> {{ item.price * item.count }} грн</td>
@@ -51,33 +50,33 @@
     <div class="main">
 
       <div class="dataUser">
-        <!-- <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)"> -->
+        <form>
         <p> Контактні дані</p>
-        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.user.id">
+        <input type="hidden" name="idUser" [(ngModel)]="idUser">
         <div class="form-group row">
-          <input type="text" class="form-control" name="firstName" required #firstName="ngModel"
-            [(ngModel)]="service.formData.user.firstName" id="firstName" placeholder="Ім'я">
+          <input type="text" class="form-control" name="firstName" required
+            [(ngModel)]="firstName" id="firstName" placeholder="Ім'я">
         </div>
         <div class="form-group row">
-          <input type="text" class="form-control" name="lastName" required #lastName="ngModel"
-            [(ngModel)]="service.formData.user.lastName" id="lastName" placeholder="Прізвище">
+          <input type="text" class="form-control" name="lastName" required 
+            [(ngModel)]="lastName" id="lastName" placeholder="Прізвище">
         </div>
         <div class="form-group row">
-          <input type="email" required class="form-control" #email="ngModel" [(ngModel)]="service.formData.user.email"
+          <input type="email" required class="form-control" [(ngModel)]="email"
             name="email" placeholder="Email*">
         </div>
         <div class="form-group row">
-          <input type="text" class="form-control" name="phone" required #phone="ngModel"
-            [(ngModel)]="service.formData.user.phone" id="phone" placeholder="Номер телефону">
+          <input type="text" class="form-control" name="phone" required
+            [(ngModel)]="phone" id="phone" placeholder="Номер телефону">
         </div>
         <div class="form-group row">
-          <input type="text" class="form-control" name="address" required #address="ngModel"
-            [(ngModel)]="service.formData.user.address" id="address" placeholder="Адреса доставки">
+          <input type="text" class="form-control" name="address" required
+            [(ngModel)]="address" id="address" placeholder="Адреса доставки">
         </div>
-        <input type="hidden" name="password" #password="ngModel" [(ngModel)]="service.formData.user.password"
-          id="password">
+        <!-- <input type="hidden" name="password" [(ngModel)]="password"
+          id="password"> -->
         <div class="form-group row">
-          <textarea type="text" name="comment" #comment="ngModel" [(ngModel)]="service.formData.user.comment"
+          <textarea type="text" name="comment" [(ngModel)]="comment"
             class="form-control" placeholder="Коментар до замовлення">
           </textarea>
         </div>
@@ -85,40 +84,39 @@
         <!-- <div class="form-group row">
           <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button>
         </div> -->
-        <!-- </form> -->
+        </form>
       </div>
 
 
       <div class="deliveryPayment">
         <div class="payment">
-          <!-- <form> -->
+          <form>
           <p>Спосіб оплати</p>
           <div class="form-group">
-            <input type="radio" value="Приват Банк" name="payment" [ngModel]="service.formData.payment"
-              #payment="ngModel">
+            <input type="radio" [checked]="true" value="Приват Банк" name="payment" [ngModel]="payment" (click)="paymentWay($event)"
+              >
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105"
               alt="">
             <h6> На Карту Приватбанку</h6>
             <p>Оплата на карту Приватбанку 5169 3600 0287 5825 (отримувач Кучма Володимир Олегович).
               Комісія з переказу в системі Privat24 - 0%</p>
-            <input type="radio" value="Оплата при отриманні" name="payment" [ngModel]="service.formData.payment"
-              #payment="ngModel">
+            <input type="radio" [checked]="false" value="Оплата при отриманні" name="payment" [ngModel]="payment" (click)="paymentWay($event)"
+             >
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fcash.50x50.jpg?alt=media&token=3de901e1-46f1-4b13-9098-6cfdf6724356"
               alt="">
             <h6> Оплата при отриманні (Післяплата, Наложений платіж)</h6>
           </div>
-          <!-- </form> -->
+          </form>
         </div>
 
         <div class="delivery">
-          <!-- <form> -->
+          <form>
           <p>Спосіб доставки</p>
 
           <div class="form-check">
-            <input type="radio" value="Нова пошта" name="delivery" [ngModel]="service.formData.delivery"
-              #paym:NgForm="ngModel">
+            <input type="radio" value="Нова пошта" name="delivery" [ngModel]="delivery"  (click)="deliveryWay($event)">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
               alt="">
@@ -127,8 +125,7 @@
           </div>
 
           <div class="form-check">
-            <input type="radio" value="Укрпошта" name="delivery" [ngModel]="service.formData.delivery"
-              #delivery="ngModel">
+            <input type="radio" value="Укрпошта" name="delivery" [ngModel]="delivery"  (click)="deliveryWay($event)">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fukrposhta.50x50.png?alt=media&token=3b242f9a-dee9-43ff-af17-0c3538fd57a4"
               alt="">
@@ -138,8 +135,7 @@
           </div>
 
           <div class="form-check">
-            <input type="radio" value="Особиста зустріч" name="delivery" [ngModel]="service.formData.delivery"
-              #delivery="ngModel">
+            <input type="radio" value="Особиста зустріч" name="delivery" [ngModel]="delivery" (click)="deliveryWay($event)">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsamovyvoz.50x50.png?alt=media&token=c3082cee-26a9-4f77-b120-238613d0b78c"
               alt="">
@@ -147,7 +143,7 @@
             <p>Зручний, безкоштовний і швидкий спосіб отримання замовлення.<br>
               <b>Адреса: м.Суми, вул.Івана Сірка, 6а</b> </p>
           </div>
-          <!-- </form> -->
+          </form>
         </div>
       </div>
 
@@ -156,11 +152,11 @@
 
     <div class="form-group row">
       <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button> -->
-      <button type="submit" (click)="add(delivery,payment,form)" class="btn btn-info">Оформити замовлення</button>
+      <button type="button" (click)="addOrder(firstName, lastName, email, phone, address, comment, payment, delivery)" class="btn btn-info">Оформити замовлення</button>
     </div>
 
 
-  </form>
+  <!-- </form> -->
 
 
 </div>

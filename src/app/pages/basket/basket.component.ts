@@ -9,6 +9,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Order } from 'src/app/shared/classes/orders.model';
 import { Product } from 'src/app/shared/classes/products.model';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
+import { IOrder } from 'src/app/shared/interfaces/orders.interfaces';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-basket',
@@ -18,36 +20,34 @@ import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 export class BasketComponent implements OnInit {
   articles: Array<ProductOrder> = [];
   counter: number = 1;
-
-  id: string;
+  idOrder: string;
+  idUser: number;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   phone: string;
   address: string;
-  emailUser: string;
-  passwordUser: string;
+  items: Array<ProductOrder> = [];
   comment: string;
   totalSumOrder: number = 0;
   payment = "Приват Банк";
   delivery = "Нова пошта";
+  personCount: number = 0;
 
 
-
-
-  constructor(private articleService: ArticleService,
-    private service: OrderService,
+  constructor(
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage, ) { }
+    private afStorage: AngularFireStorage
+  ) { }
 
   ngOnInit() {
     this.getArticles();
-    this.resetForm();
   }
 
   getArticles() {
-
+    this.articles = [];
+    this.totalSumOrder = 0;
     let keys = Object.keys(localStorage);
     let i = 0;
     let key;
@@ -60,79 +60,86 @@ export class BasketComponent implements OnInit {
     return this.totalSumOrder;
   }
 
+  statusCount(bool: boolean, item) {
+    debugger
+    console.log(item);
+    if (bool) {
+      item.count++;
+      item.amount = item.count * item.price;
+      let editItem = JSON.stringify(item);
+      localStorage.setItem(item.id, editItem);
+      console.log(editItem);
+      this.getArticles();
 
-  resetForm(form?: NgForm) {
-    console.log(form);
-    if (form != null) {
-      form.resetForm();
     }
-    this.service.formData = {
-      id: null, // має сформувати firebase
+    else {
+      item.count--;
+      item.amount = item.count * item.price;
+      let editItem = JSON.stringify(item);
+      localStorage.setItem(item.id, editItem);
+      console.log(editItem);
+      this.getArticles();
+    }
+  }
+  paymentWay(event) {
+    console.log(event.target.value);
+    return this.payment = event.target.value;
+  }
+
+  deliveryWay(event) {
+    console.log(event.target.value);
+    return this.delivery = event.target.value;
+  }
+
+
+
+
+  addOrder(firstName, lastName, email, phone, address, comment) {
+    let keys = Object.keys(localStorage);
+    let i = 0;
+    let key;
+    for (; key = keys[i]; i++) {
+      let item = JSON.parse(localStorage.getItem(key));
+      this.items.push(item);
+    }
+    const order: Order = Object.assign({}, {
+      id: null,  // має сформувати firebase
       user: {
-        id: null,
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        address: '',
-        comment: ''
+        idUser: 1,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        address: address,
+        comment: comment
       },
-      items: [{
-        id: '',
-        categoryId: null,
-        name: '',
-        image: '',
-        price: null,
-        count: null,
-        amount: null
-      }
-      ],
-      totalSumOrder: null,
-      payment: '',
-      delivery: ''
-    }
-  }
+      items: this.items,
+      totalSumOrder: this.totalSumOrder,
+      payment: this.payment,
+      delivery: this.delivery
 
-  // statusCount(bool: boolean, item) {
-  //   if (bool == true) {
-  //     item.count++;
-  //     let editItem = JSON.stringify(item)
-  //     localStorage.setItem(item.id, editItem);
-  //     this.getArticles()
-  //   }
-  //   else {
-  //     item.count++;
-  //     let editItem = JSON.stringify(item)
-  //     localStorage.setItem(item.id, editItem);
-  //     this.getArticles()
-  //   }
-  // }
-
-
-
-  add(payment: NgForm, delivery: NgForm, form: NgForm) {
-    console.log(payment.value);
-    console.log(delivery.value);
-    console.log(form.value);
-    const data: Order = Object.assign({}, form.value);
-
+    })
+    delete order.id;
+    this.firestore.collection('orders').add(order);
+    alert('Ви зробили замовлення, очікуйте на зворотній звязок');
+    localStorage.clear();
+    this.resetForms();
 
   }
-  // onSubmit(form: NgForm, payment: NgForm, delivery: NgForm) {
-  //   console.log(form);
+  resetForms() {
+    this.articles = [];
+    this.totalSumOrder = 0;
+    this.idUser = null;
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.phone = '';
+    this.address = '';
+    this.comment = '';
+  }
 
-  //   const data: Order = Object.assign({}, form.value);
-  //   // debugger
-  //   delete data.id;
-  //   if (form.value.id == null) {
-  //     this.firestore.collection('orders').add(data);
-  //   }
-  //   this.resetForm(form);
-  // }
 
-
-
-  deleteItem(item: Product): void {
+  deleteItem(item: Product) {
     console.log(item);
     localStorage.removeItem(item.id);
     for (let i = 0; i < this.articles.length; i++) {
@@ -141,6 +148,7 @@ export class BasketComponent implements OnInit {
         break;
       }
     }
+    return this.totalSumOrder - (item.counter * item.price);
   }
 
 

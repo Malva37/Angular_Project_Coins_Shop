@@ -30,9 +30,8 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    // this.getArticles();
-
   }
+
   getData(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.medalService.userRef.doc(id).valueChanges().subscribe(
@@ -52,37 +51,12 @@ export class ProductDetailsComponent implements OnInit {
     else {this.count--;
     console.log(this.count);}
   }
-  // private getArticles(): void {
-  //   this.articleService.getJSONArticle().subscribe(
-  //     data => {
-  //       this.articles = data;
-  //     }
-  //   );
-  // }
+
  
   buyProduct(medal: Medal): void {
-    // let idLocal = (localStorage.length+1).toString();
-    // idLocal.toString();
     const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
     newItem.amount = this.count * medal.price;
     localStorage.setItem( medal.id, JSON.stringify(newItem));
-
-
-
-    // const newA: IArticle = new Article(1, medal, this.counter, medal.price, medal.price);
-    // newA.totalSum = this.counter * medal.price;
-    // if (this.articles.length > 0) {
-    //   newA.id = this.articles.slice(-1)[0].id + 1;
-    //   this.articleService.postJSONArticle(newA).subscribe(
-    //     () => {
-    //       this.getArticles();
-    //     })
-    // } else {
-    //   this.articleService.postJSONArticle(newA).subscribe(
-    //     () => {
-    //       this.getArticles();
-    //     })
-    // }
   }
 
 
