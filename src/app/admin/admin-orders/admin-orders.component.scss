@@ -1,0 +1,52 @@
+.container-fluid{
+    width: 100%;
+}
+th{
+    text-align: center;
+    padding: 1%;
+}
+ol,li{
+    text-align: left;
+    list-style-type: none;
+}
+li{
+    display: flex;
+    justify-content: space-between;
+}
+.imageItem{
+   
+    border-left: 1px solid lightgrey;
+    padding: 1%;
+}
+.imageItem img{ width: 100px;
+    height: 100px;}
+
+.orders{
+    width: 98%;
+    text-align: center;
+}
+.nameSname{
+    width: 9%;
+}
+.items{
+    width: 35%;
+}
+.deliveryAddress{
+    width: 10%;
+}
+.payment{
+    width: 8%;
+}
+.phone{
+    width: 12%;
+}
+.comment{
+    width: 10%;
+}
+.totalCost{
+    width: 8%;
+}
+.buttonDelete{
+    width: 8%;
+
+}

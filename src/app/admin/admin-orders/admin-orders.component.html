@@ -1,1 +1,69 @@
-<p>admin-orders works!</p>
+<div class="container">
+  <!-- <form class="mb-2">
+    <div class="form-row mt-4">
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+    </div>
+  </form> -->
+
+
+  <table class="table-striped table-bordered orders">
+    <thead>
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th  class = "nameSname" scope="col">Імя/Прізвище</th>
+        <th  class = "items" scope="col">Товари</th>
+        <th  class = "payment" scope="col">Оплата</th>
+        <th  class = "deliveryAddress" scope="col">Доставка/Адреса</th>
+        <th  class = "phone" scope="col">Телефон</th>
+        <th class = "comment" scope="col">Коментар</th>
+        <th  class = "totalCost" scope="col">Вартість покупки</th>
+        <!-- <th scope="col">Image</th> -->
+        <th  class = "buttonDelete" scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of list; let i=index">
+
+        <!-- <td>{{ i+1 }}</td> -->
+        <td>{{ order.user.firstName + ' '+ order.user.lastName }}</td>
+        <th>
+          <ol *ngFor="let item of order.items; let i=index">
+            <li> 
+              <div class="infoItem"> {{ item.name }} <br> Кількість:{{ item.count }} шт <br> Ціна при замовленні: {{ item.price }} грн <br> Вартість: {{ item.amount }} грн </div>
+              <div class="imageItem"> <img [attr.src]="item.image" class="card-img-top"></div>
+             </li>
+          <hr>
+          </ol>
+        </th>
+        <td>{{ order.payment }}</td>
+        <td>{{ order.delivery }}: {{ order.user.address}}</td>
+        <td>{{ order.user.phone }}</td>
+        <td>{{ order.user.comment }}</td>
+  
+        <td>{{ order.totalSumOrder}} грн</td>
+        <!-- <td (click)="onEdit(medal, template)">
+          <img [attr.src]="medal.image" class="card-img-top">
+        </td> -->
+        <td>
+          <input type="button" value="delete" (click)="onDelete(order)" class="btn btn-dark btn-outline-red">
+          <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add new medal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-medal></app-medal>
+  </div>
+</ng-template>
