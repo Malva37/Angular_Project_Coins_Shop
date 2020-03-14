@@ -11,7 +11,7 @@
         <div class="h5 filter_name">
           <span data-language="features_other_filter">Ціна</span>
         </div>
-        <div class="filter_group price-slider">
+        <div class="filter_group price-slider" *ngIf="minValue && maxValue">
           <p>Min: <input type="number" name='minValue' [(ngModel)]="minValue"></p>
           <p>Max: <input type="number" name='maxValue' [(ngModel)]="maxValue"></p>
           <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
@@ -22,7 +22,7 @@
         </div>
         <div class="form-group bootstrap-select show-tick open">
           <!-- <select class="custom-select" id="series" [(ngModel)]="productSeries" name="productSeries" required> -->
-          <select class="custom-select" [(ngModel)]="productSeries" name="productSeries" required>
+          <select class="custom-select" [(ngModel)]="series" name="series" required>
             <!-- <select (change)="selectChangeHandler($event)"  class="custom-select" id="series" required> -->
             <option [attr.selected] value="-1"> — будь-яка серія — </option>
             <option> Видатні особистості України</option>
@@ -68,7 +68,7 @@
           <span data-language="features_other_filter">Рік</span>
         </div>
         <div class="form-group bootstrap-select show-tick open">
-          <select class="custom-select" id="years" [(ngModel)]="productYear" name="productYear" required>
+          <select class="custom-select" [(ngModel)]="year" name="year" required>
             <option selected="" value="-1"> — будь-який рік — </option>
             <option>1991</option>
             <option>1992</option>
@@ -112,7 +112,7 @@
           <span data-language="features_other_filter">Метал</span>
         </div>
         <div class="form-group bootstrap-select show-tick open">
-          <select class="custom-select" [(ngModel)]="productMetal" name="productMetal" required>
+          <select class="custom-select" [(ngModel)]="metal" name="metal" required>
             <option selected="" value="-1"> — будь-який метал — </option>
             <option>біметалеві із дорогоцінних металів</option>
             <option>біметалеві із недорогоцінних металів</option>
@@ -129,7 +129,7 @@
           <span data-language="features_other_filter">Номінал</span>
         </div>
         <div class="form-group bootstrap-select show-tick open">
-          <select class="custom-select" [(ngModel)]="productDenomination" name="productDenomination" id="demonstration"
+          <select class="custom-select" [(ngModel)]="denomination" name="denomination"
             required>
             <option selected="" value="-1"> — будь-який номінал — </option>
             <option>0</option>
@@ -154,17 +154,18 @@
       </form>
 
     </section>
-
     <section class="catalog">
-      <figure class="coin"
-        *ngFor="let coin of coins | searchCoin:searchName | filterPrice:minValue:maxValue | filterYear:productYear | filterSeries:productSeries | filterDenomination:productDenomination | filterMetal:productMetal ">
+      <figure class="product"
+        *ngFor="let coin of list | searchCoin:searchName | filterPrice:minValue:maxValue">
         <img [attr.src]="coin.image" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="title">{{ coin.name }}</p>
           <p class="price">{{ coin.price }} грн</p>
           <div class="button-group">
-            <a href="#" class="moreDetails h6">Детальніше</a>
-            <a href="#" class="buy h6">Купити</a>
+            <!-- <button href="#" class="moreDetails h6">Детальніше</a> -->
+              <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails h6" value="Детальніше">
+              <input type="button" class="buy h6" (click)="buyProduct(coin)" value="Купити">
+            <!-- <a href="#" class="buy h6">Купити</a> -->
           </div>
         </div>
       </figure>

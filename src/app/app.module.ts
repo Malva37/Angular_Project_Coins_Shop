@@ -35,6 +35,8 @@ import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.componen
 import { MedalComponent } from './admin/admin-medals/medal/medal.component';
 import { MedalListComponent } from './admin/admin-medals/medal-list/medal-list.component';
 import { MedalService } from './shared/services/medal.service';
+import { BanknoteService } from './shared/services/banknote.service';
+import { AccessoryService } from './shared/services/accessory.service';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -49,6 +51,12 @@ import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CoinComponent } from './admin/admin-coins/coin/coin.component';
+import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
+import { CoinService } from './shared/services/coin.service';
+import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
+import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';
+import { AccessoryListComponent } from './admin/admin-accessories/accessory-list/accessory-list.component';
 
 
 
@@ -79,6 +87,11 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     MedalComponent,
     MedalListComponent,
     ProductDetailsComponent,
+    CoinComponent,
+    CoinListComponent,
+    BanknoteListComponent,
+    AccessoryComponent,
+    AccessoryListComponent,
   
 
   ],
@@ -98,7 +111,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), TabsModule.forRoot()
   ],
-  providers: [MedalService, AngularFirestore],
+  providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

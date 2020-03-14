@@ -73,7 +73,7 @@
 
 }
 
-.coin {
+.product {
   padding: 10px;
   margin: 2% 2%;
   width: 20%;
@@ -85,7 +85,7 @@
   transition-property: transform;
 }
 
-.coin:hover {
+.product:hover {
   .button-group {
     display: flex;
     justify-content: center;
@@ -150,7 +150,7 @@
 }
 
 
-.coin img {
+.product img {
   width: 115px;
   height: 120px;
   margin: 0 auto
@@ -189,11 +189,11 @@
     width: 300px;
   }
 
-  .coin {
+  .product {
     width: 29%;
   }
 
-  .coin img {
+  .product img {
     width: 80px;
     height: 80px;
 
@@ -209,7 +209,7 @@
     width: 250px;
   }
 
-  .coin {
+  .product {
     width: 40%;
   }
 
@@ -229,7 +229,7 @@
     width: 420px;
   }
 
-  .coin {
+  .product {
     width: 80%;
   }
 

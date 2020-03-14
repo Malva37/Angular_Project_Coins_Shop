@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'medals', component: MedalsComponent},
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'basket', component: BasketComponent},
-  {path: 'product/:id', component: ProductDetailsComponent},
+  {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
  
   {path: 'admin', component: AdminComponent,children:[
   {path: '', redirectTo: 'coins', pathMatch:'full'},

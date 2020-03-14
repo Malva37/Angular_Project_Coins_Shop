@@ -6,14 +6,14 @@
       <img [attr.src]="product?.image" class="card-img-top" alt="...">
     </div>
     <div class="col-5">
-      <h5 class="text-danger">Card price {{ product?.price }}</h5>
+      <h5 class="text-danger">price {{ product?.price }}</h5>
 
       <div class="form-group">
         <div class="row">
           <div class="col-5">Кількість:</div>
           <div class="col-5 d-inline-flex">
             <button (click)="statusCount(false)">-</button>
-            <input name='count' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="count"  class="form-control">
+            <input name='count' type="number" pattern="[^1-9]{1,}/" [(ngModel)]="count" class="form-control">
             <button (click)="statusCount(true)">+</button>
           </div>
         </div>
@@ -25,8 +25,35 @@
 
   <div>
     <tabset>
-      <tab heading="Опис" id="tab1"> {{ product?.description }}</tab>
-      <tab heading="Характеристики">Basic content 1</tab>
+      <tab heading="Характеристики" id="tab1">
+        <div class="description">
+          <div *ngIf="coinsActive"><b>Серія</b>  - {{ product?.series }}
+            <hr>
+          </div>
+          <div *ngIf="coinsActive"><b>Номінал</b>  - {{ product?.denomination }} грн
+            <hr>
+          </div>
+          <div *ngIf="coinsActive"><b>Рік випуску</b>  - {{ product?.year }} рік
+            <hr>
+          </div>
+          <div *ngIf="coinsActive"><b>Метал</b>  - {{ product?.metal }}
+            <hr>
+          </div>
+
+          <div *ngIf="banknotesActive"><b>Номінал </b> - {{ product?.denomination }} грн
+            <hr>
+          </div>
+          <div *ngIf="banknotesActive"><b>Підпис</b>  - {{ product?.signature }}
+            <hr>
+          </div>
+          <div *ngIf="banknotesActive"><b>Рік випуску</b>  - {{ product?.year }} рік
+            <hr>
+          </div>
+
+          <div> <b>Опис</b>  -  {{ product?.description }}</div>
+
+        </div>
+      </tab>
     </tabset>
   </div>
 
