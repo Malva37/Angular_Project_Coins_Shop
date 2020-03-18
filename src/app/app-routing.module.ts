@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { CoinsComponent } from './pages/coins/coins.component';
-import { BanknoteComponent } from './pages/banknote/banknote.component';
+import { BanknotesComponent } from './pages/banknotes/banknotes.component';
 import { MedalsComponent } from './pages/medals/medals.component';
 import { AccessoriesComponent } from './pages/accessories/accessories.component';
 import { BasketComponent } from './pages/basket/basket.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch:'full'},
   {path: 'home', component: HomeComponent},
   {path: 'coins', component: CoinsComponent},
-  {path: 'banknote', component: BanknoteComponent},
+  {path: 'banknote', component: BanknotesComponent},
   {path: 'medals', component: MedalsComponent},
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'basket', component: BasketComponent},

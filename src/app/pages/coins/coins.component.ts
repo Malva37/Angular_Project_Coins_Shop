@@ -24,25 +24,29 @@ export class CoinsComponent implements OnInit {
   };
   newArticle: IArticle;
   count: number = 1;
+  denomination: number;
+  metal:string;
+  series:string;
+  year:number;
 
 
 
 
-  constructor(private service:CoinService) { }
+  constructor(private service: CoinService) { }
 
   ngOnInit() {
     this.service.getCoins().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
+      this.list = actionArray.map(c => {
         return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
+          id: c.payload.doc.id,
+          ...c.payload.doc.data()
         } as Coin;
-      });
+      }); 
       this.getMinPrice(this.list);
       this.getMaxPrice(this.list);
     });
   }
-  
+
   buyProduct(coin: Coin): void {
     const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image, coin.price, this.count, coin.price);
     newItem.amount = this.count * coin.price;
@@ -71,50 +75,10 @@ export class CoinsComponent implements OnInit {
     this.options.floor = min;
     this.minValue = min;
   }
-  // getMaxPrice(arr: Array<number>): number {
-  //   arr = this.productPrices
-  //   let max = arr[0];
-  //   for (let i = 1; i < arr.length; ++i) {
-  //     if (arr[i] > max) {
-  //       max = arr[i];
-  //     }
-  //   }
-  //   this.options.ceil = max;
-  //   console.log(this.options.ceil);
-
-  //   return this.maxValue = max;
-  // }
-
-
-  // getMinPrice(arr: Array<number>): number {
-  //   arr = this.productPrices
-  //   let min = arr[0];
-  //   for (let i = 1; i < arr.length; ++i) {
-  //     if (arr[i] < min) {
-  //       min = arr[i];
-  //     }
-  //   }
-  //   this.options.floor = min;
-  //   console.log(this.options.floor);
-  //   return this.minValue = min;
-  // }
-
-  // private getCoins(): void {
-  //   this.prService.getJSONCoins().subscribe(
-  //     data => {
-  //       this.coins = data;
-  //       for (const coin in this.coins) {
-  //         const object = this.coins[coin];
-  //         this.productPrices.push(object.price);
-  //       }
-  //       this.getMaxPrice(this.productPrices);
-  //       this.getMinPrice(this.productPrices);
-  //     })
-
-  // }
-
-
-
-
-
 }
+
+
+
+
+
+

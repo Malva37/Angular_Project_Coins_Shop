@@ -15,7 +15,7 @@ export class BanknoteService {
         this.userRef = firestore.collection('banknotes')
     }
 
-    getCoins() {
+    getBanknotes() {
         return this.firestore.collection('banknotes').snapshotChanges();
     }
 

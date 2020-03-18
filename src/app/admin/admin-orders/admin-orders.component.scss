@@ -42,6 +42,7 @@ li{
 }
 .comment{
     width: 10%;
+    word-wrap: break-word;
 }
 .totalCost{
     width: 8%;
@@ -49,4 +50,7 @@ li{
 .buttonDelete{
     width: 8%;
 
+}
+.infoItem{
+    padding: 1%;
 }

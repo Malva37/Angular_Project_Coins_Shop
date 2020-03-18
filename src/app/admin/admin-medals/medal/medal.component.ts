@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MedalService } from 'src/app/shared/services/medal.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ToastrService } from 'ngx-toastr';
-import { IMedal } from 'src/app/shared/interfaces/medals.interfaces';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
@@ -35,8 +33,7 @@ export class MedalComponent implements OnInit {
 
   constructor(private service: MedalService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private toastr: ToastrService) { }
+    private afStorage: AngularFireStorage) { }
 
 
 

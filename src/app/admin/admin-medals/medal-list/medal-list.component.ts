@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Medal } from 'src/app/shared/classes/medals.model';
 import { MedalService } from 'src/app/shared/services/medal.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { IMedal } from 'src/app/shared/interfaces/medals.interfaces';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';

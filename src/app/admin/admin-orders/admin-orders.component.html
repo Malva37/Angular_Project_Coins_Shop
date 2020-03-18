@@ -27,8 +27,8 @@
       <tr *ngFor="let order of list; let i=index">
 
         <!-- <td>{{ i+1 }}</td> -->
-        <td>{{ order.user.firstName + ' '+ order.user.lastName }}</td>
-        <th>
+        <td class = "nameSname">{{ order.user.firstName + ' '+ order.user.lastName }}</td>
+        <th class = "items">
           <ol *ngFor="let item of order.items; let i=index">
             <li> 
               <div class="infoItem"> {{ item.name }} <br> Кількість:{{ item.count }} шт <br> Ціна при замовленні: {{ item.price }} грн <br> Вартість: {{ item.amount }} грн </div>
@@ -37,10 +37,10 @@
           <hr>
           </ol>
         </th>
-        <td>{{ order.payment }}</td>
-        <td>{{ order.delivery }}: {{ order.user.address}}</td>
-        <td>{{ order.user.phone }}</td>
-        <td>{{ order.user.comment }}</td>
+        <td class = "payment">{{ order.payment }}</td>
+        <td class = "deliveryAddress">{{ order.delivery }}: {{ order.user.address}}</td>
+        <td class = "phone">{{ order.user.phone }}</td>
+        <td class="comment">{{ order.user.comment }}</td>
   
         <td>{{ order.totalSumOrder}} грн</td>
         <!-- <td (click)="onEdit(medal, template)">

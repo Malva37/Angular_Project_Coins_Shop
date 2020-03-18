@@ -31,7 +31,7 @@ export class MedalsComponent implements OnInit {
   constructor(
     private service: MedalService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage, ) { }
+    private afStorage: AngularFireStorage ) { }
 
 
   ngOnInit() {

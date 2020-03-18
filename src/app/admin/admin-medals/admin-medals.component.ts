@@ -13,23 +13,6 @@ import { IMedal } from 'src/app/shared/interfaces/medals.interfaces';
 export class AdminMedalsComponent implements OnInit {
 
     modalRef: BsModalRef;
-    arrMedals: Array<IMedal> = [];
-    productCategoryName: string = 'medals';
-    productName: string;
-    productDescription: string;
-    productPrice: number;
-    productCategoryId: number = 3;
-    productId: number;
-    productImage: string;
-    editStatus: boolean;
-  
-    ref: AngularFireStorageReference;
-    task: AngularFireUploadTask;
-    uploadState: Observable<string>;
-    uploadProgress: Observable<number>;
-    downloadURL: Observable<string>;
-    searchName: string;
-  
   
     constructor(private modalService: BsModalService) { }
   

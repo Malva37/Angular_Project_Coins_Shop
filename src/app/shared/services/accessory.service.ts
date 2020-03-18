@@ -14,7 +14,7 @@ export class AccessoryService {
       this.userRef = firestore.collection('accessories')
   }
 
-  getCoins() {
+  getAccessories() {
       return this.firestore.collection('accessories').snapshotChanges();
   }
 

@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Options } from 'ng5-slider';
-import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
-import { Article } from 'src/app/shared/classes/articles.model';
-import { IOrder } from 'src/app/shared/interfaces/orders.interfaces';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
-import { Accessory } from 'src/app/shared/classes/accessories.model';
-import { AccessoryService } from 'src/app/shared/services/accessory.service';
-
+import { BanknoteService } from 'src/app/shared/services/banknote.service';
+import { Banknote } from 'src/app/shared/classes/banknotes.model';
 
 @Component({
-  selector: 'app-accessories',
-  templateUrl: './accessories.component.html',
-  styleUrls: ['./accessories.component.scss']
+  selector: 'app-banknotes',
+  templateUrl: './banknotes.component.html',
+  styleUrls: ['./banknotes.component.scss']
 })
-export class AccessoriesComponent implements OnInit {
-  list: Accessory[];
+export class BanknotesComponent implements OnInit {
+  list: Banknote[];
   buttonsShow: boolean;
   searchName: string;
   minValue: number = 0;
@@ -29,27 +24,27 @@ export class AccessoriesComponent implements OnInit {
   newArticle: IArticle;
   count: number = 1;
 
-  constructor(private service: AccessoryService,
-    private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
+  constructor(private service:BanknoteService) { }
 
   ngOnInit() {
-    this.service.getAccessories().subscribe(actionArray => {
+
+    this.service.getBanknotes().subscribe(actionArray => {
       this.list = actionArray.map(item => {
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
-        } as Accessory;
+        } as Banknote;
       });
       this.getMinPrice(this.list);
       this.getMaxPrice(this.list);
     });
   }
 
-  buyProduct(accessory: Accessory): void {
-    const newItem: IProductOrder = new ProductOrder(accessory.id, accessory.categoryId, accessory.name, accessory.image, accessory.price, this.count, accessory.price);
-    newItem.amount = this.count * accessory.price;
-    localStorage.setItem(accessory.id, JSON.stringify(newItem));
+  
+  buyProduct(banknote: Banknote): void {
+    const newItem: IProductOrder = new ProductOrder(banknote.id, banknote.categoryId, banknote.name, banknote.image, banknote.price, this.count, banknote.price);
+    newItem.amount = this.count * banknote.price;
+    localStorage.setItem(banknote.id, JSON.stringify(newItem));
   }
 
   getMaxPrice(list) {

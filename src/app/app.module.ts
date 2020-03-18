@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CoinsComponent } from './pages/coins/coins.component';
-import { BanknoteComponent } from './pages/banknote/banknote.component';
+import { BanknotesComponent } from './pages/banknotes/banknotes.component';
 import { MedalsComponent } from './pages/medals/medals.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { AccessoriesComponent } from './pages/accessories/accessories.component';
@@ -55,6 +55,7 @@ import { CoinComponent } from './admin/admin-coins/coin/coin.component';
 import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
 import { CoinService } from './shared/services/coin.service';
 import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
+import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
 import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';
 import { AccessoryListComponent } from './admin/admin-accessories/accessory-list/accessory-list.component';
 
@@ -68,7 +69,7 @@ import { AccessoryListComponent } from './admin/admin-accessories/accessory-list
     FooterComponent,
     HomeComponent,
     CoinsComponent,
-    BanknoteComponent,
+    BanknotesComponent,
     MedalsComponent,
     BasketComponent,
     AccessoriesComponent,
@@ -89,6 +90,7 @@ import { AccessoryListComponent } from './admin/admin-accessories/accessory-list
     ProductDetailsComponent,
     CoinComponent,
     CoinListComponent,
+    BanknoteComponent,
     BanknoteListComponent,
     AccessoryComponent,
     AccessoryListComponent,

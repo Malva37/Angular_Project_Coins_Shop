@@ -11,26 +11,8 @@ import { IAccessory } from 'src/app/shared/interfaces/accessories.interfaces';
   styleUrls: ['./admin-accessories.component.scss']
 })
 export class AdminAccessoriesComponent implements OnInit {
-
-
+ 
   modalRef: BsModalRef;
-  arrAccessories: Array<IAccessory> = [];
-  productCategoryName: string = 'accessories';
-  productName: string;
-  productDescription: string;
-  productPrice: number;
-  productCategoryId: number = 4;
-  productId: number;
-  productImage: string;
-  editStatus: boolean;
-
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-  uploadState: Observable<string>;
-  uploadProgress: Observable<number>;
-  downloadURL: Observable<string>;
-  searchName: string;
-
 
   constructor(private modalService: BsModalService) { }
 

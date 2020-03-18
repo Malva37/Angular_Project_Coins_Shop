@@ -1,1 +1,55 @@
-<p>accessory works!</p>
+
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+    <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
+    <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
+  
+    <div class="form-group">
+      <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
+        placeholder="Product Name" required>
+      <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
+    </div>
+  
+    <div class="form-group">
+      <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter" class="form-control"
+        placeholder="Counter" pattern="[1-9]{1,}" required>
+        <!-- <div *ngIf="counter.invalid " class="validation-error">Введіть кількість відмінну від 0</div> -->
+    </div>
+  
+    <div class="form-group">
+      <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+        class="form-control" placeholder="Description">
+      </textarea>
+    </div>
+  
+    <div class="form-group">
+      <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+        placeholder="Product Price" required>
+    </div>
+  
+    <div class="form-group row">
+      <div class="card-body">
+        <h5 class="card-title">Select a file for upload:</h5>
+        <input class="form-control" placeholder="Product image" required type="file" [value]="service.formData.image" (change)="upload($event)" accept=".png,.jpg">
+        <br><br>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+            [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br>
+        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+          File uploaded: 
+          <input *ngIf="downloadURL | async; let downloadSrc" type="hidden">
+          <a [href]="downloadSrc">{{downloadSrc}}</a> 
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+    </div>
+  
+  </form>
+  

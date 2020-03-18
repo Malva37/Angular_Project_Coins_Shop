@@ -20,7 +20,7 @@ export class BanknoteComponent implements OnInit {
   denomination: number;
   description: string;
   price: number;
-  categoryId: number = 2;
+  categoryId: number;
   // productId: number;
   image: string;
 
@@ -46,7 +46,7 @@ export class BanknoteComponent implements OnInit {
     }
     this.service.formData = {
       id: null,
-      categoryId: 1,
+      categoryId: 2,
       categoryName: 'banknotes',
       name: '',
       counter: null,

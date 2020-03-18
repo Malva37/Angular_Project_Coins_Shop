@@ -1,1 +1,44 @@
-<p>accessories works!</p>
+<div class="container-fluid">
+    <section class="search">
+      <input type="text" [(ngModel)]="searchName" name="searchName" class="form-control" placeholder="Search">
+    </section>
+  
+    <div class="main">
+  
+      <section class="filters">
+  
+        <form>
+          <div class="h5 filter_name">
+            <span data-language="features_other_filter">Ціна</span>
+          </div>
+          <div class="filter_group price-slider" *ngIf="minValue && maxValue">
+            <p>Min: <input type="number" name='minValue' [(ngModel)]="minValue"></p>
+            <p>Max: <input type="number" name='maxValue' [(ngModel)]="maxValue"></p>
+            <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+          </div>
+  
+         
+        </form>
+  
+      </section>
+  
+      <section class="catalog">
+        <figure class="product"
+          *ngFor="let accessory of list | searchCoin:searchName | filterPrice:minValue:maxValue">
+          <img [attr.src]="accessory.image" class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="title">{{ accessory.name }}</p>
+            <p class="price">{{ accessory.price }} грн</p>
+            <div class="button-group">
+              <!-- <button href="#" class="moreDetails h6">Детальніше</a> -->
+                <input type="button" [routerLink]="[ '/product',  accessory.categoryName, accessory.id ]" routerLinkActive="router-link-active"  class="moreDetails h6" value="Детальніше">
+                <input type="button" class="buy h6" (click)="buyProduct(accessory)" value="Купити">
+              <!-- <a href="#" class="buy h6">Купити</a> -->
+            </div>
+          </div>
+        </figure>
+      </section>
+  
+    </div>
+  </div>
+  
