@@ -126,5 +126,10 @@ export class BanknoteListComponent implements OnInit {
   }
 
 
-
+  onDelete(banknote: Banknote) {
+    if (confirm('Are you sure to delete this medal?')) {
+      this.firestore.doc('banknotes/' + banknote.id).delete();
+      this.afStorage.storage.refFromURL(banknote.image).delete();
+    }
+  }
 }

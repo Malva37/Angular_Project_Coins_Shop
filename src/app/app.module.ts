@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './pages/home/home.component';
+// import { HomeComponent } from './pages/home/home.component';
 import { CoinsComponent } from './pages/coins/coins.component';
 import { BanknotesComponent } from './pages/banknotes/banknotes.component';
 import { MedalsComponent } from './pages/medals/medals.component';
@@ -58,7 +58,8 @@ import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/ban
 import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
 import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';
 import { AccessoryListComponent } from './admin/admin-accessories/accessory-list/accessory-list.component';
-
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
+import { AdminGuard } from './admin/admin.guard';
 
 
 
@@ -67,7 +68,7 @@ import { AccessoryListComponent } from './admin/admin-accessories/accessory-list
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
+    // HomeComponent,
     CoinsComponent,
     BanknotesComponent,
     MedalsComponent,
@@ -94,6 +95,7 @@ import { AccessoryListComponent } from './admin/admin-accessories/accessory-list
     BanknoteListComponent,
     AccessoryComponent,
     AccessoryListComponent,
+    AdminPageComponent,
   
 
   ],
@@ -113,7 +115,9 @@ import { AccessoryListComponent } from './admin/admin-accessories/accessory-list
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), TabsModule.forRoot()
   ],
-  providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore],
+  providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
+    //  AdminGuard
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

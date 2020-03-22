@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+// import { HomeComponent } from './pages/home/home.component';
 import { CoinsComponent } from './pages/coins/coins.component';
 import { BanknotesComponent } from './pages/banknotes/banknotes.component';
 import { MedalsComponent } from './pages/medals/medals.component';
@@ -14,12 +14,14 @@ import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.componen
 import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
+import { AdminGuard } from './admin/admin.guard';
 
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch:'full'},
-  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: 'coins', pathMatch:'full'},
+  // {path: 'home', component: HomeComponent},
   {path: 'coins', component: CoinsComponent},
   {path: 'banknote', component: BanknotesComponent},
   {path: 'medals', component: MedalsComponent},
@@ -34,6 +36,7 @@ const routes: Routes = [
   {path: 'medals', component: AdminMedalsComponent},
   {path: 'accessories', component: AdminAccessoriesComponent},
   {path: 'orders', component: AdminOrdersComponent},
+  // {path: 'adminPage', component: AdminPageComponent, canActivate: [AdminGuard]}
   ]},
   
 

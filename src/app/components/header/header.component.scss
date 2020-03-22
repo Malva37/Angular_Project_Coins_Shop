@@ -15,40 +15,127 @@ a {
 }
 
 a :hover {
-  color: black;
+  color:#6e5d12;
 
 }
 
-header{
-  margin-bottom: 20px;
-  background-color: #f8f5f5;
+header {
   width: 100%;
-  padding: 20px;
 }
-
+.navbar{
+    color: rgba(217, 188, 49, 0.9);
+    font-weight: 700;
+  
+}
 header .navbar-brand {
   font-family: monospace;
   font-size: 30px;
   color: #000;
   text-transform: uppercase;
+  margin-left: 5%;
+  color: rgba(217, 188, 49, 0.9);
+  font-weight: 700;
 
+}
+
+.collapse {
+margin: 2% 5% 0 10%;
 }
 
 header .nav-item {
   margin-left: 50px;
   text-transform: uppercase;
 }
+#navbarSupportedContent li a{
+  color: #f2bd0b;;
+
+}
+
+a.active{
+  color: #f2bd0b;;
+
+}
+
 
 header .nav-item a::after {
   content: '';
   display: block;
   width: 100%;
-  background-color: #207141;
+  background-color:#6e5d12;
   height: 2px;
   transform: scale(0);
   transition: all .3s;
 }
-header .nav-item a:hover::after {
-    transform: scale(1);
 
+header .nav-item a:hover::after {
+  transform: scale(1);
+
+}
+
+.navigation {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 25px;
+  background-color: #8b711d;
+  border: 1px solid #6e5d12;;
+
+}
+
+.phone {
+  width: 15%;
+  margin: 0px 5% 0 10%;
+  font-size: 17px;
+  font-weight: 700;
+
+}
+
+.phone a {
+  text-decoration-line: none;
+  color: black;
+
+}
+
+.search {
+  width: 50%;
+  margin-right: 2%;
+}
+
+.basketBox {
+  width: 20%;
+  display: inline-block;
+  position: relative;
+  height: 32px;
+  padding-left: 45px;
+  font-size: 13px;
+  color: #fff;
+  background:url("https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsprite.png?alt=media&token=d8680cc6-6e72-4f51-a43f-39cdec2f0fb9")  no-repeat 0 -111px;
+}
+
+.basketCounter {
+  position: absolute;
+  top: -5px;
+  left: 18px;
+  width: 19px;
+  height: 19px;
+  line-height: 19px;
+  border-radius: 100%;
+  background-color: #f2bd0b;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+}
+
+.basketTitle{
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #f2bd0b
+}
+.basketTotal {
+  display: block;
+  font-weight: bold;
+  color: #f2bd0b
 }

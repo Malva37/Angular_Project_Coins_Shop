@@ -1,24 +1,54 @@
 <header>
 
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#"[routerLink]="[ '/home' ]" routerLinkActive="active">home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#" [routerLink]="[ '/coins' ]" routerLinkActive="active">home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <!-- <li class="nav-item active"><a class="nav-link home" [routerLink]="[ '/home' ]" routerLinkActive="active">home</a></li> -->
-        <li class="nav-item active"><a [routerLink]="[ '/coins']" routerLinkActive="active" class="nav-link" href="#">Монети</a></li>
-        <li class="nav-item active"><a [routerLink]="[ '/banknote']" routerLinkActive="active" class="nav-link" href="#">Банкноти</a></li>
-        <li class="nav-item active"><a [routerLink]="[ '/medals']" routerLinkActive="active" class="nav-link" href="#">Медалі</a></li>
-        <li class="nav-item active"><a [routerLink]="[ '/accessories']" routerLinkActive="active" class="nav-link" href="#">Аксесуари</a></li>
-        <li class="nav-item active"><a [routerLink]="[ '/basket']" routerLinkActive="active" class="nav-link" href="#">Кошик</a></li>
-        <li class="nav-item active"><a [routerLink]="[ '/admin']" routerLinkActive="active" class="nav-link" href="#">Мій кабінет<br>
-           <b>Увійти</b> </a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/coins']" routerLinkActive="active" class="nav-link"
+            href="#">Монети</a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/banknote']" routerLinkActive="active" class="nav-link"
+            href="#">Банкноти</a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/medals']" routerLinkActive="active" class="nav-link"
+            href="#">Медалі</a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/accessories']" routerLinkActive="active" class="nav-link"
+            href="#">Аксесуари</a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/basket']" routerLinkActive="active" class="nav-link"
+            href="#">Кошик</a></li>
+        <li class="nav-item active"><a [routerLink]="[ '/admin']" routerLinkActive="active" class="nav-link"
+            href="#">Мій кабінет<br>
+            <b>Увійти</b> </a></li>
       </ul>
     </div>
   </nav>
+  <div class="navigation">
+    <div class="phone">
+
+      <a href="#"><i fa [name]="'phone'"></i></a>
+      <a href="#"> +38(096)666-66-66</a>
+      <br>
+      <a href="#"><i fa [name]="'phone'"></i></a>
+      <a href="#"> +38(097)777-77-77</a>
+
+
+    </div>
+    <div class="search">
+      <div class="fieldSearch">
+        <input type="text" [(ngModel)]="searchName" name="searchName" class="form-control" placeholder="Search">
+      </div>
+    </div>
+    <div class="basketBox">
+          <span class="basketCounter">0</span>
+          <span class="basketTitle" data-language="index_cart">Кошик</span>
+          <span class="basketTotal">0 грн</span>
+    </div>
+
+  </div>
 
 
 </header>

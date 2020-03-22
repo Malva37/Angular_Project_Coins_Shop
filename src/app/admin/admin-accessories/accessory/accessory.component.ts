@@ -57,11 +57,7 @@ export class AccessoryComponent implements OnInit {
     };
   }
   onSubmit(form: NgForm) {
-    // form.value.image = this.image;
-    // delete form.value.downloadSrc;
     const data: Accessory = Object.assign({}, form.value);
-    // const data: IAccessory = new Accessory(null, form.value.categoryId,form.value.categoryName, form.value.name, form.value.counter, form.value.description, form.value.price,this.image);
-   
     debugger
     data.image =this.image;
     delete data.id;
