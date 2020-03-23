@@ -15,14 +15,14 @@ import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-acces
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
-import { AdminGuard } from './admin/admin.guard';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { UserComponent } from './user/user.component';
+import { AdminGuard } from './admin.guard';
 
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'coins', pathMatch:'full'},
-  // {path: 'home', component: HomeComponent},
   {path: 'coins', component: CoinsComponent},
   {path: 'banknote', component: BanknotesComponent},
   {path: 'medals', component: MedalsComponent},
@@ -30,15 +30,15 @@ const routes: Routes = [
   {path: 'basket', component: BasketComponent},
   {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
   {path: 'sign-in', component: SignInComponent},
+  {path: 'user', component: UserComponent},
  
-  {path: 'admin', component: AdminComponent,children:[
+  {path: 'admin', component: AdminComponent,  canActivate: [AdminGuard], children:[
   {path: '', redirectTo: 'coins', pathMatch:'full'},
   {path: 'coins', component: AdminCoinsComponent},
   {path: 'banknotes', component: AdminBanknotesComponent},
   {path: 'medals', component: AdminMedalsComponent},
   {path: 'accessories', component: AdminAccessoriesComponent},
-  {path: 'orders', component: AdminOrdersComponent},
-  // {path: 'adminPage', component: AdminPageComponent, canActivate: [AdminGuard]}
+  {path: 'orders', component: AdminOrdersComponent}
   ]},
   
 

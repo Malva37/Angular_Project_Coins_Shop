@@ -7,7 +7,7 @@
   border: 1px solid lightgrey;
   border-radius: 5px;
   width: 300px;
-  padding: 2%;
+  padding: 1.5%;
   background-color: white;
   opacity: 0.9;
   // height: 455px;
@@ -16,10 +16,6 @@
 ::ng-deep {
   .custom-slider .ng5-slider .ng5-slider-bar {
     display: none;
-  }
-
-  .custom-slider .ng5-slider .ng5-slider-selection {
-    background: orange;
   }
 
   .custom-slider .ng5-slider .ng5-slider-pointer {
@@ -54,19 +50,18 @@
     top: -1px;
   }
 
-  .custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-    background: darkgreen;
-  }
 }
 
-.filter-name {
-  margin: 1% 0;
+.filter_name {
+  margin: 1%;
+  font-size: 17px;
+  font-weight: bold;
 }
 
-.filter-name:hover {
-  font-size: 20px;
+// .filter-name:hover {
+//   font-size: 20px;
 
-}
+// }
 
 .main {
   display: flex;
@@ -75,6 +70,28 @@
   width: 100%;
 
 }
+
+.minMaxField{
+display: flex;
+justify-content: space-between;
+}
+.minValue,
+.maxValue{
+  width: 45%;
+  margin: 2% 0;
+}
+.boxFilter{
+  margin: 3% 0;
+}
+.selectBox{
+  width: 250px;
+}
+option {
+  white-space: nowrap; /* Отменяем перенос текста */
+  overflow: hidden; /* Обрезаем содержимое */
+  padding: 5px; /* Поля */
+  text-overflow: ellipsis;
+} 
 
 .product {
   padding: 10px;
@@ -90,6 +107,13 @@
   transition-property: transform;
 }
 
+.ng5-slider-pointer-min,
+.ng5-slider-pointer-max {
+  background-color: #8b711d;
+}
+.price_slider{
+  margin-bottom: 6%;
+}
 .product:hover {
   .button-group {
     display: flex;

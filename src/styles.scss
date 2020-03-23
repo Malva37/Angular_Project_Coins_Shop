@@ -1,29 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-    overflow-x: hidden;
-    // background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2Fmoneti-kopeyki-chekanka-polet.jpg?alt=media&token=85a8120b-0a09-4b00-997a-81d225384a23);
-//    background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2FworkImages%2Fcoins.jpg?alt=media&token=b9267acc-b8ec-4922-bd64-60abbd5c87bc);
-   background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2FworkImages%2F2.jpg?alt=media&token=bfb3804a-8c28-4042-a34f-5a59b62e6e5b);
-   background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2FworkImages%2F1.jpg?alt=media&token=dc2a674b-3dab-487a-962a-668b10ad238f);
-   
-   background-repeat: no-repeat;
-    background-size: 100%;
-    font-family: Courier;
-        
-}
-
-input.ng-touched.ng-invalid{
-    border-color: #dc3545;
-}
- 
-div.validation-error{
-    width: 100%;
-    margin-top: .25rem;
-    font-size: 80%;
-    color: #dc3545;
-}
- 
-/* for table row hover - in employee-list component */
-table.table-hover tbody tr:hover{
-    cursor: pointer;
+body {
+  overflow-x: hidden;
+  height: 100%;
+  background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2FworkImages%2F1.jpg?alt=media&token=dc2a674b-3dab-487a-962a-668b10ad238f);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  font-family: Courier;
 }
