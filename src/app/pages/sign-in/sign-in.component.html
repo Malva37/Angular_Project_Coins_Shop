@@ -1,0 +1,25 @@
+<div class="main">
+    <!-- <div *ngIf="!guestpage" class="guestpage"> -->
+  
+      <form>
+  
+        <label for="emailUser" class="labelForm">Email
+          <input type="email" [(ngModel)]="emailUser" name="emailUser" class="dataGuest" id="inputEmail3"
+            placeholder="Email(наприклад)*">
+        </label>
+  
+        <br>
+  
+        <label for="passwordUser" class="labelForm">Password
+          <input type="password" [(ngModel)]="passwordUser" name="passwordUser" class="dataGuest" id="inputPassword3"
+            placeholder="Пароль*"></label>
+  
+        <div class="buttonGuest">
+          <!-- <input type="button" [routerLink]="[ '/product',  email, pasword ]"> -->
+          <button type="submit" (click)="enter(emailUser, passwordUser)" class="btn btn-primary">Увійти</button>
+          <button type="submit" class="btn btn-primary" (click)="showUserFields()">Зареєструватися</button>
+        </div>
+     
+  
+      </form>
+    <!-- </div> -->

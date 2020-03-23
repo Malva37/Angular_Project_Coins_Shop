@@ -6,7 +6,8 @@ export interface IUser{
     email: string;
     phone: string;
     address: string,
-    password: string
+    password: string,
+    role:string
  
 
 }

@@ -55,7 +55,8 @@ export class AdminComponent implements OnInit {
       email: '',
       phone: '',
       address: '',
-      password: ''
+      password: '',
+      role:''
     };
   }
 

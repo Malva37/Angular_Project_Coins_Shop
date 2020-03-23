@@ -60,6 +60,8 @@ import { AccessoryComponent } from './admin/admin-accessories/accessory/accessor
 import { AccessoryListComponent } from './admin/admin-accessories/accessory-list/accessory-list.component';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { AdminGuard } from './admin/admin.guard';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
+
 
 
 
@@ -96,6 +98,7 @@ import { AdminGuard } from './admin/admin.guard';
     AccessoryComponent,
     AccessoryListComponent,
     AdminPageComponent,
+    SignInComponent
   
 
   ],

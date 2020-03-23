@@ -16,6 +16,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { AdminGuard } from './admin/admin.guard';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'basket', component: BasketComponent},
   {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
+  {path: 'sign-in', component: SignInComponent},
  
   {path: 'admin', component: AdminComponent,children:[
   {path: '', redirectTo: 'coins', pathMatch:'full'},
