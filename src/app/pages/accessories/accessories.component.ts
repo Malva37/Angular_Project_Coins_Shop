@@ -9,6 +9,8 @@ import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 import { Accessory } from 'src/app/shared/classes/accessories.model';
 import { AccessoryService } from 'src/app/shared/services/accessory.service';
+import { ShareService } from 'src/app/shared/services/share.service';
+
 
 
 @Component({
@@ -28,11 +30,14 @@ export class AccessoriesComponent implements OnInit {
   };
   newArticle: IArticle;
   count: number = 1;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
   constructor(private service: AccessoryService,
-    private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
-
+    private share: ShareService) { 
+      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+    this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+     }
   ngOnInit() {
     this.service.getAccessories().subscribe(actionArray => {
       this.list = actionArray.map(item => {
@@ -50,6 +55,7 @@ export class AccessoriesComponent implements OnInit {
     const newItem: IProductOrder = new ProductOrder(accessory.id, accessory.categoryId, accessory.name, accessory.image, accessory.price, this.count, accessory.price);
     newItem.amount = this.count * accessory.price;
     localStorage.setItem(accessory.id, JSON.stringify(newItem));
+    this.share.plusItem();
   }
 
   getMaxPrice(list) {

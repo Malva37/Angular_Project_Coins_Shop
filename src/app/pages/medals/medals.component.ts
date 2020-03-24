@@ -9,6 +9,8 @@ import { Article } from 'src/app/shared/classes/articles.model';
 import { IOrder } from 'src/app/shared/interfaces/orders.interfaces';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
+import { ShareService } from 'src/app/shared/services/share.service';
+
 
 @Component({
   selector: 'app-medals',
@@ -27,11 +29,15 @@ export class MedalsComponent implements OnInit {
   };
   newArticle: IArticle;
   count: number = 1;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
   constructor(
     private service: MedalService,
-    private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage ) { }
+    private share: ShareService) { 
+      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+     }
 
 
   ngOnInit() {
@@ -51,6 +57,7 @@ export class MedalsComponent implements OnInit {
     const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
     newItem.amount = this.count * medal.price;
     localStorage.setItem(medal.id, JSON.stringify(newItem));
+    this.share.plusItem();
   }
 
   getMaxPrice(list) {

@@ -14,7 +14,7 @@ import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.componen
 import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
-import { AdminPageComponent } from './admin/admin-page/admin-page.component';
+// import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
 import { AdminGuard } from './admin.guard';

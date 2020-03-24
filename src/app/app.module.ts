@@ -63,6 +63,7 @@ import { AdminGuard } from './admin.guard';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
 import { AuthService } from './shared/services/auth.service';
+import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 
@@ -123,7 +124,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
     ToastrModule.forRoot(), TabsModule.forRoot()
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
-     AdminGuard, AuthService,AngularFireAuth
+     AdminGuard, AuthService,AngularFireAuth,ShareService
     ],
   bootstrap: [AppComponent]
 })

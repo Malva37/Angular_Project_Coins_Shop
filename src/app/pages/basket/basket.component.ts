@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
-import { Article } from 'src/app/shared/classes/articles.model';
-import { ArticleService } from 'src/app/shared/services/article.service';
-import { NgForm } from '@angular/forms';
-import { OrderService } from 'src/app/shared/services/order.service';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Order } from 'src/app/shared/classes/orders.model';
 import { Product } from 'src/app/shared/classes/products.model';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
-import { IOrder } from 'src/app/shared/interfaces/orders.interfaces';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { ShareService } from 'src/app/shared/services/share.service';
+
 
 @Component({
   selector: 'app-basket',
@@ -34,13 +28,16 @@ export class BasketComponent implements OnInit {
   payment = "Приват Банк";
   delivery = "Нова пошта";
   personCount: number = 0;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
 
   constructor(
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage
-  ) { }
-
+    private share: ShareService) { 
+      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+     }
   ngOnInit() {
     this.getArticles();
   }
@@ -80,6 +77,7 @@ export class BasketComponent implements OnInit {
       console.log(editItem);
       this.getArticles();
     }
+    this.share.plusItem();
   }
   paymentWay(event) {
     console.log(event.target.value);
@@ -142,6 +140,7 @@ export class BasketComponent implements OnInit {
   deleteItem(item: Product) {
     console.log(item);
     localStorage.removeItem(item.id);
+    this.share.plusItem();
     for (let i = 0; i < this.articles.length; i++) {
       if (this.articles[i].id == item.id) {
         this.articles.splice(i, 1);

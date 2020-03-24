@@ -8,6 +8,7 @@ import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces
 import { CoinService } from 'src/app/shared/services/coin.service';
 import { AccessoryService } from 'src/app/shared/services/accessory.service';
 import { BanknoteService } from 'src/app/shared/services/banknote.service';
+import { ShareService } from 'src/app/shared/services/share.service';
 
 
 
@@ -22,6 +23,8 @@ export class ProductDetailsComponent implements OnInit {
   articles: Array<ProductOrder> = [];
   coinsActive:boolean;
   banknotesActive:boolean;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
 
   constructor(private medalService: MedalService,
@@ -30,7 +33,10 @@ export class ProductDetailsComponent implements OnInit {
     private banknotesService: BanknoteService,
     private route: ActivatedRoute,
     private location: Location,
-    private articleService: ArticleService) { }
+    private share: ShareService) { 
+      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+       }
 
   ngOnInit() {
     this.getData();
@@ -102,6 +108,7 @@ export class ProductDetailsComponent implements OnInit {
     const newItem: IProductOrder = new ProductOrder(product.id, product.categoryId, product.name, product.image, product.price, this.count, product.price);
     newItem.amount = this.count * product.price;
     localStorage.setItem(product.id, JSON.stringify(newItem));
+    this.share.plusItem();
 
   }
 

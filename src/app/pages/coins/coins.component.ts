@@ -6,6 +6,8 @@ import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
 import { CoinService } from 'src/app/shared/services/coin.service';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
+import { ShareService } from 'src/app/shared/services/share.service';
+
 
 @Component({
   selector: 'app-coins',
@@ -28,11 +30,18 @@ export class CoinsComponent implements OnInit {
   metal:string;
   series:string;
   year:number;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
 
 
 
-  constructor(private service: CoinService) { }
+
+  constructor(private service: CoinService,
+    private share: ShareService) { 
+      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+      }
 
   ngOnInit() {
     this.service.getCoins().subscribe(actionArray => {
@@ -48,9 +57,17 @@ export class CoinsComponent implements OnInit {
   }
 
   buyProduct(coin: Coin): void {
+    debugger
     const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image, coin.price, this.count, coin.price);
     newItem.amount = this.count * coin.price;
+
+
+
+    // if()
+    
     localStorage.setItem(coin.id, JSON.stringify(newItem));
+    this.share.plusItem();
+
   }
 
   getMaxPrice(list) {

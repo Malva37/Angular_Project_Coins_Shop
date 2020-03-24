@@ -5,6 +5,8 @@ import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 import { BanknoteService } from 'src/app/shared/services/banknote.service';
 import { Banknote } from 'src/app/shared/classes/banknotes.model';
+import { ShareService } from 'src/app/shared/services/share.service';
+
 
 @Component({
   selector: 'app-banknotes',
@@ -23,8 +25,13 @@ export class BanknotesComponent implements OnInit {
   };
   newArticle: IArticle;
   count: number = 1;
+  clickCnt: number = 0;
+  sumBasket: number = 0;
 
-  constructor(private service:BanknoteService) { }
+  constructor(private service:BanknoteService,private share: ShareService) { 
+    this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+    this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+   }
 
   ngOnInit() {
 
@@ -45,6 +52,7 @@ export class BanknotesComponent implements OnInit {
     const newItem: IProductOrder = new ProductOrder(banknote.id, banknote.categoryId, banknote.name, banknote.image, banknote.price, this.count, banknote.price);
     newItem.amount = this.count * banknote.price;
     localStorage.setItem(banknote.id, JSON.stringify(newItem));
+    this.share.plusItem();
   }
 
   getMaxPrice(list) {
