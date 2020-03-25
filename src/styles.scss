@@ -1,9 +1,9 @@
 body {
   overflow-x: hidden;
-  height: 100%;
+  background-color: black;
   background: url(https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/images%2FworkImages%2F1.jpg?alt=media&token=dc2a674b-3dab-487a-962a-668b10ad238f);
-  background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: left top;
   font-family: Courier;
+  background-size: cover;
+  background-attachment: fixed;
 }

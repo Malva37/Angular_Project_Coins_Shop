@@ -11,10 +11,17 @@ export class HeaderComponent implements OnInit {
 
   clickCount: number;
   sumBasket: number;
+  searchName: string
 
   constructor(private share: ShareService) {
     this.share.onClickNumber.subscribe(cnt => this.clickCount = cnt);
     this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+    this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
+  }
+
+
+  valuechange(newValue) {
+    this.share.changeSearchName(newValue);
   }
 
   ngOnInit() {
@@ -27,9 +34,9 @@ export class HeaderComponent implements OnInit {
     return this.clickCount = keys.length;
   }
 
-  sumInBasket(){
+  sumInBasket() {
     let keys = Object.keys(localStorage);
-    let articles=[];
+    let articles = [];
     this.sumBasket = 0;
     let i = 0;
     let key;

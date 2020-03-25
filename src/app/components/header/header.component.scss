@@ -1,4 +1,8 @@
-body {
+*{
+  margin: 0;
+  padding: 0;
+}
+  body {
   min-width: 320px;
   font-size: 14px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -11,48 +15,53 @@ img {
 }
 
 a {
-  color: #b4ad9e;
+  color: #f2bd0b;
 }
 
 a :hover {
-  color:#6e5d12;
+  color: #6e5d12;
 
 }
 
 header {
   width: 100%;
 }
-.navbar{
-    color: rgba(217, 188, 49, 0.9);
-    font-weight: 700;
-  
-}
-header .navbar-brand {
-  font-family: monospace;
-  font-size: 30px;
-  color: #000;
-  text-transform: uppercase;
-  margin-left: 5%;
-  color: rgba(217, 188, 49, 0.9);
+
+.menu {
   font-weight: 700;
+  height: 90px;
+  display: flex;
+  padding: 35px 0;
+  color: #f2bd0b;
+  font-size: 18px;
+  justify-content: flex-end;
+}
+
+.pages ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
 
 }
 
-.collapse {
-margin: 2% 5% 0 10%;
+.myCabinet a {
+  margin: 0 80px 0 200px;
 }
 
-header .nav-item {
-  margin-left: 50px;
+header li {
+  margin-left: 80px;
   text-transform: uppercase;
 }
-#navbarSupportedContent li a{
-  color: #f2bd0b;;
+
+#navbarSupportedContent li a {
+  color: #f2bd0b;
+  
 
 }
 
-a.active{
-  color: #f2bd0b;;
+a.active {
+  color: #f2bd0b;
+  ;
 
 }
 
@@ -61,7 +70,7 @@ header .nav-item a::after {
   content: '';
   display: block;
   width: 100%;
-  background-color:#6e5d12;
+  background-color: #6e5d12;
   height: 2px;
   transform: scale(0);
   transition: all .3s;
@@ -73,19 +82,20 @@ header .nav-item a:hover::after {
 }
 
 .navigation {
-  height: 100px;
+  height: 90px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
-  padding-top: 25px;
+  // padding-top: 25px;
   background-color: #8b711d;
-  border: 1px solid #6e5d12;;
+  border: 1px solid #6e5d12;
+  padding: 25px 100px 0;
 
 }
 
 .phone {
   width: 15%;
-  margin: 0px 5% 0 10%;
+  // margin: 0px 5% 0 10%;
   font-size: 17px;
   font-weight: 700;
 
@@ -100,17 +110,20 @@ header .nav-item a:hover::after {
 .search {
   width: 50%;
   margin-right: 2%;
+  padding-right: 45px;
+
 }
 
 .basketBox {
-  width: 20%;
+  // width: 20%;
   display: inline-block;
   position: relative;
   height: 32px;
-  padding-left: 45px;
+  // padding-left: 45px;
   font-size: 13px;
   color: #fff;
-  background:url("https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsprite.png?alt=media&token=d8680cc6-6e72-4f51-a43f-39cdec2f0fb9")  no-repeat 0 -111px;
+  text-decoration-line: none;
+  background: url("https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsprite.png?alt=media&token=d8680cc6-6e72-4f51-a43f-39cdec2f0fb9") no-repeat 0 -111px;
 }
 
 .basketCounter {
@@ -128,14 +141,17 @@ header .nav-item a:hover::after {
   text-align: center;
 }
 
-.basketTitle{
+.basketTitle {
   display: block;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #f2bd0b
+  margin-bottom: 5px;
+  color: #f2bd0b;
+  margin-left: 50px;
 }
+
 .basketTotal {
   display: block;
   font-weight: bold;
-  color: #f2bd0b
+  color: #f2bd0b;
+  margin-left: 40px;
 }

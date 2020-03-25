@@ -1,256 +1,292 @@
 .container-fluid {
-    margin-bottom: 25%;
-  }
-  
-  .filters {
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    width: 300px;
-    padding: 2%;
-    // height: 455px;
-  }
-  
-  ::ng-deep {
-    .custom-slider .ng5-slider .ng5-slider-bar {
-      display: none;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-selection {
-      background: orange;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-pointer {
-      width: 8px;
-      height: 16px;
-      top: auto;
-      bottom: 0;
-      background-color: #333;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-pointer:after {
-      display: none;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-bubble {
-      bottom: 14px;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-limit {
-      font-weight: bold;
-      color: darkgreen;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-tick {
-      width: 1px;
-      height: 8px;
-      margin-left: 4px;
-      border-radius: 0;
-      background: #9cc59d;
-      top: -1px;
-    }
-  
-    .custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-      background: darkgreen;
-    }
-  }
-  
-  .filter-name {
-    margin: 1% 0;
-  }
-  
-  .filter-name:hover {
-    font-size: 20px;
-  
-  }
-  
-  .main {
-    display: flex;
-    justify-content: space-around;
-    margin: 0 2%;
-    width: 100%;
-  
-  }
-  
-  .product {
-    padding: 10px;
-    margin: 2% 2%;
-    width: 20%;
-    height: 250px;
-    text-align: center;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    transition: 0.7s;
-    transition-property: transform;
-  }
-  
-  .product:hover {
-    .button-group {
-      display: flex;
-      justify-content: center;
-  
-    }
-  
-    z-index: 1;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
-    transform: scale(1.2);
-  
-  }
-  
-  .button-group {
+  margin-top: 2%;
+}
+
+.filters {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  width: 300px;
+  padding: 1.5%;
+  background-color: white;
+  opacity: 0.9;
+}
+
+::ng-deep {
+  .custom-slider .ng5-slider .ng5-slider-bar {
     display: none;
   }
-  
-  
-  .card-body {
-    padding: 0;
+
+  .custom-slider .ng5-slider .ng5-slider-pointer {
+    width: 8px;
+    height: 16px;
+    top: auto;
+    bottom: 0;
+    background-color: #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
-  
-  .card-body p {
-    margin: 2% 0;
-    font-size: 13px;
-    font-weight: 700;
-    vertical-align: middle
+
+  .custom-slider .ng5-slider .ng5-slider-pointer:after {
+    display: none;
   }
-  
-  .title {
-    display: block;
-    text-overflow: inherit;
-    height: 40px;
-    overflow: hidden;
+
+  .custom-slider .ng5-slider .ng5-slider-bubble {
+    bottom: 14px;
   }
-  
-  .title:hover {
-    color: darkgreen;
+
+  .custom-slider .ng5-slider .ng5-slider-limit {
+    font-weight: bold;
+    // color: darkgreen;
   }
-  
-  .moreDetails,
-  .buy {
-    height: 25px;
-    width: 47%;
-    line-height: 25px;
-    border: 1px solid #848282;
-    border-radius: 3px;
-    background-color: #f1e8e8;
-    color: black;
-    box-shadow: -1px 0px 4px 0px #787272;
-    margin-top: 3px;
-    text-decoration: none;
-    font-size: 10px;
-    -webkit-box-align: 20px;
-    align-items: 20px;
-    text-align: center;
+
+  .custom-slider .ng5-slider .ng5-slider-tick {
+    width: 1px;
+    height: 8px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #9cc59d;
+    top: -1px;
   }
-  
-  .buy {
-    background-color: #b6dcb6;
-    margin-left: 2%;
-   
-  }
-  
-  
-  .product img {
-    width: 115px;
-    height: 120px;
-    margin: 0 auto
-  }
-  
-  .search {
+
+}
+
+.filter_name {
+  margin: 1%;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+// .filter-name:hover {
+//   font-size: 20px;
+
+// }
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 2%;
+  width: 100%;
+
+}
+
+.minMaxField{
+display: flex;
+justify-content: space-between;
+}
+.minValue,
+.maxValue{
+  width: 45%;
+  margin: 2% 0;
+}
+.boxFilter{
+  margin: 3% 0;
+}
+.selectBox{
+  width: 250px;
+}
+option {
+  white-space: nowrap; /* Отменяем перенос текста */
+  overflow: hidden; /* Обрезаем содержимое */
+  padding: 5px; /* Поля */
+  text-overflow: ellipsis;
+} 
+
+.product {
+  padding: 10px;
+  margin: 2% 0%;
+  width: 22%;
+  height: 250px;
+  opacity: 0.9;
+  text-align: center;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  transition: 0.7s;
+  background-color: white;
+  transition-property: transform;
+}
+
+.ng5-slider-pointer-min,
+.ng5-slider-pointer-max {
+  background-color: #8b711d;
+}
+.price_slider{
+  margin-bottom: 6%;
+}
+.product:hover {
+  .button-group {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    margin-left: 20%;
-    padding: 0px 3%;
+
   }
-  
-  
-  
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
+  transform: scale(1.2);
+
+}
+
+
+.button-group {
+  display: none;
+}
+
+
+.card-body {
+  padding: 0;
+}
+
+.card-body p {
+  margin: 1% 0;
+  // font-size: 11px;
+  font-weight: bold;
+  vertical-align: middle
+}
+
+.title {
+  display: block;
+  height: 50px;
+  font-size: 11px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title:hover {
+  color:#b68e09;
+}
+
+.moreDetails,
+.buy {
+  height: 25px;
+  width: 47%;
+  line-height: 25px;
+  border: 1px solid #848282;
+  border-radius: 3px;
+  background-color: #f1e8e8;
+  color: black;
+  margin-top: 3px;
+  text-decoration: none;
+  font-size: 10px;
+  align-items: 20px;
+  text-align: center;
+}
+
+.buy {
+  background-color:#f2bd0b;
+  margin-left: 2%;
+}
+.moreDetails:hover{
+  box-shadow: -1px 0px 4px 0px #787272;
+}
+.buy:hover{
+  box-shadow: -1px 0px 4px 0px #787272;
+
+}
+
+
+.product img {
+  width: 115px;
+  height: 120px;
+  margin: 0 auto
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  padding: 0px 3%;
+}
+
+
+
+.catalog {
+  width: 1000px;
+  margin: 0 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  transition-duration: 0.7;
+  transition-property: transform;
+}
+
+.price{
+  font-size: 14px;
+}
+
+@media screen and (max-width:992px) {
   .catalog {
-    width: 1000px;
-    margin: 0 2%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    transition-duration: 0.7;
-    transition-property: transform;
+    width: 650px;
   }
-  
-  @media screen and (max-width:992px) {
-    .catalog {
-      width: 650px;
-    }
-  
-    .search {
-      margin-left: 0;
-    }
-  
-    .filters {
-      width: 300px;
-    }
-  
-    .product {
-      width: 29%;
-    }
-  
-    .product img {
-      width: 80px;
-      height: 80px;
-  
-    }
+
+  .search {
+    margin-left: 0;
   }
-  
-  @media screen and (max-width:768px) {
-    .catalog {
-      width: 500px;
-    }
-  
-    .filters {
-      width: 250px;
-    }
-  
-    .product {
-      width: 40%;
-    }
-  
+
+  .filters {
+    width: 300px;
   }
-  
-  
-  @media screen and (max-width:480px) {
-    .catalog {
-      width: 420px;
-    }
-  
-    .search {
-      width: 420px;
-    }
-  
-    .filters {
-      width: 420px;
-    }
-  
-    .product {
-      width: 80%;
-    }
-  
+
+  .product {
+    width: 29%;
   }
-  
-  @media screen and (max-width:320px) {
-    .catalog {
-      width: 270px;
-    }
-  
-    .filters {
-      width: 270px;
-    }
-  
-    .search {
+
+  .product img {
+    width: 80px;
+    height: 80px;
+
+  }
+}
+
+@media screen and (max-width:768px) {
+  .catalog {
+    width: 500px;
+  }
+
+  .filters {
+    width: 250px;
+  }
+
+  .product {
+    width: 40%;
+  }
+
+}
+
+
+@media screen and (max-width:480px) {
+  .catalog {
+    width: 420px;
+  }
+
+  .search {
+    width: 420px;
+  }
+
+  .filters {
+    width: 420px;
+  }
+
+  .product {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width:320px) {
+  .catalog {
     width: 270px;
-    }
-  
-    .main {
-      display: block;
-    }
-  
   }
-  
+
+  .filters {
+    width: 270px;
+  }
+
+  .search {
+  width: 270px;
+  }
+
+  .main {
+    display: block;
+  }
+
+}

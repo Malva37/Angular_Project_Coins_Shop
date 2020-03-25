@@ -1,51 +1,101 @@
-.main {
+.container-fluid{
+  padding: 2% 10%;
+}
+.basket{
+  background-color: white;
+  opacity: 0.9;
+  border: 2px solid #f2bd0b;
+  padding: 2% 5%;
+}
+
+.dataOrder{
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 2%;
+  justify-content: space-around;
+  margin: 2% 0;
+  // width: 100%;
 }
 
 .imageArtilce {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
 }
+.doOrder{
+  background-color: #f2bd0b;
+  border: 1.5px solid #6c6133;
+  font-size: 17px;
+  font-weight: 600;
 
+}
 .dataUser {
-  padding: 5%;
-  border: 1px solid #000;
-  //   margin: 2% 2% 0 0;
   width: 49%;
-  //   height:initial;
+  background-color: white;
+  opacity: 0.9;
+  border: 2px solid #f2bd0b;
+  padding: 3%;
+  height: max-content;
+
+}
+// .tableTr{
+//   border-bottom: 1px solid lightgray;
+// }
+
+
+table {
+  border-collapse: collapse;
+  border-style: hidden;
+  font-weight: 600;
 
 }
 
+table td, table th {
+  border: 1px solid black;
+}
+.title{
+  font-size: 17px;
+  color: black;
+  margin: 1% 2% 5%;
+  font-weight: bold;
+ 
+}
+.title:hover{
+  text-decoration: underline;
+}
 .deliveryPayment {
   width: 49%;
+}
+.dellivery .form-check{
+border-bottom: 1px solid black;
 }
 
 .delivery {
   height: auto;
-  border: 1px solid black;
-  padding: 5%;
+  background-color: white;
+  opacity: 0.9;
+  border: 2px solid #f2bd0b;
+  padding: 3%;
 }
 .payment{
     height: auto;
-    border: 1px solid black;
-    padding: 5%;
-    margin: 3% 0 0 ;
-
+    margin:  0 0 3% 0;
+    background-color: white;
+    opacity: 0.9;
+    border: 2px solid #f2bd0b;
+    padding: 3%;
 }
 
 .tableBasket {
   width: 100%;
-  border: 1px solid #000;
+  // border: 1px solid #000;
 }
 
 .tableBasket tr,
 td {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   text-align: center;
-  padding: 1% 2%;
+  padding: 1% ;
+}
+.tableBasket tr{
+  height: 20px;
 }
 
 .counter {

@@ -21,7 +21,6 @@ import { ShareService } from 'src/app/shared/services/share.service';
 export class AccessoriesComponent implements OnInit {
   list: Accessory[];
   buttonsShow: boolean;
-  searchName: string;
   minValue: number = 0;
   maxValue: number = 1000;
   options: Options = {
@@ -32,12 +31,16 @@ export class AccessoriesComponent implements OnInit {
   count: number = 1;
   clickCnt: number = 0;
   sumBasket: number = 0;
+  searchName: string;
+  searchField: boolean;
+
 
   constructor(private service: AccessoryService,
-    private share: ShareService) { 
-      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+    private share: ShareService) {
+    this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
     this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
-     }
+    this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
+  }
   ngOnInit() {
     this.service.getAccessories().subscribe(actionArray => {
       this.list = actionArray.map(item => {

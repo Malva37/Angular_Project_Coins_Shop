@@ -7,6 +7,7 @@ import { CoinService } from 'src/app/shared/services/coin.service';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 import { ShareService } from 'src/app/shared/services/share.service';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -17,7 +18,6 @@ import { ShareService } from 'src/app/shared/services/share.service';
 export class CoinsComponent implements OnInit {
   list: Coin[];
   buttonsShow: boolean;
-  searchName: string;
   minValue: number = 0;
   maxValue: number = 1000;
   options: Options = {
@@ -27,21 +27,23 @@ export class CoinsComponent implements OnInit {
   newArticle: IArticle;
   count: number = 1;
   denomination: number;
-  metal:string;
-  series:string;
-  year:number;
+  metal: string;
+  series: string;
+  year: number;
   clickCnt: number = 0;
   sumBasket: number = 0;
-
+  searchName: string;
+  searchField: boolean;
 
 
 
 
   constructor(private service: CoinService,
-    private share: ShareService) { 
-      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
-      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
-      }
+    private share: ShareService) {
+    this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+    this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+    this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
+  }
 
   ngOnInit() {
     this.service.getCoins().subscribe(actionArray => {
@@ -50,7 +52,7 @@ export class CoinsComponent implements OnInit {
           id: c.payload.doc.id,
           ...c.payload.doc.data()
         } as Coin;
-      }); 
+      });
       this.getMinPrice(this.list);
       this.getMaxPrice(this.list);
     });
@@ -60,12 +62,18 @@ export class CoinsComponent implements OnInit {
     debugger
     const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image, coin.price, this.count, coin.price);
     newItem.amount = this.count * coin.price;
-
-
-
-    // if()
-    
-    localStorage.setItem(coin.id, JSON.stringify(newItem));
+    let keys = Object.keys(localStorage)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i];
+      if (coin.id == element) {
+        let localItem = JSON.parse(localStorage.getItem(element));
+        localItem.count++;
+        localItem.amount = localItem.count * localItem.price;
+        localStorage.setItem(coin.id, JSON.stringify(localItem));
+        break
+      }
+      localStorage.setItem(coin.id, JSON.stringify(newItem));
+    }
     this.share.plusItem();
 
   }

@@ -1,12 +1,7 @@
 <div class="container-fluid">
-  <!-- <section class="search">
-    <input type="text" [(ngModel)]="searchName" name="searchName" class="form-control" placeholder="Search">
-  </section> -->
-
+  <input type="text" [hidden]="!searchField" value={{searchName}}>
   <div class="main">
-
     <section class="filters">
-
       <form>
         <div class="boxFilter">
           <div class="filter_name"> Ціна</div>
@@ -172,11 +167,9 @@
           <p class="title">{{ coin.name }} {{ coin.denomination }} грн. {{ coin.year }}р.</p>
           <p class="price">{{ coin.price }} грн</p>
           <div class="button-group">
-            <!-- <button href="#" class="moreDetails h6">Детальніше</a> -->
-            <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails h6"
+            <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails"
               value="Детальніше">
-            <input type="button" class="buy h6" (click)="buyProduct(coin)" value="Купити">
-            <!-- <a href="#" class="buy h6">Купити</a> -->
+            <input type="button" class="buy" (click)="buyProduct(coin)" value="Купити">
           </div>
         </div>
       </figure>

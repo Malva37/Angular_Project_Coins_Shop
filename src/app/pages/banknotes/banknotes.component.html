@@ -1,7 +1,5 @@
 <div class="container-fluid">
-  <section class="search">
-    <input type="text" [(ngModel)]="searchName" name="searchName" class="form-control" placeholder="Search">
-  </section>
+  <input type="text" [hidden]="!searchField" value= {{searchName}}>
 
   <div class="main">
 

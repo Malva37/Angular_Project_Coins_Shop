@@ -7,9 +7,16 @@ import { EventEmitter } from '@angular/core';
 export class ShareService {
 
   clickCnt: number;
-  sumBasket: number
+  sumBasket: number;
   onClickNumber: EventEmitter<number> = new EventEmitter();
   onClickSum: EventEmitter<number> = new EventEmitter();
+  onChangeSearchName: EventEmitter<string> = new EventEmitter();
+
+searchName:string;
+
+changeSearchName(search){
+  this.onChangeSearchName.emit(search)
+}
 
   numberItemsInBasket() {
     let keys = Object.keys(localStorage);
@@ -19,7 +26,6 @@ export class ShareService {
   public plusItem() {
     this.numberItemsInBasket();
     this.sumInBasket();
-    console.log(this.sumBasket);
     this.onClickNumber.emit(this.clickCnt);
     this.onClickSum.emit(this.sumBasket);
   }
