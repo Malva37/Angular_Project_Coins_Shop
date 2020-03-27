@@ -14,11 +14,7 @@ import { AdminMedalsComponent } from './admin/admin-medals/admin-medals.componen
 import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-accessories.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
-// import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { UserComponent } from './user/user.component';
-import { AdminGuard } from './admin.guard';
-
 
 
 const routes: Routes = [
@@ -30,9 +26,9 @@ const routes: Routes = [
   {path: 'basket', component: BasketComponent},
   {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
   {path: 'sign-in', component: SignInComponent},
-  {path: 'user', component: UserComponent},
+
  
-  {path: 'admin', component: AdminComponent,  canActivate: [AdminGuard], children:[
+  {path: 'admin', component: AdminComponent, children:[
   {path: '', redirectTo: 'coins', pathMatch:'full'},
   {path: 'coins', component: AdminCoinsComponent},
   {path: 'banknotes', component: AdminBanknotesComponent},

@@ -54,8 +54,20 @@ export class BanknotesComponent implements OnInit {
   buyProduct(banknote: Banknote): void {
     const newItem: IProductOrder = new ProductOrder(banknote.id, banknote.categoryId, banknote.name, banknote.image, banknote.price, this.count, banknote.price);
     newItem.amount = this.count * banknote.price;
+    let keys = Object.keys(localStorage)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i];
+      if (banknote.id == element) {
+        let localItem = JSON.parse(localStorage.getItem(element));
+        localItem.count++;
+        localItem.amount = localItem.count * localItem.price;
+        localStorage.setItem(banknote.id, JSON.stringify(localItem));
+        break
+      }
+    }
     localStorage.setItem(banknote.id, JSON.stringify(newItem));
     this.share.plusItem();
+
   }
 
   getMaxPrice(list) {

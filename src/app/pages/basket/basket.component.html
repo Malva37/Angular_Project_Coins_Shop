@@ -6,12 +6,12 @@
     <table class="tableBasket">
       <thead>
         <tr>
-          <th scope="col">Фото</th>
-          <th scope="col">Найменування</th>
-          <th scope="col">Ціна</th>
-          <th scope="col">Кількість</th>
-          <th scope="col">Сумма</th>
-          <th scope="col"></th>
+          <th class="thImage" scope="col">Фото</th>
+          <th class="thTitle" scope="col">Найменування</th>
+          <th class="thPrice" scope="col">Ціна</th>
+          <th class="thCount" scope="col">Кількість</th>
+          <th class="thSuma" scope="col">Сумма</th>
+          <th class="thBtnDelete" scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -19,18 +19,18 @@
           <td>
             <img [attr.src]="item.image" class="imageArtilce">
           </td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.price }} грн </td>
+          <td class="tdFont">{{ item.name }} {{ item.denomination }} {{ item.year }}</td>
+          <td class="tdFont">{{ item.price }} грн </td>
           <td>
-            <div class="d-inline-flex">
-              <button type="button" (click)="statusCount(false,item)">-</button>
+            <div class="counter">
+              <button type="button" class="minus" (click)="statusCount(false,item)">-</button>
               <input class="count" name='count' type="number" [(ngModel)]="item.count">
-              <button type="button" (click)="statusCount(true,item)">+</button>
+              <button type="button" class="plus" (click)="statusCount(true,item)">+</button>
             </div>
           </td>
-          <td> {{ item.price * item.count }} грн</td>
+          <td class="tdFont"> {{ item.price * item.count }} грн</td>
           <td>
-            <input type="button" value="delete" (click)="deleteItem(item)" class="btn btn-dark btn-outline-red">
+            <input type="button" value="x" (click)="deleteItem(item)" class="btnDelete"> 
           </td>
         </tr>
 
@@ -81,10 +81,10 @@
         </div>
       </form>
       <button type="button" (click)="addOrder(firstName, lastName, email, phone, address, comment, payment, delivery)"
-      class="doOrder btn">Оформити замовлення</button>
+        class="doOrder btn">Оформити замовлення</button>
 
     </div>
-    
+
 
 
     <div class="deliveryPayment">
@@ -92,66 +92,72 @@
         <form>
           <p class="title">Спосіб оплати</p>
           <div class="form-group">
-            <input type="radio" [checked]="true" value="Приват Банк" name="payment" [ngModel]="payment"
-              (click)="paymentWay($event)">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105"
-              alt="">
-            <h6> На Карту Приватбанку</h6>
-            <p>Оплата на карту Приватбанку 5169 3600 0287 5825 (отримувач Кучма Володимир Олегович).
+            <div class="titleGroup">
+              <input type="radio" [checked]="true" value="Приват Банк" name="payment" [ngModel]="payment"
+                (click)="paymentWay($event)">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Flogo-privatbank.50x50.jpg?alt=media&token=96224139-12ef-463a-bd2c-5eff35d27105"
+                alt="">
+              <b> На Карту Приватбанку</b>
+            </div>
+            <p>  Оплата на карту Приватбанку <b>5555 5555 5555 5555</b>  (отримувач Іваненко Іван Іванович).
               Комісія з переказу в системі Privat24 - 0%</p>
           </div>
           <hr>
           <div class="form-group">
+            <div class="titleGroup">
+              <input type="radio" [checked]="false" value="Оплата при отриманні" name="payment" [ngModel]="payment"
+                (click)="paymentWay($event)">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fcash.50x50.jpg?alt=media&token=3de901e1-46f1-4b13-9098-6cfdf6724356"
+                alt="">
+              <p><b> Оплата при отриманні</b> (Післяплата, Наложений платіж)</p>
+            </div>
 
-            <input type="radio" [checked]="false" value="Оплата при отриманні" name="payment" [ngModel]="payment"
-              (click)="paymentWay($event)">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fcash.50x50.jpg?alt=media&token=3de901e1-46f1-4b13-9098-6cfdf6724356"
-              alt="">
-            <h6> Оплата при отриманні (Післяплата, Наложений платіж)</h6>
           </div>
 
         </form>
       </div>
-      <!-- </div> -->
+
 
       <div class="delivery">
         <form>
           <p class="title">Спосіб доставки</p>
-
           <div class="form-check">
-            <input type="radio" value="Нова пошта" name="delivery" [ngModel]="delivery" (click)="deliveryWay($event)">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
-              alt="">
-            <h6> Нова Пошта (Сплачується окремо при отриманні посилки)</h6>
-            <p>Доставка товару на склад «Нова Пошта» в Вашому населеному пункті</p>
+            <div class="titleGroup">
+              <input type="radio" value="Нова пошта" name="delivery" [ngModel]="delivery" (click)="deliveryWay($event)">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
+                alt="">
+              <p> <b> Нова Пошта </b>(Сплачується окремо при отриманні посилки)</p>
+            </div>
           </div>
+          <hr>
 
-          
+
+
 
           <div class="form-check">
-            <input type="radio" value="Укрпошта" name="delivery" [ngModel]="delivery" (click)="deliveryWay($event)">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fukrposhta.50x50.png?alt=media&token=3b242f9a-dee9-43ff-af17-0c3538fd57a4"
-              alt="">
-            <h6> Укрпошта (Сплачується окремо при отриманні посилки)</h6>
-            <p>В средньому, доставка займає 2-7 днів. Тимчасово немає доставки в зону проведення АТО і Крим <br>
-              <b>Замовлення понад 1000 грн. доставляється безкоштовно.</b> </p>
+            <div class="titleGroup">
+              <input type="radio" value="Укрпошта" name="delivery" [ngModel]="delivery" (click)="deliveryWay($event)">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fukrposhta.50x50.png?alt=media&token=3b242f9a-dee9-43ff-af17-0c3538fd57a4"
+                alt="">
+              <p> <b> Укрпошта </b>(Сплачується окремо при отриманні посилки)</p>
+            </div>
           </div>
 
           <hr>
 
           <div class="form-check">
-            <input type="radio" value="Особиста зустріч" name="delivery" [ngModel]="delivery"
-              (click)="deliveryWay($event)">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsamovyvoz.50x50.png?alt=media&token=c3082cee-26a9-4f77-b120-238613d0b78c"
-              alt="">
-            <h6> Особиста зустріч(в Києві)</h6>
-            <p>Зручний, безкоштовний і швидкий спосіб отримання замовлення.<br>
-              <b>Адреса: м.Суми, вул.Івана Сірка, 6а</b> </p>
+            <div class="titleGroup">
+              <input type="radio" value="Особиста зустріч" name="delivery" [ngModel]="delivery"
+                (click)="deliveryWay($event)">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fsamovyvoz.50x50.png?alt=media&token=c3082cee-26a9-4f77-b120-238613d0b78c"
+                alt="">
+              <p> <b> Особиста зустріч </b>в Києві(місце та час зустрічі узгоджуються по телефону)</p>
+            </div>
           </div>
 
         </form>
@@ -162,8 +168,8 @@
   </div>
 
   <!-- <div class="form-group row"> -->
-    <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button> -->
-    <!-- <button type="button" (click)="addOrder(firstName, lastName, email, phone, address, comment, payment, delivery)"
+  <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-info">Оформити замовлення</button> -->
+  <!-- <button type="button" (click)="addOrder(firstName, lastName, email, phone, address, comment, payment, delivery)"
       class="btn btn-info">Оформити замовлення</button>
   </div> -->
 

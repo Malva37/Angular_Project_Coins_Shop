@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-// import { HomeComponent } from './pages/home/home.component';
 import { CoinsComponent } from './pages/coins/coins.component';
 import { BanknotesComponent } from './pages/banknotes/banknotes.component';
 import { MedalsComponent } from './pages/medals/medals.component';
@@ -58,10 +57,7 @@ import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/ban
 import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
 import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';
 import { AccessoryListComponent } from './admin/admin-accessories/accessory-list/accessory-list.component';
-// import { AdminPageComponent } from './admin/admin-page/admin-page.component';
-import { AdminGuard } from './admin.guard';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { UserComponent } from './user/user.component';
 import { AuthService } from './shared/services/auth.service';
 import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -101,9 +97,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
     BanknoteListComponent,
     AccessoryComponent,
     AccessoryListComponent,
-    // AdminPageComponent,
     SignInComponent,
-    UserComponent
   
 
   ],
@@ -124,7 +118,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
     ToastrModule.forRoot(), TabsModule.forRoot()
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
-     AdminGuard, AuthService,AngularFireAuth,ShareService
+      AuthService,AngularFireAuth,ShareService
     ],
   bootstrap: [AppComponent]
 })

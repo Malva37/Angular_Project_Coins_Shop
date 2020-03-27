@@ -59,8 +59,20 @@ export class MedalsComponent implements OnInit {
   buyProduct(medal: Medal): void {
     const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
     newItem.amount = this.count * medal.price;
+    let keys = Object.keys(localStorage)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i];
+      if (medal.id == element) {
+        let localItem = JSON.parse(localStorage.getItem(element));
+        localItem.count++;
+        localItem.amount = localItem.count * localItem.price;
+        localStorage.setItem(medal.id, JSON.stringify(localItem));
+        break
+      }
+    }
     localStorage.setItem(medal.id, JSON.stringify(newItem));
     this.share.plusItem();
+
   }
 
   getMaxPrice(list) {

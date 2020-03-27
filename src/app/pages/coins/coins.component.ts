@@ -72,8 +72,8 @@ export class CoinsComponent implements OnInit {
         localStorage.setItem(coin.id, JSON.stringify(localItem));
         break
       }
-      localStorage.setItem(coin.id, JSON.stringify(newItem));
     }
+    localStorage.setItem(coin.id, JSON.stringify(newItem));
     this.share.plusItem();
 
   }

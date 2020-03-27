@@ -57,8 +57,20 @@ export class AccessoriesComponent implements OnInit {
   buyProduct(accessory: Accessory): void {
     const newItem: IProductOrder = new ProductOrder(accessory.id, accessory.categoryId, accessory.name, accessory.image, accessory.price, this.count, accessory.price);
     newItem.amount = this.count * accessory.price;
+    let keys = Object.keys(localStorage)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i];
+      if (accessory.id == element) {
+        let localItem = JSON.parse(localStorage.getItem(element));
+        localItem.count++;
+        localItem.amount = localItem.count * localItem.price;
+        localStorage.setItem(accessory.id, JSON.stringify(localItem));
+        break
+      }
+    }
     localStorage.setItem(accessory.id, JSON.stringify(newItem));
     this.share.plusItem();
+
   }
 
   getMaxPrice(list) {

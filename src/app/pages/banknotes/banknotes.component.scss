@@ -3,8 +3,8 @@
   }
   
   .filters {
-    border: 1px solid lightgrey;
-    border-radius: 5px;
+    border: 1px solid #f2bd0b;
+    border-radius: 3px;
     width: 300px;
     padding: 1.5%;
     background-color: white;
@@ -91,19 +91,19 @@
     text-overflow: ellipsis;
   } 
   
-  .product {
-    padding: 10px;
-    margin: 2% 0%;
-    width: 22%;
-    height: 250px;
-    opacity: 0.9;
-    text-align: center;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    transition: 0.7s;
-    background-color: white;
-    transition-property: transform;
-  }
+  // .product {
+  //   padding: 10px;
+  //   margin: 2% 0%;
+  //   width: 22%;
+  //   height: 250px;
+  //   opacity: 0.9;
+  //   text-align: center;
+  //   border: 1px solid lightgrey;
+  //   border-radius: 5px;
+  //   transition: 0.7s;
+  //   background-color: white;
+  //   transition-property: transform;
+  // }
   
   .ng5-slider-pointer-min,
   .ng5-slider-pointer-max {
