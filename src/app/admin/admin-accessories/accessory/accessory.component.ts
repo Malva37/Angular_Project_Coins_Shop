@@ -19,6 +19,8 @@ export class AccessoryComponent implements OnInit {
   categoryName: string;
   name: string;
   counter: number;
+  reserved:number;
+  isAvailable:boolean;
   description: string;
   price: number;
   image: string;
@@ -51,6 +53,8 @@ export class AccessoryComponent implements OnInit {
       categoryName: 'accessories',
       name: '',
       counter: null,
+      reserved:null,
+      isAvailable:true,
       description: '',
       price: null,
       image: ''

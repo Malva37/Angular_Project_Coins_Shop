@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'accessories', component: AccessoriesComponent},
   {path: 'basket', component: BasketComponent},
   {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
-  {path: 'sign-in', component: SignInComponent},
+  {path: 'login', component: SignInComponent},
 
  
   {path: 'admin', component: AdminComponent, children:[

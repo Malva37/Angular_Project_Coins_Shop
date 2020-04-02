@@ -7,6 +7,8 @@ export class Coin implements ICoin{
             public categoryName:string,
             public name:string,
             public counter:number,
+            public reserved:number,
+            public isAvailable:boolean,
             public series:string,
             public year:number,
             public metal:string,

@@ -21,6 +21,8 @@ export class BanknoteListComponent implements OnInit {
   categoryName: string;
   name: string;
   counter: number;
+  reserved:number;
+  isAvailable:boolean;
   year:number;
   denomination:number;
   signature:string;
@@ -35,7 +37,7 @@ export class BanknoteListComponent implements OnInit {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
   modalRef: BsModalRef;
-  editImageStatus: boolean
+  editImageStatus: boolean;
 
   constructor(private service: BanknoteService,
     private modalService: BsModalService,
@@ -67,6 +69,8 @@ export class BanknoteListComponent implements OnInit {
       categoryName: 'banknotes',
       name: '',
       counter: null,
+      reserved:null,
+      isAvailable:true,
       year: null,
       denomination: null,
       signature: '',

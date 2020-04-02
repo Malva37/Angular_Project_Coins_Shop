@@ -1,60 +1,32 @@
-<!-- <div class="main">
-  
+
+
+<div *ngIf="!signStatus">
 
   <form>
-
     <label for="emailUser" class="labelForm">Email
       <input type="email" [(ngModel)]="emailUser" name="emailUser" class="dataGuest" id="inputEmail3"
         placeholder="Email(наприклад)*">
     </label>
-
     <br>
-
     <label for="passwordUser" class="labelForm">Password
       <input type="password" [(ngModel)]="passwordUser" name="passwordUser" class="dataGuest" id="inputPassword3"
         placeholder="Пароль*"></label>
 
     <div class="buttonGuest">
-      <input type="button" (click)="signInWithEmail()">
+      <!-- <input type="button" (click)="btnStatus()"> -->
+      <button (click)=" login(emailUser, passwordUser)">Увійти</button>
 
-
+      <!-- <input type="button" value="Зареєструватись" (click)="login(emailUser, passwordUser )"> -->
+      <button (click)="btnStatus()">Зареєструватись</button>
     </div>
+  </form>
 
-    <div class="test">
-
-      <button type="button" [routerLink]="[ '/user' ]" routerLinkActive="active" class="btn btn-warning">User</button>
-      <button type="button"  [routerLink]="[ '/admin' ]" routerLinkActive="active" class="btn btn-danger">Admin</button>
-
-    </div>
-
-    <router-outlet></router-outlet>
-  </form> -->
-
-
-<form name="userform" method="post" #formCtrl="ngForm">
-
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control col-sm-2"  name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Email" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control col-sm-2"  name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
-  </div>
-
-  <div class="form-group">
-    <button type="buton" class="btn btn-primary btn-block" style="margin-bottom: 20px" (click)="signInWithEmail()"
-      [disabled]="formCtrl.form.invalid">
-      Login with Email
-
-    </button>
-  </div>
-</form>
+</div>
 
 
 
 
-<div class='userPage'>
+<div *ngIf="signStatus" class='userPage'>
   <div class="col">
     <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
@@ -111,8 +83,7 @@
 
       <div class="form-group row">
         <div class="col-sm-3">
-          <button type="submit" [disabled]="form.invalid"
-            class="btn btn-lg btn-block btn-info">Зареєструватися</button>
+          <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">Зареєструватися</button>
         </div>
 
       </div>

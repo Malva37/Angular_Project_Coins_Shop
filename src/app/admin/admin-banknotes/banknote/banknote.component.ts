@@ -20,6 +20,8 @@ export class BanknoteComponent implements OnInit {
   denomination: number;
   description: string;
   price: number;
+  reserved:number;
+  isAvailable:boolean;
   categoryId: number;
   // productId: number;
   image: string;
@@ -50,6 +52,8 @@ export class BanknoteComponent implements OnInit {
       categoryName: 'banknotes',
       name: '',
       counter: null,
+      reserved:null,
+      isAvailable:true,
       year: null,
       denomination: null,
       signature: '',

@@ -4,6 +4,8 @@ export interface IProduct{
     categoryName:string;
     name:string;
     counter:number;
+    reserved:number;
+    isAvailable:boolean;
     description:string;
     price:number;
     image:any;

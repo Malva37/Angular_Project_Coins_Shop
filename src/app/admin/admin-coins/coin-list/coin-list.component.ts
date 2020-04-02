@@ -20,10 +20,12 @@ export class CoinListComponent implements OnInit {
   categoryName: string;
   name: string;
   counter: number;
-   series:string;
-   year:number;
-   metal:string;
-   denomination:number;
+  reserved: number;
+  isAvailable: boolean;
+  series: string;
+  year: number;
+  metal: string;
+  denomination: number;
   description: string;
   price: number;
   image: string;
@@ -56,7 +58,7 @@ export class CoinListComponent implements OnInit {
   }
 
 
-  
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -72,6 +74,8 @@ export class CoinListComponent implements OnInit {
       categoryName: 'coins',
       name: '',
       counter: null,
+      reserved: null,
+      isAvailable: true,
       series: '',
       year: null,
       metal: '',
@@ -82,7 +86,7 @@ export class CoinListComponent implements OnInit {
     };
   }
 
-  
+
   onEdit(coin: Coin, template) {
     debugger
     this.openModal(template);

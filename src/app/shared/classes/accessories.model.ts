@@ -8,6 +8,8 @@ export class Accessory implements IAccessory {
         public categoryName: string,
         public name: string,
         public counter:number,
+        public reserved:number,
+        public isAvailable:boolean,
         public description: string,
         public price: number,
         public image: any

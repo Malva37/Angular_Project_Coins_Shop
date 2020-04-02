@@ -21,6 +21,8 @@ export class CoinComponent implements OnInit {
   metal: string;
   denomination: number;
   description: string;
+  reserved:number;
+  isAvailable:boolean;
   price: number;
   categoryId: number = 1;
   // productId: number;
@@ -52,6 +54,8 @@ export class CoinComponent implements OnInit {
       categoryName: 'coins',
       name: '',
       counter: null,
+      reserved:null,
+      isAvailable: true,
       series: '',
       year: null,
       metal: '',
