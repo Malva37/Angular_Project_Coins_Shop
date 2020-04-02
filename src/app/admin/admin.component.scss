@@ -1,18 +1,11 @@
 
 .main{
-  width: 70%;
-  margin: 70px 310px;
+  width: 90%;
+  margin: 5% auto;
   min-height: 400px;
+  background-color: white;
+  opacity: 0.9;
 }
-// .labelForm{
-
-// }
-// .guestpage{
-// //  width: 60%;
-// }
-// .buttonGuest{
-  
-// }
 .adminProduct{
   width: 80%;
 }
@@ -22,11 +15,12 @@ a {
 
 
 
-
 .nav-link {
   text-transform: uppercase;
   color: black;
+  
 }
+
 
 a.nav-link::after {
   content: '';

@@ -61,6 +61,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { AuthService } from './shared/services/auth.service';
 import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
 
 
 
@@ -98,6 +99,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
     AccessoryComponent,
     AccessoryListComponent,
     SignInComponent,
+    FilterSignPipe,
   
 
   ],

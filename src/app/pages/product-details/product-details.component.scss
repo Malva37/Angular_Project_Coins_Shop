@@ -10,3 +10,72 @@ img{
 .description{
     padding: 3%;
 }
+.main{
+    padding: 5%;
+    margin: 5% auto;
+    background-color: white;
+    opacity: 0.9;
+    border: 2px solid #f2bd0b;
+    border-radius: 5px;
+
+}
+.titleProduct{
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+.imageData{
+    display: flex;
+    justify-content: space-between;
+}
+.countBox{
+    display: flex;
+    justify-content: right;
+}
+.dataMain,
+image{
+    padding: 5%;
+}
+.dataMain{
+    text-align: right;
+}
+
+.counter {
+    display: flex;
+    margin: 0 15%;
+  }
+  .count{
+    width: 50px;
+    font-weight: 600;
+      text-align: center;
+      font-size: 15px;
+      border: 1px solid black;
+      border-right: none;
+      border-left: none;
+  }
+  .minus{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid black;
+  }
+  .plus{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid black;
+  }
+
+  .buy {
+    height: 25px;
+    width: 47%;
+    line-height: 25px;
+    border: 1px solid #848282;
+    border-radius: 3px;
+    background-color: #f2bd0b;;
+    color: black;
+    margin-top: 3px;
+    // text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600px;
+}

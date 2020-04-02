@@ -103,6 +103,28 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  
+  // statusCount(bool: boolean) {
+  //   debugger
+  //   if (bool) {
+  //     this.count++;
+  //     item.amount = item.count * item.price;
+  //     let editItem = JSON.stringify(item);
+  //     localStorage.setItem(item.id, editItem);
+  //     console.log(editItem);
+  //     this.getArticles();
+
+  //   }
+  //   else {
+  //     item.count--;
+  //     item.amount = item.count * item.price;
+  //     let editItem = JSON.stringify(item);
+  //     localStorage.setItem(item.id, editItem);
+  //     console.log(editItem);
+  //     this.getArticles();
+  //   }
+  //   this.share.plusItem();
+  // }
 
   buyProduct(product: any): void {
     const newItem: IProductOrder = new ProductOrder(product.id, product.categoryId, product.name, product.image, product.price, this.count, product.price);
