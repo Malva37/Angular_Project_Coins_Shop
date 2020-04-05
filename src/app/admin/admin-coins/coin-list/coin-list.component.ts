@@ -29,6 +29,7 @@ export class CoinListComponent implements OnInit {
   description: string;
   price: number;
   image: string;
+  imageReverse: string;
   downloadSrc: string;
 
   ref: AngularFireStorageReference;
@@ -38,6 +39,14 @@ export class CoinListComponent implements OnInit {
   downloadURL: Observable<string>;
   modalRef: BsModalRef;
   editImageStatus: boolean;
+  editImageReverseStatus: boolean;
+  
+  refReverse: AngularFireStorageReference;
+  taskReverse: AngularFireUploadTask;
+  uploadStateReverse: Observable<string>;
+  uploadProgressReverse: Observable<number>;
+  downloadURLReverse: Observable<string>;
+
 
 
   constructor(private service: CoinService,
@@ -82,7 +91,8 @@ export class CoinListComponent implements OnInit {
       denomination: null,
       description: '',
       price: null,
-      image: ''
+      image: '',
+      imageReverse: ''
     };
   }
 
@@ -92,10 +102,13 @@ export class CoinListComponent implements OnInit {
     this.openModal(template);
     this.service.formData = Object.assign({}, coin);
     this.editImageStatus = true;
+    this.editImageReverseStatus = true;
   }
 
 
   onSubmit(form: NgForm) {
+    form.value.image = this.image;
+    form.value.imageReverse = this.imageReverse;
     const data: Coin = Object.assign({}, form.value);
     this.firestore.doc('coins/' + form.value.id).update(data);
     this.resetForm(form);
@@ -105,6 +118,7 @@ export class CoinListComponent implements OnInit {
     if (confirm('Are you sure to delete this medal?')) {
       this.firestore.doc('coins/' + coin.id).delete();
       this.afStorage.storage.refFromURL(coin.image).delete();
+      this.afStorage.storage.refFromURL(coin.imageReverse).delete();
     }
   }
 
@@ -128,6 +142,28 @@ export class CoinListComponent implements OnInit {
     });
   }
 
+  
+  public uploadReverse(event: any): void {
+    const file = event.target.files[0];
+    const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
+    this.taskReverse = this.afStorage.upload(filePath, file);
+    this.uploadStateReverse = this.taskReverse.snapshotChanges().pipe(map(s => s.state));
+    this.uploadProgressReverse = this.taskReverse.percentageChanges();
+    this.taskReverse.snapshotChanges()
+      .pipe(finalize(() => this.downloadURLReverse = this.afStorage.ref(filePath).getDownloadURL()))
+      .subscribe();
+    this.taskReverse.then((e) => {
+      this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
+        data => {
+          this.imageReverse = data;
+          console.log(data.downloadSrcReverse);
+        }
+      );
+    }
+    );
+  }
+
+
   private createUUID(): string {
     let dt = new Date().getTime();
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -142,6 +178,11 @@ export class CoinListComponent implements OnInit {
     this.editImageStatus = false;
     this.afStorage.storage.refFromURL(coin.image).delete();
     this.service.formData.image = ''
+  }
+  public deleteImageReverse(coin: Coin) {
+    this.editImageReverseStatus = false;
+    this.afStorage.storage.refFromURL(coin.imageReverse).delete();
+    this.service.formData.imageReverse = ''
   }
 
 

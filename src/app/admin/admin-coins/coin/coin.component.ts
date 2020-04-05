@@ -27,6 +27,7 @@ export class CoinComponent implements OnInit {
   categoryId: number = 1;
   // productId: number;
   image: string;
+  imageReverse:string;
 
 
   ref: AngularFireStorageReference;
@@ -34,6 +35,13 @@ export class CoinComponent implements OnInit {
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
+
+  refReverse: AngularFireStorageReference;
+  taskReverse: AngularFireUploadTask;
+  uploadStateReverse: Observable<string>;
+  uploadProgressReverse: Observable<number>;
+  downloadURLReverse: Observable<string>;
+
 
   constructor(private service: CoinService,
     private firestore: AngularFirestore,
@@ -62,7 +70,8 @@ export class CoinComponent implements OnInit {
       denomination: null,
       description: '',
       price: null,
-      image: ''
+      image: '',
+      imageReverse:''
     };
   }
 
@@ -70,7 +79,7 @@ export class CoinComponent implements OnInit {
   onSubmit(form: NgForm) {
     debugger
     form.value.image = this.image;
-    // delete form.value.downloadSrc;
+    form.value.imageReverse = this.imageReverse;
     const data: Coin = Object.assign({}, form.value);
     debugger
     delete data.id;
@@ -110,6 +119,34 @@ export class CoinComponent implements OnInit {
     }
     );
   }
+
+  public uploadReverse(event: any): void {
+    const file = event.target.files[0];
+    const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
+    this.taskReverse = this.afStorage.upload(filePath, file);
+    this.uploadStateReverse = this.taskReverse.snapshotChanges().pipe(map(s => s.state));
+    this.uploadProgressReverse = this.taskReverse.percentageChanges();
+    this.taskReverse.snapshotChanges()
+      .pipe(finalize(() => this.downloadURLReverse = this.afStorage.ref(filePath).getDownloadURL()))
+      .subscribe();
+    this.taskReverse.then((e) => {
+      this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
+        data => {
+          this.imageReverse = data;
+          console.log(data.downloadSrcReverse);
+        }
+      );
+    }
+    );
+  }
+
+  // refReverse: AngularFireStorageReference;
+  // taskReverse: AngularFireUploadTask;
+  // uploadStateReverse: Observable<string>;
+  // uploadProgressReverse: Observable<number>;
+  // downloadURLReverse: Observable<string>;
+
+
 
   private createUUID(): string {
     let dt = new Date().getTime();

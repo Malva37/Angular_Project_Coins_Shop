@@ -4,21 +4,22 @@
   <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
   <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
 
-  <div class="form-group">
+  <div class="field">
+    <div class="titleField">Назва товару:</div>
     <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
-      placeholder="Product Name" required>
+     required>
     <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
   </div>
 
-  <div class="form-group">
+  <div class="field">
+    <div class="titleField">Кількість:</div>
     <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter" class="form-control"
-      placeholder="Counter" pattern="[1-9]{1,}" required>
+      pattern="[1-9]{1,}" required>
     <!-- <div *ngIf="counter.invalid " class="validation-error">Введіть кількість відмінну від 0</div> -->
   </div>
 
-
-
-  <div class="form-group bootstrap-select show-tick open">
+  <div class="field bootstrap-select show-tick open">
+    <div class="titleField">Серія:</div>
     <select class="custom-select" #series="ngModel" [(ngModel)]="service.formData.series"
       name="series" required>
       <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
@@ -61,7 +62,8 @@
     </select>
   </div>
 
-  <div class="form-group bootstrap-select show-tick open">
+  <div class="field bootstrap-select show-tick open">
+    <div class="titleField">Рік випуску:</div>
     <select class="custom-select" [(ngModel)]="service.formData.year" #year="ngModel" name="year" required>
         <option selected="" value="-1"> — будь-який рік — </option>
         <option>1991</option>
@@ -102,7 +104,8 @@
       </select>
   </div>
 
-  <div class="form-group bootstrap-select show-tick open">
+  <div class="field bootstrap-select show-tick open">
+    <div class="titleField">Метал:</div>
     <select class="custom-select" [(ngModel)]="service.formData.metal" name="metal"  #metal="ngModel" required>
       <option selected="" value="-1"> — будь-який метал — </option>
       <option>біметалеві із дорогоцінних металів</option>
@@ -116,7 +119,8 @@
     </select>
   </div>
 
-  <div class="form-group bootstrap-select show-tick open">
+  <div class="field bootstrap-select show-tick open">
+    <div class="titleField">Номінал</div>
     <select class="custom-select" [(ngModel)]="service.formData.denomination" name="denomination"  #denomination="ngModel"
       required>
       <option selected="" value="-1"> — будь-який номінал — </option>
@@ -140,39 +144,47 @@
     </select>
   </div>
 
-  <div class="form-group">
+  <div class="field">
+    <div class="titleField">Ціна:</div>
+    <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+     required>
+  </div>
+
+  <div class="field">
+    <div class="titleField">Опис:</div>
     <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
-      class="form-control" [attr.placeholder]="Description">
+      class="form-control">
       </textarea>
   </div>
 
-  <div class="form-group">
-    <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
-      placeholder="Product Price" required>
-  </div>
+  
 
-  <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
-  <div class="form-group row">
-    <div class="card-body">
-      <h5 class="card-title">Select a file for upload:</h5>
-      <input class="form-control" placeholder="Product image" required type="file" [value]="service.formData.image"
+ 
+  <div class="field">
+    <div class="titleField">Завантаж фото(аверс):</div>
+      <input class="form-control" required type="file" [value]="service.formData.image"
         (change)="upload($event)" accept=".png,.jpg">
-      <br><br>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-          [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
-          aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <br>
       <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
         File uploaded:
         <input *ngIf="downloadURL | async; let downloadSrc" type="hidden">
         <a [href]="downloadSrc">{{downloadSrc}}</a>
       </div>
-    </div>
   </div>
 
-  <div class="form-group">
+
+  <div class="field">
+      <div class="titleField">Завантаж фото(реверс):</div>
+      <input class="form-control" required type="file" [value]="service.formData.imageReverse"
+        (change)="uploadReverse($event)" accept=".png,.jpg">
+
+      <div *ngIf="downloadURLReverse | async; let downloadSrcReverse" class="alert alert-info" role="alert">
+        File uploaded:
+        <input *ngIf="downloadURLReverse | async; let downloadSrcReverse" type="hidden">
+        <a [href]="downloadSrcReverse">{{downloadSrcReverse}}</a>
+      </div>
+  </div>
+
+  <div class="field">
     <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
   </div>
  

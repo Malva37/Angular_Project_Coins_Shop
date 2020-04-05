@@ -21,10 +21,13 @@ export class ProductDetailsComponent implements OnInit {
   product: any;
   count: number = 1;
   articles: Array<ProductOrder> = [];
-  coinsActive:boolean;
-  banknotesActive:boolean;
+  coinsActive: boolean;
+  banknotesActive: boolean;
+  imageReverseStatus: boolean = true;
   clickCnt: number = 0;
   sumBasket: number = 0;
+  pressImageStatus:boolean=true;
+  pressImageReverseStatus:boolean;
 
 
   constructor(private medalService: MedalService,
@@ -33,22 +36,31 @@ export class ProductDetailsComponent implements OnInit {
     private banknotesService: BanknoteService,
     private route: ActivatedRoute,
     private location: Location,
-    private share: ShareService) { 
-      this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
-      this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
-       }
+    private share: ShareService) {
+    this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
+    this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
+  }
 
   ngOnInit() {
     this.getData();
   }
 
+  pressImageReverse(){
+    this.pressImageStatus =false;
+    this.pressImageReverseStatus=true;
+  }
+
+  pressImage(){
+    this.pressImageStatus =true;
+    this.pressImageReverseStatus=false;
+  }
   getData(): void {
     const category = this.route.snapshot.paramMap.get('categoryName');
     const id = this.route.snapshot.paramMap.get('id');
     if (category == 'medals') {
       this.medalService.userRef.doc(id).valueChanges().subscribe(
         data => {
-          this.product = data 
+          this.product = data
         })
     }
 
@@ -56,10 +68,10 @@ export class ProductDetailsComponent implements OnInit {
       this.coinService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
-         this.coinsActive = true;
-         console.log(this.product);
-         
-        }) 
+          this.coinsActive = true;
+          console.log(this.product);
+
+        })
     }
 
 
@@ -67,20 +79,21 @@ export class ProductDetailsComponent implements OnInit {
       this.banknotesService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
-         this.banknotesActive = true;
+          this.banknotesActive = true;
 
         })
 
-        
+
     }
 
     if (category == 'accessories') {
       this.accessoriesService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
+          this.imageReverseStatus = false;
         })
 
-        
+
     }
 
 
@@ -103,7 +116,7 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  
+
   // statusCount(bool: boolean) {
   //   debugger
   //   if (bool) {

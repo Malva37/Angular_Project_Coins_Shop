@@ -15,6 +15,7 @@ export class Coin implements ICoin{
             public denomination:number,
             public description:string,
             public price:number,
-            public image:any
+            public image:any,
+            public imageReverse:any
     ){}
 }

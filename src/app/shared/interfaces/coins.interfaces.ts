@@ -5,4 +5,6 @@ export interface ICoin extends IProduct {
     denomination:number;
     series: string;
     metal: string
+    imageReverse:any;
+
 }

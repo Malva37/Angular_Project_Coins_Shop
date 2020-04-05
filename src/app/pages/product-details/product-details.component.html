@@ -1,61 +1,79 @@
-<div class="container">
 
-  <div class="main">
-    <button (click)="back()">back</button>
+  <div class="container-fluid">
+    <a class="back" (click)="back()"> < назад </a>
     <h2 class="titleProduct">{{ product?.name }}</h2>
     <div class="imageData">
-      <div class="image">
-        <img [attr.src]="product?.image" class="card-img-top" alt="...">
+      <div class="imageBig">
+        <img *ngIf="pressImageStatus" [attr.src]="product?.image" alt="...">
+        <img *ngIf="pressImageReverseStatus" [attr.src]="product?.imageReverse" alt="...">
       </div>
+
       <div class="dataMain">
-        <h5 class="text-danger">price {{ product?.price }}</h5>
-
-        <div class="countBox">
-            <div class="col-5">Кількість:</div>
-            <div class="counter">
-              <button type="button" class="minus" (click)="statusCount(false)">-</button>
-              <input class="count" name='count' type="number" [(ngModel)]="count">
-              <button type="button" class="plus" (click)="statusCount(true)">+</button>
-            </div>
+        <div class="dataPriceCount">
+          <table>
+            <tbody>
+              <tr>
+                <td>Ціна:</td>
+                <td>{{ product?.price }} грн.</td>
+              </tr>
+              <tr>
+                <td>Кількість:</td>
+                <td>
+                  <div class="countBox">
+                    <!-- <div class="col-5">Кількість:</div> -->
+                    <div class="counter">
+                      <button type="button" class="minus" (click)="statusCount(false)">-</button>
+                      <input class="count" name='count' type="number" [(ngModel)]="count">
+                      <button type="button" class="plus" (click)="statusCount(true)">+</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="button" class="buy" (click)="buyProduct(product)" value="Купити">
         </div>
-
-        <input type="button" class="buy" (click)="buyProduct(product)" value="Купити">
+        <div class="imageBox">
+          <div class="moreImage">Більше фото... </div>
+          <div class="imageLittle">
+            <img (click)="pressImage()" [attr.src]="product?.image" alt="...">
+            <img *ngIf="imageReverseStatus" (click)="pressImageReverse()" [attr.src]="product?.imageReverse" alt="...">
+          </div>
+        </div>
       </div>
     </div>
 
-    <div>
-      <tabset>
-        <tab heading="Характеристики" id="tab1">
-          <div class="description">
-            <div *ngIf="coinsActive"><b>Серія</b> - {{ product?.series }}
-              <hr>
-            </div>
-            <div *ngIf="coinsActive"><b>Номінал</b> - {{ product?.denomination }} грн
-              <hr>
-            </div>
-            <div *ngIf="coinsActive"><b>Рік випуску</b> - {{ product?.year }} рік
-              <hr>
-            </div>
-            <div *ngIf="coinsActive"><b>Метал</b> - {{ product?.metal }}
-              <hr>
-            </div>
 
-            <div *ngIf="banknotesActive"><b>Номінал </b> - {{ product?.denomination }} грн
-              <hr>
-            </div>
-            <div *ngIf="banknotesActive"><b>Підпис</b> - {{ product?.signature }}
-              <hr>
-            </div>
-            <div *ngIf="banknotesActive"><b>Рік випуску</b> - {{ product?.year }} рік
-              <hr>
-            </div>
 
-            <div> <b>Опис</b> - {{ product?.description }}</div>
 
-          </div>
-        </tab>
-      </tabset>
+    <div class="detaileDescription">
+      <div><b>Характеристики</b></div>
+      <div class="description">
+        <div *ngIf="coinsActive"><b>Серія</b> - {{ product?.series }}
+          <hr>
+        </div>
+        <div *ngIf="coinsActive"><b>Номінал</b> - {{ product?.denomination }} грн
+          <hr>
+        </div>
+        <div *ngIf="coinsActive"><b>Рік випуску</b> - {{ product?.year }} рік
+          <hr>
+        </div>
+        <div *ngIf="coinsActive"><b>Метал</b> - {{ product?.metal }}
+          <hr>
+        </div>
+
+        <div *ngIf="banknotesActive"><b>Номінал </b> - {{ product?.denomination }} грн
+          <hr>
+        </div>
+        <div *ngIf="banknotesActive"><b>Підпис</b> - {{ product?.signature }}
+          <hr>
+        </div>
+        <div *ngIf="banknotesActive"><b>Рік випуску</b> - {{ product?.year }} рік
+          <hr>
+        </div>
+        <div> <b>Опис</b> - {{ product?.description }}</div>
+      </div>
+
     </div>
   </div>
 
-</div>
