@@ -1,26 +1,49 @@
+<form class="mb-2">
+  <div class="form-row mt-4">
+    <div class="col-11">
+      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
+    </div>
+
+    <div class="col">
+      <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
+    </div>
+
+  </div>
+</form>
+
 <table class="table">
   <thead>
-    <tr>
+    <tr class="title">
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
+      <th scope="col">Назва</th>
+      <th scope="col">Ціна</th>
+      <th scope="col">Кількість</th>
+      <th scope="col">Серія</th>
+      <th scope="col">Рік</th>
+      <th scope="col">Метал</th>
+      <th scope="col">Номінал</th>
       <th scope="col">Image</th>
-      <th scope="col">Delete</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let coin of list; let i=index">
+    <tr *ngFor="let coin of list | searchCoin:searchName; let i=index">
       <!-- <td (click)="onEdite(template)" >{{ i+1 }}</td> -->
       <td (click)="onEdit(coin, template)">{{ i+1 }}</td>
       <td (click)="onEdit(coin, template)">{{ coin.name }}</td>
       <td (click)="onEdit(coin, template)">{{ coin.price}} грн</td>
-      <td (click)="onEdit(coin, template)">
+      <td (click)="onEdit(coin, template)">{{ coin.counter}} шт.</td>
+      <td (click)="onEdit(coin, template)">{{ coin.series}}</td>
+      <td (click)="onEdit(coin, template)">{{ coin.year}} рік</td>
+      <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
+      <td (click)="onEdit(coin, template)">{{ coin.denomination}} грн.</td>
+      <td class ="imageTable" (click)="onEdit(coin, template)">
         <img [attr.src]="coin.image" class="card-img-top">
         <img [attr.src]="coin.imageReverse" class="card-img-top">
 
       </td>
       <td>
-        <input type="button" value="delete" (click)="onDelete(medal)" class="btn btn-dark btn-outline-red">
+        <input type="button" value="X" (click)="onDelete(medal)" class="btnDelete">
         <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
       </td>
     </tr>
@@ -32,7 +55,7 @@
 <ng-template #template>
 
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Add new medal</h4>
+    <h4 class="modal-title pull-left">Edit coin</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -43,7 +66,8 @@
       <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
       <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
       <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
-
+      <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
+      <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
 
       <div class="field">
         <div class="titleField">Назва товару:</div>
@@ -54,7 +78,7 @@
       <div class="field">
         <div class="titleField">Кількість:</div>
         <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter"
-          class="form-control" pattern="[1-9]{1,}" required>
+          class="form-control" pattern="[0-9]{1,}" required>
         <!-- <div *ngIf="counter.invalid " class="validation-error">Введіть кількість відмінну від 0</div> -->
       </div>
 
@@ -203,17 +227,10 @@
              <div class="titleField">Завантаж фото(аверс):</div>
         
             <input class="form-control" required type="file" (change)="upload($event)" accept=".png,.jpg" />
-            <!-- <br><br>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <br> -->
-            <div class="alert alert-info" role="alert">
+            <div class="hidden" role="alert">
               File uploaded:
               <a [href]="downloadSrc">{{ service.formData.downloadSrc }}</a>
-              <input type="hidden" [(ngModel)]="service.formData.image" #image="ngModel" name="image">
+              <input [(ngModel)]="service.formData.image" #image="ngModel" name="image">
             </div>
           <!-- </div> -->
         </div>
@@ -228,10 +245,10 @@
                 aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br> -->
-          <div class="alert alert-info" role="alert">
+          <div class="hidden" role="alert">
             File uploaded:
             <a [href]="downloadSrcReverse">{{ service.formData.downloadSrcReverse }}</a>
-            <input type="hidden" [(ngModel)]="service.formData.imageReverse" #imageReverse="ngModel"
+            <input [(ngModel)]="service.formData.imageReverse" #imageReverse="ngModel"
               name="imageReverse">
           </div>
         </div>
@@ -252,7 +269,7 @@
 
 
       <div class="field">
-        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+        <button type="submit" (click)="modalRef.hide()" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
       </div>
 
 

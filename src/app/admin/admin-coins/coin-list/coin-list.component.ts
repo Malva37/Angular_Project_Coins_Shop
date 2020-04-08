@@ -40,7 +40,7 @@ export class CoinListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean;
   editImageReverseStatus: boolean;
-  
+
   refReverse: AngularFireStorageReference;
   taskReverse: AngularFireUploadTask;
   uploadStateReverse: Observable<string>;
@@ -101,18 +101,20 @@ export class CoinListComponent implements OnInit {
     debugger
     this.openModal(template);
     this.service.formData = Object.assign({}, coin);
+    this.image = coin.image;
+    this.imageReverse = coin.imageReverse;
     this.editImageStatus = true;
     this.editImageReverseStatus = true;
   }
 
 
   onSubmit(form: NgForm) {
-    form.value.image = this.image;
-    form.value.imageReverse = this.imageReverse;
+    form.value.isAvailable = form.value.counter > 0;
     const data: Coin = Object.assign({}, form.value);
     this.firestore.doc('coins/' + form.value.id).update(data);
     this.resetForm(form);
   }
+
 
   onDelete(coin: Coin) {
     if (confirm('Are you sure to delete this medal?')) {
@@ -142,7 +144,7 @@ export class CoinListComponent implements OnInit {
     });
   }
 
-  
+
   public uploadReverse(event: any): void {
     const file = event.target.files[0];
     const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
@@ -155,8 +157,8 @@ export class CoinListComponent implements OnInit {
     this.taskReverse.then((e) => {
       this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          this.imageReverse = data;
-          console.log(data.downloadSrcReverse);
+          this.service.formData.imageReverse = data;
+
         }
       );
     }

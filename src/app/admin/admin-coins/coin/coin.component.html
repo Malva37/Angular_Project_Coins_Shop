@@ -3,6 +3,8 @@
   <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
   <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
   <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
+  <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
+  <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
 
   <div class="field">
     <div class="titleField">Назва товару:</div>
@@ -14,7 +16,7 @@
   <div class="field">
     <div class="titleField">Кількість:</div>
     <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter" class="form-control"
-      pattern="[1-9]{1,}" required>
+      pattern="[0-9]{1,}" required>
     <!-- <div *ngIf="counter.invalid " class="validation-error">Введіть кількість відмінну від 0</div> -->
   </div>
 
@@ -157,29 +159,24 @@
       </textarea>
   </div>
 
-  
-
- 
   <div class="field">
     <div class="titleField">Завантаж фото(аверс):</div>
       <input class="form-control" required type="file" [value]="service.formData.image"
         (change)="upload($event)" accept=".png,.jpg">
-      <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+      <div class="hidden" *ngIf="downloadURL | async; let downloadSrc" role="alert">
         File uploaded:
-        <input *ngIf="downloadURL | async; let downloadSrc" type="hidden">
+        <input *ngIf="downloadURL | async; let downloadSrc">
         <a [href]="downloadSrc">{{downloadSrc}}</a>
       </div>
   </div>
-
 
   <div class="field">
       <div class="titleField">Завантаж фото(реверс):</div>
       <input class="form-control" required type="file" [value]="service.formData.imageReverse"
         (change)="uploadReverse($event)" accept=".png,.jpg">
-
-      <div *ngIf="downloadURLReverse | async; let downloadSrcReverse" class="alert alert-info" role="alert">
+  <div class="hidden" *ngIf="downloadURLReverse | async; let downloadSrcReverse" role="alert">
         File uploaded:
-        <input *ngIf="downloadURLReverse | async; let downloadSrcReverse" type="hidden">
+        <input *ngIf="downloadURLReverse | async; let downloadSrcReverse">
         <a [href]="downloadSrcReverse">{{downloadSrcReverse}}</a>
       </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { CoinService } from 'src/app/shared/services/coin.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { Coin } from 'src/app/shared/classes/coins.model';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class CoinComponent implements OnInit {
   // productId: number;
   image: string;
   imageReverse:string;
+  modalRef: BsModalRef;
 
 
   ref: AngularFireStorageReference;
@@ -44,6 +46,7 @@ export class CoinComponent implements OnInit {
 
 
   constructor(private service: CoinService,
+    private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage ) { }
 
@@ -80,17 +83,19 @@ export class CoinComponent implements OnInit {
     debugger
     form.value.image = this.image;
     form.value.imageReverse = this.imageReverse;
+    form.value.isAvailable = form.value.counter > 0;
     const data: Coin = Object.assign({}, form.value);
     debugger
     delete data.id;
     if (form.value.id == null) {
+    
       this.firestore.collection('coins').add(data);
     } else {
       this.firestore.doc('coins/' + form.value.id).update(data);
     }
     this.resetForm(form);
+    this.modalService._hideModal(1);
   }
-
 
 
 
@@ -139,12 +144,6 @@ export class CoinComponent implements OnInit {
     }
     );
   }
-
-  // refReverse: AngularFireStorageReference;
-  // taskReverse: AngularFireUploadTask;
-  // uploadStateReverse: Observable<string>;
-  // uploadProgressReverse: Observable<number>;
-  // downloadURLReverse: Observable<string>;
 
 
 

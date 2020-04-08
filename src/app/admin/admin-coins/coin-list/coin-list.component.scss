@@ -1,40 +1,82 @@
-img{
-    width: 100px;
-    height: 100px;
+img {
+  width: 100px;
+  height: 100px;
 }
 
-.titleField{
-    font-size: 15px;
-    padding: 0 0 0 2%;
-    font-family: "Courier New", Courier, monospace;
+.titleField {
+  font-size: 15px;
+  padding: 0 0 0 2%;
+  font-family: "Courier New", Courier, monospace;
 }
-.field{
-    margin: 0 auto 2%;
-}
-.modalBody{
-    padding: 3%;
-}
-.table{
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-    border-style: hidden;
-    font-weight: 600;
-  }
-  .imagesBox{
-      display: flex;
-      justify-content: space-around;
-      margin: 3% auto;
-      position: relative;
-  }
 
-  .deleteBtn{
-    background-color: #f2bd0b;
-    border: 1px solid black;
-    border-radius: 5px;
-    color: black;
-    font-weight: 600;
-    position: absolute;
-    font-size: 14px;
-    
-  }
+.field {
+  margin: 0 auto 2%;
+}
+
+.modalBody {
+  padding: 3%;
+}
+
+.imagesBox {
+  display: flex;
+  justify-content: space-around;
+  margin: 3% auto;
+  position: relative;
+}
+
+.deleteBtn {
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+  position: absolute;
+  font-size: 14px;
+
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  margin: 2% 0;
+  text-align: center;
+  border-collapse: collapse;
+  border-style: hidden;
+  font-weight: 600;
+
+}
+
+table td,
+table th {
+  border: 1px solid lightgray;
+}
+
+.title {
+  font-size: 16px;
+
+}
+
+tbody td {
+  font-size: 15px;
+  font-weight: normal;
+  color: black;
+  //   padding: 0;
+  vertical-align: middle;
+}
+
+.imageTable {
+  display: flex;
+}
+
+.btnDelete {
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+  padding: 0px 5px;
+  text-align: center;
+  font-size: 14px;
+}
