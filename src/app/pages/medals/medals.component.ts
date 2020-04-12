@@ -57,7 +57,7 @@ export class MedalsComponent implements OnInit {
   }
 
   buyProduct(medal: Medal): void {
-    const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image, medal.price, this.count, medal.price);
+    const newItem: IProductOrder = new ProductOrder(medal.id, medal.categoryId, medal.name, medal.image[1], medal.price, this.count, medal.price);
     newItem.amount = this.count * medal.price;
     let keys = Object.keys(localStorage)
     for (let i = 0; i < keys.length; i++) {

@@ -13,7 +13,10 @@ export const environment = {
     messagingSenderId: "",
     appId: "",
     measurementId: ""
-  }
+  },
+  apiUrl: "http://localhost:8088",
+  apiUrlSecured: "https://localhost:8088"
+
 };
 
 /*

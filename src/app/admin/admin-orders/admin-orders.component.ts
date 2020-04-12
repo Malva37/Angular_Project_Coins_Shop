@@ -22,14 +22,7 @@ export class AdminOrdersComponent implements OnInit {
 
   ngOnInit() {
 
-    this.service.getOrders().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id, ...item.payload.doc.data()
-        } as Order;
-      });
-    });
-    // this.resetForm();
+    this.service.getJSONOrders()
   }
 
   onDelete(order: Order) {

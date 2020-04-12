@@ -70,7 +70,7 @@ export class MedalListComponent implements OnInit {
       isAvailable: true,
       description: '',
       price: null,
-      image: ''
+      image: ['']
     };
   }
 
@@ -88,12 +88,12 @@ export class MedalListComponent implements OnInit {
     this.resetForm(form);
   }
 
-  onDelete(medal: Medal) {
-    if (confirm('Are you sure to delete this medal?')) {
-      this.firestore.doc('medals/' + medal.id).delete();
-      this.afStorage.storage.refFromURL(medal.image).delete();
-    }
-  }
+  // onDelete(medal: Medal) {
+  //   if (confirm('Are you sure to delete this medal?')) {
+  //     this.firestore.doc('medals/' + medal.id).delete();
+  //     this.afStorage.storage.refFromURL(medal.image).delete();
+  //   }
+  // }
 
 
 
@@ -125,11 +125,11 @@ export class MedalListComponent implements OnInit {
     return uuid;
   }
 
-  public deleteImage(medal: Medal) {
-    this.editImageStatus = false;
-    this.afStorage.storage.refFromURL(medal.image).delete();
-    this.service.formData.image = ''
-  }
+  // public deleteImage(medal: Medal) {
+  //   this.editImageStatus = false;
+  //   this.afStorage.storage.refFromURL(medal.image).delete();
+  //   this.service.formData.image = ''
+  // }
 
 
 

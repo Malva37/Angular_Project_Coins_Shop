@@ -57,7 +57,7 @@ export class MedalComponent implements OnInit {
       isAvailable: true,
       description: '',
       price: null,
-      image: ''
+      image: ['']
     };
   }
 

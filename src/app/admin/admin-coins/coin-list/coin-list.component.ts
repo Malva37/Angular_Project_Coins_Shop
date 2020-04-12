@@ -7,6 +7,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map, finalize } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { CoinService } from 'src/app/shared/services/coin.service';
+import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 
 @Component({
   selector: 'app-coin-list',
@@ -16,6 +17,7 @@ import { CoinService } from 'src/app/shared/services/coin.service';
 export class CoinListComponent implements OnInit {
 
   list: Coin[];
+  id:number;
   categoryId: number;
   categoryName: string;
   name: string;
@@ -28,9 +30,10 @@ export class CoinListComponent implements OnInit {
   denomination: number;
   description: string;
   price: number;
-  image: string;
+  image: Array<string>;
   imageReverse: string;
   downloadSrc: string;
+  product:ICoin;
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -56,16 +59,32 @@ export class CoinListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.service.getCoins().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id, ...item.payload.doc.data()
-        } as Coin;
-      });
-    });
+    // this.service.getCoins().subscribe(actionArray => {
+    //   this.list = actionArray.map(item => {
+    //     return {
+    //       id: item.payload.doc.id, ...item.payload.doc.data()
+    //     } as Coin;
+    //   });
+    // });
     this.resetForm();
   }
+  addItem(event) {
+    const file = event.target.value;
+    console.log(file);
+    console.log(event.target.name);
+    let product: ICoin = new Coin('1', this.categoryId,
+      this.categoryName, this.name, this.counter, this.reserved,
+      this.isAvailable, this.series, this.year, this.metal,
+      this.denomination, this.description, this.price, this.image)
 
+    this.service.postJSONCoin(product).subscribe(
+      data => {
+        this.list = data;
+      }
+    )
+
+
+  }
 
 
   openModal(template: TemplateRef<any>) {
@@ -91,21 +110,21 @@ export class CoinListComponent implements OnInit {
       denomination: null,
       description: '',
       price: null,
-      image: '',
-      imageReverse: ''
+      image: ['']
+      // imageReverse: ''
     };
   }
 
 
-  onEdit(coin: Coin, template) {
-    debugger
-    this.openModal(template);
-    this.service.formData = Object.assign({}, coin);
-    this.image = coin.image;
-    this.imageReverse = coin.imageReverse;
-    this.editImageStatus = true;
-    this.editImageReverseStatus = true;
-  }
+  // onEdit(coin: Coin, template) {
+  //   debugger
+  //   this.openModal(template);
+  //   this.service.formData = Object.assign({}, coin);
+  //   this.image = coin.image;
+  //   this.imageReverse = coin.imageReverse;
+  //   this.editImageStatus = true;
+  //   this.editImageReverseStatus = true;
+  // }
 
 
   onSubmit(form: NgForm) {
@@ -116,13 +135,13 @@ export class CoinListComponent implements OnInit {
   }
 
 
-  onDelete(coin: Coin) {
-    if (confirm('Are you sure to delete this medal?')) {
-      this.firestore.doc('coins/' + coin.id).delete();
-      this.afStorage.storage.refFromURL(coin.image).delete();
-      this.afStorage.storage.refFromURL(coin.imageReverse).delete();
-    }
-  }
+  // onDelete(coin: Coin) {
+  //   if (confirm('Are you sure to delete this medal?')) {
+  //     this.firestore.doc('coins/' + coin.id).delete();
+  //     this.afStorage.storage.refFromURL(coin.image).delete();
+  //     this.afStorage.storage.refFromURL(coin.imageReverse).delete();
+  //   }
+  // }
 
 
 
@@ -145,25 +164,25 @@ export class CoinListComponent implements OnInit {
   }
 
 
-  public uploadReverse(event: any): void {
-    const file = event.target.files[0];
-    const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
-    this.taskReverse = this.afStorage.upload(filePath, file);
-    this.uploadStateReverse = this.taskReverse.snapshotChanges().pipe(map(s => s.state));
-    this.uploadProgressReverse = this.taskReverse.percentageChanges();
-    this.taskReverse.snapshotChanges()
-      .pipe(finalize(() => this.downloadURLReverse = this.afStorage.ref(filePath).getDownloadURL()))
-      .subscribe();
-    this.taskReverse.then((e) => {
-      this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
-        data => {
-          this.service.formData.imageReverse = data;
+  // public uploadReverse(event: any): void {
+  //   const file = event.target.files[0];
+  //   const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
+  //   this.taskReverse = this.afStorage.upload(filePath, file);
+  //   this.uploadStateReverse = this.taskReverse.snapshotChanges().pipe(map(s => s.state));
+  //   this.uploadProgressReverse = this.taskReverse.percentageChanges();
+  //   this.taskReverse.snapshotChanges()
+  //     .pipe(finalize(() => this.downloadURLReverse = this.afStorage.ref(filePath).getDownloadURL()))
+  //     .subscribe();
+  //   this.taskReverse.then((e) => {
+  //     this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
+  //       data => {
+  //         this.service.formData.imageReverse = data;
 
-        }
-      );
-    }
-    );
-  }
+  //       }
+  //     );
+  //   }
+  //   );
+  // }
 
 
   private createUUID(): string {
@@ -176,16 +195,16 @@ export class CoinListComponent implements OnInit {
     return uuid;
   }
 
-  public deleteImage(coin: Coin) {
-    this.editImageStatus = false;
-    this.afStorage.storage.refFromURL(coin.image).delete();
-    this.service.formData.image = ''
-  }
-  public deleteImageReverse(coin: Coin) {
-    this.editImageReverseStatus = false;
-    this.afStorage.storage.refFromURL(coin.imageReverse).delete();
-    this.service.formData.imageReverse = ''
-  }
+  // public deleteImage(coin: Coin) {
+  //   this.editImageStatus = false;
+  //   this.afStorage.storage.refFromURL(coin.image).delete();
+  //   this.service.formData.image = ''
+  // }
+  // public deleteImageReverse(coin: Coin) {
+  //   this.editImageReverseStatus = false;
+  //   this.afStorage.storage.refFromURL(coin.imageReverse).delete();
+  //   this.service.formData.imageReverse = ''
+  // }
 
 
 }

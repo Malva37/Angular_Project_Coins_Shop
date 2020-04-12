@@ -12,7 +12,7 @@ export class Medal implements IMedal {
         public isAvailable:boolean,
         public description: string,
         public price: number,
-        public image: string
+        public image: Array<string>
     ) { }
 
 }

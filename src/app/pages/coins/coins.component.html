@@ -156,9 +156,15 @@
             </select>
           </div>
         </div>
-      </form>
 
+        <input type="number" [(ngModel)]="idCoin" name="idCoin">
+        <input type="button" (click)="showOne(idCoin)">
+        <div class="oneCoin">{{oneCoin}}</div>
+      </form>
     </section>
+
+ 
+
     <section class="catalog">
       <figure class="product"
         *ngFor="let coin of list | searchCoin:searchName | filterPrice:minValue:maxValue | filterDenomination: denomination | filterMetal: metal | filterSeries: series | filterYear: year ">
@@ -175,6 +181,7 @@
         </div>
       </figure>
     </section>
+
 
   </div>
 </div>

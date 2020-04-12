@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -99,7 +99,7 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
     AccessoryComponent,
     AccessoryListComponent,
     SignInComponent,
-    FilterSignPipe,
+    FilterSignPipe
   
 
   ],
@@ -117,7 +117,9 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
     Ng5SliderModule,
     CommonModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot(), TabsModule.forRoot()
+    ToastrModule.forRoot(), TabsModule.forRoot(),
+    ReactiveFormsModule
+  
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
       AuthService,AngularFireAuth,ShareService

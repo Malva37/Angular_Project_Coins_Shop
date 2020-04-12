@@ -36,6 +36,9 @@ export class CoinsComponent implements OnInit {
   searchField: boolean;
 
 
+  idCoin: number;
+  oneCoin:ICoin;
+
 
 
   constructor(private service: CoinService,
@@ -46,21 +49,37 @@ export class CoinsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCoins().subscribe(actionArray => {
-      this.list = actionArray.map(c => {
-        return {
-          id: c.payload.doc.id,
-          ...c.payload.doc.data()
-        } as Coin;
-      });
-      this.getMinPrice(this.list);
-      this.getMaxPrice(this.list);
-    });
+    // this.service.getCoins().subscribe(actionArray => {
+    //   this.list = actionArray.map(c => {
+    //     return {
+    //       id: c.payload.doc.id,
+    //       ...c.payload.doc.data()
+    //     } as Coin;
+    //   });
+    //   this.getMinPrice(this.list);
+    //   this.getMaxPrice(this.list);
+    // });
+
+    // this.service.getOneCoin(1);
   }
+
+
+
+  showOne(id: number) {
+    console.log(id);;
+    this.service.getOneCoin(id).subscribe(
+      data => {
+        console.log(data);
+        
+        this.oneCoin = data;
+      });
+  }
+
+
 
   buyProduct(coin: Coin): void {
     debugger
-    const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image, coin.price, this.count, coin.price);
+    const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image[1], coin.price, this.count, coin.price);
     newItem.amount = this.count * coin.price;
     let keys = Object.keys(localStorage)
     for (let i = 0; i < keys.length; i++) {

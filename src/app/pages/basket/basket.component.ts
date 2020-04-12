@@ -150,9 +150,7 @@ export class BasketComponent implements OnInit {
     return this.totalSumOrder - (item.counter * item.price);
   }
 
-// getCity(name:string){
-//   this.
-// }
+
 
 
 }

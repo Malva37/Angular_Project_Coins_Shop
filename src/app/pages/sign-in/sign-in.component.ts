@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/shared/classes/users.model';
+import { IUser } from 'src/app/shared/interfaces/users.interfaces';
 
 
 @Component({
@@ -18,15 +19,20 @@ export class SignInComponent implements OnInit {
 
   emailUser: string;
   passwordUser: string;
-  currentUser: any;
-  currentUserPage: boolean;
-  // user:any;
-  user = {
-    email: '',
-    password: ''
-  };
+  signStatus: boolean;
 
-  id: string;
+
+
+
+  // currentUser: any;
+  // currentUserPage: boolean;
+
+  // user = {
+  //   email: '',
+  //   password: ''
+  // };
+
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -34,7 +40,7 @@ export class SignInComponent implements OnInit {
   phone: string;
   address: string;
   role: string = 'user';
-  private dbPath = '/users';
+  user: IUser;
   usersRef: AngularFirestoreCollection<User> = null;
   // constructor(private db: AngularFirestore) {
   //   this.usersRef = db.collection(this.dbPath);
@@ -46,12 +52,41 @@ export class SignInComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private db: AngularFirestore) {
-    this.usersRef = db.collection(this.dbPath)
+
   }
 
   ngOnInit() {
     this.resetForm();
   };
+
+  addUser(email, password) {
+    this.signStatus = true;
+    const user: IUser = new User(
+      this.id = null,
+      this.firstName = '',
+      this.lastName = '',
+      this.email = email,
+      this.phone = '',
+      this.address = '',
+      this.password = password,
+      this.role = 'user');
+    console.log(user);
+
+    this.service.postJSONUsers(user).subscribe(
+      () => {
+        this.user = user;
+        console.log(user);
+
+      }
+
+
+    );
+    // this.service.formData.password = password;
+    // this.service.formData.email = email;
+  }
+
+
+
 
 
   resetForm(form?: NgForm) {
@@ -74,60 +109,16 @@ export class SignInComponent implements OnInit {
   onSubmit(form: NgForm) {
 
     const data: User = Object.assign({}, form.value);
-    debugger
-    delete data.id;
-    if (form.value.id == null) {
-      this.firestore.collection('users').add(data);
-      console.log(data);
+    data.email = this.user.email;
+    data.password = this.user.password;
+    console.log(data);
+    // const user: IUser = new User(1, this.firstName, this.lastName, this.email, this.phone, this.address, this.password, this.role = 'user')
+    // console.log(user);
+    // this.resetForm(form);
 
-    } else {
-      this.firestore.doc('users/' + form.value.id).update(data);
-    }
-    this.resetForm(form);
   }
 
 
-
-  // enter(email, password) {
-
-  //   this.service.userRef.doc('id').snapshotChanges().subscribe(
-  //     data => {
-  //       this.currentUser = data
-  //       console.log(this.currentUser);
-
-  //     })
-  // }
-
-
-
-  loginUser(email, pass) {
-    this.usersRef.get().subscribe(
-      querySnapshot => {
-        querySnapshot.forEach((doc) => {
-          if (email === doc.data().email) {
-            if (pass === doc.data().password) {
-              this.usersRef.doc(doc.id).update({ loginStatus: true })
-              const us = doc.data()
-              us.loginStatus = true
-              localStorage.setItem('user', JSON.stringify(us))
-              
-            }
-          } 
-        } )
-      });
-  }
-
-  // signInWithEmail() {
-  //   console.log(this.user.email, this.user.password);
-
-  //   this.authService.signInRegular(this.user.email, this.user.password)
-  //     .then((res) => {
-  //       console.log(res);
-
-  //       this.router.navigate(['user']);
-  //     })
-  //     .catch((err) => console.log('error: ' + err));
-  // }
 
 
 }

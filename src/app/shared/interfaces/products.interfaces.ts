@@ -8,5 +8,5 @@ export interface IProduct{
     isAvailable:boolean;
     description:string;
     price:number;
-    image:any;
+    image:Array<string>;
 }
