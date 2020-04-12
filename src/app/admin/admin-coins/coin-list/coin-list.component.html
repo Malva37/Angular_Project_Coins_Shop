@@ -225,26 +225,17 @@
       <div class="imageBox field">
         <div class="field" *ngIf="!editImageStatus">
              <div class="titleField">Завантаж фото(аверс):</div>
-        
             <input class="form-control" required type="file" (change)="upload($event)" accept=".png,.jpg" />
             <div class="hidden" role="alert">
               File uploaded:
               <a [href]="downloadSrc">{{ service.formData.downloadSrc }}</a>
               <input [(ngModel)]="service.formData.image" #image="ngModel" name="image">
             </div>
-          <!-- </div> -->
         </div>
 
         <div class="field" *ngIf="!editImageReverseStatus">
           <div class="titleField">Завантаж фото(реверс):</div>
-          <input class="form-control" required type="file" (change)="uploadReverse($event)" accept=".png,.jpg" />
-          <!-- <br><br>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <br> -->
+          <input class="form-control" required type="file" (change)="uploadReverse($event)" accept=".png,.jpg">
           <div class="hidden" role="alert">
             File uploaded:
             <a [href]="downloadSrcReverse">{{ service.formData.downloadSrcReverse }}</a>
@@ -252,7 +243,6 @@
               name="imageReverse">
           </div>
         </div>
-        <!-- </div> -->
       </div>
 
       <div class="imagesBox">
