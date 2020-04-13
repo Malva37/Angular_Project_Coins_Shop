@@ -19,18 +19,11 @@ export class CoinService {
     constructor(private firestore: AngularFirestore,
         private http: HttpClient) {
         this.userRef = firestore.collection('coins');
-        this.urlCoins = `${environment.apiUrl}/coins`;
+        this.urlCoins = `${environment.apiUrl}/admin/coins`;
         this.httpHeader = new HttpHeaders().append(
             "Access-Control-Allow-Origin", environment.apiUrl
         )
     }
-
-    // getCoins() {
-    //     console.log(environment.apiUrl);
-
-
-    //     return this.firestore.collection('coins').snapshotChanges();
-    // }
 
     getOneCoin(id: number): Observable<ICoin> {
         return this.http.get<ICoin>(`${this.urlCoins}?id=${id}`)

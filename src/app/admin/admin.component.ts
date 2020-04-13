@@ -41,24 +41,24 @@ export class AdminComponent implements OnInit {
     private afStorage: AngularFireStorage) { }
 
   ngOnInit() {
-    this.resetForm();
+    // this.resetForm();
   }
   
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.resetForm();
-    }
-    this.service.formData = {
-      id: null,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      password: '',
-      role:''
-    };
-  }
+  // resetForm(form?: NgForm) {
+  //   if (form != null) {
+  //     form.resetForm();
+  //   }
+  //   this.service.formData = {
+  //     id: null,
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     phone: '',
+  //     address: '',
+  //     password: '',
+  //     role:''
+  //   };
+  // }
 
   enter() {
     if (this.emailUser == 'a' && this.passwordUser == 'a') {

@@ -29,6 +29,13 @@
 
         </ul>
       </div>
+      <div *ngIf="adminButton">
+        <a [routerLink]="[ '/admin']" routerLinkActive="active" class="nav-link" href="#">
+          <span class="namePage">Admin</span>
+          <!-- <div class="myCabinetIcon icon"></div> -->
+      
+        </a>
+      </div>
       <div class="myCabinet">
         <a [routerLink]="[ '/login']" routerLinkActive="active" class="nav-link" href="#">
           <span class="namePage">Вхід</span>

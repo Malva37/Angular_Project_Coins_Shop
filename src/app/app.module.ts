@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
 import {ReactiveFormsModule} from '@angular/forms';
 
@@ -62,6 +62,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 
@@ -122,7 +123,12 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
   
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
-      AuthService,AngularFireAuth,ShareService
+      AuthService,AngularFireAuth,ShareService,
+      {
+        provide : HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi   : true,
+      }
     ],
   bootstrap: [AppComponent]
 })
