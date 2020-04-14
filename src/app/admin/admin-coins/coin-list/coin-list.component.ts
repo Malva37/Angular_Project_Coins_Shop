@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map, finalize } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { CoinService } from 'src/app/shared/services/coin.service';
 import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 
@@ -50,7 +50,7 @@ export class CoinListComponent implements OnInit {
   uploadProgressReverse: Observable<number>;
   downloadURLReverse: Observable<string>;
 
-
+  profileForm:any;
 
   constructor(private service: CoinService,
     private modalService: BsModalService,
@@ -67,7 +67,17 @@ export class CoinListComponent implements OnInit {
     //   });
     // });
     this.resetForm();
+    
+    this.profileForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+    });
   }
+
+
+
+
+
   addItem(event) {
     const file = event.target.value;
     console.log(file);

@@ -4,6 +4,7 @@ import { UserServiceService } from '../shared/services/User.service';
 import { User } from '../shared/classes/users.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { ShareService } from '../shared/services/share.service';
 
 
 @Component({
@@ -33,17 +34,34 @@ export class AdminComponent implements OnInit {
   passwordUser: string;
 
 
-
-
-
   constructor(private service: UserServiceService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
+    private afStorage: AngularFireStorage,
+    private shareService: ShareService) { }
+
+
+
+
+
+
+
+    
 
   ngOnInit() {
     // this.resetForm();
+
   }
-  
+
+
+
+
+
+
+
+
+
+
+
   // resetForm(form?: NgForm) {
   //   if (form != null) {
   //     form.resetForm();
@@ -87,21 +105,21 @@ export class AdminComponent implements OnInit {
     //     }
     //   })
 
-    }
+  }
 
 
-    // if (this.emailUser) {
+  // if (this.emailUser) {
 
-    //   // getData():void{
-    //   //   const id = this.route.snapshot.paramMap.get('id');
-    //   //   this.medalService.userRef.doc(id).valueChanges().subscribe(
-    //   //     data => {
-    //   //       this.product = data
-    //   //       // console.log(this.medal)
-    //   //     })
-    //   // }
-    // }
-  
+  //   // getData():void{
+  //   //   const id = this.route.snapshot.paramMap.get('id');
+  //   //   this.medalService.userRef.doc(id).valueChanges().subscribe(
+  //   //     data => {
+  //   //       this.product = data
+  //   //       // console.log(this.medal)
+  //   //     })
+  //   // }
+  // }
+
 
 
 

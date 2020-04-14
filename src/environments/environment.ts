@@ -11,12 +11,10 @@ export const environment = {
     projectId: "",
     storageBucket: "",
     messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    appId: ""
   },
   apiUrl: "http://localhost:8088",
   apiUrlSecured: "https://localhost:8088"
-
 };
 
 /*

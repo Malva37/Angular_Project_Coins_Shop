@@ -43,18 +43,14 @@ export class SignInComponent implements OnInit {
   usersRef: AngularFirestoreCollection<User> = null;
 
 
-  constructor(private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private service: AuthService,
-    private authService: AuthService,
-   
-    private db: AngularFirestore) {
+  constructor(private service: AuthService) {
 
-  }
+  } 
   ngOnInit() { }
 
   login(email, password) {
-    let user = new UserCredentials(email, password);
+    let user = new UserCredentials(email,
+       password);
     this.service.postJSONUsers(user);
 
   }

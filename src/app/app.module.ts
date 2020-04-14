@@ -63,6 +63,7 @@ import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
 import { AuthInterceptor } from './auth.interceptor';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 
@@ -100,7 +101,8 @@ import { AuthInterceptor } from './auth.interceptor';
     AccessoryComponent,
     AccessoryListComponent,
     SignInComponent,
-    FilterSignPipe
+    FilterSignPipe,
+    ProfileComponent
   
 
   ],

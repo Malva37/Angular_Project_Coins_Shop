@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class ShareService {
   onClickSum: EventEmitter<number> = new EventEmitter();
   onChangeSearchName: EventEmitter<string> = new EventEmitter();
 
-searchName:string;
+  searchName: string;
 
-changeSearchName(search){
-  this.onChangeSearchName.emit(search)
-}
+  constructor(private router: Router) { }
+
+  changeSearchName(search) {
+    this.onChangeSearchName.emit(search)
+  }
 
   numberItemsInBasket() {
     let keys = Object.keys(localStorage);
@@ -44,6 +47,16 @@ changeSearchName(search){
     }
     return this.sumBasket;
   }
+
+
+
+
+
+
+
+  
+
+
 
 }
 

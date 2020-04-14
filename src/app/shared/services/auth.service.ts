@@ -23,6 +23,11 @@ export class AuthService {
     return this.http.get<Array<UserCredentials>>(`${this.baseUrl}/authenticate`)
   }
 
+
+
+
+
+
   postJSONUsers(user: UserCredentials) {
     this.http.post<any>(`${this.baseUrl}/authenticate`, user,
       { observe: 'response' }).subscribe(response => {
@@ -31,12 +36,39 @@ export class AuthService {
         if (response.body.isAdmin) {
           this.router.navigate(['/admin']);
         } else {
-          console.log(response.body.isAdmin);
-    
+          this.router.navigate(['/profile']);
         }
       });
-  }
+    }
 
+
+
+      isAdminLogin(): boolean {
+        return localStorage.getItem('isAdmin') == 'true';
+      }
+    
+      isUserLogin(): boolean {
+        return localStorage.getItem('isAdmin') == 'false';
+      }
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
   deleteJSONUsers(id: number): Observable<UserCredentials> {
     return this.http.delete<UserCredentials>(`${this.baseUrl}/${id}`)
   }

@@ -106,7 +106,11 @@ header .nav-item a:hover::after {
     width: 48px;
     background: url('../../../assets/icon/accessories.png') no-repeat;
 }
-
+.adminButton{
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/admin.png') no-repeat;
+}
 
 .myCabinetIcon{
   height: 37px;
