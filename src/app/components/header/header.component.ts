@@ -12,12 +12,17 @@ export class HeaderComponent implements OnInit {
   clickCount: number;
   sumBasket: number;
   searchName: string
-  adminButton:boolean;
+  adminIcon: boolean;
+  userIcon: boolean;
+  logIn: boolean;
 
   constructor(private share: ShareService) {
     this.share.onClickNumber.subscribe(cnt => this.clickCount = cnt);
     this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
     this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
+    this.share.switchOnAdmin.subscribe(status => this.adminIcon = status);
+    this.share.switchOnUser.subscribe(status => this.userIcon = status);
+    this.share.switchOnAny.subscribe(status => this.logIn = status);
   }
 
 
@@ -27,20 +32,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.numberItemsInBasket();
-    this.showAdminButton();
     this.sumInBasket();
   }
 
-  showAdminButton(): boolean {
-    let adminHere = localStorage.getItem('isAdmin');
-    if (adminHere) {
-      return this.adminButton = true;
-    }
-    else {
-      this.adminButton = false
-    }
+
+  logOut() {
+    this.adminIcon = false;
+    this.userIcon = false;
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    this.logIn = true;
 
   }
+
   numberItemsInBasket() {
     let keys = Object.keys(localStorage);
     return this.clickCount = keys.length;

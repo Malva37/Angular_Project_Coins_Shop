@@ -106,16 +106,28 @@ header .nav-item a:hover::after {
     width: 48px;
     background: url('../../../assets/icon/accessories.png') no-repeat;
 }
-.adminButton{
+.adminIcon{
   height: 35px;
   width: 48px;
   background: url('../../../assets/icon/admin.png') no-repeat;
 }
+.userIcon{
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/user.png') no-repeat;
+}
 
-.myCabinetIcon{
+.logInIcon{
   height: 37px;
   width: 37px;
   background: url('../../../assets/icon/enter.png') no-repeat;
+}
+
+
+.logOutIcon{
+  height: 37px;
+  width: 37px;
+  background: url('../../../assets/icon/logOut.png') no-repeat;
 }
 .icon{
 margin: 0 auto;

@@ -15,7 +15,41 @@ export class ShareService {
 
   searchName: string;
 
+
+  admin: boolean;
+  user: boolean;
+  anyOne: boolean;
+  switchOnAdmin: EventEmitter<boolean> = new EventEmitter();
+  switchOnUser: EventEmitter<boolean> = new EventEmitter();
+  switchOnAny: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private router: Router) { }
+
+
+  adminHere() {
+    this.admin = true;
+    this.switchOnAdmin.emit(this.admin);
+    // this.switchOn();
+  }
+
+  userHere() {
+    this.user = true;
+    this.switchOnUser.emit(this.user);
+    // this.switchOn();
+  }
+
+  anyHere() {
+    this.anyOne = false;
+    this.switchOnAny.emit(this.anyOne);
+
+  }
+
+
+
+
+
+
+
 
   changeSearchName(search) {
     this.onChangeSearchName.emit(search)
@@ -32,7 +66,6 @@ export class ShareService {
     this.onClickNumber.emit(this.clickCnt);
     this.onClickSum.emit(this.sumBasket);
   }
-
 
   sumInBasket() {
     let keys = Object.keys(localStorage);
@@ -54,7 +87,7 @@ export class ShareService {
 
 
 
-  
+
 
 
 

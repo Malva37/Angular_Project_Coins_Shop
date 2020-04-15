@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { UserCredentials } from '../classes/userCredentials';
 import { Router } from '@angular/router';
+import { ShareService } from './share.service';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class AuthService {
   baseUrl: string;
 
   constructor(private http: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private share: ShareService) {
     this.baseUrl = environment.apiUrl;
   }
 
@@ -35,32 +37,26 @@ export class AuthService {
         localStorage.setItem('isAdmin', response.body.isAdmin)
         if (response.body.isAdmin) {
           this.router.navigate(['/admin']);
+          this.share.adminHere();
+          this.share.anyHere();
         } else {
           this.router.navigate(['/profile']);
+          this.share.userHere();
+          this.share.anyHere();
+
         }
       });
-    }
+  }
 
 
 
-      isAdminLogin(): boolean {
-        return localStorage.getItem('isAdmin') == 'true';
-      }
-    
-      isUserLogin(): boolean {
-        return localStorage.getItem('isAdmin') == 'false';
-      }
-  
+  isAdminLogin(): boolean {
+    return localStorage.getItem('isAdmin') == 'true';
+  }
 
-
-
-
-
-
-
-
-
-  
+  isUserLogin(): boolean {
+    return localStorage.getItem('isAdmin') == 'false';
+  }
 
 
 
@@ -68,7 +64,18 @@ export class AuthService {
 
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
   deleteJSONUsers(id: number): Observable<UserCredentials> {
     return this.http.delete<UserCredentials>(`${this.baseUrl}/${id}`)
   }

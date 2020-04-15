@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { User } from 'src/app/shared/classes/users.model';
 import { IUser } from 'src/app/shared/interfaces/users.interfaces';
 import { UserCredentials } from 'src/app/shared/classes/userCredentials';
+import { ShareService } from 'src/app/shared/services/share.service';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class SignInComponent implements OnInit {
   usersRef: AngularFirestoreCollection<User> = null;
 
 
-  constructor(private service: AuthService) {
+  constructor(private service: AuthService,
+    private share:ShareService) {
 
   } 
   ngOnInit() { }
@@ -52,6 +54,7 @@ export class SignInComponent implements OnInit {
     let user = new UserCredentials(email,
        password);
     this.service.postJSONUsers(user);
+ 
 
   }
 

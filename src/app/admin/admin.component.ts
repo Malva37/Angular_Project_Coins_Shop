@@ -34,24 +34,23 @@ export class AdminComponent implements OnInit {
   passwordUser: string;
 
 
+  adminStatus:boolean;
+
   constructor(private service: UserServiceService,
+    private share: ShareService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private shareService: ShareService) { }
-
-
-
-
-
-
-
+    private afStorage: AngularFireStorage) { 
+      this.share.switchOnAdmin.subscribe(status => this.adminStatus = status);
+    }
     
 
   ngOnInit() {
     // this.resetForm();
-
+    this.share.adminHere();
   }
 
+
+ 
 
 
 
