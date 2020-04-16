@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map, finalize } from 'rxjs/operators';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { CoinService } from 'src/app/shared/services/coin.service';
 import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 
@@ -17,7 +17,7 @@ import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 export class CoinListComponent implements OnInit {
 
   list: Coin[];
-  id:number;
+  id: number;
   categoryId: number;
   categoryName: string;
   name: string;
@@ -30,10 +30,11 @@ export class CoinListComponent implements OnInit {
   denomination: number;
   description: string;
   price: number;
-  image: Array<string>;
+  image: Array<string> = [];
   imageReverse: string;
   downloadSrc: string;
-  product:ICoin;
+  product: ICoin;
+  oneImage:string;
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -49,32 +50,41 @@ export class CoinListComponent implements OnInit {
   uploadStateReverse: Observable<string>;
   uploadProgressReverse: Observable<number>;
   downloadURLReverse: Observable<string>;
+  
+  arrayInputs = [{ controlerInputName1: ['1', Validators.required] }];
 
-  profileForm:any;
+  formName = this.fb.group({
+    controllerArray: this.fb.array([])
+  })
 
   constructor(private service: CoinService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
+    private afStorage: AngularFireStorage,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
-
-    // this.service.getCoins().subscribe(actionArray => {
-    //   this.list = actionArray.map(item => {
-    //     return {
-    //       id: item.payload.doc.id, ...item.payload.doc.data()
-    //     } as Coin;
-    //   });
-    // });
     this.resetForm();
-    
-    this.profileForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-    });
+    this.setArrayInputs(this.arrayInputs)
+
   }
 
 
+  setArrayInputs(arrayInputs) {
+    const arrayFG = arrayInputs.map(address => this.fb.group(address));
+    const formArray = this.fb.array(arrayFG);
+    this.formName.setControl('controllerArray', formArray);
+  }
+
+
+  addInput() {
+    (this.formName.get('controllerArray') as FormArray)
+      .push(this.fb.group({ controlerInputName1: '' }))
+  }
+
+  removeInput(index) {
+    this.formName.controls.controllerArray["controls"].splice(index, 1)
+  }
 
 
 
@@ -169,30 +179,18 @@ export class CoinListComponent implements OnInit {
       this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
           this.service.formData.image = data;
+          this.oneImage = data;
+          console.log(this.oneImage);
+          this.image.push(this.oneImage);
+          console.log(this.image);
+          
         });
     });
+
+    
+
   }
 
-
-  // public uploadReverse(event: any): void {
-  //   const file = event.target.files[0];
-  //   const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
-  //   this.taskReverse = this.afStorage.upload(filePath, file);
-  //   this.uploadStateReverse = this.taskReverse.snapshotChanges().pipe(map(s => s.state));
-  //   this.uploadProgressReverse = this.taskReverse.percentageChanges();
-  //   this.taskReverse.snapshotChanges()
-  //     .pipe(finalize(() => this.downloadURLReverse = this.afStorage.ref(filePath).getDownloadURL()))
-  //     .subscribe();
-  //   this.taskReverse.then((e) => {
-  //     this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
-  //       data => {
-  //         this.service.formData.imageReverse = data;
-
-  //       }
-  //     );
-  //   }
-  //   );
-  // }
 
 
   private createUUID(): string {

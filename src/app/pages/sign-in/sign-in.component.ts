@@ -21,17 +21,6 @@ export class SignInComponent implements OnInit {
   passwordUser: string;
   signStatus: boolean;
 
-
-
-
-  // currentUser: any;
-  // currentUserPage: boolean;
-
-  // user = {
-  //   email: '',
-  //   password: ''
-  // };
-
   id: number;
   firstName: string;
   lastName: string;
@@ -41,7 +30,6 @@ export class SignInComponent implements OnInit {
   address: string;
   role: string = 'user';
 
-  usersRef: AngularFirestoreCollection<User> = null;
 
 
   constructor(private service: AuthService,
@@ -54,8 +42,10 @@ export class SignInComponent implements OnInit {
     let user = new UserCredentials(email,
        password);
     this.service.postJSONUsers(user);
- 
 
+  }
+  registration(){
+    this.signStatus=true;
   }
 
 

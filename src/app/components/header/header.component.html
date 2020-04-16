@@ -42,14 +42,14 @@
         </a>
       </div>
 
-      <div *ngIf="logIn" class="myCabinet">
+      <div *ngIf="!logIn" class="myCabinet">
         <a [routerLink]="[ '/login']" routerLinkActive="active" class="nav-link" href="#">
           <span class="namePage">Вхід</span>
           <div class="logInIcon icon"></div>
         </a>
       </div>
 
-      <div *ngIf="!logIn" class="myCabinet">
+      <div *ngIf="logIn" class="myCabinet">
         <a [routerLink]="[ '/login']" routerLinkActive="active" (click)="logOut()" class="nav-link" href="#">
           <span class="namePage">Вихід</span>
           <div class="logOutIcon icon"></div>

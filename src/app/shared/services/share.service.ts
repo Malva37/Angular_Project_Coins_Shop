@@ -39,7 +39,7 @@ export class ShareService {
   }
 
   anyHere() {
-    this.anyOne = false;
+    this.anyOne = true;
     this.switchOnAny.emit(this.anyOne);
 
   }

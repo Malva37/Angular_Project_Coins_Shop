@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     this.userIcon = false;
     localStorage.removeItem('token');
     localStorage.removeItem('isAdmin');
-    this.logIn = true;
+    this.logIn = false;
 
   }
 

@@ -1,11 +1,40 @@
+// .main {
+//   width: 70%;
+//   margin: 70px 310px;
+//   min-height: 400px;
+// }
 
-.main{
-    width: 70%;
-    margin: 70px 310px;
-    min-height: 400px;
-  }
+// .currentUser {
+//   margin: 10% 20%;
+//   display: block;
+// }
+.container-fluid {
+  padding: 2% 20%;
 
-  .currentUser{
-margin: 10% 20%;
-display: block;
-  }
+}
+.registration,
+.fullRegistration{
+  background-color: white;
+  opacity: 0.9;
+  border: 1px solid #f2bd0b;
+  border-radius: 3px;
+  padding: 5%;
+  display: flex;
+ justify-content: space-evenly;
+}
+.fullRegistration form{
+  width: 100%;
+}
+.registrationForm,
+.registrationButton{
+  margin:auto;
+}
+
+
+button{
+  background-color: #f2bd0b;
+  border: 1.5px solid #6c6133;
+  font-size: 17px;
+  font-weight: 600;
+  // margin: 0 auto;
+}

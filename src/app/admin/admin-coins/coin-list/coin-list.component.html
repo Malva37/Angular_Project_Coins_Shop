@@ -217,8 +217,56 @@
           class="form-control">
           </textarea>
       </div>
+
+      <!-- <form [formGroup]="addForm">
+        <div formArrayName="rows">
+              <ul *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
+                <li>
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="field" formControlName="imageDownload">
+                        <div class="titleField">Завантаж фото:</div>
+                          <input class="form-control" type="file" [attr.value]="image"
+                            (change)="upload($event)" accept=".png,.jpg">
+                          <div class="hidden" *ngIf="downloadURL | async; let downloadSrc" role="alert">
+                            File uploaded:
+                            <input *ngIf="downloadURL | async; let downloadSrc">
+                            <a [href]="downloadSrc">{{downloadSrc}}</a>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+          <button type="button" (click)="initGroup()"> Add Row</button>
+        </div>
+      </form> -->
     
     
+
+
+      <form [formGroup]='formName'>
+        <div formArrayName="controllerArray" >
+          <div *ngFor="let item of formName.controls.controllerArray.controls; let i=index" [formGroupName]="i">
+            <!-- <input formControlName="controlerInputName1"> -->
+
+            <div class="field" formControlName="controlerInputName1">
+              <div class="titleField">Завантаж фото:</div>
+                <input class="form-control" type="file" [attr.value]="image"
+                  (change)="upload($event)" accept=".png,.jpg">
+                <div class="hidden" *ngIf="downloadURL | async; let downloadSrc" role="alert">
+                  File uploaded:
+                  <input *ngIf="downloadURL | async; let downloadSrc">
+                  <a [href]="downloadSrc">{{downloadSrc}}</a>
+                </div>
+            </div>
+
+            <button (click)='removeInput(i)'>remove input</button>
+          </div>
+        </div>
+      </form>
+
+      <button (click)='addInput()'>add input</button>`
     
     
       <!-- <div class="field">
