@@ -3,11 +3,12 @@ import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 import { Options } from 'ng5-slider';
 import { Coin } from 'src/app/shared/classes/coins.model';
 import { IArticle } from 'src/app/shared/interfaces/articles.interfaces';
-import { CoinService } from 'src/app/shared/services/coin.service';
+import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 import { ShareService } from 'src/app/shared/services/share.service';
 import { of } from 'rxjs';
+import { CoinForUserService } from 'src/app/shared/services/coin-for-user.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class CoinsComponent implements OnInit {
 
 
 
-  constructor(private service: CoinService,
+  constructor(private service: CoinForUserService,
     private share: ShareService) {
     this.share.onClickNumber.subscribe(cnt => this.clickCnt = cnt);
     this.share.onClickSum.subscribe(sum => this.sumBasket = sum);

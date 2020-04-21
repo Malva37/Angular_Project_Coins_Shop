@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
-import { CoinService } from 'src/app/shared/services/coin.service';
+import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { Coin } from 'src/app/shared/classes/coins.model';

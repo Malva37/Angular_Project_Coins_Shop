@@ -52,7 +52,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CoinComponent } from './admin/admin-coins/coin/coin.component';
 // import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
-import { CoinService } from './shared/services/coin.service';
+import { CoinService } from './shared/services/coin-for-admin.service';
 import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
 import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
 import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';

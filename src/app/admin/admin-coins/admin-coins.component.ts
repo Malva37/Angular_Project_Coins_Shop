@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map, finalize } from 'rxjs/operators';
 import { NgForm, FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
-import { CoinService } from 'src/app/shared/services/coin.service';
+import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 import 'rxjs/add/operator/map'
 import { element } from 'protractor';
+import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class AdminCoinsComponent implements OnInit {
   modalRef: BsModalRef;
   formData: Coin;
   list: Array<ICoin>;
+  adminCategories:Array<ICategory>;
   page: number;
   id: number;
   categoryId: number;
@@ -57,11 +60,13 @@ export class AdminCoinsComponent implements OnInit {
   constructor(private modalService: BsModalService,
     private service: CoinService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
+    private afStorage: AngularFireStorage,
+    private categoryService:CategoriesService) { }
 
   ngOnInit() {
 
     this.getForAdmin();
+    this.getCategory();
     // this.service.getCoins().subscribe(actionArray => {
     //   this.list = actionArray.map(item => {
     //     const data = item.payload.doc.data() as Coin;
@@ -73,16 +78,34 @@ export class AdminCoinsComponent implements OnInit {
     this.resetForm();
   }
 
+   getCategory() {
+    this.categoryService.getCategories().subscribe(
+      data => {
+        let newData = JSON.stringify(data);
+        this.adminCategories = JSON.parse(newData).data;
+      }
+    );
+  }
+
   getForAdmin() {
     this.service.getCoins().subscribe(
       data => {
-
         let newData = JSON.stringify(data)
         this.list = JSON.parse(newData).data;
         this.page = JSON.parse(newData).pagination.page;
 
       })
   }
+
+  selectCategory (event: any): string |number {
+    console.log(event);
+    this.categoryName = event.target.value;
+    this.categoryId = event.target.selectedIndex;
+
+    console.log(this.categoryName,  this.categoryId);
+    return this.categoryName && this.categoryId;
+  }
+
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -94,7 +117,7 @@ export class AdminCoinsComponent implements OnInit {
     }
     this.service.formData = {
       id: null,
-      categoryId: 1,
+      categoryId: null,
       categoryName: '',
       name: '',
       counter: null,
@@ -118,11 +141,9 @@ export class AdminCoinsComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    debugger
-    // form.value.image = this.image;
-    // delete form.value.downloadSrc;
     const data: ICoin = Object.assign({}, form.value);
-    debugger
+    data.categoryId = this.categoryId;
+    console.log(data);
     delete data.id;
     if (form.value.id == null) {
       // this.firestore.collection('medals').add(data);
