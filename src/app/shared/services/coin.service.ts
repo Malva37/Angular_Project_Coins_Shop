@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CoinService {
 
-    // formData: Coin;
+    formData: Coin;
     userRef: AngularFirestoreCollection<Coin> = null;
     urlCoins: string;
     httpHeader: HttpHeaders
@@ -28,6 +28,13 @@ export class CoinService {
     getOneCoin(id: number): Observable<ICoin> {
         return this.http.get<ICoin>(`${this.urlCoins}?id=${id}`)
 
+    }
+
+    getCoins(): Observable <Array<ICoin>> {
+        // let resp = this.http.get<Object>(this.urlCoins);
+        
+        // JSON.parse(resp)
+        return this.http.get<Array<ICoin>>(this.urlCoins)
     }
 
 

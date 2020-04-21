@@ -14,7 +14,7 @@
     </div>
   </form>
 
-  <!-- <table class="table">
+  <table class="table">
     <thead>
       <tr class="title">
         <th scope="col">#</th>
@@ -25,12 +25,15 @@
         <th scope="col">Рік</th>
         <th scope="col">Метал</th>
         <th scope="col">Номінал</th>
-        <th scope="col">Image</th>
+        <!-- <th scope="col">Image</th> -->
+        <th scope="col">Add Image</th>
+        <th scope="col">Edit Image</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let coin of list | searchCoin:searchName; let i=index">
+      <tr *ngFor="let coin of list; let i=index">
+        <!-- <tr *ngFor="let coin of list | searchCoin:searchName; let i=index"> -->
         <td (click)="onEdit(coin, template)">{{ i+1 }}</td>
         <td (click)="onEdit(coin, template)">{{ coin.name }}</td>
         <td (click)="onEdit(coin, template)">{{ coin.price}} грн</td>
@@ -39,16 +42,62 @@
         <td (click)="onEdit(coin, template)">{{ coin.year}} рік</td>
         <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
         <td (click)="onEdit(coin, template)">{{ coin.denomination}} грн.</td>
-        <td class="imageTable" (click)="onEdit(coin, template)">
-          <img [attr.src]="coin.image" class="card-img-top">
+        <!-- <td class="imageTable">
+          <img [attr.src]="coin.images" class="card-img-top">
+        </td> -->
+        <td>
+          <input type="button" value="Add image" (click)="openModal(imageBox)" class="btn">
+        </td>
+        <td>
+          <input type="button" value="Change image" (click)="openModal(imageBox,coin)" class="btn">
         </td>
         <td>
           <input type="button" [attr.value]="X" (click)="onDelete(medal)" class="btnDelete">
         </td>
       </tr>
     </tbody>
-  </table> -->
+  </table>
+  <div class="pagesBox">
+    <div>{{page+1}}</div>
+    <div>{{page+1}}</div>
+    <div>{{page+1}}</div>
+  </div>
 
+
+  <ng-template #imageBox>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Додай/зміни фото</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modalBody">
+      <form>
+        <div class="form-group row">
+          <table *ngIf="isArrayImages" class="showImages">
+            <tr *ngFor="let oneImage of images; let i=index">
+              <td>{{ i+1 }}</td>
+              <td>
+                <img [attr.src]="oneImage" class="littleImage">
+              </td>
+              <td>
+                <input type="button" value="x" (click)="onDelete(banknote)" class="btnDelete">
+              </td>
+              <hr>
+            </tr>
+          </table>
+          <div class="card-body">
+            <h5 class="card-title">Select a file for upload:</h5>
+            <input class="form-control" type="file" (change)="upload($event)" accept=".png,.jpg">
+            <img class="littleImage" [src]="images" alt="">
+          </div>
+        </div>
+        <div class="field">
+          <button type="button" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
 
 
   <ng-template #template>
@@ -60,29 +109,29 @@
     </div>
     <div class="modalBody">
 
-      <form>
+      <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-        <input type="hidden" name="id" [(ngModel)]="id">
-        <input type="hidden" name="categoryId" [(ngModel)]="categoryId">
-        <input type="hidden" name="categoryName" [(ngModel)]="categoryName">
-        <input type="hidden" name="reserved" [(ngModel)]="reserved">
-        <input type="hidden" name="isAvailable" [(ngModel)]="isAvailable">
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+        <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
+        <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
+        <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
+        <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
 
         <div class="field">
           <div class="titleField">Назва товару:</div>
-          <input name="name" [(ngModel)]="name" (focusout)="addItem($event)" class="form-control">
+          <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" required>
         </div>
 
         <div class="field">
           <div class="titleField">Кількість:</div>
-          <input type="number" name="counter" [(ngModel)]="counter" (focusout)="addItem($event)" class="form-control"
-            pattern="[0-9]{1,}">
+          <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter"
+            class="form-control" pattern="[1-9]{1,}" required>
 
         </div>
 
         <div class="field bootstrap-select show-tick open">
           <div class="titleField">Серія:</div>
-          <select class="custom-select" [(ngModel)]="series" name="series">
+          <select class="custom-select" #series="ngModel" [(ngModel)]="service.formData.series" name="series">
             <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
             <option> Видатні особистості України</option>
             <option> Античні пам`ятки України</option>
@@ -125,7 +174,7 @@
 
         <div class="field bootstrap-select show-tick open">
           <div class="titleField">Рік випуску:</div>
-          <select class="custom-select" [(ngModel)]="year" name="year">
+          <select class="custom-select" #year="ngModel" [(ngModel)]="service.formData.year" name="year">
             <option selected="" [attr.value]="-1"> — будь-який рік — </option>
             <option>1991</option>
             <option>1992</option>
@@ -167,7 +216,7 @@
 
         <div class="field bootstrap-select show-tick open">
           <div class="titleField">Метал:</div>
-          <select class="custom-select" [(ngModel)]="metal" name="metal">
+          <select class="custom-select" #metal="ngModel" [(ngModel)]="service.formData.metal" name="metal">
             <option selected="" [attr.value]="-1"> — будь-який метал — </option>
             <option>біметалеві із дорогоцінних металів</option>
             <option>біметалеві із недорогоцінних металів</option>
@@ -182,7 +231,8 @@
 
         <div class="field bootstrap-select show-tick open">
           <div class="titleField">Номінал</div>
-          <select class="custom-select" [(ngModel)]="denomination" name="denomination">
+          <select class="custom-select" #denomination="ngModel" [(ngModel)]="service.formData.denomination"
+            name="denomination">
             <option selected="" [attr.value]="-1"> — будь-який номінал — </option>
             <option>0</option>
             <option>1</option>
@@ -206,15 +256,20 @@
 
         <div class="field">
           <div class="titleField">Ціна:</div>
-          <input type="number" name="price" [(ngModel)]="price" class="form-control">
+          <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+            required>
         </div>
 
         <div class="field">
           <div class="titleField">Опис:</div>
-          <textarea type="text" name="description" [(ngModel)]="description" class="form-control">
+          <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+            class="form-control">
             </textarea>
         </div>
 
+        <input type="hidden" name="images" #images="ngModel" [(ngModel)]="service.formData.images">
+
+        <!-- 
         <div class="form-group row">
           <table *ngIf="isArrayImages" class="showImages">
             <tr *ngFor="let oneImage of images; let i=index">
@@ -234,7 +289,7 @@
                (change)="upload($event)" accept=".png,.jpg">
             <img class="littleImage" [src]="images" alt="">
           </div>
-        </div>
+        </div> -->
 
 
 
@@ -262,16 +317,13 @@
         </div> -->
 
         <div class="field">
-          <button type="button" class="btn btn-lg btn-block btn-info">SUBMIT</button>
-
-          <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button> -->
+          <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
         </div>
 
       </form>
 
-    
+
     </div>
   </ng-template>
 
 </div>
-

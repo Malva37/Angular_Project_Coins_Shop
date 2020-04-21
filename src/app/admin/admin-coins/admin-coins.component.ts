@@ -22,7 +22,8 @@ import { element } from 'protractor';
 export class AdminCoinsComponent implements OnInit {
   modalRef: BsModalRef;
   formData: Coin;
-  list: Coin[];
+  list: Array<ICoin>;
+  page: number;
   id: number;
   categoryId: number;
   categoryName: string;
@@ -59,20 +60,42 @@ export class AdminCoinsComponent implements OnInit {
     private afStorage: AngularFireStorage) { }
 
   ngOnInit() {
-    // this.resetForm();
 
+    this.getForAdmin();
+    // this.service.getCoins().subscribe(actionArray => {
+    //   this.list = actionArray.map(item => {
+    //     const data = item.payload.doc.data() as Coin;
+    //     const id = item.payload.doc.id;
+    //     return { id, ...data }
 
+    // });
+    // });
+    this.resetForm();
   }
 
+  getForAdmin() {
+    this.service.getCoins().subscribe(
+      data => {
+
+        let newData = JSON.stringify(data)
+        this.list = JSON.parse(newData).data;
+        this.page = JSON.parse(newData).pagination.page;
+
+      })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 
   resetForm(form?) {
     if (form != null) {
       form.resetForm();
     }
-    this.formData = {
+    this.service.formData = {
       id: null,
       categoryId: 1,
-      categoryName: 'coins',
+      categoryName: '',
       name: '',
       counter: null,
       reserved: null,
@@ -84,34 +107,61 @@ export class AdminCoinsComponent implements OnInit {
       description: '',
       price: null,
       images: ['']
-      // imageReverse: ''
     };
   }
 
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
 
-  addItem(event) {
-    let file = event.target.value;
-    console.log(file);
-    
-   let product :ICoin= new Coin(null, this.categoryId,
-      this.categoryName, this.name, this.counter, this.reserved,
-      this.isAvailable, this.series, this.year, this.metal,
-      this.denomination, this.description, this.price, this.images);
-    console.log(product);
-    if (product.id == null) {
-      this.service.postJSONCoin(product)
-        .map(res => {  console.log(res)})
+
+
+
+
+
+  onSubmit(form: NgForm) {
+    debugger
+    // form.value.image = this.image;
+    // delete form.value.downloadSrc;
+    const data: ICoin = Object.assign({}, form.value);
+    debugger
+    delete data.id;
+    if (form.value.id == null) {
+      // this.firestore.collection('medals').add(data);
+      this.service.postJSONCoin(data)
+        // .map(res => {
+        //   console.log(res);
+        // })
         .subscribe(
           res => {
             console.log(res);
           }
         );
+
+    } else {
+      this.firestore.doc('medals/' + form.value.id).update(data);
     }
+    this.resetForm(form);
+    this.getForAdmin();
   }
+
+  // addItem(event) {
+  //   let file = event.target.value;
+  //   console.log(file);
+
+  //  let product :ICoin= new Coin(null, this.categoryId,
+  //     this.categoryName, this.name, this.counter, this.reserved,
+  //     this.isAvailable, this.series, this.year, this.metal,
+  //     this.denomination, this.description, this.price, this.images);
+  //   console.log(product);
+  //   if (product.id == null) {
+  //     this.service.postJSONCoin(product)
+  //       .map(res => {  console.log(res)})
+  //       .subscribe(
+  //         res => {
+  //           console.log(res);
+  //         }
+  //       );
+  //   }
+  // }
 
 
 

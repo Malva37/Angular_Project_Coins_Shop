@@ -37,7 +37,7 @@ export class CoinsComponent implements OnInit {
 
 
   idCoin: number;
-  oneCoin:ICoin;
+  oneCoin: ICoin;
 
 
 
@@ -49,28 +49,27 @@ export class CoinsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.service.getCoins().subscribe(actionArray => {
-    //   this.list = actionArray.map(c => {
-    //     return {
-    //       id: c.payload.doc.id,
-    //       ...c.payload.doc.data()
-    //     } as Coin;
-    //   });
-    //   this.getMinPrice(this.list);
-    //   this.getMaxPrice(this.list);
-    // });
+    this.getForUser()
 
-    // this.service.getOneCoin(1);
   }
 
+  getForUser() {
+    this.service.getCoins().subscribe(
+      data => {
 
+        let newData = JSON.stringify(data)
+        this.list = JSON.parse(newData).data;
+        // this.page = JSON.parse(newData).pagination.page;
+
+      })
+  }
 
   showOne(id: number) {
     console.log(id);;
     this.service.getOneCoin(id).subscribe(
       data => {
         console.log(data);
-        
+
         this.oneCoin = data;
       });
   }
