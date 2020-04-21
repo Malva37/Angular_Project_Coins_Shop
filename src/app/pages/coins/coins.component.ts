@@ -77,25 +77,25 @@ export class CoinsComponent implements OnInit {
 
 
 
-  buyProduct(coin: Coin): void {
-    debugger
-    const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image[1], coin.price, this.count, coin.price);
-    newItem.amount = this.count * coin.price;
-    let keys = Object.keys(localStorage)
-    for (let i = 0; i < keys.length; i++) {
-      const element = keys[i];
-      if (coin.id == element) {
-        let localItem = JSON.parse(localStorage.getItem(element));
-        localItem.count++;
-        localItem.amount = localItem.count * localItem.price;
-        localStorage.setItem(coin.id, JSON.stringify(localItem));
-        break
-      }
-    }
-    localStorage.setItem(coin.id, JSON.stringify(newItem));
-    this.share.plusItem();
+  // buyProduct(coin: Coin): void {
+  //   debugger
+  //   const newItem: IProductOrder = new ProductOrder(coin.id, coin.categoryId, coin.name, coin.image[1], coin.price, this.count, coin.price);
+  //   newItem.amount = this.count * coin.price;
+  //   let keys = Object.keys(localStorage)
+  //   for (let i = 0; i < keys.length; i++) {
+  //     const element = keys[i];
+  //     if (coin.id == element) {
+  //       let localItem = JSON.parse(localStorage.getItem(element));
+  //       localItem.count++;
+  //       localItem.amount = localItem.count * localItem.price;
+  //       localStorage.setItem(coin.id, JSON.stringify(localItem));
+  //       break
+  //     }
+  //   }
+  //   localStorage.setItem(coin.id, JSON.stringify(newItem));
+  //   this.share.plusItem();
 
-  }
+  // }
 
   getMaxPrice(list) {
     let max = list[0].price;

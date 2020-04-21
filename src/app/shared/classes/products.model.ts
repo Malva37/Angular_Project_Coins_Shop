@@ -2,7 +2,7 @@ import { IProduct } from '../interfaces/products.interfaces';
 
 export class Product implements IProduct{
     constructor(
-        public id:string,
+        public id:number,
         public categoryId:number,
         public categoryName:string,
         public name:string,
@@ -11,7 +11,7 @@ export class Product implements IProduct{
         public isAvailable:boolean,
         public description:string,
         public price:number,
-        public image:any
+        public images:Array<string>
 ){}
 
 

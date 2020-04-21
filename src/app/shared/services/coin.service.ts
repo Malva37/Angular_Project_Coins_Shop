@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CoinService {
 
-    formData: Coin;
+    // formData: Coin;
     userRef: AngularFirestoreCollection<Coin> = null;
     urlCoins: string;
     httpHeader: HttpHeaders
@@ -30,7 +30,7 @@ export class CoinService {
 
     }
 
-    
+
     postJSONCoin(product: ICoin): Observable<Array<ICoin>> {
         return this.http.post<Array<ICoin>>(this.urlCoins, product)
     }

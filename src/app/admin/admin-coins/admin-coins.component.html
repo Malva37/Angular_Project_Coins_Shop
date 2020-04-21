@@ -1,15 +1,277 @@
 <div class="container">
-  <app-coin-list></app-coin-list>
-</div>
+  <!-- <app-coin-list></app-coin-list> -->
 
-<ng-template #template>
+  <form class="mb-2">
+    <div class="form-row mt-4">
+      <div class="col-11">
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
+      </div>
+
+      <div class="col">
+        <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
+      </div>
+
+    </div>
+  </form>
+
+  <!-- <table class="table">
+    <thead>
+      <tr class="title">
+        <th scope="col">#</th>
+        <th scope="col">Назва</th>
+        <th scope="col">Ціна</th>
+        <th scope="col">Кількість</th>
+        <th scope="col">Серія</th>
+        <th scope="col">Рік</th>
+        <th scope="col">Метал</th>
+        <th scope="col">Номінал</th>
+        <th scope="col">Image</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coin of list | searchCoin:searchName; let i=index">
+        <td (click)="onEdit(coin, template)">{{ i+1 }}</td>
+        <td (click)="onEdit(coin, template)">{{ coin.name }}</td>
+        <td (click)="onEdit(coin, template)">{{ coin.price}} грн</td>
+        <td (click)="onEdit(coin, template)">{{ coin.counter}} шт.</td>
+        <td (click)="onEdit(coin, template)">{{ coin.series}}</td>
+        <td (click)="onEdit(coin, template)">{{ coin.year}} рік</td>
+        <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
+        <td (click)="onEdit(coin, template)">{{ coin.denomination}} грн.</td>
+        <td class="imageTable" (click)="onEdit(coin, template)">
+          <img [attr.src]="coin.image" class="card-img-top">
+        </td>
+        <td>
+          <input type="button" [attr.value]="X" (click)="onDelete(medal)" class="btnDelete">
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+
+
+  <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Add new coin</h4>
+      <h4 class="modal-title pull-left">Додай/зміни товар</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      <app-coin></app-coin>
+    <div class="modalBody">
+
+      <form>
+
+        <input type="hidden" name="id" [(ngModel)]="id">
+        <input type="hidden" name="categoryId" [(ngModel)]="categoryId">
+        <input type="hidden" name="categoryName" [(ngModel)]="categoryName">
+        <input type="hidden" name="reserved" [(ngModel)]="reserved">
+        <input type="hidden" name="isAvailable" [(ngModel)]="isAvailable">
+
+        <div class="field">
+          <div class="titleField">Назва товару:</div>
+          <input name="name" [(ngModel)]="name" (focusout)="addItem($event)" class="form-control">
+        </div>
+
+        <div class="field">
+          <div class="titleField">Кількість:</div>
+          <input type="number" name="counter" [(ngModel)]="counter" (focusout)="addItem($event)" class="form-control"
+            pattern="[0-9]{1,}">
+
+        </div>
+
+        <div class="field bootstrap-select show-tick open">
+          <div class="titleField">Серія:</div>
+          <select class="custom-select" [(ngModel)]="series" name="series">
+            <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
+            <option> Видатні особистості України</option>
+            <option> Античні пам`ятки України</option>
+            <option> Вищі навчальні заклади України</option>
+            <option> Відродження української державності</option>
+            <option> Відродження християнської духовності в Україні</option>
+            <option> Герої козацької доби </option>
+            <option> Героям Майдану</option>
+            <option> Гетьманські столиці</option>
+            <option> Дитячий Зодіак</option>
+            <option> Друга світова війна</option>
+            <option> Духовні скарби України</option>
+            <option> Збройні Сили України</option>
+            <option> Знаки зодіаку</option>
+            <option> Інші монети</option>
+            <option> Княжа Україна</option>
+            <option> Літаки України</option>
+            <option> Міста-герої України</option>
+            <option> Морська історія України</option>
+            <option> На межі тисячоліть</option>
+            <option> Найменша золота монета</option>
+            <option> Народні музичні інструменти</option>
+            <option> Народні промисли та ремесла</option>
+            <option> Області України</option>
+            <option> Обрядові свята України</option>
+            <option> Пам'ятки архітектури України</option>
+            <option> Пам'ятки давніх культур України</option>
+            <option> Славетні роди України</option>
+            <option> Спорт </option>
+            <option> Стародавні міста України </option>
+            <option> Сувенірна продукція </option>
+            <option> Східний календар </option>
+            <option> Україна космічна </option>
+            <option> Українська спадщина </option>
+            <option> Фауна в пам`ятках культури України</option>
+            <option>Флора і фауна</option>
+            <option> 2000-ліття Різдва Христового</option>
+          </select>
+        </div>
+
+        <div class="field bootstrap-select show-tick open">
+          <div class="titleField">Рік випуску:</div>
+          <select class="custom-select" [(ngModel)]="year" name="year">
+            <option selected="" [attr.value]="-1"> — будь-який рік — </option>
+            <option>1991</option>
+            <option>1992</option>
+            <option>1993</option>
+            <option>1994</option>
+            <option>1995</option>
+            <option>1996</option>
+            <option>1997</option>
+            <option>1998</option>
+            <option>1999</option>
+            <option>2000</option>
+            <option>2001</option>
+            <option>2002</option>
+            <option>2003</option>
+            <option>2004</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>
+            <option>2024</option>
+            <option>2025</option>
+          </select>
+        </div>
+
+        <div class="field bootstrap-select show-tick open">
+          <div class="titleField">Метал:</div>
+          <select class="custom-select" [(ngModel)]="metal" name="metal">
+            <option selected="" [attr.value]="-1"> — будь-який метал — </option>
+            <option>біметалеві із дорогоцінних металів</option>
+            <option>біметалеві із недорогоцінних металів</option>
+            <option>золото</option>
+            <option>інша нумізматична продукція</option>
+            <option>мельхіор</option>
+            <option>нейзильбер</option>
+            <option>сплав на основі цинку</option>
+            <option>срібло</option>
+          </select>
+        </div>
+
+        <div class="field bootstrap-select show-tick open">
+          <div class="titleField">Номінал</div>
+          <select class="custom-select" [(ngModel)]="denomination" name="denomination">
+            <option selected="" [attr.value]="-1"> — будь-який номінал — </option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+            <option>125</option>
+            <option>180</option>
+            <option>200</option>
+            <option>250</option>
+            <option>540</option>
+            <option>1080</option>
+            <option>200 000</option>
+            <option>1 000 000</option>
+            <option>2 000 000</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="titleField">Ціна:</div>
+          <input type="number" name="price" [(ngModel)]="price" class="form-control">
+        </div>
+
+        <div class="field">
+          <div class="titleField">Опис:</div>
+          <textarea type="text" name="description" [(ngModel)]="description" class="form-control">
+            </textarea>
+        </div>
+
+        <div class="form-group row">
+          <table *ngIf="isArrayImages" class="showImages">
+            <tr *ngFor="let oneImage of images; let i=index">
+              <td>{{ i+1 }}</td>
+              <td>
+                <img [attr.src]="oneImage" class="littleImage">
+              </td>
+              <td>
+                <input type="button" value="x" (click)="onDelete(banknote)" class="btnDelete">
+              </td>
+              <hr>
+            </tr>
+          </table>
+          <div class="card-body">
+            <h5 class="card-title">Select a file for upload:</h5>
+            <input class="form-control" type="file"
+               (change)="upload($event)" accept=".png,.jpg">
+            <img class="littleImage" [src]="images" alt="">
+          </div>
+        </div>
+
+
+
+
+        <!-- <div class="field">
+          <div class="titleField">Завантаж фото(аверс):</div>
+            <input class="form-control" type="file" [attr.value]="image"
+              (change)="upload($event)" accept=".png,.jpg">
+            <div class="hidden" *ngIf="downloadURL | async; let downloadSrc" role="alert">
+              File uploaded:
+              <input *ngIf="downloadURL | async; let downloadSrc">
+              <a [href]="downloadSrc">{{downloadSrc}}</a>
+            </div>
+        </div>
+      
+        <div class="field">
+            <div class="titleField">Завантаж фото(реверс):</div>
+            <input class="form-control" type="file" [attr.value]="imageReverse"
+              (change)="uploadReverse($event)" accept=".png,.jpg">
+        <div class="hidden" *ngIf="downloadURLReverse | async; let downloadSrcReverse" role="alert">
+              File uploaded:
+              <input *ngIf="downloadURLReverse | async; let downloadSrcReverse">
+              <a [href]="downloadSrcReverse">{{downloadSrcReverse}}</a>
+            </div>
+        </div> -->
+
+        <div class="field">
+          <button type="button" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+
+          <!-- <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button> -->
+        </div>
+
+      </form>
+
+    
     </div>
-</ng-template>
+  </ng-template>
+
+</div>
+

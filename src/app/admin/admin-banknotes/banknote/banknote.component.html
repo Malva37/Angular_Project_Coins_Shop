@@ -111,6 +111,19 @@
 
   <!-- <input type="hidden" name="image" #image="ngModel" [(ngModel)]="service.formData.image"> -->
   <div class="form-group row">
+    <table *ngIf="isArrayImages" class="showImages">
+      <tr *ngFor="let oneImage of image; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>
+          <img [attr.src]="oneImage" class="littleImage">
+        </td>
+        <td>
+          <input type="button" value="x" (click)="onDelete(banknote)" class="btnDelete">
+        </td>
+        <hr>
+      </tr>
+    </table>
+    <!-- </div> -->
     <div class="card-body">
       <h5 class="card-title">Select a file for upload:</h5>
       <input class="form-control" placeholder="Product image" required type="file" [value]="service.formData.image"
@@ -122,11 +135,12 @@
           aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <br>
-      <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+      <!-- <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
         File uploaded:
         <input *ngIf="downloadURL | async; let downloadSrc" type="hidden">
-        <a [href]="downloadSrc">{{downloadSrc}}</a>
-      </div>
+        <a [href]="downloadSrc">{{downloadSrc}}</a> -->
+        <img class="littleImage" [src]="image" alt="">
+      <!-- </div> -->
     </div>
   </div>
 

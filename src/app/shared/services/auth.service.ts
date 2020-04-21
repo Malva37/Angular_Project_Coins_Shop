@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { UserCredentials } from '../classes/userCredentials';
 import { Router } from '@angular/router';
 import { ShareService } from './share.service';
+import { User } from '../classes/users.model';
+
 
 
 @Injectable({
@@ -47,7 +49,23 @@ export class AuthService {
         }
       });
   }
+  createUsers(user: User) {
+    this.http.post<any>(`${this.baseUrl}/authenticate`, user,
+      { observe: 'response' }).subscribe(response => {
+        localStorage.setItem('token', response.body.token)
+        localStorage.setItem('isAdmin', response.body.isAdmin)
+        if (response.body.isAdmin) {
+          this.router.navigate(['/admin']);
+          this.share.adminHere();
+          this.share.anyHere();
+        } else {
+          this.router.navigate(['/profile']);
+          this.share.userHere();
+          this.share.anyHere();
 
+        }
+      });
+  }
 
 
   isAdminLogin(): boolean {

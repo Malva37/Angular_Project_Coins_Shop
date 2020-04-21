@@ -1,57 +1,47 @@
 <div class="container-fluid">
 
   <div *ngIf="!signStatus" class="registration">
-    <div class="registrationForm">
-      <form>
-        <div class="form-group row">
-          <input type="email" [(ngModel)]="emailUser" name="emailUser" class="form-control row" placeholder="Email">
-        </div>
-        <div class="form-group row">
-          <input type="password" [(ngModel)]="passwordUser" name="passwordUser" class="form-control row"
-            placeholder="Пароль*">
-        </div>
-        <div class="form-group row">
-          <button class="btn" (click)="login(emailUser,passwordUser)">Увійти</button>
-        </div>
-      </form>
-    </div>
-    <div class="registrationButton">
-      <button class="btn" (click)="registration()">Зареєструватись</button>
-    </div>
-
+    <form>
+      <div class="form-group row">
+        <input type="email" [(ngModel)]="emailUser" name="emailUser" class="form-control row" placeholder="Email">
+      </div>
+      <div class="form-group row">
+        <input type="password" [(ngModel)]="passwordUser" name="passwordUser" class="form-control row"
+          placeholder="Пароль">
+      </div>
+      <button class="btn-sm  enterBtn" (click)="login(emailUser,passwordUser)">Увійти</button>
+      <button class="btn-sm registBtn" (click)="registration()">Зареєструватись</button>
+    </form>
   </div>
 
   <div *ngIf="signStatus" class='fullRegistration'>
-    <div class="col-8">
-      <form>
-        <input type="hidden" name="id" [(ngModel)]="id">
-        <input type="hidden" name="role" [(ngModel)]="role">
-        <div class="form-group row">
-          <input type="text" class="form-control" name="firstName" required [(ngModel)]="firstName" placeholder="Ім'я">
-        </div>
-        <div class="form-group row">
-          <input type="text" class="form-control" name="lastName" required [(ngModel)]="lastName"
-            placeholder="Прізвище">
-        </div>
-        <div class="form-group row">
-          <input type="text" class="form-control" name="phone" required [(ngModel)]="phone"
-            placeholder="Номер телефону">
-        </div>
-        <div class="form-group row">
-          <input type="text" class="form-control" name="address" required [(ngModel)]="address"
-            placeholder="Адреса доставки">
-        </div>
-        <div class="form-group row">
-          <input type="password" class="form-control" name="password" required [(ngModel)]="password"
-            placeholder="Пароль">
-        </div>
-        <div class="form-group row">
-          <input type="password" class="form-control" name="email" required [(ngModel)]="email" placeholder="email">
-        </div>
-        <div class="form-group row">
-            <button class="btn">Зареєструватися</button>
-        </div>
-      </form>
-    </div>
+    <form>
+      <input type="hidden" name="id" [(ngModel)]="id">
+      <input type="hidden" name="role" [(ngModel)]="role">
+      <div class="form-group row">
+        <input type="text" class="form-control" name="firstName" required [(ngModel)]="firstName" placeholder="Ім'я">
+      </div>
+      <div class="form-group row">
+        <input type="text" class="form-control" name="lastName" required [(ngModel)]="lastName" placeholder="Прізвище">
+      </div>
+      <div class="form-group row">
+        <input type="text" class="form-control" name="phone" pattern="^\+?3?8?(0\d{9})$" required [(ngModel)]="phone" placeholder="Телефон">
+      </div>
+      <div class="form-group row">
+        <input type="text" class="form-control" name="address" required [(ngModel)]="address"
+          placeholder="Адреса доставки">
+      </div>
+      <div class="form-group row">
+        <input type="password" class="form-control" name="password" required [(ngModel)]="password"
+          placeholder="Пароль">
+      </div>
+      <div class="form-group row">
+        <input type="password" class="form-control" name="email" required [(ngModel)]="email" placeholder="email">
+      </div>
+      <div class="form-group row registrationButton">
+        <button (click)="registrationFull(firstName,lastName,phone,address, password, email)"
+          class="btn-sm">Зареєструватися</button>
+      </div>
+    </form>
   </div>
 </div>

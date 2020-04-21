@@ -51,7 +51,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CoinComponent } from './admin/admin-coins/coin/coin.component';
-import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
+// import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
 import { CoinService } from './shared/services/coin.service';
 import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
 import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
@@ -95,7 +95,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     MedalListComponent,
     ProductDetailsComponent,
     CoinComponent,
-    CoinListComponent,
+    // CoinListComponent,
     BanknoteComponent,
     BanknoteListComponent,
     AccessoryComponent,

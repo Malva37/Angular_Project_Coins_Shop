@@ -137,18 +137,18 @@ export class BasketComponent implements OnInit {
   }
 
 
-  deleteItem(item: Product) {
-    console.log(item);
-    localStorage.removeItem(item.id);
-    this.share.plusItem();
-    for (let i = 0; i < this.articles.length; i++) {
-      if (this.articles[i].id == item.id) {
-        this.articles.splice(i, 1);
-        break;
-      }
-    }
-    return this.totalSumOrder - (item.counter * item.price);
-  }
+  // deleteItem(item: Product) {
+  //   console.log(item);
+  //   localStorage.removeItem(item.id);
+  //   this.share.plusItem();
+  //   for (let i = 0; i < this.articles.length; i++) {
+  //     if (this.articles[i].id == item.id) {
+  //       this.articles.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+  //   return this.totalSumOrder - (item.counter * item.price);
+  // }
 
 
 

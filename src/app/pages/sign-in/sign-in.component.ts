@@ -47,6 +47,10 @@ export class SignInComponent implements OnInit {
   registration(){
     this.signStatus=true;
   }
+  registrationFull(firstName,lastName,phone,address, password, email){
+    let user = new User(1,firstName,lastName,phone,address, password, email,this.role);
+   this.service.createUsers(user);
+  }
 
 
 }

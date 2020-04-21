@@ -3,7 +3,7 @@ import { IProduct } from '../interfaces/products.interfaces';
 
 export class Banknote implements IProduct{
     constructor(
-            public id:string,
+            public id:number,
             public categoryId:number,
             public categoryName:string,
             public name:string,
@@ -15,6 +15,6 @@ export class Banknote implements IProduct{
             public signature:string,
             public description:string,
             public price:number,
-            public image: any
+            public images: Array<string>
     ){}
 }

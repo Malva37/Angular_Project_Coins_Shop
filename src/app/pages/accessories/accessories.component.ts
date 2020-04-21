@@ -42,58 +42,58 @@ export class AccessoriesComponent implements OnInit {
     this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
   }
   ngOnInit() {
-    this.service.getAccessories().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Accessory;
-      });
-      this.getMinPrice(this.list);
-      this.getMaxPrice(this.list);
-    });
+    // this.service.getAccessories().subscribe(actionArray => {
+    //   this.list = actionArray.map(item => {
+    //     return {
+    //       id: item.payload.doc.id,
+    //       ...item.payload.doc.data()
+    //     } as Accessory;
+    //   });
+    //   this.getMinPrice(this.list);
+    //   this.getMaxPrice(this.list);
+    // });
   }
 
-  buyProduct(accessory: Accessory): void {
-    const newItem: IProductOrder = new ProductOrder(accessory.id, accessory.categoryId, accessory.name, accessory.image, accessory.price, this.count, accessory.price);
-    newItem.amount = this.count * accessory.price;
-    let keys = Object.keys(localStorage)
-    for (let i = 0; i < keys.length; i++) {
-      const element = keys[i];
-      if (accessory.id == element) {
-        let localItem = JSON.parse(localStorage.getItem(element));
-        localItem.count++;
-        localItem.amount = localItem.count * localItem.price;
-        localStorage.setItem(accessory.id, JSON.stringify(localItem));
-        break
-      }
-    }
-    localStorage.setItem(accessory.id, JSON.stringify(newItem));
-    this.share.plusItem();
+  // buyProduct(accessory: Accessory): void {
+  //   const newItem: IProductOrder = new ProductOrder(accessory.id, accessory.categoryId, accessory.name, accessory.image, accessory.price, this.count, accessory.price);
+  //   newItem.amount = this.count * accessory.price;
+  //   let keys = Object.keys(localStorage)
+  //   for (let i = 0; i < keys.length; i++) {
+  //     const element = keys[i];
+  //     if (accessory.id == element) {
+  //       let localItem = JSON.parse(localStorage.getItem(element));
+  //       localItem.count++;
+  //       localItem.amount = localItem.count * localItem.price;
+  //       localStorage.setItem(accessory.id, JSON.stringify(localItem));
+  //       break
+  //     }
+  //   }
+  //   localStorage.setItem(accessory.id, JSON.stringify(newItem));
+  //   this.share.plusItem();
 
-  }
+  // }
 
-  getMaxPrice(list) {
-    let max = list[0].price;
-    for (let i = 1; i < list.length; ++i) {
-      if (list[i].price > max) {
-        max = list[i].price;
-      }
-    }
-    this.options.ceil = max;
-    this.maxValue = max;
-  }
+  // getMaxPrice(list) {
+  //   let max = list[0].price;
+  //   for (let i = 1; i < list.length; ++i) {
+  //     if (list[i].price > max) {
+  //       max = list[i].price;
+  //     }
+  //   }
+  //   this.options.ceil = max;
+  //   this.maxValue = max;
+  // }
 
 
-  getMinPrice(list) {
-    let min = list[0].price;
-    for (let i = 1; i < list.length; ++i) {
-      if (list[i].price < min) {
-        min = list[i].price;
-      }
-    }
-    this.options.floor = min;
-    this.minValue = min;
-  }
+  // getMinPrice(list) {
+  //   let min = list[0].price;
+  //   for (let i = 1; i < list.length; ++i) {
+  //     if (list[i].price < min) {
+  //       min = list[i].price;
+  //     }
+  //   }
+  //   this.options.floor = min;
+  //   this.minValue = min;
+  // }
 
 }

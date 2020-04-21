@@ -3,7 +3,7 @@ import { IMedal } from '../interfaces/medals.interfaces';
 
 export class Medal implements IMedal {
     constructor(
-        public id: string,
+        public id: number,
         public categoryId: number,
         public categoryName: string,
         public name: string,
@@ -12,7 +12,7 @@ export class Medal implements IMedal {
         public isAvailable:boolean,
         public description: string,
         public price: number,
-        public image: Array<string>
+        public images: Array<string>
     ) { }
 
 }

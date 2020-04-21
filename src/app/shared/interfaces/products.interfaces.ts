@@ -1,5 +1,5 @@
 export interface IProduct{
-    id:string;
+    id:number;
     categoryId:number;
     categoryName:string;
     name:string;
@@ -8,5 +8,5 @@ export interface IProduct{
     isAvailable:boolean;
     description:string;
     price:number;
-    image:Array<string>;
+    images:Array<string>;
 }

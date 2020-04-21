@@ -8,13 +8,18 @@ import { AuthService } from '../app/shared/services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({
-      setHeaders: {
-        'Content-Type' : 'application/json; charset=utf-8',
-        'Accept'       : 'application/json',
-        'Authorization': `${AuthService.getToken()}`,
-      },
-    });
+
+    const auth = "/authenticate";
+    if (req.url.search(auth) === -1) {
+      req = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `${AuthService.getToken()}`,
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    }
 
     return next.handle(req);
   }
