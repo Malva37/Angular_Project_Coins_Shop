@@ -31,7 +31,7 @@ export class AdminCoinsComponent implements OnInit {
   categoryId: number;
   categoryName: string;
   name: string;
-  counter: number;
+  count: number;
   reserved: number;
   isAvailable: boolean;
   series: string;
@@ -120,7 +120,7 @@ export class AdminCoinsComponent implements OnInit {
       categoryId: null,
       categoryName: '',
       name: '',
-      counter: null,
+      count: null,
       reserved: null,
       isAvailable: true,
       series: '',

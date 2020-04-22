@@ -7,7 +7,7 @@ export class Medal implements IMedal {
         public categoryId: number,
         public categoryName: string,
         public name: string,
-        public counter:number,
+        public count:number,
         public reserved:number,
         public isAvailable:boolean,
         public description: string,

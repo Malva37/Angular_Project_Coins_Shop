@@ -3,7 +3,7 @@ export interface IProduct{
     categoryId:number;
     categoryName:string;
     name:string;
-    counter:number;
+    count:number;
     reserved:number;
     isAvailable:boolean;
     description:string;
