@@ -39,6 +39,11 @@ export class CoinService {
         return this.http.post<Array<ICoin>>(this.urlCoins, product)
     }
 
+    
+   updateCoin(product: ICoin): Observable<Array<ICoin>> {
+    return this.http.put<Array<ICoin>>(`${this.urlCoins}/${product.id}`, product);
+  }
+
 
 
 }

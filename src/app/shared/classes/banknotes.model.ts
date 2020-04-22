@@ -15,6 +15,7 @@ export class Banknote implements IProduct{
             public signature:string,
             public description:string,
             public price:number,
+            public isVisibleForUsers:boolean,
             public images: Array<string>
     ){}
 }

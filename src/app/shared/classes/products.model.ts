@@ -11,6 +11,7 @@ export class Product implements IProduct{
         public isAvailable:boolean,
         public description:string,
         public price:number,
+        public isVisibleForUsers:boolean,
         public images:Array<string>
 ){}
 

@@ -12,6 +12,7 @@ export class Accessory implements IAccessory {
         public isAvailable:boolean,
         public description: string,
         public price: number,
+        public isVisibleForUsers:boolean,
         public images: Array<string>
     ) { }
 

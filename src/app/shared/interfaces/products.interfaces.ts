@@ -8,5 +8,6 @@ export interface IProduct{
     isAvailable:boolean;
     description:string;
     price:number;
+    isVisibleForUsers:boolean;
     images:Array<string>;
 }

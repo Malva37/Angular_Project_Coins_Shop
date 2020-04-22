@@ -6,7 +6,6 @@
       <div class="col-11">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
       </div>
-
       <div class="col">
         <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
       </div>
@@ -17,49 +16,46 @@
   <table class="table">
     <thead>
       <tr class="title">
-        <th scope="col">#</th>
+        <th scope="col">Видима<br>корист.</th>
         <th scope="col">Назва</th>
-        <th scope="col">Ціна</th>
-        <th scope="col">Кількість</th>
+        <th scope="col">Ціна,<br>грн</th>
+        <th scope="col">К-сть,<br>шт.</th>
         <th scope="col">Серія</th>
         <th scope="col">Рік</th>
         <th scope="col">Метал</th>
-        <th scope="col">Номінал</th>
+        <th scope="col">Номінал,<br>грн</th>
         <!-- <th scope="col">Image</th> -->
-        <th scope="col">Add Image</th>
-        <th scope="col">Edit Image</th>
+        <th scope="col">Додати, <br>змінити фото</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let coin of list; let i=index">
         <!-- <tr *ngFor="let coin of list | searchCoin:searchName; let i=index"> -->
-        <td (click)="onEdit(coin, template)">{{ i+1 }}</td>
+        <td>
+          <input name="isVisibleForUsers" #isVisibleForUsers="ngModel" type="checkbox"
+            [(ngModel)]="coin.isVisibleForUsers" (change)="fieldsChange(coin)">
+        </td>
         <td (click)="onEdit(coin, template)">{{ coin.name }}</td>
-        <td (click)="onEdit(coin, template)">{{ coin.price}} грн</td>
-        <td (click)="onEdit(coin, template)">{{ coin.counter}} шт.</td>
+        <td (click)="onEdit(coin, template)">{{ coin.price}}</td>
+        <td (click)="onEdit(coin, template)">{{ coin.count}}</td>
         <td (click)="onEdit(coin, template)">{{ coin.series}}</td>
-        <td (click)="onEdit(coin, template)">{{ coin.year}} рік</td>
+        <td (click)="onEdit(coin, template)">{{ coin.year}}</td>
         <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
-        <td (click)="onEdit(coin, template)">{{ coin.denomination}} грн.</td>
+        <td (click)="onEdit(coin, template)">{{ coin.denomination}}</td>
         <!-- <td class="imageTable">
           <img [attr.src]="coin.images" class="card-img-top">
         </td> -->
         <td>
-          <input type="button" value="Add image" (click)="openModal(imageBox)" class="btn">
+          <input type="button" value="Image" (click)="openModal(imageBox, coin)" class="btnImage">
         </td>
         <td>
-          <input type="button" value="Change image" (click)="openModal(imageBox,coin)" class="btn">
-        </td>
-        <td>
-          <input type="button" [attr.value]="X" (click)="onDelete(medal)" class="btnDelete">
+          <input type="button" value="X" (click)="onDelete(coin)" class="btnDelete">
         </td>
       </tr>
     </tbody>
   </table>
   <div class="pagesBox">
-    <div>{{page+1}}</div>
-    <div>{{page+1}}</div>
     <div>{{page+1}}</div>
   </div>
 
@@ -75,15 +71,14 @@
       <form>
         <div class="form-group row">
           <table *ngIf="isArrayImages" class="showImages">
-            <tr *ngFor="let oneImage of images; let i=index">
+            <tr *ngFor="let image of images; let i=index">
               <td>{{ i+1 }}</td>
               <td>
-                <img [attr.src]="oneImage" class="littleImage">
+                <img [attr.src]="image" class="littleImage">
               </td>
               <td>
-                <input type="button" value="x" (click)="onDelete(banknote)" class="btnDelete">
+                <input type="button" value="x" (click)=" deleteImage(image)" class="btnDelete">
               </td>
-              <hr>
             </tr>
           </table>
           <div class="card-body">
@@ -93,7 +88,7 @@
           </div>
         </div>
         <div class="field">
-          <button type="button" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+          <button type="button" (click)="addImages(images,currentIdProduct)" class="btn btn-info">Додати фото</button>
         </div>
       </form>
     </div>
@@ -119,8 +114,8 @@
 
         <div class="field">
           <div class="titleField">Категорія:</div>
-          <select (change)="selectCategory($event)" name="categoryName" class="custom-select"
-            #categoryName="ngModel" [(ngModel)]="service.formData.categoryName" required>
+          <select (change)="selectCategory($event)" name="categoryName" class="custom-select" #categoryName="ngModel"
+            [(ngModel)]="service.formData.categoryName" required>
             <option disabled selected>Choose category</option>
             <option *ngFor="let item of adminCategories" [value]="item.name">
               {{item.name}}</option>
@@ -134,8 +129,8 @@
 
         <div class="field">
           <div class="titleField">Кількість:</div>
-          <input type="number" name="count" #count="ngModel" [(ngModel)]="service.formData.count"
-            class="form-control" pattern="[1-9]{1,}" required>
+          <input type="number" name="count" #count="ngModel" [(ngModel)]="service.formData.count" class="form-control"
+            pattern="[1-9]{1,}" required>
 
         </div>
 

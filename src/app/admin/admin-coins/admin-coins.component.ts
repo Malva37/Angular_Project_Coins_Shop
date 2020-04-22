@@ -25,7 +25,7 @@ export class AdminCoinsComponent implements OnInit {
   modalRef: BsModalRef;
   formData: Coin;
   list: Array<ICoin>;
-  adminCategories:Array<ICategory>;
+  adminCategories: Array<ICategory>;
   page: number;
   id: number;
   categoryId: number;
@@ -40,13 +40,16 @@ export class AdminCoinsComponent implements OnInit {
   denomination: number;
   description: string;
   price: number;
+  isVisibleForUsers: boolean;
   images: Array<string> = [];
   // imageReverse: string;
   downloadSrc: string;
-  // product: ICoin;
-  // oneImage:string;
+  product: ICoin;
+  editStatus: boolean;
+  // currentIdProduct:number;
+
   isArrayImages: boolean;
-  // product;
+
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
@@ -61,24 +64,15 @@ export class AdminCoinsComponent implements OnInit {
     private service: CoinService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage,
-    private categoryService:CategoriesService) { }
+    private categoryService: CategoriesService) { }
 
   ngOnInit() {
-
     this.getForAdmin();
     this.getCategory();
-    // this.service.getCoins().subscribe(actionArray => {
-    //   this.list = actionArray.map(item => {
-    //     const data = item.payload.doc.data() as Coin;
-    //     const id = item.payload.doc.id;
-    //     return { id, ...data }
-
-    // });
-    // });
     this.resetForm();
   }
 
-   getCategory() {
+  getCategory() {
     this.categoryService.getCategories().subscribe(
       data => {
         let newData = JSON.stringify(data);
@@ -97,18 +91,26 @@ export class AdminCoinsComponent implements OnInit {
       })
   }
 
-  selectCategory (event: any): string |number {
-    console.log(event);
+  selectCategory(event: any): string | number {
     this.categoryName = event.target.value;
     this.categoryId = event.target.selectedIndex;
-
-    console.log(this.categoryName,  this.categoryId);
     return this.categoryName && this.categoryId;
   }
 
+  fieldsChange(product) {
+    console.log(product);
+    this.service.updateCoin(product).subscribe(
+      () => {
+        this.getForAdmin();
+      }
+    );
+  }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, product?) {
     this.modalRef = this.modalService.show(template);
+    this.product = product
+    // console.log(product);
+    // return this.currentIdProduct;
   }
 
   resetForm(form?) {
@@ -122,75 +124,72 @@ export class AdminCoinsComponent implements OnInit {
       name: '',
       count: null,
       reserved: null,
-      isAvailable: true,
+      isAvailable: null,
       series: '',
       year: null,
       metal: '',
       denomination: null,
       description: '',
       price: null,
+      isVisibleForUsers: false,
       images: ['']
     };
   }
 
-
-
-
-
-
-
-
   onSubmit(form: NgForm) {
     const data: ICoin = Object.assign({}, form.value);
-    data.categoryId = this.categoryId;
-    console.log(data);
-    delete data.id;
-    if (form.value.id == null) {
-      // this.firestore.collection('medals').add(data);
+    if (!this.editStatus) {
       this.service.postJSONCoin(data)
-        // .map(res => {
-        //   console.log(res);
-        // })
         .subscribe(
-          res => {
-            console.log(res);
-          }
-        );
-
+            res => {
+              console.log(res);
+            });
     } else {
-      this.firestore.doc('medals/' + form.value.id).update(data);
+      this.service.updateCoin(data)
     }
-    this.resetForm(form);
+    this.editStatus = false;
+    this.resetForm();
     this.getForAdmin();
+
   }
 
-  // addItem(event) {
-  //   let file = event.target.value;
-  //   console.log(file);
 
-  //  let product :ICoin= new Coin(null, this.categoryId,
-  //     this.categoryName, this.name, this.counter, this.reserved,
-  //     this.isAvailable, this.series, this.year, this.metal,
-  //     this.denomination, this.description, this.price, this.images);
-  //   console.log(product);
-  //   if (product.id == null) {
-  //     this.service.postJSONCoin(product)
-  //       .map(res => {  console.log(res)})
-  //       .subscribe(
-  //         res => {
-  //           console.log(res);
-  //         }
-  //       );
-  //   }
-  // }
+  addImages(images) {
+    console.log(this.product);
+    console.log(images);
 
+    this.product.images = images;
+    this.service.updateCoin(this.product).subscribe(
+      () => {
+        this.getForAdmin();
+      }
+    );
 
+  }
 
+  deleteImage(image) {
+    console.log(image);
+    this.afStorage.storage.refFromURL(image).delete();
+    
+  }
 
+  onEdit(product, template) {
+    this.openModal(template, product);
+    console.log(product);
+
+    this.service.formData = Object.assign({}, product);
+    console.log(product);
+    this.editStatus = true;
+
+    // this.image = coin.image;
+    // this.imageReverse = coin.imageReverse;
+    // this.editImageStatus = true;
+    // this.editImageReverseStatus = true;
+  }
 
   public upload(event: any): void {
     const file = event.target.files[0];
-    const filePath = `images/banknotes/${this.createUUID()}.${file.type.split('/')[1]}`;
+    const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
     this.task = this.afStorage.upload(filePath, file);
     this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
     this.uploadProgress = this.task.percentageChanges();
@@ -198,11 +197,9 @@ export class AdminCoinsComponent implements OnInit {
       .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
       .subscribe();
     this.task.then((e) => {
-      this.afStorage.ref(`images/banknotes/${e.metadata.name}`).getDownloadURL().subscribe(
+      this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          console.log(data);
           this.images.push(data)
-          console.log(this.images);
           if (this.images.length > 0) {
             this.isArrayImages = true;
           }
