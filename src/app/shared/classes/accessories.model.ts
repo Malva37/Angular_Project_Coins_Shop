@@ -1,5 +1,6 @@
 
 import { IAccessory } from '../interfaces/accessories.interfaces';
+import { IImage } from '../interfaces/image.interfaces';
 
 export class Accessory implements IAccessory {
     constructor(
@@ -13,7 +14,7 @@ export class Accessory implements IAccessory {
         public description: string,
         public price: number,
         public isVisibleForUsers:boolean,
-        public images: Array<string>
+        public images: Array<IImage>
     ) { }
 
 }

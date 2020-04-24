@@ -1,16 +1,9 @@
-<div class="container">
+<!-- <div class="myContainer"> -->
   <!-- <app-coin-list></app-coin-list> -->
 
-  <form class="mb-2">
-    <div class="form-row mt-4">
-      <div class="col-11">
-        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
-      </div>
-
-    </div>
+  <form class="searchAdd">
+    <input type="text" class="searchInput form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
+    <button type="button" class="btnAdd" (click)="openModal(template)">Add</button>
   </form>
 
   <table class="table">
@@ -24,7 +17,7 @@
         <th scope="col">Рік</th>
         <th scope="col">Метал</th>
         <th scope="col">Номінал,<br>грн</th>
-        <!-- <th scope="col">Image</th> -->
+        <th scope="col">Image</th>
         <th scope="col">Додати, <br>змінити фото</th>
         <th scope="col"></th>
       </tr>
@@ -43,9 +36,9 @@
         <td (click)="onEdit(coin, template)">{{ coin.year}}</td>
         <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
         <td (click)="onEdit(coin, template)">{{ coin.denomination}}</td>
-        <!-- <td class="imageTable">
-          <img [attr.src]="coin.images" class="card-img-top">
-        </td> -->
+        <td class="imageTable">
+          <img [attr.src]="coin.images.image?.url" class="card-img-top">
+        </td>
         <td>
           <input type="button" value="Image" (click)="openModal(imageBox, coin)" class="btnImage">
         </td>
@@ -74,10 +67,13 @@
             <tr *ngFor="let image of images; let i=index">
               <td>{{ i+1 }}</td>
               <td>
-                <img [attr.src]="image" class="littleImage">
+                <img [attr.src]="image.url" class="littleImage">
               </td>
               <td>
-                <input type="button" value="x" (click)=" deleteImage(image)" class="btnDelete">
+                <input type="radio" name="isTitle" [checked]="image.title" (change)="changeStatusTitleImage(image)">
+              </td>
+              <td>
+                <input type="button" value="x" (click)="deleteImage(image)" class="btnDelete">
               </td>
             </tr>
           </table>
@@ -331,4 +327,4 @@
     </div>
   </ng-template>
 
-</div>
+<!-- </div> -->

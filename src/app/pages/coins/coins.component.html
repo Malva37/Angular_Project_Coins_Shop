@@ -168,10 +168,9 @@
     <section class="catalog">
       <figure class="product"
         *ngFor="let coin of list | searchCoin:searchName | filterPrice:minValue:maxValue | filterDenomination: denomination | filterMetal: metal | filterSeries: series | filterYear: year ">
-        <img [attr.src]="coin.image" class="card-img-top" alt="...">
-        <!-- <img [attr.src]="coin.imageReverse" class="card-img-top" alt="..."> -->
+        <img [attr.src]="coin.images" class="card-img-top" alt="...">
         <div class="card-body">
-          <p class="title">{{ coin.name }} {{ coin.denomination }} грн. {{ coin.year }}р.</p>
+          <p class="title">{{ coin.name }} {{ coin.denomination }}грн. {{ coin.year }}р.</p>
           <p class="price">{{ coin.price }} грн</p>
           <div class="button-group">
             <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails"

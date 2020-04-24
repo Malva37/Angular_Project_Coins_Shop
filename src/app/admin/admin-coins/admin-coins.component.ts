@@ -14,6 +14,8 @@ import 'rxjs/add/operator/map'
 import { element } from 'protractor';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
+import { IImage } from 'src/app/shared/interfaces/image.interfaces';
+import { Image } from 'src/app/shared/classes/image.model';
 
 
 @Component({
@@ -41,13 +43,14 @@ export class AdminCoinsComponent implements OnInit {
   description: string;
   price: number;
   isVisibleForUsers: boolean;
-  images: Array<string> = [];
+  images: Array<IImage> = [];
+  image: IImage;
   // imageReverse: string;
   downloadSrc: string;
   product: ICoin;
   editStatus: boolean;
   // currentIdProduct:number;
-
+  // title: boolean;
   isArrayImages: boolean;
 
 
@@ -108,10 +111,22 @@ export class AdminCoinsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, product?) {
     this.modalRef = this.modalService.show(template);
-    this.product = product
+    this.product = product;
+    this.images = product.images;
+    console.log(this.images);
+    
     // console.log(product);
     // return this.currentIdProduct;
   }
+  
+  // openModalImage(template: TemplateRef<any>, product?) {
+  //   this.modalRef = this.modalService.show(template);
+  //   this.product = product;
+  //   this.images = product.images;
+  //   // console.log(product);
+  //   // return this.currentIdProduct;
+  // }
+
 
   resetForm(form?) {
     if (form != null) {
@@ -132,7 +147,7 @@ export class AdminCoinsComponent implements OnInit {
       description: '',
       price: null,
       isVisibleForUsers: false,
-      images: ['']
+      images: []
     };
   }
 
@@ -141,9 +156,9 @@ export class AdminCoinsComponent implements OnInit {
     if (!this.editStatus) {
       this.service.postJSONCoin(data)
         .subscribe(
-            res => {
-              console.log(res);
-            });
+          res => {
+            console.log(res);
+          });
     } else {
       this.service.updateCoin(data)
     }
@@ -168,9 +183,19 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   deleteImage(image) {
-    console.log(image);
-    this.afStorage.storage.refFromURL(image).delete();
-    
+    this.afStorage.storage.refFromURL(image.url).delete();
+    this.images = this.images.filter(obj => {
+      return obj.url !== image.url;
+    })
+    if (image.title) {
+      this.images[0].title = true;
+    }
+    console.log(this.images);
+
+    if (image.id != null) {
+      // sent request with (image.id)
+    }
+
   }
 
   onEdit(product, template) {
@@ -199,17 +224,26 @@ export class AdminCoinsComponent implements OnInit {
     this.task.then((e) => {
       this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          this.images.push(data)
+          let image: IImage = new Image(null, data, false)
+          this.images.push(image);
           if (this.images.length > 0) {
             this.isArrayImages = true;
+
+            this.images[0].title = true;
+
+            return this.images;
           }
-          return this.images;
         }
       );
     }
     );
   }
+  changeStatusTitleImage(image) {
 
+    this.images[0].title = false;
+
+    if (image.title) { image.title = false } else { image.title = true }
+  }
 
   private createUUID(): string {
     let dt = new Date().getTime();

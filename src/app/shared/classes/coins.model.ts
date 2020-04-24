@@ -1,4 +1,5 @@
 import { ICoin } from '../interfaces/coins.interfaces';
+import { IImage } from '../interfaces/image.interfaces';
 
 export class Coin implements ICoin{
     constructor(
@@ -16,7 +17,6 @@ export class Coin implements ICoin{
             public description:string,
             public price:number,
             public isVisibleForUsers:boolean,
-            public images:Array<string>
-            // public imageReverse:any
+            public images:Array<IImage>
     ){}
 }

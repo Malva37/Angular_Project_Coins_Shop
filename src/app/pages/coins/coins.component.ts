@@ -60,6 +60,8 @@ export class CoinsComponent implements OnInit {
 
         let newData = JSON.stringify(data)
         this.list = JSON.parse(newData).data;
+        console.log(this.list);
+        
         // this.page = JSON.parse(newData).pagination.page;
 
       })

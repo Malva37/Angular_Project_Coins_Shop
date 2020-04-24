@@ -1,5 +1,6 @@
 
 import { IMedal } from '../interfaces/medals.interfaces';
+import { IImage } from '../interfaces/image.interfaces';
 
 export class Medal implements IMedal {
     constructor(
@@ -13,7 +14,7 @@ export class Medal implements IMedal {
         public description: string,
         public price: number,
         public isVisibleForUsers:boolean,
-        public images: Array<string>
+        public images: Array<IImage>
     ) { }
 
 }

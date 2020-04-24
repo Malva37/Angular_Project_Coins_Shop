@@ -1,11 +1,7 @@
 tr img {
-  height: 35px;
-  width: 35px;
-
-}
-
-tr img:hover {
-  transform: scale(2.5);
+  height: 40px;
+  width: 40px;
+  padding: 2px;
 }
 
 img {
@@ -18,9 +14,9 @@ img {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  //   border-style: hidden;
   font-size: 15px;
   padding: 0;
+  table-layout: fixed;
 }
 
 .modalBody {
@@ -35,6 +31,7 @@ img {
 .table th,
 td {
   padding: 0 1px;
+  word-wrap: break-word;
 }
 
 table td {
@@ -42,18 +39,6 @@ table td {
   vertical-align: middle;
 }
 
-//   table tr:first-child td {
-//     border-top: 0;
-//   }
-//   table tr td:first-child {
-//     border-left: 0;
-//   }
-//   table tr:last-child td {
-//     border-bottom: 0;
-//   }
-//   table tr td:last-child {
-//     border-right: 0;
-//   }
 .btnDelete {
   background-color: #f2bd0b;
   border: 1px solid black;
@@ -73,4 +58,91 @@ table td {
   border-radius: 5px;
   font-weight: 600;
   padding: 0px 5px;
+}
+
+.searchInput {
+  width: 80%;
+
+}
+
+.btnAdd {
+  width: 15%;
+  margin-left: 5%;
+  font-weight: 400;
+  vertical-align: middle;
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 0px 5px;
+}
+
+.searchAdd {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 0;
+
+}
+tbody tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+
+@media screen and (max-width:1200px)and (min-width:769px) {
+  .myContainer {
+    min-width: 769px;
+    max-width: 1200px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+}
+
+
+@media screen and (max-width:768px) and (min-width:320px) {
+
+  table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #807a7a; }
+	
+	td { 
+		border: none;
+		border-bottom: 1px solid black; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		position: absolute;
+		top: 0px;
+		left: 6px;
+		width: 46%; 
+		padding-right: 5px; 
+    white-space: nowrap;
+		border-right: 1px solid lightgray; 
+    
+  }
+  
+  
+  td:nth-of-type(1):before { content: "Видима корист."; }
+	td:nth-of-type(2):before { content: "Назва"; }
+	td:nth-of-type(3):before { content: "Ціна"; }
+	td:nth-of-type(4):before { content: "К-сть"; }
+	td:nth-of-type(5):before { content: "Серія"; }
+	td:nth-of-type(6):before { content: "Рік"; }
+	td:nth-of-type(7):before { content: "Метал"; }
+	td:nth-of-type(8):before { content: "Номінал"; }
+	td:nth-of-type(9):before { content: "Image"; }
+	td:nth-of-type(10):before { content: "Дод./змін. фото"; }
+	td:nth-of-type(11):before { content: "Видалити"; }
+
 }
