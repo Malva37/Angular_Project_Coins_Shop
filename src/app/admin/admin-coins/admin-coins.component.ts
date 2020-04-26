@@ -16,6 +16,7 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
 import { IImage } from 'src/app/shared/interfaces/image.interfaces';
 import { Image } from 'src/app/shared/classes/image.model';
+import { prototype } from 'events';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class AdminCoinsComponent implements OnInit {
   // imageReverse: string;
   downloadSrc: string;
   product: ICoin;
+  totalPages: number;
   editStatus: boolean;
   // currentIdProduct:number;
   // title: boolean;
@@ -90,7 +92,7 @@ export class AdminCoinsComponent implements OnInit {
         let newData = JSON.stringify(data)
         this.list = JSON.parse(newData).data;
         this.page = JSON.parse(newData).pagination.page;
-
+        this.totalPages = Math.ceil(JSON.parse(newData).pagination.total / 10);
       })
   }
 
@@ -112,20 +114,16 @@ export class AdminCoinsComponent implements OnInit {
   openModal(template: TemplateRef<any>, product?) {
     this.modalRef = this.modalService.show(template);
     this.product = product;
+
+  }
+
+  openModalImage(template: TemplateRef<any>, product?) {
+    this.modalRef = this.modalService.show(template);
+    this.product = product;
     this.images = product.images;
-    console.log(this.images);
-    
     // console.log(product);
     // return this.currentIdProduct;
   }
-  
-  // openModalImage(template: TemplateRef<any>, product?) {
-  //   this.modalRef = this.modalService.show(template);
-  //   this.product = product;
-  //   this.images = product.images;
-  //   // console.log(product);
-  //   // return this.currentIdProduct;
-  // }
 
 
   resetForm(form?) {
@@ -158,16 +156,29 @@ export class AdminCoinsComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
+            this.getForAdmin();
           });
     } else {
-      this.service.updateCoin(data)
+      this.service.updateCoin(data).subscribe(
+        () => {
+          this.getForAdmin();
+        }
+      )
     }
     this.editStatus = false;
     this.resetForm();
-    this.getForAdmin();
+    // this.getForAdmin();
 
   }
-
+  deleteProduct(product) {
+    console.log(product);
+    this.service.deleteCoin(product.id).subscribe(
+      () => {
+        this.getForAdmin();
+      }
+    )
+    // this.getForAdmin();
+  }
 
   addImages(images) {
     console.log(this.product);

@@ -30,7 +30,7 @@ export class CoinService {
 
     }
 
-    getCoins(): Observable <Array<ICoin>> {
+    getCoins(): Observable<Array<ICoin>> {
         return this.http.get<Array<ICoin>>(this.urlCoins)
     }
 
@@ -39,11 +39,23 @@ export class CoinService {
         return this.http.post<Array<ICoin>>(this.urlCoins, product)
     }
 
-    
-   updateCoin(product: ICoin): Observable<Array<ICoin>> {
-    return this.http.put<Array<ICoin>>(`${this.urlCoins}/${product.id}`, product);
-  }
 
+    updateCoin(product: ICoin): Observable<ICoin> {
+        return this.http.put<ICoin>(this.urlCoins, product);
+    }
+
+    deleteCoin(id: number): Observable<void> {
+        console.log("delete coin: " + id);
+        let url = `${this.urlCoins}?id=${id}`;
+        console.log(url);
+
+       return this.http.delete<void>(url);
+        console.log('after delete');
+        
+    }
 
 
 }
+
+
+
