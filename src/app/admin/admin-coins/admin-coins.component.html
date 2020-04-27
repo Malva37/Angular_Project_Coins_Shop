@@ -37,7 +37,9 @@
       <td (click)="onEdit(coin, template)">{{ coin.metal}}</td>
       <td (click)="onEdit(coin, template)">{{ coin.denomination}}</td>
       <td class="imageTable">
-        <img [attr.src]="coin.images.image?.url" class="card-img-top">
+        <ul *ngFor="let image of coin.images;">
+          <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top">
+        </ul>
       </td>
       <td>
         <input type="button" value="Image" (click)="openModalImage(imageBox, coin)" class="btnImage">
@@ -54,12 +56,11 @@
     <ul class="pagination">
       <li class="page-item">
         <a class="page-link" (click)="paginaAnt()">
-          <</a> </li>
-      <li class="page-item">
+          <</a> </li> <li class="page-item">
             <a class="page-link"> {{ page+1 }}</a>
       </li>
       <li class="page-item">
-        <a class="page-link"  (click)="proxPagina()">></a>
+        <a class="page-link" (click)="proxPagina()">></a>
       </li>
       <li class="page-item disabled">
         <span class="page-link">Total: {{ totalPages }}</span>
@@ -86,7 +87,7 @@
               <img [attr.src]="image.url" class="littleImage">
             </td>
             <td>
-              <input type="radio" name="isTitle" [checked]="image.title" (change)="changeStatusTitleImage(image)">
+              <input type="radio" name="isTitle" [checked]="image.isTitle" (change)="changeStatusTitleImage(image)">
             </td>
             <td>
               <input type="button" value="x" (click)="deleteImage(image)" class="btnDelete">
@@ -100,7 +101,7 @@
         </div>
       </div>
       <div class="field">
-        <button type="button" (click)="addImages(images,currentIdProduct)" class="btn btn-info">Додати фото</button>
+        <button type="button" (click)="addImages(images)" class="btn btn-info">Додати фото</button>
       </div>
     </form>
   </div>
@@ -294,4 +295,3 @@
 
   </div>
 </ng-template>
-

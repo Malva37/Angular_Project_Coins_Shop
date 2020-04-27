@@ -1,46 +1,59 @@
 <div class="container-fluid">
 
   <div *ngIf="!signStatus" class="registration">
-    <form>
+    <form #formSm="ngForm" autocomplete="off" (submit)="onSubmit(formSm)">
       <div class="form-group row">
-        <input type="email" [(ngModel)]="emailUser" name="emailUser" class="form-control row" placeholder="Email">
+        <input type="text" #userName="ngModel" name = "userName" [(ngModel)]="share.formDataSm.userName" class="form-control row"
+          placeholder="name">
+          <div *ngIf="formSm.invalid " class="validation-error">Введіть вірний логін/пароль</div>
       </div>
       <div class="form-group row">
-        <input type="password" [(ngModel)]="passwordUser" name="passwordUser" class="form-control row"
-          placeholder="Пароль">
+        <input type="password" name="password" #password="ngModel"
+        [(ngModel)]="share.formDataSm.password"
+          class="form-control row" placeholder="Пароль">
+          <div *ngIf="formSm.invalid " class="validation-error">Введіть вірний логін/пароль</div>
       </div>
-      <button class="btn-sm  enterBtn" (click)="login(emailUser,passwordUser)">Увійти</button>
-      <button class="btn-sm registBtn" (click)="registration()">Зареєструватись</button>
+      <button type="submit" [disabled]="formSm.invalid" class="btn-sm enterBtn">Увійти</button>
     </form>
+    <button class="btn-sm registBtn" (click)="registration()">Зареєструватись</button>
   </div>
 
+
+
+
   <div *ngIf="signStatus" class='fullRegistration'>
-    <form>
-      <input type="hidden" name="id" [(ngModel)]="id">
-      <input type="hidden" name="role" [(ngModel)]="role">
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="share.formData.id">
+      <input type="hidden" name="isAdmin" #isAdmin="ngModel" [(ngModel)]="share.formData.isAdmin">
       <div class="form-group row">
-        <input type="text" class="form-control" name="firstName" required [(ngModel)]="firstName" placeholder="Ім'я">
+        <input type="text" class="form-control" name="firstName" #firstName="ngModel"
+          [(ngModel)]="share.formData.firstName" placeholder="Ім'я">
+        <div *ngIf="firstName.invalid " class="validation-error">Введіть кількість відмінну від 0</div>
       </div>
       <div class="form-group row">
-        <input type="text" class="form-control" name="lastName" required [(ngModel)]="lastName" placeholder="Прізвище">
+        <input type="text" class="form-control" name="lastName" #lastName="ngModel"
+          [(ngModel)]="share.formData.lastName" placeholder="Прізвище">
       </div>
       <div class="form-group row">
-        <input type="text" class="form-control" name="phone" pattern="^\+?3?8?(0\d{9})$" required [(ngModel)]="phone" placeholder="Телефон">
+        <input type="text" [textMask]="{mask: phoneMask}" class="form-control" name="phone " #phone="ngModel"
+          [(ngModel)]="share.formData.phone" placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ">
       </div>
       <div class="form-group row">
-        <input type="text" class="form-control" name="address" required [(ngModel)]="address"
+        <input type="text" class="form-control" name="address" #address="ngModel" [(ngModel)]="share.formData.address"
           placeholder="Адреса доставки">
       </div>
       <div class="form-group row">
-        <input type="password" class="form-control" name="password" required [(ngModel)]="password"
-          placeholder="Пароль">
+        <input type="password" class="form-control" name="password" #password="ngModel"
+          [(ngModel)]="share.formData.password" placeholder="Пароль">
       </div>
       <div class="form-group row">
-        <input type="password" class="form-control" name="email" required [(ngModel)]="email" placeholder="email">
+        <input type="password" class="form-control" name="email" #email="ngModel" [(ngModel)]="share.formData.email"
+          placeholder="email">
       </div>
       <div class="form-group row registrationButton">
-        <button (click)="registrationFull(firstName,lastName,phone,address, password, email)"
-          class="btn-sm">Зареєструватися</button>
+        <!-- <button (click)="registrationFull(firstName,lastName,phone,address, password, email)"
+          class="btn-sm">Зареєструватися</button> -->
+        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
       </div>
     </form>
   </div>

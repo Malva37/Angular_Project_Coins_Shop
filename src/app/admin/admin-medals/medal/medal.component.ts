@@ -47,7 +47,7 @@ export class MedalComponent implements OnInit {
 //     if (form != null) {
 //       form.resetForm();
 //     }
-//     this.service.formData = {
+    // this.service.formData = {
 //       id: null,
 //       categoryId: 3,
 //       categoryName: 'medals',

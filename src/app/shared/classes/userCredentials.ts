@@ -1,5 +1,6 @@
+import { IUserCredentials } from '../interfaces/userCredentials.interfaces';
 
-export class UserCredentials {
+export class UserCredentials implements IUserCredentials {
 
     constructor(
         public userName: string,

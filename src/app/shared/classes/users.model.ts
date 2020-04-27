@@ -11,7 +11,7 @@ export class User implements IUser {
         public phone: string,
         public address: string,
         public password: string,
-       public role:string
+       public isAdmin:boolean
       
 
     ) { }

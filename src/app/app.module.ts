@@ -64,10 +64,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
 import { AuthInterceptor } from './auth.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
-
-
-
-
+import { TextMaskModule } from 'angular2-text-mask';
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -103,7 +101,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SignInComponent,
     FilterSignPipe,
     ProfileComponent
-  
 
   ],
   imports: [
@@ -113,6 +110,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     NgxUiLoaderRouterModule,
     HttpClientModule,
     FormsModule,
+    TextMaskModule,
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
@@ -129,6 +127,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
       {
         provide : HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
+        useFactory: function(router: Router) {
+          return new AuthInterceptor(router);
+        },
+        deps: [Router],
         multi   : true,
       }
     ],

@@ -17,7 +17,7 @@ import { CoinForUserService } from 'src/app/shared/services/coin-for-user.servic
   styleUrls: ['./coins.component.scss']
 })
 export class CoinsComponent implements OnInit {
-  list: Coin[];
+  list: Array<ICoin>;
   buttonsShow: boolean;
   minValue: number = 0;
   maxValue: number = 1000;
@@ -57,11 +57,12 @@ export class CoinsComponent implements OnInit {
   getForUser() {
     this.service.getCoins().subscribe(
       data => {
+        console.log(data);
 
         let newData = JSON.stringify(data)
         this.list = JSON.parse(newData).data;
         console.log(this.list);
-        
+
         // this.page = JSON.parse(newData).pagination.page;
 
       })

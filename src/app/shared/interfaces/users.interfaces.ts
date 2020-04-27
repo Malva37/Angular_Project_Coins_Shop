@@ -7,7 +7,7 @@ export interface IUser{
     phone: string;
     address: string,
     password: string,
-    role:string
+    isAdmin:boolean;
  
 
 }

@@ -68,6 +68,9 @@
   width: 100%;
 
 }
+ul{
+  padding-inline-start: 0;
+}
 
 .minMaxField{
 display: flex;
@@ -85,12 +88,17 @@ justify-content: space-between;
   width: 250px;
 }
 option {
-  white-space: nowrap; /* Отменяем перенос текста */
-  overflow: hidden; /* Обрезаем содержимое */
-  padding: 5px; /* Поля */
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px; 
   text-overflow: ellipsis;
 } 
-
+.noImageBig{
+  width: 120px;
+  height: 120px;
+ background: url('../../../assets/icon/noImageBig.png') no-repeat; 
+ margin: 0 auto;
+}
 
 .ng5-slider-pointer-min,
 .ng5-slider-pointer-max {

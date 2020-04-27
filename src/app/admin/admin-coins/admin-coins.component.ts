@@ -17,6 +17,7 @@ import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
 import { IImage } from 'src/app/shared/interfaces/image.interfaces';
 import { Image } from 'src/app/shared/classes/image.model';
 import { prototype } from 'events';
+import { ImagesService } from 'src/app/shared/services/images.service';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class AdminCoinsComponent implements OnInit {
   // currentIdProduct:number;
   // title: boolean;
   isArrayImages: boolean;
+  isImage: boolean;
 
 
   ref: AngularFireStorageReference;
@@ -69,7 +71,8 @@ export class AdminCoinsComponent implements OnInit {
     private service: CoinService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage,
-    private categoryService: CategoriesService) { }
+    private categoryService: CategoriesService,
+    private imageService: ImagesService) { }
 
   ngOnInit() {
     this.getForAdmin();
@@ -117,12 +120,13 @@ export class AdminCoinsComponent implements OnInit {
 
   }
 
-  openModalImage(template: TemplateRef<any>, product?) {
+  openModalImage(template: TemplateRef<any>, product) {
     this.modalRef = this.modalService.show(template);
     this.product = product;
+    console.log(this.product);
     this.images = product.images;
-    // console.log(product);
-    // return this.currentIdProduct;
+    console.log(this.images);
+    this.isArrayImages = true;
   }
 
 
@@ -167,9 +171,8 @@ export class AdminCoinsComponent implements OnInit {
     }
     this.editStatus = false;
     this.resetForm();
-    // this.getForAdmin();
-
   }
+
   deleteProduct(product) {
     console.log(product);
     this.service.deleteCoin(product.id).subscribe(
@@ -177,15 +180,14 @@ export class AdminCoinsComponent implements OnInit {
         this.getForAdmin();
       }
     )
-    // this.getForAdmin();
   }
 
   addImages(images) {
     console.log(this.product);
     console.log(images);
 
-    this.product.images = images;
-    this.service.updateCoin(this.product).subscribe(
+    this.images = images;
+    this.imageService.postImage(this.product).subscribe(
       () => {
         this.getForAdmin();
       }
@@ -198,29 +200,19 @@ export class AdminCoinsComponent implements OnInit {
     this.images = this.images.filter(obj => {
       return obj.url !== image.url;
     })
-    if (image.title) {
-      this.images[0].title = true;
+    if (image.isTitle) {
+      this.images[0].isTitle = true;
     }
     console.log(this.images);
-
     if (image.id != null) {
-      // sent request with (image.id)
     }
 
   }
 
   onEdit(product, template) {
     this.openModal(template, product);
-    console.log(product);
-
     this.service.formData = Object.assign({}, product);
-    console.log(product);
     this.editStatus = true;
-
-    // this.image = coin.image;
-    // this.imageReverse = coin.imageReverse;
-    // this.editImageStatus = true;
-    // this.editImageReverseStatus = true;
   }
 
   public upload(event: any): void {
@@ -235,25 +227,27 @@ export class AdminCoinsComponent implements OnInit {
     this.task.then((e) => {
       this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          let image: IImage = new Image(null, data, false)
+          let image = { id: null, url: data, isTitle: false };
           this.images.push(image);
-          if (this.images.length > 0) {
+          if (this.images.length == 1) {
             this.isArrayImages = true;
-
-            this.images[0].title = true;
-
-            return this.images;
+            this.images[0].isTitle = true;
           }
+          return this.images;
         }
       );
     }
     );
   }
+
   changeStatusTitleImage(image) {
-
-    this.images[0].title = false;
-
-    if (image.title) { image.title = false } else { image.title = true }
+    image.isTitle = true;
+    for (let elem of this.images) {
+      if (elem.isTitle === true && elem.url != image.url) {
+        elem.isTitle = false;
+        break;
+      }
+    }
   }
 
   private createUUID(): string {

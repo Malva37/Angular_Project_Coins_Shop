@@ -4,7 +4,7 @@ export class Image implements IImage {
     constructor(
         public id: number,
         public url: string,
-        public title: boolean
+        public isTitle: boolean
     ) { }
 
 

@@ -8,6 +8,8 @@ import { User } from 'src/app/shared/classes/users.model';
 import { IUser } from 'src/app/shared/interfaces/users.interfaces';
 import { UserCredentials } from 'src/app/shared/classes/userCredentials';
 import { ShareService } from 'src/app/shared/services/share.service';
+import { UserServiceService } from 'src/app/shared/services/User.service';
+import { IUserCredentials } from 'src/app/shared/interfaces/userCredentials.interfaces';
 
 
 @Component({
@@ -16,10 +18,9 @@ import { ShareService } from 'src/app/shared/services/share.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
-  emailUser: string;
-  passwordUser: string;
-  signStatus: boolean;
+  phoneMask = ['+', '3', '8', '(', '0', /\d{1}/, /\d{1}/, ')', /\d{1}/, /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/];
+  userName: string;
+  signStatus: boolean
 
   id: number;
   firstName: string;
@@ -28,28 +29,80 @@ export class SignInComponent implements OnInit {
   password: string;
   phone: string;
   address: string;
-  role: string = 'user';
+  isAdmin: boolean = false;
 
 
 
   constructor(private service: AuthService,
-    private share:ShareService) {
+    private share: UserServiceService) {
 
-  } 
-  ngOnInit() { }
+  }
+  ngOnInit() {
+    this.resetForm();
+    // this.resetFormSm();
+  }
+
+  resetForm(form?: NgForm) {
+    if (form != null) {
+      form.resetForm();
+    }
+    this.share.formData = {
+      id: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address: '',
+      password: '',
+      isAdmin: null
+    };
+    this.share.formDataSm = {
+      userName: '',
+      password: ''
+    }
+  }
+
+  // resetFormSm(formSm?: NgForm) {
+  //   if (formSm != null) {
+  //     formSm.resetForm();
+  //   }
+
+  //   this.share.formDataSm = {
+  //     userName: '',
+  //     password: ''
+  //   }
+  // }
+
 
   login(email, password) {
     let user = new UserCredentials(email,
-       password);
+      password);
     this.service.postJSONUsers(user);
 
   }
-  registration(){
-    this.signStatus=true;
+
+
+
+  onSubmit(form: NgForm) {
+    const user: IUserCredentials = Object.assign({}, form.value);
+    // let user = new UserCredentials(email,
+    //   password);
+    this.service.postJSONUsers(user);
+
+    //     delete data.id;
+    //     if (form.value.id == null) {
+    //       this.firestore.collection('medals').add(data);
+    //     } else {
+    //       this.firestore.doc('medals/' + form.value.id).update(data);
+    //     }
+    //     this.resetForm(form);
   }
-  registrationFull(firstName,lastName,phone,address, password, email){
-    let user = new User(1,firstName,lastName,phone,address, password, email,this.role);
-   this.service.createUsers(user);
+  registration() {
+    this.signStatus = true;
+  }
+  registrationFull(firstName, lastName, phone, address, password, email) {
+    let user = new User(1, firstName, lastName, phone, address, password, email, this.isAdmin);
+    this.service.createUsers(user);
   }
 
 

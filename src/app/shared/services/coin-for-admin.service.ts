@@ -14,7 +14,7 @@ export class CoinService {
     formData: Coin;
     userRef: AngularFirestoreCollection<Coin> = null;
     urlCoins: string;
-    httpHeader: HttpHeaders
+    httpHeader: HttpHeaders;
 
     constructor(private firestore: AngularFirestore,
         private http: HttpClient) {
@@ -53,6 +53,9 @@ export class CoinService {
         console.log('after delete');
         
     }
+
+
+
 
 
 }
