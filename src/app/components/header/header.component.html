@@ -57,18 +57,16 @@
       </div>
 
     </nav>
+
     <div class="navigation">
       <div class="phone">
-        <a href="#"><i fa [name]="'phone'"></i></a>
-        <a href="#"> +38(096)666-66-66</a>
-        <br>
-        <a href="#"><i fa [name]="'phone'"></i></a>
-        <a href="#"> +38(097)777-77-77</a>
+        <a href="#"><i fa [name]="'phone'"></i> +38(096) 666-66-66</a>
+        <a href="#"><i fa [name]="'phone'"></i> +38(097) 777-77-77</a>
       </div>
       <div class="search">
         <div class="fieldSearch">
-          <input type="text" [ngModel]="searchName" (ngModelChange)="valuechange($event)" class="form-control"
-            placeholder="Search">
+          <input type="text" [ngModel]="searchName" (ngModelChange)="valuechange($event)" class="form-control searchInput"
+            placeholder="Пошук товарів">
         </div>
       </div>
       <div class="basketBox" [routerLink]="[ '/basket']" routerLinkActive="active">

@@ -20,10 +20,13 @@ export class ImagesService {
   }
 
   postImage(product): Observable<Array<IImage>> {
-
     console.log();
-    
     return this.http.post<Array<IImage>>(this.urlImages, product)
+  }
+
+  deleteImage(id:number) {
+    console.log(id);
+    this.http.delete(`${this.urlImages}?id=${id}`)
   }
 
 

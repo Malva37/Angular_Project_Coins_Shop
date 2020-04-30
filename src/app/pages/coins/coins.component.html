@@ -1,8 +1,173 @@
 <div class="container-fluid">
   <input type="text" [hidden]="!searchField" value={{searchName}}>
   <div class="main">
+
+
+   
+
     <section class="filters">
-      <form>
+      <mat-expansion-panel class="filterSmallSize">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="filter_name">Фільтр</mat-panel-title>
+        </mat-expansion-panel-header>
+        <form>
+          <div class="boxFilter">
+            <div class="filter_name"> Ціна</div>
+            <div class="filter_group price_slider" *ngIf="minValue && maxValue">
+              <div class="minMaxField">
+                <p class="minValue">від
+                  <input type="number" class="form-control" name='minValue' [(ngModel)]="minValue">
+                </p>
+                <p class="maxValue">до
+                  <input type="number" class="form-control" name='maxValue' [(ngModel)]="maxValue">
+                </p>
+              </div>
+              <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+            </div>
+          </div>
+
+          <div class="boxFilter">
+
+            <div class="filter_name">Серія</div>
+            <div class="form-group bootstrap-select show-tick open">
+              <select class="custom-select" [(ngModel)]="series" name="series" required>
+                <option> Видатні особистості України</option>
+                <option> Античні пам`ятки України</option>
+                <option> Вищі навчальні заклади України</option>
+                <option> Відродження української державності</option>
+                <option> Відродження християнської духовності в Україні</option>
+                <option> Герої козацької доби </option>
+                <option> Героям Майдану</option>
+                <option> Гетьманські столиці</option>
+                <option> Дитячий Зодіак</option>
+                <option> Друга світова війна</option>
+                <option> Духовні скарби України</option>
+                <option> Збройні Сили України</option>
+                <option> Знаки зодіаку</option>
+                <option> Інші монети</option>
+                <option> Княжа Україна</option>
+                <option> Літаки України</option>
+                <option> Міста-герої України</option>
+                <option> Морська історія України</option>
+                <option> На межі тисячоліть</option>
+                <option> Найменша золота монета</option>
+                <option> Народні музичні інструменти</option>
+                <option> Народні промисли та ремесла</option>
+                <option> Області України</option>
+                <option> Обрядові свята України</option>
+                <option> Пам'ятки архітектури України</option>
+                <option> Пам'ятки давніх культур України</option>
+                <option> Славетні роди України</option>
+                <option> Спорт </option>
+                <option> Стародавні міста України </option>
+                <option> Сувенірна продукція </option>
+                <option> Східний календар </option>
+                <option> Україна космічна </option>
+                <option> Українська спадщина </option>
+                <option> Фауна в пам`ятках культури України</option>
+                <option>Флора і фауна</option>
+                <option> 2000-ліття Різдва Христового</option>
+                <option> Інша серія </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="boxFilter">
+
+            <div class="filter_name">Рік</div>
+            <div class="form-group bootstrap-select show-tick open">
+              <select class="custom-select" [(ngModel)]="year" name="year" required>
+                <option>1991</option>
+                <option>1992</option>
+                <option>1993</option>
+                <option>1994</option>
+                <option>1995</option>
+                <option>1996</option>
+                <option>1997</option>
+                <option>1998</option>
+                <option>1999</option>
+                <option>2000</option>
+                <option>2001</option>
+                <option>2002</option>
+                <option>2003</option>
+                <option>2004</option>
+                <option>2005</option>
+                <option>2006</option>
+                <option>2007</option>
+                <option>2008</option>
+                <option>2009</option>
+                <option>2010</option>
+                <option>2011</option>
+                <option>2012</option>
+                <option>2013</option>
+                <option>2014</option>
+                <option>2015</option>
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="boxFilter">
+
+
+            <div class="filter_name">Метал</div>
+            <div class="form-group bootstrap-select show-tick open">
+              <select class="custom-select" [(ngModel)]="metal" name="metal" required>
+                <option>біметалеві із дорогоцінних металів</option>
+                <option>біметалеві із недорогоцінних металів</option>
+                <option>золото</option>
+                <option>інша нумізматична продукція</option>
+                <option>мельхіор</option>
+                <option>нейзильбер</option>
+                <option>сплав на основі цинку</option>
+                <option>срібло</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="boxFilter">
+
+            <div class="filter_name">Номінал</div>
+            <div class="form-group bootstrap-select show-tick open">
+              <select class="custom-select" [(ngModel)]="denomination" name="denomination" required>
+                <option selected="" value="-1"> — будь-який номінал — </option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+                <option>100</option>
+                <option>125</option>
+                <option>180</option>
+                <option>200</option>
+                <option>250</option>
+                <option>540</option>
+                <option>1080</option>
+                <option>200 000</option>
+                <option>1 000 000</option>
+                <option>2 000 000</option>
+              </select>
+            </div>
+          </div>
+
+          <input type="number" [(ngModel)]="idCoin" name="idCoin">
+          <input type="button" (click)="showOne(idCoin)">
+          <div class="oneCoin">{{oneCoin}}</div>
+        </form>
+      </mat-expansion-panel>
+
+      <form class="filterBigSize">
         <div class="boxFilter">
           <div class="filter_name"> Ціна</div>
           <div class="filter_group price_slider" *ngIf="minValue && maxValue">
@@ -22,10 +187,7 @@
 
           <div class="filter_name">Серія</div>
           <div class="form-group bootstrap-select show-tick open">
-            <!-- <select class="custom-select" id="series" [(ngModel)]="productSeries" name="productSeries" required> -->
-            <select class="custom-select selectBox" [(ngModel)]="series" name="series" required>
-              <!-- <select (change)="selectChangeHandler($event)"  class="custom-select" id="series" required> -->
-              <option [attr.selected] value="-1"> — будь-яка серія — </option>
+            <select class="custom-select" [(ngModel)]="series" name="series" required>
               <option> Видатні особистості України</option>
               <option> Античні пам`ятки України</option>
               <option> Вищі навчальні заклади України</option>
@@ -62,6 +224,7 @@
               <option> Фауна в пам`ятках культури України</option>
               <option>Флора і фауна</option>
               <option> 2000-ліття Різдва Христового</option>
+              <option> Інша серія </option>
             </select>
           </div>
         </div>
@@ -71,7 +234,6 @@
           <div class="filter_name">Рік</div>
           <div class="form-group bootstrap-select show-tick open">
             <select class="custom-select" [(ngModel)]="year" name="year" required>
-              <option selected="" value="-1"> — будь-який рік — </option>
               <option>1991</option>
               <option>1992</option>
               <option>1993</option>
@@ -117,7 +279,6 @@
           <div class="filter_name">Метал</div>
           <div class="form-group bootstrap-select show-tick open">
             <select class="custom-select" [(ngModel)]="metal" name="metal" required>
-              <option selected="" value="-1"> — будь-який метал — </option>
               <option>біметалеві із дорогоцінних металів</option>
               <option>біметалеві із недорогоцінних металів</option>
               <option>золото</option>
@@ -161,26 +322,38 @@
         <input type="button" (click)="showOne(idCoin)">
         <div class="oneCoin">{{oneCoin}}</div>
       </form>
+    
     </section>
-
- 
 
     <section class="catalog">
       <!-- <figure class="product" *ngFor="let coin of list | searchCoin:searchName | filterPrice:minValue:maxValue | filterDenomination: denomination | filterMetal: metal | filterSeries: series | filterYear: year "> -->
-        <figure class="product" *ngFor="let coin of list">
+      <figure class="product" *ngFor="let coin of list">
+        <div class="imageBox">
           <ul *ngFor="let image of coin.images;">
-            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top">
+            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage">
           </ul>
           <ul *ngIf="(coin.images.length == '0')" class="noImageBig card-img-top">
           </ul>
-        <!-- <img [attr.src]="coin.images.url" class="card-img-top" alt="..."> -->
-        <div class="card-body">
+        </div>
+        <div class="card-body cardBodyBig">
           <p class="title">{{ coin.name }} {{ coin.denomination }}грн. {{ coin.year }}р.</p>
           <p class="price">{{ coin.price }} грн</p>
           <div class="button-group">
             <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails"
               value="Детальніше">
             <input type="button" class="buy" (click)="buyProduct(coin)" value="Купити">
+          </div>
+        </div>
+
+        <div class="card-body cardBodySmall" [routerLink]="[ '/product',  coin.categoryName, coin.id ]">
+          <p class="title">{{ coin.name }}</p>
+          <div class="yearDenomination">
+            <p>{{ coin.denomination }}грн.</p>
+            <p>{{ coin.year }}р.</p>
+          </div>
+          <div class="priceBuy">
+            <p class="price">{{ coin.price }} грн</p>
+            <input type="button" class="buySmall" (click)="buyProduct(coin)" value="Купити">
           </div>
         </div>
       </figure>

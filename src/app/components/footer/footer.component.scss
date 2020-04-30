@@ -1,33 +1,32 @@
 footer {
-  // background-image: url(/./src/assets/images/bac_image_footer.jpg);
-  // background-color: #f8f5f5;
   padding: 15px 0;
   color: black;
-  margin-top: 50px;
-  // position: fixed;
-  bottom: 0;
-  width: 100%;
+  margin-top: 10%;
   background-color: #8b711d;
   border: 1px solid #6e5d12;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.footer-left a {
+footer a {
   color: black;
-  margin-right: 20px;
+}
+.footerRight{
+ display: flex;
+ justify-content: center;
+}
+.footerRight a{
+  margin: 40%;
 }
 
-.footer-right a {
-  color: black;
-  margin-left: 20px;
-}
-
-@media screen and (max-width:320px) {
+@media screen and (max-width:768px) and (min-width:320px) {
   footer {
-    font-size: 12px;
+    font-size: 13px;
     margin: 0 auto;
+    display: block;
+    text-align: center;
   }
-  .footer-right{
-    margin: 1% 30%;
-  
+  .footerRight a{
+    margin: 0 2%;
   }
 }

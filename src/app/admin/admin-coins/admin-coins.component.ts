@@ -47,15 +47,13 @@ export class AdminCoinsComponent implements OnInit {
   isVisibleForUsers: boolean;
   images: Array<IImage> = [];
   image: IImage;
-  // imageReverse: string;
   downloadSrc: string;
   product: ICoin;
   totalPages: number;
   editStatus: boolean;
-  // currentIdProduct:number;
-  // title: boolean;
-  isArrayImages: boolean;
+  isArrayImages: boolean = false;
   isImage: boolean;
+ 
 
 
   ref: AngularFireStorageReference;
@@ -88,6 +86,8 @@ export class AdminCoinsComponent implements OnInit {
       }
     );
   }
+
+
 
   getForAdmin() {
     this.service.getCoins().subscribe(
@@ -126,7 +126,9 @@ export class AdminCoinsComponent implements OnInit {
     console.log(this.product);
     this.images = product.images;
     console.log(this.images);
-    this.isArrayImages = true;
+    if (this.images.length > 0) {
+      this.isArrayImages = true;
+    }
   }
 
 
@@ -171,6 +173,7 @@ export class AdminCoinsComponent implements OnInit {
     }
     this.editStatus = false;
     this.resetForm();
+    // this.modalRef = this.modalService.show(template);
   }
 
   deleteProduct(product) {
@@ -196,15 +199,19 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   deleteImage(image) {
+    console.log("delete");
+    console.log(image);
+    
     this.afStorage.storage.refFromURL(image.url).delete();
     this.images = this.images.filter(obj => {
       return obj.url !== image.url;
     })
-    if (image.isTitle) {
+    if (image.isTitle&& this.images.length>0) {
       this.images[0].isTitle = true;
     }
     console.log(this.images);
     if (image.id != null) {
+      this.imageService.deleteImage(image.id)
     }
 
   }
@@ -233,6 +240,8 @@ export class AdminCoinsComponent implements OnInit {
             this.isArrayImages = true;
             this.images[0].isTitle = true;
           }
+          console.log(this.images);
+          
           return this.images;
         }
       );

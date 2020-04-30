@@ -66,6 +66,8 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { Router } from '@angular/router';
+import { MatExpansionModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -119,7 +121,9 @@ import { Router } from '@angular/router';
     CommonModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), TabsModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule
+    
   
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
