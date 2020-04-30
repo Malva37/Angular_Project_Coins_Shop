@@ -1,21 +1,22 @@
 <div class="container-fluid">
 
   <div *ngIf="!signStatus" class="registration">
-    <form #formSm="ngForm" autocomplete="off" (submit)="onSubmit(formSm)">
+    <form #formSm="ngForm" autocomplete="off" (submit)="onSubmit()">
       <div class="form-group row">
-        <input type="text" #userName="ngModel" name = "userName" [(ngModel)]="share.formDataSm.userName" class="form-control row"
-          placeholder="name">
-          <div *ngIf="formSm.invalid " class="validation-error">Введіть вірний логін/пароль</div>
+        <input type="text" #userName="ngModel" autocomplete="name" name = "userName" [(ngModel)]="share.formDataSm.userName" class="form-control row"
+          placeholder="name" pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}">
+          <div *ngIf="userName.invalid && userName.touched" class="validation-error">Введіть кількість відмінну від 0</div>
       </div>
       <div class="form-group row">
-        <input type="password" name="password" #password="ngModel"
+        <input type="password" name="password" autocomplete="new-password" #password="ngModel"
         [(ngModel)]="share.formDataSm.password"
           class="form-control row" placeholder="Пароль">
-          <div *ngIf="formSm.invalid " class="validation-error">Введіть вірний логін/пароль</div>
+          <!-- <div *ngIf="formSm.invalid " class="validation-error">Введіть вірний логін/пароль</div> -->
       </div>
-      <button type="submit" [disabled]="formSm.invalid" class="btn-sm enterBtn">Увійти</button>
+      <button type="submit" class="btn-sm enterBtn">Увійти</button>
+      <button type="button" class="btn-sm registBtn" (click)="registration()">Зареєструватись</button>
     </form>
-    <button class="btn-sm registBtn" (click)="registration()">Зареєструватись</button>
+   
   </div>
 
 
@@ -27,33 +28,38 @@
       <input type="hidden" name="isAdmin" #isAdmin="ngModel" [(ngModel)]="share.formData.isAdmin">
       <div class="form-group row">
         <input type="text" class="form-control" name="firstName" #firstName="ngModel"
-          [(ngModel)]="share.formData.firstName" placeholder="Ім'я">
-        <div *ngIf="firstName.invalid " class="validation-error">Введіть кількість відмінну від 0</div>
+          [(ngModel)]="share.formData.firstName" placeholder="Ім'я" pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}" required>
+        <div *ngIf="firstName.invalid && firstName.touched" class="validation-error">Введіть тільки буквенні символи</div>
       </div>
       <div class="form-group row">
         <input type="text" class="form-control" name="lastName" #lastName="ngModel"
-          [(ngModel)]="share.formData.lastName" placeholder="Прізвище">
+          [(ngModel)]="share.formData.lastName" placeholder="Прізвище" pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}" required>
+          <div *ngIf="lastName.invalid && lastName.touched" class="validation-error">Введіть тільки буквенні символи</div>
       </div>
       <div class="form-group row">
         <input type="text" [textMask]="{mask: phoneMask}" class="form-control" name="phone " #phone="ngModel"
-          [(ngModel)]="share.formData.phone" placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ">
+          [(ngModel)]="share.formData.phone" placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ" required>
       </div>
       <div class="form-group row">
         <input type="text" class="form-control" name="address" #address="ngModel" [(ngModel)]="share.formData.address"
           placeholder="Адреса доставки">
       </div>
-      <div class="form-group row">
-        <input type="password" class="form-control" name="password" #password="ngModel"
-          [(ngModel)]="share.formData.password" placeholder="Пароль">
+      <div class="form-group row fieldPassword">
+        <input [type]="show ? 'text' : 'password'" class="form-control" name="password" #password="ngModel"
+          [(ngModel)]="share.formData.password"   autocomplete="new-password" placeholder="Пароль не менше 6 символів" required>
+          <span class="passwordEye" (click)="showPassword()"></span>
       </div>
+       <div *ngIf="password.invalid && password.touched" class="validation-error">Введіть пароль</div>
       <div class="form-group row">
-        <input type="password" class="form-control" name="email" #email="ngModel" [(ngModel)]="share.formData.email"
-          placeholder="email">
+        <input type="email" class="form-control" pattern="[a-zA-Z0-9-.]+\@{1}[a-z.]+" name="email" #email="ngModel" [(ngModel)]="share.formData.email"
+          placeholder="email" required>
+        <div *ngIf="email.invalid && email.touched" class="validation-error">Ви ввели неіснуючий e-mail</div>
+
       </div>
       <div class="form-group row registrationButton">
         <!-- <button (click)="registrationFull(firstName,lastName,phone,address, password, email)"
           class="btn-sm">Зареєструватися</button> -->
-        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+        <input type="submit" [disabled]="form.invalid" value="Зареєструватись" class="btn btn-lg btn-block btn-info">
       </div>
     </form>
   </div>

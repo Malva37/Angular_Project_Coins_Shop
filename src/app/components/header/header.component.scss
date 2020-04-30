@@ -67,7 +67,7 @@ a :hover {
 
 a.active {
   color: #f2bd0b;
-  
+
 }
 
 
@@ -85,52 +85,59 @@ header .nav-item a:hover::after {
   transform: scale(1);
 
 }
-.coin{
+
+.coin {
   height: 35px;
   width: 45px;
   background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -20px;
 
 }
-.banknote{
-    height: 35px;
-    width: 48px;
-    background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -136px;
+
+.banknote {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -136px;
 }
-.medal{
+
+.medal {
   height: 35px;
   width: 43px;
   background: url('../../../assets/icon/medal.png') no-repeat -152px -61px;
 }
-.accessory{
-    height: 35px;
-    width: 48px;
-    background: url('../../../assets/icon/accessories.png') no-repeat;
+
+.accessory {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/accessories.png') no-repeat;
 }
-.adminIcon{
+
+.adminIcon {
   height: 35px;
   width: 48px;
   background: url('../../../assets/icon/admin.png') no-repeat;
 }
-.userIcon{
+
+.userIcon {
   height: 35px;
   width: 48px;
   background: url('../../../assets/icon/user.png') no-repeat;
 }
 
-.logInIcon{
+.logInIcon {
   height: 37px;
   width: 37px;
   background: url('../../../assets/icon/enter.png') no-repeat;
 }
 
 
-.logOutIcon{
+.logOutIcon {
   height: 37px;
   width: 37px;
   background: url('../../../assets/icon/logOut.png') no-repeat;
 }
-.icon{
-margin: 0 auto;
+
+.icon {
+  margin: 0 auto;
 }
 
 
@@ -149,7 +156,7 @@ margin: 0 auto;
 .phone {
   font-size: 17px;
   font-weight: 700;
-  width: 40%;
+  width: 20%;
 
 }
 
@@ -161,10 +168,11 @@ margin: 0 auto;
 }
 
 .search {
-  width: 35%;
+  width: 45%;
 
 }
-.searchInput{
+
+.searchInput {
   padding: 0 1%;
 }
 
@@ -209,7 +217,12 @@ margin: 0 auto;
 }
 
 
-@media screen and (max-width:1200px)and (min-width:769px) {}
+@media screen and (max-width:1200px)and (min-width:769px) {
+
+  .phone {
+    width: 30%;
+  }
+}
 
 
 @media screen and (max-width:768px) and (min-width:320px) {
@@ -218,15 +231,22 @@ margin: 0 auto;
     font-size: 14px;
 
   }
-  .phone{
+
+  .phone {
     display: none;
   }
-.namePage{
-  display: none;
-}
-.search{
-  width: 65%;
-}
+
+  .namePage {
+    display: none;
+  }
+
+  .search {
+    width: 65%;
+  }
+
+  input::placeholder {
+    font-size: 13px;
+  }
 
   .btnMyCabinet {
     display: block;
