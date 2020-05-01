@@ -30,7 +30,7 @@
           </td>
           <td class="tdFont"> {{ item.price * item.count }} грн</td>
           <td>
-            <input type="button" value="x" (click)="deleteItem(item)" class="btnDelete"> 
+            <input type="button" value="x" (click)="deleteItem(item)" class="btnDelete">
           </td>
         </tr>
 
@@ -52,36 +52,59 @@
   <div class="dataOrder">
 
     <div class="dataUser">
-      <form>
+      <!-- <form [formGroup]="form01">
+        email:<input type="text" name="email" formControlName="email" required/> gender:
+        <input type="text" name="gender" formControlName="gender" required>
+    
+
+    <button type="submit" [disabled]="!form01.valid" (click)="functionForm01()">Click</button>
+
+      </form> -->
+
+
+
+      <form [formGroup]="form01">
         <p class="title"> Контактні дані</p>
-        <input type="hidden" name="idUser" [(ngModel)]="idUser">
+        <input type="hidden" name="idUser" formControlName="idUser">
+        <!-- 
+        <input [formControl]="username" [pattern]="unamePattern"> 
+        <div *ngIf="username.errors?.pattern">
+          User name not valid.
+     </div>  -->
         <div class="form-group row">
-          <input type="text" class="form-control" name="firstName" required [(ngModel)]="firstName" id="firstName"
+          <input type="text" class="form-control" name="firstName" required formControlName="firstName"
             placeholder="Ім'я">
+          <!-- <div *ngIf="firstName.invalid && firstName.touched" class="validation-error">Введіть тільки буквенні символи</div> -->
         </div>
         <div class="form-group row">
-          <input type="text" class="form-control" name="lastName" required [(ngModel)]="lastName" id="lastName"
+          <input type="text" class="form-control" name="lastName" required formControlName="lastName"
             placeholder="Прізвище">
+          <!-- <div *ngIf="lastName.invalid && lastName.touched" class="validation-error">Введіть тільки буквенні символи</div> -->
+        </div>
+
+        <div class="form-group row">
+          <input type="text" class="form-control" [textMask]="{mask: phoneMask}" name="phone" required
+            formControlName="phone" placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ">
+          <!-- <div *ngIf="phoneError">
+            Name must be at least 4 characters long.
+          </div> -->
         </div>
         <div class="form-group row">
-          <input type="email" required class="form-control" [(ngModel)]="email" name="email" placeholder="Email*">
-        </div>
-        <div class="form-group row">
-          <input type="text" class="form-control" name="phone" required [(ngModel)]="phone" id="phone"
-            placeholder="Номер телефону">
-        </div>
-        <div class="form-group row">
-          <input type="text" class="form-control" name="address" required [(ngModel)]="address" id="address"
+          <input type="text" class="form-control" name="address" required formControlName="address" id="address"
             placeholder="Адреса доставки">
         </div>
         <div class="form-group row">
-          <textarea type="text" name="comment" [(ngModel)]="comment" class="form-control"
+          <input type="email" required class="form-control" formControlName="email" name="email" placeholder="Email*">
+          <!-- <div *ngIf="email.invalid && email.touched" class="validation-error">Ви ввели неіснуючий e-mail</div> -->
+        </div>
+        <div class="form-group row">
+          <textarea type="text" name="comment" formControlName="comment" class="form-control"
             placeholder="Коментар до замовлення">
           </textarea>
         </div>
       </form>
-      <button type="button" (click)="addOrder(firstName, lastName, email, phone, address, comment, payment, delivery)"
-        class="doOrder btn">Оформити замовлення</button>
+      <button type="button" [disabled]="!form01.valid" (click)="addOrder(address, comment)" class="doOrder btn">Оформити
+        замовлення</button>
 
     </div>
 
@@ -100,7 +123,7 @@
                 alt="">
               <b> На Карту Приватбанку</b>
             </div>
-            <p>  Оплата на карту Приватбанку <b>5555 5555 5555 5555</b>  (отримувач Іваненко Іван Іванович).
+            <p> Оплата на карту Приватбанку <b>5555 5555 5555 5555</b> (отримувач Іваненко Іван Іванович).
               Комісія з переказу в системі Privat24 - 0%</p>
           </div>
           <hr>
@@ -129,7 +152,7 @@
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/test-dd969.appspot.com/o/icons%2Fnovaposhta-logo.50x50.png?alt=media&token=ef8c7909-78ce-4d97-b3a1-4895ec685d7c"
                 alt="">
-               <!-- <input type="button" value="REQUEST" (click)="getSity()"> -->
+              <!-- <input type="button" value="REQUEST" (click)="getSity()"> -->
               <p> <b> Нова Пошта </b>(Сплачується окремо при отриманні посилки)</p>
             </div>
           </div>

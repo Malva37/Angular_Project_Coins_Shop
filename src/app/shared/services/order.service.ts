@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  formData: Order;
+  form: Order;
   userRef: AngularFirestoreCollection<Order> = null;
 
   urlOrders: string;
