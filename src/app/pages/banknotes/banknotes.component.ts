@@ -24,6 +24,9 @@ export class BanknotesComponent implements OnInit {
   };
   newArticle: IArticle;
   count: number = 1;
+  signature:string;
+  year:number;
+  denomination:number;
   clickCnt: number = 0;
   sumBasket: number = 0;
   searchName: string;

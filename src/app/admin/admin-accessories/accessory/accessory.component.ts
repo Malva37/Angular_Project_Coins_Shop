@@ -34,7 +34,7 @@ export class AccessoryComponent implements OnInit {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
 
-  constructor(private service: AccessoryService,
+  constructor(public service: AccessoryService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }
 

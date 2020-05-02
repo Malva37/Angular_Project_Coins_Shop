@@ -53,12 +53,14 @@
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item">
-        <a class="page-link" (click)="paginaAnt()">
+        <!-- <a class="page-link" (click)="paginaAnt()"> -->
+          <a class="page-link">
           <</a> </li> <li class="page-item">
             <a class="page-link"> {{ page+1 }}</a>
       </li>
       <li class="page-item">
-        <a class="page-link" (click)="proxPagina()">></a>
+        <!-- <a class="page-link" (click)="proxPagina()">></a> -->
+        <a class="page-link">></a>
       </li>
       <li class="page-item disabled">
         <span class="page-link">Total: {{ totalPages }}</span>

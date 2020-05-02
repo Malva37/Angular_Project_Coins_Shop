@@ -33,7 +33,7 @@ export class BanknoteComponent implements OnInit {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
 
-  constructor(private service: BanknoteService,
+  constructor(public service: BanknoteService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }
 

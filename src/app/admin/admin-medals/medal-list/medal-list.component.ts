@@ -35,7 +35,7 @@ export class MedalListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean
 
-  constructor(private service: MedalService,
+  constructor(public service: MedalService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }

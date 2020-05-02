@@ -33,7 +33,7 @@ export class MedalComponent implements OnInit {
   downloadURL: Observable<string>;
 
 
-  constructor(private service: MedalService,
+  constructor(public service: MedalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }
 

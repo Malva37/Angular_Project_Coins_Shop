@@ -15,7 +15,7 @@
     </tbody>
   </table> -->
 
-
+<!-- 
 
 <table class="table">
   <thead>
@@ -29,7 +29,6 @@
   </thead>
   <tbody>
     <tr *ngFor="let medal of list; let i=index">
-      <!-- <td (click)="onEdite(template)" >{{ i+1 }}</td> -->
       <td (click)="onEdit(medal, template)">{{ i+1 }}</td>
       <td (click)="onEdit(medal, template)">{{ medal.name }}</td>
       <td (click)="onEdit(medal, template)">{{ medal.price}} грн</td>
@@ -38,7 +37,6 @@
       </td>
       <td>
         <input type="button" value="delete" (click)="onDelete(medal)" class="btn btn-dark btn-outline-red">
-        <!-- <a class="btn text-danger" (click)="onDelete(medal.id)"><i class="fas fa-trash"></i></a> -->
       </td>
     </tr>
   </tbody>
@@ -69,7 +67,6 @@
       <div class="form-group">
         <input type="number" pattern="[1-9]{1,}" name="counter" #counter="ngModel"
           [(ngModel)]="service.formData.counter" class="form-control" placeholder="Counter" required>
-        <!-- <div *ngIf="counter.invalid && counter.touched" class="validation-error">Введіть кількість відмінну від 0</div> -->
       </div>
 
       
@@ -122,4 +119,4 @@
 
     </form>
   </div>
-</ng-template>
+</ng-template> -->

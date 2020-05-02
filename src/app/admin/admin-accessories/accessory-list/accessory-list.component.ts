@@ -36,7 +36,7 @@ export class AccessoryListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean
 
-  constructor(private service: AccessoryService,
+  constructor(public service: AccessoryService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }

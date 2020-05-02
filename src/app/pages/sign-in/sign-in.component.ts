@@ -29,7 +29,7 @@ export class SignInComponent implements OnInit {
 
 
   constructor(private service: AuthService,
-    private share: UserServiceService) { }
+    public share: UserServiceService) { }
 
   ngOnInit() {
     this.resetForm();

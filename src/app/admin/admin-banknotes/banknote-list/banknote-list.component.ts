@@ -39,7 +39,7 @@ export class BanknoteListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean;
 
-  constructor(private service: BanknoteService,
+  constructor(public service: BanknoteService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }

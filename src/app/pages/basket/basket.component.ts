@@ -17,6 +17,7 @@ export class BasketComponent implements OnInit {
   phoneMask = ['+', '3', '8', '(', '0', /\d{1}/, /\d{1}/, ')', /\d{1}/, /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/];
   counter: number = 1;
   idOrder: string;
+  id:number;
   idUser: number;
   firstName: string;
   lastName: string;

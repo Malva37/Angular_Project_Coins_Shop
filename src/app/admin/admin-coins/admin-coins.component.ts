@@ -30,6 +30,7 @@ export class AdminCoinsComponent implements OnInit {
   formData: Coin;
   list: Array<ICoin>;
   adminCategories: Array<ICategory>;
+  searchName:string;
   page: number;
   id: number;
   categoryId: number;
@@ -66,7 +67,7 @@ export class AdminCoinsComponent implements OnInit {
 
 
   constructor(private modalService: BsModalService,
-    private service: CoinService,
+    public service: CoinService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage,
     private categoryService: CategoriesService,
