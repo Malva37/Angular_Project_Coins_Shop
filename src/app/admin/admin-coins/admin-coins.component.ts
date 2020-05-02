@@ -53,7 +53,7 @@ export class AdminCoinsComponent implements OnInit {
   editStatus: boolean;
   isArrayImages: boolean = false;
   isImage: boolean;
- 
+
 
 
   ref: AngularFireStorageReference;
@@ -201,12 +201,12 @@ export class AdminCoinsComponent implements OnInit {
   deleteImage(image) {
     console.log("delete");
     console.log(image);
-    
+
     this.afStorage.storage.refFromURL(image.url).delete();
     this.images = this.images.filter(obj => {
       return obj.url !== image.url;
     })
-    if (image.isTitle&& this.images.length>0) {
+    if (image.isTitle && this.images.length > 0) {
       this.images[0].isTitle = true;
     }
     console.log(this.images);
@@ -234,15 +234,16 @@ export class AdminCoinsComponent implements OnInit {
     this.task.then((e) => {
       this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
         data => {
-          let image = { id: null, url: data, isTitle: false };
-          this.images.push(image);
-          if (this.images.length == 1) {
-            this.isArrayImages = true;
-            this.images[0].isTitle = true;
-          }
-          console.log(this.images);
-          
-          return this.images;
+          let isTitleValue = this.images.length === 0;
+          let image = { id: null, url: data, isTitle: isTitleValue, productId: this.product.id };
+         console.log(this.images);
+         
+          this.imageService.postImage(image).subscribe(
+            res => {
+              console.log(res);
+              return this.images = res.images;
+            });
+          console.log('post done');
         }
       );
     }

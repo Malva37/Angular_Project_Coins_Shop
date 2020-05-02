@@ -51,33 +51,11 @@ export class BasketComponent implements OnInit {
       firstName: [null, [Validators.required, Validators.pattern('[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}')]],
       lastName: [null, [Validators.required, Validators.pattern('[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}')]],
       phone: [null, [Validators.required]],
-      address: [null, [Validators.required, Validators.pattern('[a-zA-Z\u0400-\u04FF0-9-.,/]+')]],
+      address: [null, [Validators.required, Validators.pattern('[a-zA-Z\u0400-\u04FF0-9-. ,/]{4,}')]],
       email: [null, [Validators.required, Validators.pattern('[a-zA-Z0-9-.]+\@{1}[a-z.]+')]],
       comment: [null]
     });
   }
-
-  // functionForm01() {
-  //   this.results = [
-  //     {
-  //       "email": this.form01.controls.email.value
-  //     },
-  //     {
-  //       "gender": this.form01.controls.gender.value
-  //     }
-  //   ]
-  //   console.log(this.results);
-
-  //   this.form01.reset();
-  // }
-  // constructor(public builder: FormBuilder) {
-  //   this.form01 = this.builder.group({
-  //     email: [null, Validators.required], //text
-  //     DoB: [null, Validators.required], //radio button
-  //     gender: [null, Validators.required], //date picker
-  //   });
-  // }
-
 
   ngOnInit() {
     this.getArticles();
@@ -135,7 +113,7 @@ export class BasketComponent implements OnInit {
 
 
 
-  addOrder(address, comment) {
+  addOrder() {
     let keys = Object.keys(localStorage);
     let i = 0;
     let key;
@@ -156,8 +134,8 @@ export class BasketComponent implements OnInit {
           comment: this.form01.controls.comment.value
         },
     console.log(this.user);
-    console.log(address);
-    console.log(comment);
+    console.log(this.delivery);
+    console.log(this.payment);
 
     // const order: Order = Object.assign({}, {
     //   id: null,  // має сформувати firebase
@@ -193,6 +171,8 @@ export class BasketComponent implements OnInit {
     this.phone = '';
     this.address = '';
     this.comment = '';
+    this.payment ='Приват Банк';
+    this.delivery= 'Нова пошта';
   }
 
 

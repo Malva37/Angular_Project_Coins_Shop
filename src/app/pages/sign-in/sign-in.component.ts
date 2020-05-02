@@ -72,7 +72,10 @@ export class SignInComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
+    debugger
     const user: IUserCredentials = Object.assign({}, form.value);
+    console.log(user);
+    
     this.service.postJSONUsers(user);
   }
 

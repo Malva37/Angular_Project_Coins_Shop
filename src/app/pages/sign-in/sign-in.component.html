@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div *ngIf="!signStatus" class="registration">
-    <form #formSm="ngForm" autocomplete="off" (submit)="onSubmit()">
+    <form #formSm="ngForm" autocomplete="off" (submit)="onSubmit(formSm)">
       <div class="form-group row">
         <input type="text" #userName="ngModel" autocomplete="name" name = "userName" [(ngModel)]="share.formDataSm.userName" class="form-control row"
           placeholder="name" pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}">

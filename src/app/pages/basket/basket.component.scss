@@ -37,7 +37,7 @@
   border-radius: 3px;
   padding: 3%;
   height: max-content;
-
+  margin: 0 0 3% 0;
 }
 
 table {
@@ -46,14 +46,16 @@ table {
   font-weight: 600;
 
 }
-
+thead th {
+  font-size: 17px;
+}
 table td,
 table th {
   border: 1px solid black;
 }
 
 .title {
-  font-size: 19px;
+  font-size: 17px;
   color: black;
   margin: 1% 2% 5%;
   font-weight: bold;
@@ -143,7 +145,7 @@ td {
 
 .counter {
   display: flex;
-  margin: 0 15%;
+  // margin: 0 15%;
 }
 
 .count {
@@ -184,8 +186,10 @@ td {
   margin: -2% 1% 0;
 
 }
-
-validation-error {
+.row{
+  margin: 2% 0;
+}
+.validation-error {
   color: red;
   font-size: 15px;
   word-spacing: -2px;
@@ -196,7 +200,17 @@ validation-error {
   .form-control {
     font-size: 13px;
   }
+  .dataOrder{
+    display: block;
 
+  }
+  .dataUser,.deliveryPayment{
+    width: 100%;
+  }
+  .title, thead th {
+    font-size: 15px;
+  
+  }
   .validation-error {
     font-size: 13px;
     line-height: 1;
