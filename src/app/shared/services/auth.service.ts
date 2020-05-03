@@ -33,6 +33,8 @@ export class AuthService {
 
 
   postJSONUsers(user: UserCredentials) {
+    console.log(this.baseUrl);
+    
     this.http.post<any>(`${this.baseUrl}/authenticate`, user,
       { observe: 'response' }).subscribe(response => {
         localStorage.setItem('token', response.body.token)
