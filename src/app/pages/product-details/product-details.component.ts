@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { ArticleService } from 'src/app/shared/services/article.service';
 import { ProductOrder } from 'src/app/shared/classes/productOrder.model';
 import { IProductOrder } from 'src/app/shared/interfaces/productOrder.interfaces';
-import { CoinService } from 'src/app/shared/services/coin.service';
+import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { AccessoryService } from 'src/app/shared/services/accessory.service';
 import { BanknoteService } from 'src/app/shared/services/banknote.service';
 import { ShareService } from 'src/app/shared/services/share.service';

@@ -1,29 +1,42 @@
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+<!-- 
+ <div class="field">
+  <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div [formGroupName]="i">
+      <input formControlName="name" placeholder="Item name">
+      <input formControlName="description" placeholder="Item description">
+      <input formControlName="price" placeholder="Item price">
+    </div>
 
-  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
-  <input type="hidden" name="categoryId" #id="ngModel" [(ngModel)]="service.formData.categoryId">
-  <input type="hidden" name="categoryName" #id="ngModel" [(ngModel)]="service.formData.categoryName">
-  <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
-  <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
+    Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }}
+  </div>
+
+</div> -->
+
+
+<!-- 
+<form>
+
+  <input type="hidden" name="id" [(ngModel)]="id">
+  <input type="hidden" name="categoryId" [(ngModel)]="categoryId">
+  <input type="hidden" name="categoryName" [(ngModel)]="categoryName">
+  <input type="hidden" name="reserved"  [(ngModel)]="reserved">
+  <input type="hidden" name="isAvailable" [(ngModel)]="isAvailable">
 
   <div class="field">
     <div class="titleField">Назва товару:</div>
-    <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
-     required>
-    <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
+    <input name="name" [(ngModel)]="name" class="form-control" >
   </div>
 
   <div class="field">
     <div class="titleField">Кількість:</div>
-    <input type="number" name="counter" #counter="ngModel" [(ngModel)]="service.formData.counter" class="form-control"
-      pattern="[0-9]{1,}" required>
-    <!-- <div *ngIf="counter.invalid " class="validation-error">Введіть кількість відмінну від 0</div> -->
+    <input type="number" name="counter" [(ngModel)]="counter" class="form-control"
+      pattern="[0-9]{1,}">
+  
   </div>
 
   <div class="field bootstrap-select show-tick open">
     <div class="titleField">Серія:</div>
-    <select class="custom-select" #series="ngModel" [(ngModel)]="service.formData.series"
-      name="series" required>
+    <select class="custom-select" [(ngModel)]="series" name="series">
       <option [attr.selected] [attr.disabled]> — будь-яка серія — </option>
       <option> Видатні особистості України</option>
       <option> Античні пам`ятки України</option>
@@ -66,49 +79,49 @@
 
   <div class="field bootstrap-select show-tick open">
     <div class="titleField">Рік випуску:</div>
-    <select class="custom-select" [(ngModel)]="service.formData.year" #year="ngModel" name="year" required>
-        <option selected="" value="-1"> — будь-який рік — </option>
-        <option>1991</option>
-        <option>1992</option>
-        <option>1993</option>
-        <option>1994</option>
-        <option>1995</option>
-        <option>1996</option>
-        <option>1997</option>
-        <option>1998</option>
-        <option>1999</option>
-        <option>2000</option>
-        <option>2001</option>
-        <option>2002</option>
-        <option>2003</option>
-        <option>2004</option>
-        <option>2005</option>
-        <option>2006</option>
-        <option>2007</option>
-        <option>2008</option>
-        <option>2009</option>
-        <option>2010</option>
-        <option>2011</option>
-        <option>2012</option>
-        <option>2013</option>
-        <option>2014</option>
-        <option>2015</option>
-        <option>2016</option>
-        <option>2017</option>
-        <option>2018</option>
-        <option>2019</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-      </select>
+    <select class="custom-select" [(ngModel)]="year" name="year">
+      <option selected="" value="-1"> — будь-який рік — </option>
+      <option>1991</option>
+      <option>1992</option>
+      <option>1993</option>
+      <option>1994</option>
+      <option>1995</option>
+      <option>1996</option>
+      <option>1997</option>
+      <option>1998</option>
+      <option>1999</option>
+      <option>2000</option>
+      <option>2001</option>
+      <option>2002</option>
+      <option>2003</option>
+      <option>2004</option>
+      <option>2005</option>
+      <option>2006</option>
+      <option>2007</option>
+      <option>2008</option>
+      <option>2009</option>
+      <option>2010</option>
+      <option>2011</option>
+      <option>2012</option>
+      <option>2013</option>
+      <option>2014</option>
+      <option>2015</option>
+      <option>2016</option>
+      <option>2017</option>
+      <option>2018</option>
+      <option>2019</option>
+      <option>2020</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option>2024</option>
+      <option>2025</option>
+    </select>
   </div>
 
   <div class="field bootstrap-select show-tick open">
     <div class="titleField">Метал:</div>
-    <select class="custom-select" [(ngModel)]="service.formData.metal" name="metal"  #metal="ngModel" required>
+    <select class="custom-select" [(ngModel)]="metal" name="metal">
       <option selected="" value="-1"> — будь-який метал — </option>
       <option>біметалеві із дорогоцінних металів</option>
       <option>біметалеві із недорогоцінних металів</option>
@@ -123,8 +136,7 @@
 
   <div class="field bootstrap-select show-tick open">
     <div class="titleField">Номінал</div>
-    <select class="custom-select" [(ngModel)]="service.formData.denomination" name="denomination"  #denomination="ngModel"
-      required>
+    <select class="custom-select" [(ngModel)]="denomination" name="denomination">
       <option selected="" value="-1"> — будь-який номінал — </option>
       <option>0</option>
       <option>1</option>
@@ -148,20 +160,24 @@
 
   <div class="field">
     <div class="titleField">Ціна:</div>
-    <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
-     required>
+    <input type="number" name="price" [(ngModel)]="price" class="form-control"
+      required>
   </div>
 
   <div class="field">
     <div class="titleField">Опис:</div>
-    <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+    <textarea type="text" name="description" (change)="addItem($event)" [(ngModel)]="description"
       class="form-control">
       </textarea>
   </div>
 
+ 
+
+
+
   <div class="field">
     <div class="titleField">Завантаж фото(аверс):</div>
-      <input class="form-control" required type="file" [value]="service.formData.image"
+      <input class="form-control" type="file" [value]="image"
         (change)="upload($event)" accept=".png,.jpg">
       <div class="hidden" *ngIf="downloadURL | async; let downloadSrc" role="alert">
         File uploaded:
@@ -172,7 +188,7 @@
 
   <div class="field">
       <div class="titleField">Завантаж фото(реверс):</div>
-      <input class="form-control" required type="file" [value]="service.formData.imageReverse"
+      <input class="form-control" type="file" [value]="imageReverse"
         (change)="uploadReverse($event)" accept=".png,.jpg">
   <div class="hidden" *ngIf="downloadURLReverse | async; let downloadSrcReverse" role="alert">
         File uploaded:
@@ -182,7 +198,10 @@
   </div>
 
   <div class="field">
-    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+    <button type="button" class="btn btn-lg btn-block btn-info">SUBMIT</button> 
+
+   
   </div>
- 
-</form>
+
+</form> 
+-->

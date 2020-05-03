@@ -1,24 +1,218 @@
-tr img{
-    height: 35px;
-    width: 35px;
+tr img {
+  height: 56px;
+  max-width: 66px;
+  min-width: 40px;
+  width: 56px;
+  padding: 2px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.noImageSmall {
+  width: 50px;
+  height: 50px;
+  background: url('../../../assets/icon/noImageSmall.png') no-repeat;
+  margin: 0 auto;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  font-size: 15px;
+  padding: 0;
+  table-layout: fixed;
+}
+
+.modalBody {
+  padding: 3%;
 
 }
-tr img:hover{
-transform: scale(2.5);
+
+.pagination {
+  padding: 0 42%;
 }
-img{
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
+
+.imageTable {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  padding: 0;
 }
-.table{
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-    border-style: hidden;
-    font-weight: 600;
+
+.imageTable tr {
+  width: 100%;
+}
+
+.imageTable thead th {
+  border: 1px solid lightgray;
+  vertical-align: middle;
+}
+
+.table th,
+td {
+  padding: 0 1px;
+  word-wrap: break-word;
+
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+table td {
+  border: 1px solid lightgray;
+  vertical-align: middle;
+}
+
+.btnDelete {
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+  padding: 0px 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.btnImage {
+  font-weight: 400;
+  vertical-align: middle;
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 0px 5px;
+}
+
+.searchInput {
+  width: 80%;
+
+}
+
+.btnAdd {
+  width: 15%;
+  margin-left: 5%;
+  font-weight: 400;
+  vertical-align: middle;
+  background-color: #f2bd0b;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 0px 5px;
+}
+
+.searchAdd {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 0;
+
+}
+
+tbody tr:nth-of-type(odd) {
+  background: #eee;
+}
+
+@media screen and (max-width:1200px)and (min-width:769px) {
+  .myContainer {
+    min-width: 769px;
+    max-width: 1200px;
   }
-.modalBody{
-    padding: 3%;
-    
+
+  .table {
+    font-size: 13px;
+  }
+
+}
+
+
+@media screen and (max-width:768px) and (min-width:320px) {
+
+  .table table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .table tr {
+    border: 1px solid #807a7a;
+  }
+
+  .table td {
+    border: none;
+    border-bottom: 1px solid black;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .table td:before {
+    position: absolute;
+    top: 0px;
+    left: 6px;
+    width: 46%;
+    padding-right: 5px;
+    white-space: nowrap;
+    border-right: 1px solid lightgray;
+
+  }
+
+
+  .table td:nth-of-type(1):before {
+    content: "Видима корист.";
+  }
+
+  .table td:nth-of-type(2):before {
+    content: "Назва";
+  }
+
+  .table td:nth-of-type(3):before {
+    content: "Ціна";
+  }
+
+  .table td:nth-of-type(4):before {
+    content: "К-сть";
+  }
+
+  .table td:nth-of-type(5):before {
+    content: "Серія";
+  }
+
+  .table td:nth-of-type(6):before {
+    content: "Рік";
+  }
+
+  .table td:nth-of-type(7):before {
+    content: "Метал";
+  }
+
+  .table td:nth-of-type(8):before {
+    content: "Номінал";
+  }
+
+  .table td:nth-of-type(9):before {
+    content: "Image";
+  }
+
+  .table td:nth-of-type(10):before {
+    content: "Дод./змін. фото";
+  }
+
+  .table td:nth-of-type(11):before {
+    content: "Видалити";
+  }
+
 }

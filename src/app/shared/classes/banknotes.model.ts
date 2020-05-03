@@ -1,13 +1,14 @@
 
 import { IProduct } from '../interfaces/products.interfaces';
+import { IImage } from '../interfaces/image.interfaces';
 
 export class Banknote implements IProduct{
     constructor(
-            public id:string,
+            public id:number,
             public categoryId:number,
             public categoryName:string,
             public name:string,
-            public counter:number,
+            public count:number,
             public reserved:number,
             public isAvailable:boolean,
             public year:number,
@@ -15,6 +16,7 @@ export class Banknote implements IProduct{
             public signature:string,
             public description:string,
             public price:number,
-            public image: any
+            public isVisibleForUsers:boolean,
+            public images: Array<IImage>
     ){}
 }

@@ -4,13 +4,18 @@
 
 .filters {
   border: 1px solid #f2bd0b;
-    border-radius: 3px;
-  width: 300px;
+  border-radius: 3px;
+  width: 25%;
   padding: 1.5%;
   background-color: white;
   opacity: 0.9;
 }
-
+.cardBodySmall{
+  display: none;
+}
+.cardBodyBig{
+  display: block;
+}
 ::ng-deep {
   .custom-slider .ng5-slider .ng5-slider-bar {
     display: none;
@@ -36,7 +41,7 @@
 
   .custom-slider .ng5-slider .ng5-slider-limit {
     font-weight: bold;
-    // color: darkgreen;
+
   }
 
   .custom-slider .ng5-slider .ng5-slider-tick {
@@ -50,67 +55,83 @@
 
 }
 
+.filterSmallSize {
+  display: none;
+}
+.filterBigSize {
+  display: block;
+}
+
 .filter_name {
   margin: 1%;
   font-size: 17px;
   font-weight: bold;
 }
 
-// .filter-name:hover {
-//   font-size: 20px;
-
-// }
 
 .main {
   display: flex;
   justify-content: space-around;
-  margin: 0 2%;
   width: 100%;
 
 }
 
-.minMaxField{
-display: flex;
-justify-content: space-between;
+ul {
+  padding-inline-start: 0;
 }
+
+.minMaxField {
+  display: flex;
+  justify-content: space-between;
+}
+
 .minValue,
-.maxValue{
+.maxValue {
   width: 45%;
   margin: 2% 0;
 }
-.boxFilter{
+
+.boxFilter {
   margin: 3% 0;
 }
-.selectBox{
+
+.selectBox {
   width: 250px;
 }
-option {
-  white-space: nowrap; /* Отменяем перенос текста */
-  overflow: hidden; /* Обрезаем содержимое */
-  padding: 5px; /* Поля */
-  text-overflow: ellipsis;
-} 
 
+option {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px;
+  text-overflow: ellipsis;
+}
+
+.noImageBig {
+  width: 100px;
+  height: 100px;
+  background: url('../../../assets/icon/noImageBig.png') no-repeat;
+  margin: 0 auto;
+}
 
 .ng5-slider-pointer-min,
 .ng5-slider-pointer-max {
   background-color: #8b711d;
 }
-.price_slider{
+
+.price_slider {
   margin-bottom: 6%;
 }
+
 .product:hover {
   .button-group {
     display: flex;
     justify-content: center;
-
   }
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
   transform: scale(1.2);
 
 }
-
 
 .button-group {
   display: none;
@@ -123,22 +144,21 @@ option {
 
 .card-body p {
   margin: 1% 0;
-  // font-size: 11px;
   font-weight: bold;
   vertical-align: middle
 }
 
 .title {
   display: block;
-  height: 50px;
-  font-size: 11px;
+  max-height: 30px;
+  font-size: 13px;
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .title:hover {
-  color:#b68e09;
+  color: #b68e09;
 }
 
 .moreDetails,
@@ -159,36 +179,28 @@ option {
 }
 
 .buy {
-  background-color:#f2bd0b;
+  background-color: #f2bd0b;
   margin-left: 2%;
 }
-.moreDetails:hover{
+
+.moreDetails:hover {
   box-shadow: -1px 0px 4px 0px #787272;
 }
-.buy:hover{
+
+.buy:hover {
   box-shadow: -1px 0px 4px 0px #787272;
 
 }
 
 
 .product img {
-  width: 115px;
-  height: 120px;
+  max-width: 110px;
+  height: 100px;
   margin: 0 auto
 }
 
-.search {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-left: 20%;
-  padding: 0px 3%;
-}
-
-
-
 .catalog {
-  width: 1000px;
+  width: 70%;
   margin: 0 2%;
   display: flex;
   flex-wrap: wrap;
@@ -197,27 +209,11 @@ option {
   transition-property: transform;
 }
 
-.price{
-  font-size: 14px;
+.product {
+  width: 21%;
 }
 
-@media screen and (max-width:992px) {
-  .catalog {
-    width: 650px;
-  }
-
-  .search {
-    margin-left: 0;
-  }
-
-  .filters {
-    width: 300px;
-  }
-
-  .product {
-    width: 29%;
-  }
-
+@media screen and (max-width:1200px)and (min-width:769px) {
   .product img {
     width: 80px;
     height: 80px;
@@ -225,52 +221,77 @@ option {
   }
 }
 
-@media screen and (max-width:768px) {
-  .catalog {
-    width: 500px;
+
+@media screen and (max-width:768px) and (min-width:320px) {
+  .main {
+    display: block;
   }
 
+  .catalog {
+    width: 100%;
+    margin: 0;
+  }
+
+
   .filters {
-    width: 250px;
+    width: 100%;
+  }
+  .cardBodySmall{
+    display: block;
+  }
+  .cardBodyBig{
+    display: none;
+  }
+
+  .filterSmallSize {
+    display: block;
+  }
+  .filterBigSize {
+    display: none;
+  }
+  .priceBuy,
+  .yearDenomination{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .buySmall{
+    display: block;
+    height: 25px;
+    width: 47%;
+    line-height: 25px;
+    border: 1px solid #848282;
+    border-radius: 3px;
+    background-color: #f1e8e8;
+    color: black;
+    margin-top: 3px;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    align-items: 20px;
+    text-align: center;
+    background-color: #f2bd0b;
   }
 
   .product {
-    width: 40%;
+    width: 95%;
+    margin: 0 0 1% 0;
+    height: 140px;
+    display: flex;
   }
 
-}
-
-
-@media screen and (max-width:480px) {
-  .catalog {
-    width: 420px;
+  .product:hover {
+    transform: scale(1.05);
   }
 
-  .search {
-    width: 420px;
-  }
-
-  .filters {
-    width: 420px;
-  }
-
-  .product {
-    width: 80%;
-  }
-
-}
-
-@media screen and (max-width:320px) {
-  .catalog {
-    width: 270px;
-  }
-
-  .filters {
-    width: 270px;
+  .imageBox {
+    width: 35%;
+    height: 100px;
+    line-height: 100px;
   }
 
   .search {
-  width: 270px;
+    width: 270px;
   }
 
   .main {

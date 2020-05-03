@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategory } from '../interfaces/categories.interfaces';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,11 @@ urlCateg:string;
 
 
   constructor(private http:HttpClient) {
-    this.urlCateg ='http://localhost:3000/categories'
+    this.urlCateg = `${environment.apiUrl}/admin/categories`;
    }
 
-   getJSONCategories(): Observable<Array<ICategory>> {
+   getCategories(): Observable<Array<ICategory>> {
     return this.http.get<Array<ICategory>>(this.urlCateg)
-  }
-
-  postJSONCategories(category: ICategory): Observable<Array<ICategory>> {
-    return this.http.post<Array<ICategory>>(this.urlCateg, category)
-  }
-
-  deleteJSONCategories(id: number): Observable<Array<ICategory>> {
-    return this.http.delete<Array<ICategory>>(`${this.urlCateg}/${id}`)
   }
 
 

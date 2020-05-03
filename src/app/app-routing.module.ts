@@ -15,28 +15,32 @@ import { AdminAccessoriesComponent } from './admin/admin-accessories/admin-acces
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { ProfileGuard } from './shared/guards/profile.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'coins', pathMatch:'full'},
-  {path: 'coins', component: CoinsComponent},
-  {path: 'banknote', component: BanknotesComponent},
-  {path: 'medals', component: MedalsComponent},
-  {path: 'accessories', component: AccessoriesComponent},
-  {path: 'basket', component: BasketComponent},
-  {path: 'product/:categoryName/:id', component: ProductDetailsComponent},
-  {path: 'login', component: SignInComponent},
+  { path: '', redirectTo: 'coins', pathMatch: 'full' },
+  { path: 'coins', component: CoinsComponent },
+  { path: 'banknote', component: BanknotesComponent },
+  { path: 'medals', component: MedalsComponent },
+  { path: 'accessories', component: AccessoriesComponent },
+  { path: 'basket', component: BasketComponent },
+  { path: 'product/:categoryName/:id', component: ProductDetailsComponent },
+  { path: 'login', component: SignInComponent },
+  {path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard]},
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'coins', pathMatch: 'full' },
+      { path: 'coins', component: AdminCoinsComponent },
+      { path: 'banknotes', component: AdminBanknotesComponent },
+      { path: 'medals', component: AdminMedalsComponent },
+      { path: 'accessories', component: AdminAccessoriesComponent },
+      { path: 'orders', component: AdminOrdersComponent }
+    ]
+  },
 
- 
-  {path: 'admin', component: AdminComponent, children:[
-  {path: '', redirectTo: 'coins', pathMatch:'full'},
-  {path: 'coins', component: AdminCoinsComponent},
-  {path: 'banknotes', component: AdminBanknotesComponent},
-  {path: 'medals', component: AdminMedalsComponent},
-  {path: 'accessories', component: AdminAccessoriesComponent},
-  {path: 'orders', component: AdminOrdersComponent}
-  ]},
-  
 
 ];
 

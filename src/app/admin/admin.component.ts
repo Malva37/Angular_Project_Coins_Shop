@@ -4,6 +4,7 @@ import { UserServiceService } from '../shared/services/User.service';
 import { User } from '../shared/classes/users.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { ShareService } from '../shared/services/share.service';
 
 
 @Component({
@@ -33,32 +34,48 @@ export class AdminComponent implements OnInit {
   passwordUser: string;
 
 
-
-
+  adminStatus:boolean;
 
   constructor(private service: UserServiceService,
+    private share: ShareService,
     private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage) { }
+    private afStorage: AngularFireStorage) { 
+      this.share.switchOnAdmin.subscribe(status => this.adminStatus = status);
+    }
+    
 
   ngOnInit() {
-    this.resetForm();
+    // this.resetForm();
+    this.share.adminHere();
   }
-  
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.resetForm();
-    }
-    this.service.formData = {
-      id: null,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      password: '',
-      role:''
-    };
-  }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+  // resetForm(form?: NgForm) {
+  //   if (form != null) {
+  //     form.resetForm();
+  //   }
+  //   this.service.formData = {
+  //     id: null,
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     phone: '',
+  //     address: '',
+  //     password: '',
+  //     role:''
+  //   };
+  // }
 
   enter() {
     if (this.emailUser == 'a' && this.passwordUser == 'a') {
@@ -87,21 +104,21 @@ export class AdminComponent implements OnInit {
     //     }
     //   })
 
-    }
+  }
 
 
-    // if (this.emailUser) {
+  // if (this.emailUser) {
 
-    //   // getData():void{
-    //   //   const id = this.route.snapshot.paramMap.get('id');
-    //   //   this.medalService.userRef.doc(id).valueChanges().subscribe(
-    //   //     data => {
-    //   //       this.product = data
-    //   //       // console.log(this.medal)
-    //   //     })
-    //   // }
-    // }
-  
+  //   // getData():void{
+  //   //   const id = this.route.snapshot.paramMap.get('id');
+  //   //   this.medalService.userRef.doc(id).valueChanges().subscribe(
+  //   //     data => {
+  //   //       this.product = data
+  //   //       // console.log(this.medal)
+  //   //     })
+  //   // }
+  // }
+
 
 
 

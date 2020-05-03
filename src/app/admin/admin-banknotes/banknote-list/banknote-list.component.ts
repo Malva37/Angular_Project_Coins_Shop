@@ -39,101 +39,101 @@ export class BanknoteListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean;
 
-  constructor(private service: BanknoteService,
+  constructor(public service: BanknoteService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }
 
   ngOnInit() {
-    this.service.getBanknotes().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id, ...item.payload.doc.data()
-        } as Banknote;
-      });
-    });
-    this.resetForm();
+    // this.service.getBanknotes().subscribe(actionArray => {
+    //   this.list = actionArray.map(item => {
+    //     return {
+    //       id: item.payload.doc.id, ...item.payload.doc.data()
+    //     } as Banknote;
+    //   });
+    // });
+    // this.resetForm();
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
 
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.resetForm();
-    }
-    this.service.formData = {
-      id: null,
-      categoryId: 2,
-      categoryName: 'banknotes',
-      name: '',
-      counter: null,
-      reserved:null,
-      isAvailable:true,
-      year: null,
-      denomination: null,
-      signature: '',
-      description: '',
-      price: null,
-      image: ''
-    };
-  }
+  // resetForm(form?: NgForm) {
+  //   if (form != null) {
+  //     form.resetForm();
+  //   }
+  //   this.service.formData = {
+  //     id: null,
+  //     categoryId: 2,
+  //     categoryName: 'banknotes',
+  //     name: '',
+  //     counter: null,
+  //     reserved:null,
+  //     isAvailable:true,
+  //     year: null,
+  //     denomination: null,
+  //     signature: '',
+  //     description: '',
+  //     price: null,
+  //     image: ''
+  //   };
+  // }
 
-  onSubmit(form: NgForm) {
-    const data: Banknote = Object.assign({}, form.value);
-    this.firestore.doc('banknotes/' + form.value.id).update(data);
-    this.resetForm(form);
-  }
+  // onSubmit(form: NgForm) {
+  //   const data: Banknote = Object.assign({}, form.value);
+  //   this.firestore.doc('banknotes/' + form.value.id).update(data);
+  //   this.resetForm(form);
+  // }
 
   
-  onEdit(banknote: Banknote, template) {
-    this.openModal(template);
-    this.service.formData = Object.assign({}, banknote);
-    this.editImageStatus = true;
-  }
+  // onEdit(banknote: Banknote, template) {
+  //   this.openModal(template);
+  //   this.service.formData = Object.assign({}, banknote);
+  //   this.editImageStatus = true;
+  // }
 
 
 
-  public upload(event: any): void {
-    debugger
-    const file = event.target.files[0];
-    const filePath = `images/banknotes/${this.createUUID()}.${file.type.split('/')[1]}`;
-    this.task = this.afStorage.upload(filePath, file);
-    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
-    this.uploadProgress = this.task.percentageChanges();
-    this.task.snapshotChanges()
-      .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
-      .subscribe();
-    this.task.then((e) => {
-      this.afStorage.ref(`images/banknotes/${e.metadata.name}`).getDownloadURL().subscribe(
-        data => {
-          this.service.formData.image = data;
-        });
-    });
-  }
+  // public upload(event: any): void {
+  //   debugger
+  //   const file = event.target.files[0];
+  //   const filePath = `images/banknotes/${this.createUUID()}.${file.type.split('/')[1]}`;
+  //   this.task = this.afStorage.upload(filePath, file);
+  //   this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+  //   this.uploadProgress = this.task.percentageChanges();
+  //   this.task.snapshotChanges()
+  //     .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
+  //     .subscribe();
+  //   this.task.then((e) => {
+  //     this.afStorage.ref(`images/banknotes/${e.metadata.name}`).getDownloadURL().subscribe(
+  //       data => {
+  //         this.service.formData.image = data;
+  //       });
+  //   });
+  // }
 
-  private createUUID(): string {
-    let dt = new Date().getTime();
-    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-  }
+  // private createUUID(): string {
+  //   let dt = new Date().getTime();
+  //   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  //     const r = (dt + Math.random() * 16) % 16 | 0;
+  //     dt = Math.floor(dt / 16);
+  //     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  //   });
+  //   return uuid;
+  // }
 
-  public deleteImage(banknote: Banknote) {
-    this.editImageStatus = false;
-    this.afStorage.storage.refFromURL(banknote.image).delete();
-    this.service.formData.image = ''
-  }
+  // public deleteImage(banknote: Banknote) {
+  //   this.editImageStatus = false;
+  //   this.afStorage.storage.refFromURL(banknote.image).delete();
+  //   this.service.formData.image = ''
+  // }
 
 
-  onDelete(banknote: Banknote) {
-    if (confirm('Are you sure to delete this medal?')) {
-      this.firestore.doc('banknotes/' + banknote.id).delete();
-      this.afStorage.storage.refFromURL(banknote.image).delete();
-    }
-  }
+  // onDelete(banknote: Banknote) {
+  //   if (confirm('Are you sure to delete this medal?')) {
+  //     this.firestore.doc('banknotes/' + banknote.id).delete();
+  //     this.afStorage.storage.refFromURL(banknote.image).delete();
+  //   }
+  // }
 }

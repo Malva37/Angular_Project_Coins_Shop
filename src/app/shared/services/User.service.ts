@@ -1,22 +1,15 @@
 import { Injectable } from '@angular/core';
-import { User } from '../classes/users.model';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { IUser } from '../interfaces/users.interfaces';
+import { IUserCredentials } from '../interfaces/userCredentials.interfaces';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  formData: User;
-  userRef: AngularFirestoreCollection<User> = null;
+  formData: IUser;
+  formDataSm:IUserCredentials;
+  constructor() { }
 
 
-
-  constructor(private firestore: AngularFirestore) {
-    this.userRef = firestore.collection('users')
-  }
-
-  getUsers() {
-    return this.firestore.collection('users').snapshotChanges();
-  }
-  
 }

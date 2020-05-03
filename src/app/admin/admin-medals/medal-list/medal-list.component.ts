@@ -35,20 +35,20 @@ export class MedalListComponent implements OnInit {
   modalRef: BsModalRef;
   editImageStatus: boolean
 
-  constructor(private service: MedalService,
+  constructor(public service: MedalService,
     private modalService: BsModalService,
     private firestore: AngularFirestore,
     private afStorage: AngularFireStorage) { }
 
   ngOnInit() {
-    this.service.getMedals().subscribe(actionArray => {
-      this.list = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id, ...item.payload.doc.data()
-        } as Medal;
-      });
-    });
-    this.resetForm();
+    // this.service.getMedals().subscribe(actionArray => {
+    //   this.list = actionArray.map(item => {
+    //     return {
+    //       id: item.payload.doc.id, ...item.payload.doc.data()
+    //     } as Medal;
+    //   });
+    // });
+    // this.resetForm();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -56,80 +56,80 @@ export class MedalListComponent implements OnInit {
   }
 
 
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.resetForm();
-    }
-    this.service.formData = {
-      id: null,
-      categoryId: 3,
-      categoryName: 'medals',
-      name: '',
-      counter: null,
-      reserved:null,
-      isAvailable: true,
-      description: '',
-      price: null,
-      image: ''
-    };
-  }
+  // resetForm(form?: NgForm) {
+  //   if (form != null) {
+  //     form.resetForm();
+  //   }
+  //   this.service.formData = {
+  //     id: null,
+  //     categoryId: 3,
+  //     categoryName: 'medals',
+  //     name: '',
+  //     counter: null,
+  //     reserved:null,
+  //     isAvailable: true,
+  //     description: '',
+  //     price: null,
+  //     image: ['']
+  //   };
+  // }
 
-  onEdit(medal: Medal, template) {
-    debugger
-    this.openModal(template);
-    this.service.formData = Object.assign({}, medal);
-    this.editImageStatus = true;
-  }
-
-
-  onSubmit(form: NgForm) {
-    const data: Medal = Object.assign({}, form.value);
-    this.firestore.doc('medals/' + form.value.id).update(data);
-    this.resetForm(form);
-  }
-
-  onDelete(medal: Medal) {
-    if (confirm('Are you sure to delete this medal?')) {
-      this.firestore.doc('medals/' + medal.id).delete();
-      this.afStorage.storage.refFromURL(medal.image).delete();
-    }
-  }
+  // onEdit(medal: Medal, template) {
+  //   debugger
+  //   this.openModal(template);
+  //   this.service.formData = Object.assign({}, medal);
+  //   this.editImageStatus = true;
+  // }
 
 
+  // onSubmit(form: NgForm) {
+  //   const data: Medal = Object.assign({}, form.value);
+  //   this.firestore.doc('medals/' + form.value.id).update(data);
+  //   this.resetForm(form);
+  // }
 
-  public upload(event: any): void {
-    debugger
-    const file = event.target.files[0];
-    const filePath = `images/medals/${this.createUUID()}.${file.type.split('/')[1]}`;
-    this.task = this.afStorage.upload(filePath, file);
-    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
-    this.uploadProgress = this.task.percentageChanges();
-    this.task.snapshotChanges()
-      .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
-      .subscribe();
-    this.task.then((e) => {
-      this.afStorage.ref(`images/medals/${e.metadata.name}`).getDownloadURL().subscribe(
-        data => {
-          this.service.formData.image = data;
-        });
-    });
-  }
+  // // onDelete(medal: Medal) {
+  // //   if (confirm('Are you sure to delete this medal?')) {
+  // //     this.firestore.doc('medals/' + medal.id).delete();
+  // //     this.afStorage.storage.refFromURL(medal.image).delete();
+  // //   }
+  // // }
 
-  private createUUID(): string {
-    let dt = new Date().getTime();
-    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-  }
 
-  public deleteImage(medal: Medal) {
-    this.editImageStatus = false;
-    this.afStorage.storage.refFromURL(medal.image).delete();
-    this.service.formData.image = ''
-  }
+
+  // public upload(event: any): void {
+  //   debugger
+  //   const file = event.target.files[0];
+  //   const filePath = `images/medals/${this.createUUID()}.${file.type.split('/')[1]}`;
+  //   this.task = this.afStorage.upload(filePath, file);
+  //   this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+  //   this.uploadProgress = this.task.percentageChanges();
+  //   this.task.snapshotChanges()
+  //     .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
+  //     .subscribe();
+  //   this.task.then((e) => {
+  //     this.afStorage.ref(`images/medals/${e.metadata.name}`).getDownloadURL().subscribe(
+  //       data => {
+  //         this.service.formData.image = data;
+  //       });
+  //   });
+  // }
+
+  // private createUUID(): string {
+  //   let dt = new Date().getTime();
+  //   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  //     const r = (dt + Math.random() * 16) % 16 | 0;
+  //     dt = Math.floor(dt / 16);
+  //     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  //   });
+  //   return uuid;
+  // }
+
+  // // public deleteImage(medal: Medal) {
+  // //   this.editImageStatus = false;
+  // //   this.afStorage.storage.refFromURL(medal.image).delete();
+  // //   this.service.formData.image = ''
+  // // }
 
 
 

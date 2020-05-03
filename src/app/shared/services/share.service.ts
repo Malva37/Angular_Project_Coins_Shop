@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,47 @@ export class ShareService {
   onClickSum: EventEmitter<number> = new EventEmitter();
   onChangeSearchName: EventEmitter<string> = new EventEmitter();
 
-searchName:string;
+  searchName: string;
 
-changeSearchName(search){
-  this.onChangeSearchName.emit(search)
-}
+
+  admin: boolean;
+  user: boolean;
+  anyOne: boolean;
+  switchOnAdmin: EventEmitter<boolean> = new EventEmitter();
+  switchOnUser: EventEmitter<boolean> = new EventEmitter();
+  switchOnAny: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(private router: Router) { }
+
+
+  adminHere() {
+    this.admin = true;
+    this.switchOnAdmin.emit(this.admin);
+    // this.switchOn();
+  }
+
+  userHere() {
+    this.user = true;
+    this.switchOnUser.emit(this.user);
+    // this.switchOn();
+  }
+
+  anyHere() {
+    this.anyOne = true;
+    this.switchOnAny.emit(this.anyOne);
+
+  }
+
+
+
+
+
+
+
+
+  changeSearchName(search) {
+    this.onChangeSearchName.emit(search)
+  }
 
   numberItemsInBasket() {
     let keys = Object.keys(localStorage);
@@ -29,7 +66,6 @@ changeSearchName(search){
     this.onClickNumber.emit(this.clickCnt);
     this.onClickSum.emit(this.sumBasket);
   }
-
 
   sumInBasket() {
     let keys = Object.keys(localStorage);
@@ -44,6 +80,16 @@ changeSearchName(search){
     }
     return this.sumBasket;
   }
+
+
+
+
+
+
+
+
+
+
 
 }
 

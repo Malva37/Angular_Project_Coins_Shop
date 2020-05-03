@@ -67,7 +67,7 @@ a :hover {
 
 a.active {
   color: #f2bd0b;
-  
+
 }
 
 
@@ -85,36 +85,59 @@ header .nav-item a:hover::after {
   transform: scale(1);
 
 }
-.coin{
+
+.coin {
   height: 35px;
   width: 45px;
   background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -20px;
 
 }
-.banknote{
-    height: 35px;
-    width: 48px;
-    background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -136px;
+
+.banknote {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/coin_banknote.png') no-repeat -12px -136px;
 }
-.medal{
+
+.medal {
   height: 35px;
   width: 43px;
   background: url('../../../assets/icon/medal.png') no-repeat -152px -61px;
 }
-.accessory{
-    height: 35px;
-    width: 48px;
-    background: url('../../../assets/icon/accessories.png') no-repeat;
+
+.accessory {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/accessories.png') no-repeat;
 }
 
+.adminIcon {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/admin.png') no-repeat;
+}
 
-.myCabinetIcon{
+.userIcon {
+  height: 35px;
+  width: 48px;
+  background: url('../../../assets/icon/user.png') no-repeat;
+}
+
+.logInIcon {
   height: 37px;
   width: 37px;
   background: url('../../../assets/icon/enter.png') no-repeat;
 }
-.icon{
-margin: 0 auto;
+
+
+.logOutIcon {
+  height: 37px;
+  width: 37px;
+  background: url('../../../assets/icon/logOut.png') no-repeat;
+}
+
+.icon {
+  margin: 0 auto;
 }
 
 
@@ -123,6 +146,7 @@ margin: 0 auto;
   display: flex;
   justify-content: space-between;
   width: 100%;
+  font-size: 17px;
   background-color: #8b711d;
   border: 1px solid #6e5d12;
   padding: 2% 5%;
@@ -130,20 +154,26 @@ margin: 0 auto;
 }
 
 .phone {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
+  width: 20%;
 
 }
 
 .phone a {
-  text-decoration-line: none;
   color: black;
+  display: block;
+  text-decoration-line: none;
 
 }
 
 .search {
-  width: 50%;
+  width: 45%;
 
+}
+
+.searchInput {
+  padding: 0 1%;
 }
 
 .basketBox {
@@ -187,7 +217,12 @@ margin: 0 auto;
 }
 
 
-@media screen and (max-width:1200px)and (min-width:769px) {}
+@media screen and (max-width:1200px)and (min-width:769px) {
+
+  .phone {
+    width: 30%;
+  }
+}
 
 
 @media screen and (max-width:768px) and (min-width:320px) {
@@ -196,9 +231,22 @@ margin: 0 auto;
     font-size: 14px;
 
   }
-.namePage{
-  display: none;
-}
+
+  .phone {
+    display: none;
+  }
+
+  .namePage {
+    display: none;
+  }
+
+  .search {
+    width: 65%;
+  }
+
+  input::placeholder {
+    font-size: 13px;
+  }
 
   .btnMyCabinet {
     display: block;
@@ -211,6 +259,5 @@ margin: 0 auto;
     text-align: center;
     font-size: 14px;
   }
-
 
 }

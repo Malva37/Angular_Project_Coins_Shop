@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
-import { UserServiceService } from 'src/app/shared/services/User.service';
-import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/shared/classes/users.model';
+import { UserCredentials } from 'src/app/shared/classes/userCredentials';
+import { UserServiceService } from 'src/app/shared/services/User.service';
+import { IUserCredentials } from 'src/app/shared/interfaces/userCredentials.interfaces';
 
 
 @Component({
@@ -15,50 +13,35 @@ import { User } from 'src/app/shared/classes/users.model';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
-  emailUser: string;
-  passwordUser: string;
-  currentUser: any;
-  currentUserPage: boolean;
-  // user:any;
-  user = {
-    email: '',
-    password: ''
-  };
-
-  id: string;
+  phoneMask = ['+', '3', '8', '(', '0', /\d{1}/, /\d{1}/, ')', /\d{1}/, /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/, '-', /\d{1}/, /\d{1}/];
+  userName: string;
+  signStatus: boolean
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   phone: string;
   address: string;
-  role: string = 'user';
-  private dbPath = '/users';
-  usersRef: AngularFirestoreCollection<User> = null;
-  // constructor(private db: AngularFirestore) {
-  //   this.usersRef = db.collection(this.dbPath);
-  // }
+  isAdmin: boolean = false;
+  show: boolean;
 
-  constructor(private firestore: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private service: UserServiceService,
-    private authService: AuthService,
-    private router: Router,
-    private db: AngularFirestore) {
-    this.usersRef = db.collection(this.dbPath)
-  }
+
+
+  constructor(private service: AuthService,
+    public share: UserServiceService) { }
 
   ngOnInit() {
     this.resetForm();
-  };
+    this.show = false;
 
+  }
 
   resetForm(form?: NgForm) {
     if (form != null) {
       form.resetForm();
     }
-    this.service.formData = {
+    this.share.formData = {
       id: null,
       firstName: '',
       lastName: '',
@@ -66,70 +49,44 @@ export class SignInComponent implements OnInit {
       phone: '',
       address: '',
       password: '',
-      role: 'user'
+      isAdmin: null
     };
+    this.share.formDataSm = {
+      userName: '',
+      password: ''
+    }
   }
+  showPassword() {
+    this.show = !this.show;
+  }
+
+
+  login(email, password) {
+    let user = new UserCredentials(email,
+      password);
+    this.service.postJSONUsers(user);
+
+  }
+
+
 
 
   onSubmit(form: NgForm) {
-
-    const data: User = Object.assign({}, form.value);
     debugger
-    delete data.id;
-    if (form.value.id == null) {
-      this.firestore.collection('users').add(data);
-      console.log(data);
-
-    } else {
-      this.firestore.doc('users/' + form.value.id).update(data);
-    }
-    this.resetForm(form);
+    const user: IUserCredentials = Object.assign({}, form.value);
+    console.log(user);
+    
+    this.service.postJSONUsers(user);
   }
 
-
-
-  // enter(email, password) {
-
-  //   this.service.userRef.doc('id').snapshotChanges().subscribe(
-  //     data => {
-  //       this.currentUser = data
-  //       console.log(this.currentUser);
-
-  //     })
-  // }
-
-
-
-  loginUser(email, pass) {
-    this.usersRef.get().subscribe(
-      querySnapshot => {
-        querySnapshot.forEach((doc) => {
-          if (email === doc.data().email) {
-            if (pass === doc.data().password) {
-              this.usersRef.doc(doc.id).update({ loginStatus: true })
-              const us = doc.data()
-              us.loginStatus = true
-              localStorage.setItem('user', JSON.stringify(us))
-              
-            }
-          } 
-        } )
-      });
+  registration() {
+    this.signStatus = true;
   }
 
-  // signInWithEmail() {
-  //   console.log(this.user.email, this.user.password);
-
-  //   this.authService.signInRegular(this.user.email, this.user.password)
-  //     .then((res) => {
-  //       console.log(res);
-
-  //       this.router.navigate(['user']);
-  //     })
-  //     .catch((err) => console.log('error: ' + err));
-  // }
+  registrationFull(firstName, lastName, phone, address, password, email) {
+    let user = new User(1, firstName, lastName, phone, address, password, email, this.isAdmin);
+    this.service.createUsers(user);
+  }
 
 
 }
-
-

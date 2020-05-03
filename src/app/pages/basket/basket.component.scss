@@ -1,15 +1,16 @@
-.container-fluid{
+.container-fluid {
   padding: 2% 10%;
 }
-.basket{
+
+.basket {
   background-color: white;
   opacity: 0.9;
-  border:1px solid #f2bd0b;
+  border: 1px solid #f2bd0b;
   border-radius: 3px;
   padding: 2% 5%;
 }
 
-.dataOrder{
+.dataOrder {
   display: flex;
   justify-content: space-around;
   margin: 2% 0;
@@ -19,22 +20,24 @@
   height: 60px;
   width: 70px;
 }
-.doOrder{
+
+.doOrder {
   background-color: #f2bd0b;
   border: 1.5px solid #6c6133;
   font-size: 17px;
   font-weight: 600;
 
 }
+
 .dataUser {
   width: 49%;
   background-color: white;
   opacity: 0.9;
-  border:1px solid #f2bd0b;
+  border: 1px solid #f2bd0b;
   border-radius: 3px;
   padding: 3%;
   height: max-content;
-
+  margin: 0 0 3% 0;
 }
 
 table {
@@ -43,18 +46,23 @@ table {
   font-weight: 600;
 
 }
-
-table td, table th {
+thead th {
+  font-size: 17px;
+}
+table td,
+table th {
   border: 1px solid black;
 }
-.title{
-  font-size: 19px;
+
+.title {
+  font-size: 17px;
   color: black;
   margin: 1% 2% 5%;
   font-weight: bold;
- 
+
 }
-.btnDelete{
+
+.btnDelete {
   background-color: #f2bd0b;
   border: 1px solid black;
   border-radius: 5px;
@@ -64,100 +72,154 @@ table td, table th {
   text-align: center;
   font-size: 14px;
 }
-.title:hover{
+
+.title:hover {
   text-decoration: underline;
 }
+
 .deliveryPayment {
   width: 49%;
 }
-.dellivery .form-check{
-border-bottom: 1px solid black;
+
+.dellivery .form-check {
+  border-bottom: 1px solid black;
 }
 
 .delivery {
   height: auto;
   background-color: white;
   opacity: 0.9;
-  border:1px solid #f2bd0b;
+  border: 1px solid #f2bd0b;
   border-radius: 3px;
   padding: 3%;
 }
-.payment{
-    height: auto;
-    margin:  0 0 3% 0;
-    background-color: white;
-    opacity: 0.9;
-    border:1px solid #f2bd0b;
-    border-radius: 3px;
-    padding: 3%;
+
+.payment {
+  height: auto;
+  margin: 0 0 3% 0;
+  background-color: white;
+  opacity: 0.9;
+  border: 1px solid #f2bd0b;
+  border-radius: 3px;
+  padding: 3%;
 }
 
 .tableBasket {
   width: 100%;
   text-align: center;
 }
-.thImage{
+
+.thImage {
   width: 15%;
 }
-.thTitle{
+
+.thTitle {
   width: 45%;
 }
-.thPrice{
+
+.thPrice {
   width: 10%;
 }
-.thCount{
+
+.thCount {
   width: 15%;
 }
-.thSuma{
+
+.thSuma {
   width: 10%;
 }
-.thBtnDelete{
+
+.thBtnDelete {
   width: 5%;
 }
 
 .tableBasket tr,
 td {
   text-align: center;
-  padding: 1% ;
+  padding: 1%;
 }
-.tableBasket tr{
+
+.tableBasket tr {
   height: 20px;
 }
 
 .counter {
   display: flex;
-  margin: 0 15%;
+  // margin: 0 15%;
 }
-.count{
+
+.count {
   width: 50px;
   font-weight: 600;
-    text-align: center;
-    font-size: 15px;
-    border: 1px solid black;
-    border-right: none;
-    border-left: none;
+  text-align: center;
+  font-size: 15px;
+  border: 1px solid black;
+  border-right: none;
+  border-left: none;
 }
-.minus{
+
+.minus {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   border: 1px solid black;
 }
-.plus{
+
+.plus {
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid black;
 }
-.tdFont{
+
+.tdFont {
   font-size: 14px;
 }
-.titleGroup{
+
+.titleGroup {
   display: flex;
   justify-content: flex-start;
   margin-top: 4%;
 }
-.dataOrder img{
+
+.dataOrder img {
   width: 53px;
   height: 33px;
   margin: -2% 1% 0;
+
+}
+.row{
+  margin: 2% 0;
+}
+.validation-error {
+  color: red;
+  font-size: 15px;
+  word-spacing: -2px;
+  letter-spacing: -1px;
+}
+
+@media screen and (max-width:768px) and (min-width:320px) {
+  .form-control {
+    font-size: 13px;
+  }
+  .dataOrder{
+    display: block;
+
+  }
+  .dataUser,.deliveryPayment{
+    width: 100%;
+  }
+  .title, thead th {
+    font-size: 15px;
+  
+  }
+  .validation-error {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  input::placeholder {
+    font-size: 13px;
+    word-spacing: -2px;
+    letter-spacing: -1px;
+  }
 
 }

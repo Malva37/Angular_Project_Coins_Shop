@@ -11,9 +11,9 @@ export const environment = {
     projectId: "",
     storageBucket: "",
     messagingSenderId: "",
-    appId: "",
-    measurementId: ""
-  }
+    appId: ""
+  },
+  apiUrl: "http://localhost:8088"
 };
 
 /*

@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,8 +51,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CoinComponent } from './admin/admin-coins/coin/coin.component';
-import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
-import { CoinService } from './shared/services/coin.service';
+// import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
+import { CoinService } from './shared/services/coin-for-admin.service';
 import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
 import { BanknoteComponent } from './admin/admin-banknotes/banknote/banknote.component';
 import { AccessoryComponent } from './admin/admin-accessories/accessory/accessory.component';
@@ -62,9 +62,11 @@ import { AuthService } from './shared/services/auth.service';
 import { ShareService } from './shared/services/share.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
-
-
-
+import { AuthInterceptor } from './auth.interceptor';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { Router } from '@angular/router';
+import { MatExpansionModule } from '@angular/material';
 
 
 @NgModule({
@@ -93,14 +95,14 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
     MedalListComponent,
     ProductDetailsComponent,
     CoinComponent,
-    CoinListComponent,
+    // CoinListComponent,
     BanknoteComponent,
     BanknoteListComponent,
     AccessoryComponent,
     AccessoryListComponent,
     SignInComponent,
     FilterSignPipe,
-  
+    ProfileComponent
 
   ],
   imports: [
@@ -110,6 +112,7 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
     NgxUiLoaderRouterModule,
     HttpClientModule,
     FormsModule,
+    TextMaskModule,
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
@@ -117,10 +120,23 @@ import { FilterSignPipe } from './shared/pipes/filter-sign.pipe';
     Ng5SliderModule,
     CommonModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot(), TabsModule.forRoot()
+    ToastrModule.forRoot(), TabsModule.forRoot(),
+    ReactiveFormsModule,
+    MatExpansionModule
+    
+  
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,
-      AuthService,AngularFireAuth,ShareService
+      AuthService,AngularFireAuth,ShareService,
+      {
+        provide : HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        useFactory: function(router: Router) {
+          return new AuthInterceptor(router);
+        },
+        deps: [Router],
+        multi   : true,
+      }
     ],
   bootstrap: [AppComponent]
 })

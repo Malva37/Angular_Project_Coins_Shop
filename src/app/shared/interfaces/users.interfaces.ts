@@ -1,13 +1,13 @@
 export interface IUser{
     
-    id: string;
+    id: number;
     firstName: string;
     lastName: string;
     email: string;
     phone: string;
     address: string,
     password: string,
-    role:string
+    isAdmin:boolean;
  
 
 }
