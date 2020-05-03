@@ -38,6 +38,7 @@
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^8.8.0",
     "ngx-ui-loader": "^8.0.0",
+    "process": "^0.11.10",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.5.4",
     "tslib": "^1.11.0",
