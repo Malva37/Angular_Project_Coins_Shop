@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -50,7 +50,7 @@ import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { CoinComponent } from './admin/admin-coins/coin/coin.component';
+// import { CoinComponent } from './admin/admin-coins/coin/coin.component';
 // import { CoinListComponent } from './admin/admin-coins/coin-list/coin-list.component';
 import { CoinService } from './shared/services/coin-for-admin.service';
 import { BanknoteListComponent } from './admin/admin-banknotes/banknote-list/banknote-list.component';
@@ -94,7 +94,7 @@ import { MatExpansionModule } from '@angular/material';
     MedalComponent,
     MedalListComponent,
     ProductDetailsComponent,
-    CoinComponent,
+    // CoinComponent,
     // CoinListComponent,
     BanknoteComponent,
     BanknoteListComponent,
@@ -122,8 +122,7 @@ import { MatExpansionModule } from '@angular/material';
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), TabsModule.forRoot(),
     ReactiveFormsModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
   
   ],
   providers: [MedalService,CoinService,BanknoteService,AccessoryService, AngularFirestore,

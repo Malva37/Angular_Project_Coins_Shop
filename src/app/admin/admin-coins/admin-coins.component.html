@@ -133,13 +133,14 @@
       <input type="hidden" name="categoryId" #categoryId="ngModel" [(ngModel)]="service.formData.categoryId">
       <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
       <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
+      <input type="hidden" name="isVisibleForUsers" #isVisibleForUsers="ngModel" [(ngModel)]="service.formData.isVisibleForUsers">
 
       <div class="field">
         <div class="titleField">Категорія:</div>
-        <select (change)="selectCategory($event)" name="categoryName" class="custom-select" #categoryName="ngModel"
-          [(ngModel)]="service.formData.categoryName" required>
+        <select (change)="selectCategory($event)" name="categoryId" class="custom-select" #categoryId="ngModel"
+          [(ngModel)]="service.formData.categoryId" required>
           <option disabled selected>Choose category</option>
-          <option *ngFor="let item of adminCategories" [value]="item.name">
+          <option *ngFor="let item of adminCategories" [value]="item.id">
             {{item.name}}</option>
         </select>
       </div>

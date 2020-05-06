@@ -118,15 +118,18 @@ export class AdminCoinsComponent implements OnInit {
   openModal(template: TemplateRef<any>, product?) {
     this.modalRef = this.modalService.show(template);
     this.product = product;
+    console.log(this.product);
+    
 
   }
 
   openModalImage(template: TemplateRef<any>, product) {
     this.modalRef = this.modalService.show(template);
+    // console.log(product);
     this.product = product;
-    console.log(this.product);
+    // console.log(this.product);
     this.images = product.images;
-    console.log(this.images);
+    // console.log(this.images);
     if (this.images.length > 0) {
       this.isArrayImages = true;
     }
@@ -157,7 +160,11 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form.value);
+    
     const data: ICoin = Object.assign({}, form.value);
+    console.log(data);
+    
     if (!this.editStatus) {
       this.service.postJSONCoin(data)
         .subscribe(
@@ -237,12 +244,13 @@ export class AdminCoinsComponent implements OnInit {
         data => {
           let isTitleValue = this.images.length === 0;
           let image = { id: null, url: data, isTitle: isTitleValue, productId: this.product.id };
+          debugger
          console.log(this.images);
          
           this.imageService.postImage(image).subscribe(
-            res => {
-              console.log(res);
-              return this.images = res.images;
+            () => {
+              this.getForAdmin();
+              // return this.images = res.images;
             });
           console.log('post done');
         }

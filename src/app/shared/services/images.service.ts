@@ -20,9 +20,9 @@ export class ImagesService {
       "Access-Control-Allow-Origin", environment.apiUrl)
   }
 
-  postImage(product): Observable<IProduct> {
-    // console.log();
-    return this.http.post<IProduct>(this.urlImages, product)
+  postImage(product): Observable<Array<IProduct>> {
+    return  this.http.post<Array<IProduct>>(this.urlImages, product);
+   
   }
 
   deleteImage(id:number) {

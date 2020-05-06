@@ -21,6 +21,25 @@
 .container-fluid{
     padding: 2% 10%;
 }
+.noImageBig {
+  width: 100px;
+  height: 100px;
+  background: url('../../../assets/icon/noImageBig.png') no-repeat;
+  margin: 0 auto;
+}
+
+.noImageSmall {
+  width: 50px;
+  height: 50px;
+  background: url('../../../assets/icon/noImageSmall.png') no-repeat;
+  margin: 0 auto;
+}
+.imageSmall{
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+
+}
 
 .titleProduct {
   font-size: 18px;

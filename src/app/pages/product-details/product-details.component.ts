@@ -9,6 +9,7 @@ import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { AccessoryService } from 'src/app/shared/services/accessory.service';
 import { BanknoteService } from 'src/app/shared/services/banknote.service';
 import { ShareService } from 'src/app/shared/services/share.service';
+import { CoinForUserService } from 'src/app/shared/services/coin-for-user.service';
 
 
 
@@ -26,12 +27,13 @@ export class ProductDetailsComponent implements OnInit {
   imageReverseStatus: boolean = true;
   clickCnt: number = 0;
   sumBasket: number = 0;
+  images = [];
   pressImageStatus:boolean=true;
   pressImageReverseStatus:boolean;
 
 
   constructor(private medalService: MedalService,
-    private coinService: CoinService,
+    private coinService: CoinForUserService,
     private accessoriesService: AccessoryService,
     private banknotesService: BanknoteService,
     private route: ActivatedRoute,
@@ -55,22 +57,24 @@ export class ProductDetailsComponent implements OnInit {
     this.pressImageReverseStatus=false;
   }
   getData(): void {
+    debugger
     const category = this.route.snapshot.paramMap.get('categoryName');
     const id = this.route.snapshot.paramMap.get('id');
     if (category == 'medals') {
       this.medalService.userRef.doc(id).valueChanges().subscribe(
         data => {
-          this.product = data
+          this.product = data;
         })
     }
 
     if (category == 'coins') {
-      this.coinService.userRef.doc(id).valueChanges().subscribe(
+ 
+      this.coinService.getOneCoin(+id).subscribe(
+        // this.coinService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
           this.coinsActive = true;
-          console.log(this.product);
-
+          this.images = data.images;
         })
     }
 

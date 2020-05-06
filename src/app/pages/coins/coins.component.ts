@@ -36,9 +36,7 @@ export class CoinsComponent implements OnInit {
   searchName: string;
   searchField: boolean;
 
-
-  idCoin: number;
-  oneCoin: ICoin;
+ 
 
 
 
@@ -57,25 +55,13 @@ export class CoinsComponent implements OnInit {
   getForUser() {
     this.service.getCoins().subscribe(
       data => {
-        console.log(data);
-
         let newData = JSON.stringify(data)
         this.list = JSON.parse(newData).data;
-        console.log(this.list);
-
-        // this.page = JSON.parse(newData).pagination.page;
-
       })
   }
 
   showOne(id: number) {
-    console.log(id);;
-    this.service.getOneCoin(id).subscribe(
-      data => {
-        console.log(data);
-
-        this.oneCoin = data;
-      });
+    this.service.getOneCoin(id).subscribe();
   }
 
 

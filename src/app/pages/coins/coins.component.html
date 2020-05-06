@@ -161,9 +161,7 @@
             </div>
           </div>
 
-          <input type="number" [(ngModel)]="idCoin" name="idCoin">
-          <input type="button" (click)="showOne(idCoin)">
-          <div class="oneCoin">{{oneCoin}}</div>
+
         </form>
       </mat-expansion-panel>
 
@@ -327,7 +325,8 @@
 
     <section class="catalog">
       <!-- <figure class="product" *ngFor="let coin of list | searchCoin:searchName | filterPrice:minValue:maxValue | filterDenomination: denomination | filterMetal: metal | filterSeries: series | filterYear: year "> -->
-      <figure class="product" *ngFor="let coin of list">
+      <figure class="product" *ngFor="let coin of list" [routerLink]="[ '/product',  coin.categoryName, coin.id ]">
+
         <div class="imageBox">
           <ul *ngFor="let image of coin.images;">
             <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage">
@@ -339,14 +338,11 @@
           <p class="title">{{ coin.name }} {{ coin.denomination }}грн. {{ coin.year }}р.</p>
           <p class="price">{{ coin.price }} грн</p>
           <div class="button-group">
-            <input type="button" [routerLink]="[ '/product',  coin.categoryName, coin.id ]" class="moreDetails"
-              value="Детальніше">
             <input type="button" class="buy"  value="Купити">
             <!-- <input type="button" class="buy" (click)="buyProduct(coin)" value="Купити"> -->
           </div>
         </div>
-
-        <div class="card-body cardBodySmall" [routerLink]="[ '/product',  coin.categoryName, coin.id ]">
+        <div class="card-body cardBodySmall">
           <p class="title">{{ coin.name }}</p>
           <div class="yearDenomination">
             <p>{{ coin.denomination }}грн.</p>
@@ -358,6 +354,7 @@
             <input type="button" class="buySmall" value="Купити">
           </div>
         </div>
+
       </figure>
     </section>
 
