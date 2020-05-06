@@ -4,9 +4,9 @@
       <div class="imageData">
 
         <div class="imageBig">
-          <ul *ngFor="let image of images">
-            <img *ngIf="(image?.isTitle == true)" [attr.src]="image?.url" class="card-img-top">
-          </ul>
+          <div *ngFor="let image of images">
+            <img *ngIf="(image.active == true)" [attr.src]="image?.url" class="card-img-top">
+          </div>
           <div *ngIf="(images.length == '0')" class="noImageBig card-img-top"></div>
         </div>
 
@@ -19,7 +19,7 @@
                   <td>{{ product?.price }} грн.</td>
                 </tr>
                 <tr>
-                  <td>Кількість:</td>
+                  <td>К-сть:</td>
                   <td>
                     <div class="countBox">
                       <div class="counter">
@@ -32,16 +32,34 @@
                 </tr>
               </tbody>
             </table>
-            <input type="button" class="buy" (click)="buyProduct(product)" value="Купити">
+            <div class="availableButton">
+              <div class="available">
+                <span *ngIf="product?.isAvailable == false">Під замовлення. Телефонуйте</span>
+                <span *ngIf="product?.isAvailable == true">В наявності</span>
+            </div>
+
+            <div class="available">
+              <input  *ngIf="product?.isAvailable == true"type="button" class="buy" (click)="buyProduct(product)" value="Купити">
+              <!-- <input  *ngIf="product?.isAvailable == true"type="button" class="buy" (click)="buyProduct(product)" value="Купити"> -->
+              <span *ngIf="product?.isAvailable == false">Під замовлення. Телефонуйте</span>
+             
+          </div>
+            
+
+            </div>
           </div>
 
 
           <div class="imageBox" *ngIf="(images.length > '0')">
-            <div class="moreImage">Більше фото... </div>
-              <ul class="list-group list-group-horizontal-sm imageLittle">
-                <li *ngFor="let image of images">
-                  <img [attr.src]="image.url" class="list-group-item card-img-top imageSmall">
+          
+              <ul class="imageLittle">
+                <a class="prev" (click)="pullLeft()">&#10094;</a>
+                <a class="next" (click)="pullRight()">&#10095;</a>
+                
+                <li *ngFor="let image of images" class = "">
+                  <img [attr.src]="image.url" class="imageSmall" (click)="pressImage(image)">
                 </li>
+
               </ul>
           </div>
         </div>

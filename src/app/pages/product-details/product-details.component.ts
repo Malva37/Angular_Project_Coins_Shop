@@ -24,12 +24,11 @@ export class ProductDetailsComponent implements OnInit {
   articles: Array<ProductOrder> = [];
   coinsActive: boolean;
   banknotesActive: boolean;
-  imageReverseStatus: boolean = true;
+
   clickCnt: number = 0;
   sumBasket: number = 0;
   images = [];
-  pressImageStatus:boolean=true;
-  pressImageReverseStatus:boolean;
+
 
 
   constructor(private medalService: MedalService,
@@ -47,34 +46,39 @@ export class ProductDetailsComponent implements OnInit {
     this.getData();
   }
 
-  pressImageReverse(){
-    this.pressImageStatus =false;
-    this.pressImageReverseStatus=true;
+  pressImage(image) {
+    this.images.forEach(element => {
+      if (element.active == true) {
+        element.active = false;
+        image.active = true;
+      }
+    });
+
   }
 
-  pressImage(){
-    this.pressImageStatus =true;
-    this.pressImageReverseStatus=false;
-  }
   getData(): void {
-    debugger
     const category = this.route.snapshot.paramMap.get('categoryName');
     const id = this.route.snapshot.paramMap.get('id');
     if (category == 'medals') {
       this.medalService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
+          
         })
     }
 
     if (category == 'coins') {
- 
       this.coinService.getOneCoin(+id).subscribe(
-        // this.coinService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
           this.coinsActive = true;
           this.images = data.images;
+          this.images.forEach(element => {
+            element.active = false;
+            if (element.isTitle == true) {
+              element.active = true;
+            }
+          });
         })
     }
 
@@ -94,7 +98,7 @@ export class ProductDetailsComponent implements OnInit {
       this.accessoriesService.userRef.doc(id).valueChanges().subscribe(
         data => {
           this.product = data;
-          this.imageReverseStatus = false;
+  
         })
 
 
@@ -103,6 +107,14 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
+
+  pullLeft() {
+
+  }
+
+  pullRight() {
+
+  }
 
 
   back(): void {
