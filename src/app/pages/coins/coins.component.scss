@@ -10,12 +10,15 @@
   background-color: white;
   opacity: 0.9;
 }
-.cardBodySmall{
+
+.cardBodySmall {
   display: none;
 }
-.cardBodyBig{
+
+.cardBodyBig {
   display: block;
 }
+
 ::ng-deep {
   .custom-slider .ng5-slider .ng5-slider-bar {
     display: none;
@@ -58,6 +61,7 @@
 .filterSmallSize {
   display: none;
 }
+
 .filterBigSize {
   display: block;
 }
@@ -69,7 +73,8 @@
 }
 
 
-.main {
+.main,
+.denominationYear {
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -78,6 +83,7 @@
 
 ul {
   padding-inline-start: 0;
+  margin: 0;
 }
 
 .minMaxField {
@@ -110,7 +116,7 @@ option {
   width: 100px;
   height: 100px;
   background: url('../../../assets/icon/noImageBig.png') no-repeat;
-  margin: 0 auto;
+  margin: 0px auto 10% auto;
 }
 
 .ng5-slider-pointer-min,
@@ -122,18 +128,27 @@ option {
   margin-bottom: 6%;
 }
 
+.priceBuy {
+  display: block;
+}
+
 .product:hover {
-  .button-group {
-    display: flex;
-    justify-content: center;
+  .buy {
+    display: block;
   }
+
+  .priceBuy {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10);
-  transform: scale(1.2);
+  transform: scale(1.1);
 
 }
 
-.button-group {
+.buy {
   display: none;
 }
 
@@ -145,43 +160,44 @@ option {
 .card-body p {
   margin: 1% 0;
   font-weight: bold;
-  vertical-align: middle
+  vertical-align: middle;
+  font-size: 13px;
 }
 
 .title {
-  display: block;
-  max-height: 30px;
+  display: flex;
+  height: 70px;
   font-size: 13px;
+  justify-content: center;
   word-wrap: break-word;
   overflow: hidden;
+  align-items: center;
+  line-height: 1.2;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-height: 12px;
+  max-height: 48px;
 }
 
 .title:hover {
   color: #b68e09;
 }
 
-.moreDetails,
 .buy {
   height: 25px;
-  width: 47%;
+  width: 30%;
   line-height: 25px;
   border: 1px solid #848282;
   border-radius: 3px;
-  background-color: #f1e8e8;
   color: black;
-  margin-top: 3px;
   text-decoration: none;
-  font-size: 10px;
-  font-weight: 700;
-  align-items: 20px;
-  text-align: center;
+  font-size: 12px;
+  background-color: #f2bd0b;
+  font-weight: 600;
 }
 
-.buy {
-  background-color: #f2bd0b;
-  margin-left: 2%;
-}
 
 .moreDetails:hover {
   box-shadow: -1px 0px 4px 0px #787272;
@@ -194,9 +210,9 @@ option {
 
 
 .product img {
-  max-width: 110px;
-  height: 100px;
-  margin: 0 auto
+  width: 80px;
+    height: 80px;
+    margin: 10% auto;
 }
 
 .catalog {
@@ -214,11 +230,7 @@ option {
 }
 
 @media screen and (max-width:1200px)and (min-width:769px) {
-  .product img {
-    width: 80px;
-    height: 80px;
-
-  }
+ 
 }
 
 
@@ -234,28 +246,38 @@ option {
 
 
   .filters {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
   }
-  .cardBodySmall{
+
+  .cardBodySmall {
     display: block;
+    width: 60%;
   }
-  .cardBodyBig{
+
+  .cardBodySmall p {
+    font-size: 12px;
+  }
+
+  .cardBodyBig {
     display: none;
   }
 
   .filterSmallSize {
     display: block;
   }
+
   .filterBigSize {
     display: none;
   }
+
   .priceBuy,
-  .yearDenomination{
+  .yearDenomination {
     display: flex;
     justify-content: space-evenly;
   }
-  
-  .buySmall{
+
+  .buySmall {
     display: block;
     height: 25px;
     width: 47%;
@@ -274,10 +296,10 @@ option {
   }
 
   .product {
-    width: 95%;
+    width: 90%;
     margin: 0 0 1% 0;
-    height: 140px;
     display: flex;
+    padding: 2% 0.5%;
   }
 
   .product:hover {
@@ -286,16 +308,20 @@ option {
 
   .imageBox {
     width: 35%;
-    height: 100px;
-    line-height: 100px;
+    height: 130px;
+    line-height: 130px;
   }
 
   .search {
     width: 270px;
   }
 
-  .main {
-    display: block;
+
+  .product img {
+    margin: auto;
   }
 
+  .noImageBig {
+    margin: auto;
+  }
 }

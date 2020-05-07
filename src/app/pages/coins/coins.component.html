@@ -3,7 +3,7 @@
   <div class="main">
 
 
-   
+
 
     <section class="filters">
       <mat-expansion-panel class="filterSmallSize">
@@ -315,12 +315,8 @@
             </select>
           </div>
         </div>
-
-        <input type="number" [(ngModel)]="idCoin" name="idCoin">
-        <input type="button" (click)="showOne(idCoin)">
-        <div class="oneCoin">{{oneCoin}}</div>
       </form>
-    
+
     </section>
 
     <section class="catalog">
@@ -328,18 +324,21 @@
       <figure class="product" *ngFor="let coin of list" [routerLink]="[ '/product',  coin.categoryName, coin.id ]">
 
         <div class="imageBox">
-          <ul *ngFor="let image of coin.images;">
+          <div *ngFor="let image of coin.images;">
             <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage">
-          </ul>
-          <ul *ngIf="(coin.images.length == '0')" class="noImageBig card-img-top">
-          </ul>
+          </div>
+          <div *ngIf="(coin.images.length == '0')" class="noImageBig card-img-top">
+          </div>
         </div>
         <div class="card-body cardBodyBig">
-          <p class="title">{{ coin.name }} {{ coin.denomination }}грн. {{ coin.year }}р.</p>
-          <p class="price">{{ coin.price }} грн</p>
-          <div class="button-group">
-            <input type="button" class="buy"  value="Купити">
-            <!-- <input type="button" class="buy" (click)="buyProduct(coin)" value="Купити"> -->
+          <p class="title">{{ coin.name }}</p>
+          <div class="denominationYear">
+            <p> {{ coin.denomination }}грн.</p>
+            <p> {{ coin.year }}р.</p>
+          </div>
+          <div class="priceBuy">
+            <p class="price">{{ coin.price }} грн</p>
+            <input type="button" class="buy" value="Купити">
           </div>
         </div>
         <div class="card-body cardBodySmall">
@@ -350,7 +349,6 @@
           </div>
           <div class="priceBuy">
             <p class="price">{{ coin.price }} грн</p>
-            <!-- <input type="button" class="buySmall" (click)="buyProduct(coin)" value="Купити"> -->
             <input type="button" class="buySmall" value="Купити">
           </div>
         </div>
