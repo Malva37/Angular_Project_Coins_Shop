@@ -10,7 +10,9 @@
   background-color: white;
   opacity: 0.9;
 }
-
+form-group{
+  margin-bottom: 0;
+}
 .cardBodySmall {
   display: none;
 }
@@ -113,10 +115,10 @@ option {
 }
 
 .noImageBig {
-  width: 100px;
+  max-width: 100px;
   height: 100px;
-  background: url('../../../assets/icon/noImageBig.png') no-repeat;
-  margin: 0px auto 10% auto;
+  // background: url('../../../assets/icon/noImageBig.png') no-repeat;
+  margin:auto;
 }
 
 .ng5-slider-pointer-min,
@@ -135,11 +137,15 @@ option {
 .product:hover {
   .buy {
     display: block;
+    width: 51%;
   }
 
   .priceBuy {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+  }
+  .price{
+    width: 49%;
   }
 
   z-index: 1;
@@ -205,15 +211,20 @@ option {
 
 .buy:hover {
   box-shadow: -1px 0px 4px 0px #787272;
+  width: 51%;
 
 }
 
-
-.product img {
-  width: 80px;
-    height: 80px;
-    margin: 10% auto;
+.mainImage{
+  width: 100px;
+  height: 100px;
 }
+
+// .product img {
+//   // width: 80px;
+//   // height: 80px;
+//     // margin: 10% auto;
+// }
 
 .catalog {
   width: 70%;
@@ -231,6 +242,17 @@ option {
 
 @media screen and (max-width:1200px)and (min-width:769px) {
  
+  .mainImage{
+    width: 80px;
+    height: 80px;
+  }
+
+  .noImageBig {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    background: url('../../../assets/icon/noImageMobile.png') no-repeat;
+  }
 }
 
 
@@ -247,12 +269,16 @@ option {
 
   .filters {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto 1% auto;
+  }
+  .filters{
+    padding: 0;
   }
 
   .cardBodySmall {
     display: block;
     width: 60%;
+    margin: 0 0 0 3%;
   }
 
   .cardBodySmall p {
@@ -299,7 +325,7 @@ option {
     width: 90%;
     margin: 0 0 1% 0;
     display: flex;
-    padding: 2% 0.5%;
+    padding: 3% 2.5%;
   }
 
   .product:hover {
@@ -308,20 +334,31 @@ option {
 
   .imageBox {
     width: 35%;
-    height: 130px;
-    line-height: 130px;
+    // height: 130px;
+    // line-height: 130px;
   }
 
   .search {
     width: 270px;
   }
 
-
-  .product img {
-    margin: auto;
+  .mainImage{
+    // width: 100px;
+    height: 100px;
+    outline: #f2bd0b solid 1px;
+    outline-offset: 5px;
+    max-width: 100%;
   }
 
   .noImageBig {
-    margin: auto;
+    // margin: auto;
+    // background: url('../../../assets/icon/noImageBig.png') no-repeat;
+    outline: #f2bd0b solid 1px;
+    outline-offset: 5px;
+    // width: auto;
+    // background-position: center center;
+    // background-clip: ;
+
+   
   }
 }

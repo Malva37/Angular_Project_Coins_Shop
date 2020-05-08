@@ -8,7 +8,6 @@ import { ShareService } from './share.service';
 import { User } from '../classes/users.model';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,19 +21,11 @@ export class AuthService {
     this.baseUrl = environment.apiUrl;
   }
 
-
   getJSONUser(): Observable<Array<UserCredentials>> {
     return this.http.get<Array<UserCredentials>>(`${this.baseUrl}/authenticate`)
   }
 
-
-
-
-
-
   postJSONUsers(user: UserCredentials) {
-    console.log(this.baseUrl);
-    
     this.http.post<any>(`${this.baseUrl}/authenticate`, user,
       { observe: 'response' }).subscribe(response => {
         localStorage.setItem('token', response.body.token)

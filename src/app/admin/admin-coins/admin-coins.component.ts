@@ -124,8 +124,9 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   openModalImage(template: TemplateRef<any>, product) {
+    debugger
     this.modalRef = this.modalService.show(template);
-    // console.log(product);
+    console.log(product);
     this.product = product;
     // console.log(this.product);
     this.images = product.images;

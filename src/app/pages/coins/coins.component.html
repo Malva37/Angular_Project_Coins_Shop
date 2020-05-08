@@ -325,9 +325,10 @@
 
         <div class="imageBox">
           <div *ngFor="let image of coin.images;">
-            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage">
+            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage" [attr.title]="coin.name">
           </div>
-          <div *ngIf="(coin.images.length == '0')" class="noImageBig card-img-top">
+          <div *ngIf="(coin.images.length == '0')">
+            <img src="../../../assets/icon/noImageBig.png"  class="noImageBig card-img-top" alt="">
           </div>
         </div>
         <div class="card-body cardBodyBig">
@@ -337,7 +338,7 @@
             <p> {{ coin.year }}р.</p>
           </div>
           <div class="priceBuy">
-            <p class="price">{{ coin.price }} грн</p>
+            <p class="price">Ціна: {{ coin.price }}грн.</p>
             <input type="button" class="buy" value="Купити">
           </div>
         </div>
@@ -348,7 +349,7 @@
             <p>{{ coin.year }}р.</p>
           </div>
           <div class="priceBuy">
-            <p class="price">{{ coin.price }} грн</p>
+            <p class="price">Ціна: {{ coin.price }}грн.</p>
             <input type="button" class="buySmall" value="Купити">
           </div>
         </div>
