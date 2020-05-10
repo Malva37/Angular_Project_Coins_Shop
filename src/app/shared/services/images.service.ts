@@ -20,8 +20,13 @@ export class ImagesService {
       "Access-Control-Allow-Origin", environment.apiUrl)
   }
 
-  postImage(product): Observable<Array<IProduct>> {
-    return  this.http.post<Array<IProduct>>(this.urlImages, product);
+  postImage(product): Observable<IProduct> {
+    return  this.http.post<IProduct>(this.urlImages, product);
+   
+  }
+
+  updateImage(image): Observable<IProduct> {
+    return  this.http.put<IProduct>(this.urlImages, image);
    
   }
 

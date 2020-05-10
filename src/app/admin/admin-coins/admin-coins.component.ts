@@ -30,7 +30,7 @@ export class AdminCoinsComponent implements OnInit {
   formData: Coin;
   list: Array<ICoin>;
   adminCategories: Array<ICategory>;
-  searchName:string;
+  searchName: string;
   page: number;
   id: number;
   categoryId: number;
@@ -119,7 +119,7 @@ export class AdminCoinsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     this.product = product;
     console.log(this.product);
-    
+
 
   }
 
@@ -162,10 +162,10 @@ export class AdminCoinsComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    
+
     const data: ICoin = Object.assign({}, form.value);
     console.log(data);
-    
+
     if (!this.editStatus) {
       this.service.postJSONCoin(data)
         .subscribe(
@@ -246,12 +246,13 @@ export class AdminCoinsComponent implements OnInit {
           let isTitleValue = this.images.length === 0;
           let image = { id: null, url: data, isTitle: isTitleValue, productId: this.product.id };
           debugger
-         console.log(this.images);
-         
+          console.log(this.images);
+
           this.imageService.postImage(image).subscribe(
-            () => {
+            res => {
+              console.log(res);
               this.getForAdmin();
-              // return this.images = res.images;
+              this.images = res.images;
             });
           console.log('post done');
         }
@@ -268,6 +269,16 @@ export class AdminCoinsComponent implements OnInit {
         break;
       }
     }
+    image.productId = this.product.id;
+    console.log(image);
+    
+    this.imageService.updateImage(image).subscribe(
+      res => {
+        console.log(res);
+        this.getForAdmin();
+        this.images = res.images;
+      }
+    )
   }
 
   private createUUID(): string {

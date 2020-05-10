@@ -86,28 +86,28 @@ export class CoinsComponent implements OnInit {
 
   // }
 
-  getMaxPrice(list) {
-    let max = list[0].price;
-    for (let i = 1; i < list.length; ++i) {
-      if (list[i].price > max) {
-        max = list[i].price;
-      }
-    }
-    this.options.ceil = max;
-    this.maxValue = max;
-  }
+  // getMaxPrice(list) {
+  //   let max = list[0].price;
+  //   for (let i = 1; i < list.length; ++i) {
+  //     if (list[i].price > max) {
+  //       max = list[i].price;
+  //     }
+  //   }
+  //   this.options.ceil = max;
+  //   this.maxValue = max;
+  // }
 
 
-  getMinPrice(list) {
-    let min = list[0].price;
-    for (let i = 1; i < list.length; ++i) {
-      if (list[i].price < min) {
-        min = list[i].price;
-      }
-    }
-    this.options.floor = min;
-    this.minValue = min;
-  }
+  // getMinPrice(list) {
+  //   let min = list[0].price;
+  //   for (let i = 1; i < list.length; ++i) {
+  //     if (list[i].price < min) {
+  //       min = list[i].price;
+  //     }
+  //   }
+  //   this.options.floor = min;
+  //   this.minValue = min;
+  // }
 }
 
 

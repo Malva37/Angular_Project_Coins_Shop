@@ -13,7 +13,12 @@
         <form>
           <div class="boxFilter">
             <div class="filter_name"> Ціна</div>
-            <div class="filter_group price_slider" *ngIf="minValue && maxValue">
+            <div class="filter_group price_slider">
+              <input type="range" min="50" max="100">
+            </div>
+
+            <!-- <div class="filter_group price_slider"> 
+               <div class="filter_group price_slider" *ngIf="minValue && maxValue">
               <div class="minMaxField">
                 <p class="minValue">від
                   <input type="number" class="form-control" name='minValue' [(ngModel)]="minValue">
@@ -21,9 +26,9 @@
                 <p class="maxValue">до
                   <input type="number" class="form-control" name='maxValue' [(ngModel)]="maxValue">
                 </p>
-              </div>
+              </div> 
               <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
-            </div>
+            </div> -->
           </div>
 
           <div class="boxFilter">
@@ -325,10 +330,11 @@
 
         <div class="imageBox">
           <div *ngFor="let image of coin.images;">
-            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage" [attr.title]="coin.name">
+            <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top mainImage"
+              [attr.title]="coin.name">
           </div>
           <div *ngIf="(coin.images.length == '0')">
-            <img src="../../../assets/icon/noImageBig.png"  class="noImageBig card-img-top" alt="">
+            <img src="../../../assets/icon/noImageBig.png" class="noImageBig card-img-top" alt="">
           </div>
         </div>
         <div class="card-body cardBodyBig">

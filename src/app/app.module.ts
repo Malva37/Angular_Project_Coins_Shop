@@ -46,7 +46,7 @@ import { FilterYearPipe } from './shared/pipes/filter-year.pipe';
 import { FilterSeriesPipe } from './shared/pipes/filter-series.pipe';
 import { FilterDenominationPipe } from './shared/pipes/filter-denomination.pipe';
 import { FilterMetalPipe } from './shared/pipes/filter-metal.pipe';
-import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
+// import { FilterPricePipe } from './shared/pipes/filter-price.pipe';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -90,7 +90,7 @@ import { MatExpansionModule } from '@angular/material';
     FilterSeriesPipe,
     FilterDenominationPipe,
     FilterMetalPipe,
-    FilterPricePipe,
+    // FilterPricePipe,
     MedalComponent,
     MedalListComponent,
     ProductDetailsComponent,

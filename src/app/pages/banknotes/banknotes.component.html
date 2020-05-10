@@ -118,7 +118,8 @@
 
     </section>
     <section class="catalog">
-      <figure class="product" *ngFor="let banknote of list | searchCoin:searchName | filterPrice:minValue:maxValue |  filterDenomination:denomination | filterYear: year | filterSign:signature">
+      <!-- <figure class="product" *ngFor="let banknote of list | searchCoin:searchName | filterPrice:minValue:maxValue |  filterDenomination:denomination | filterYear: year | filterSign:signature"> -->
+        <figure class="product" *ngFor="let banknote of list">
         <img [attr.src]="banknote.image" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="title">{{ banknote.name }} {{ banknote.denomination }} грн. {{ banknote.year }}р.</p>

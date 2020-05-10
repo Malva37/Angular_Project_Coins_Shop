@@ -23,7 +23,9 @@
     </section>
 
     <section class="catalog">
-      <figure class="product" *ngFor="let accessory of list | searchCoin:searchName | filterPrice:minValue:maxValue">
+      <!-- <figure class="product" *ngFor="let accessory of list | searchCoin:searchName | filterPrice:minValue:maxValue"> -->
+      <figure class="product" *ngFor="let accessory of list">
+        
         <img [attr.src]="accessory.image" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="title">{{ accessory.name }}</p>

@@ -22,7 +22,8 @@
     </section>
 
     <section class="catalog">
-      <figure class="product" *ngFor="let medal of list | searchCoin:searchName | filterPrice:minValue:maxValue">
+      <!-- <figure class="product" *ngFor="let medal of list | searchCoin:searchName | filterPrice:minValue:maxValue"> -->
+        <figure class="product" *ngFor="let medal of list">
         <img [attr.src]="medal.image" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="title">{{ medal.name }}</p>
