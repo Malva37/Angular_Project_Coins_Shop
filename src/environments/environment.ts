@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyAchb4HxKRupxPcwuFEt5EOlpPaenMbBNA",
-    authDomain: "coins-shop-bejava.firebaseapp.com",
-    databaseURL: "https://coins-shop-bejava.firebaseio.com",
-    projectId: "coins-shop-bejava",
-    storageBucket: "coins-shop-bejava.appspot.com",
-    messagingSenderId: "634822537022",
-    appId: "1:634822537022:web:a0ed6d48ec4a50cec6c66f"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
   },
-  apiUrl: "https://coins-shop-ua.herokuapp.com"
+  apiUrl: ""
 };
 
 /*
