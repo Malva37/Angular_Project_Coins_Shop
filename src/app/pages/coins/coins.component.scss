@@ -20,6 +20,10 @@ form-group{
 .cardBodyBig {
   display: block;
 }
+.ng5-slider .ng5-slider-pointer {
+  cursor: pointer;
+  background-color: #f2bd0b!important;
+}
 
 ::ng-deep {
   .custom-slider .ng5-slider .ng5-slider-bar {
@@ -57,6 +61,16 @@ form-group{
     background: #9cc59d;
     top: -1px;
   }
+  .ng5-slider .ng5-slider-pointer {
+    background-color: #f2bd0b!important;
+    width: 13px!important;
+    padding-right: 16px!important;
+    height: 14px!important;
+    top: -6px!important;
+  }
+  .ng5-slider .ng5-slider-selection {
+    background: #f2bd0b!important;
+}
 
 }
 

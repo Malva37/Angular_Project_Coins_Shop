@@ -64,6 +64,10 @@ export class CoinsComponent implements OnInit {
     this.service.getOneCoin(id).subscribe();
   }
 
+  valueChanged(e) {
+    debugger
+    console.log(e.target.value);
+  }
 
 
   // buyProduct(coin: Coin): void {

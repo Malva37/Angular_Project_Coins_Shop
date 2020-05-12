@@ -13,22 +13,25 @@
         <form>
           <div class="boxFilter">
             <div class="filter_name"> Ціна</div>
-            <div class="filter_group price_slider">
-              <input type="range" min="50" max="100">
-            </div>
-
-            <!-- <div class="filter_group price_slider"> 
-               <div class="filter_group price_slider" *ngIf="minValue && maxValue">
-              <div class="minMaxField">
-                <p class="minValue">від
-                  <input type="number" class="form-control" name='minValue' [(ngModel)]="minValue">
-                </p>
-                <p class="maxValue">до
-                  <input type="number" class="form-control" name='maxValue' [(ngModel)]="maxValue">
-                </p>
-              </div> 
-              <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+            <!-- <div class="filter_group price_slider">
+              <input type="range" min="30" max="300" value="30" (input)="valueChanged($event)">
             </div> -->
+
+            <div class="filter_group price_slider">
+              <div class="filter_group price_slider" *ngIf="minValue && maxValue">
+                <div class="minMaxField">
+                  <p class="minValue">від
+                    <input type="number" class="form-control" name='minValue' [(ngModel)]="minValue">
+                  </p>
+                  <p class="maxValue">до
+                    <input type="number" class="form-control" name='maxValue' [(ngModel)]="maxValue">
+                  </p>
+                </div>
+                <!-- <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider> -->
+                <input type="range" min="30" max="300" value="30" (input)="valueChanged($event)">
+
+              </div>
+            </div>
           </div>
 
           <div class="boxFilter">
@@ -172,17 +175,21 @@
 
       <form class="filterBigSize">
         <div class="boxFilter">
+          <div class="filter_group price_slider">
+            <!-- <div class="filter_group price_slider" *ngIf="minValue && maxValue"> -->
           <div class="filter_name"> Ціна</div>
-          <div class="filter_group price_slider" *ngIf="minValue && maxValue">
-            <div class="minMaxField">
+
+            <!-- <div class="minMaxField">
               <p class="minValue">від
                 <input type="number" class="form-control" name='minValue' [(ngModel)]="minValue">
               </p>
               <p class="maxValue">до
                 <input type="number" class="form-control" name='maxValue' [(ngModel)]="maxValue">
               </p>
-            </div>
+            </div> -->
             <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+            <!-- <input type="range" min="30" max="5000" value="30" (input)="valueChanged($event)"> -->
+
           </div>
         </div>
 
