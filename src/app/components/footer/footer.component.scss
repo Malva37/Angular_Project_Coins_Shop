@@ -6,6 +6,9 @@ footer {
   border: 1px solid #6e5d12;
   display: flex;
   justify-content: space-evenly;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 footer a {

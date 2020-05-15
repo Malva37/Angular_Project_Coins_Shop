@@ -12,6 +12,7 @@ import { User } from '../classes/users.model';
   providedIn: 'root'
 })
 export class AuthService {
+  
 
   baseUrl: string;
 

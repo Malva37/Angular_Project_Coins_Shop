@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareService } from 'src/app/shared/services/share.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { element } from 'protractor';
 
 
 @Component({
@@ -15,8 +17,10 @@ export class HeaderComponent implements OnInit {
   adminIcon: boolean;
   userIcon: boolean;
   logIn: boolean;
+  checkSignOut: boolean;
 
-  constructor(private share: ShareService) {
+  constructor(private share: ShareService,
+    private autService: AuthService) {
     this.share.onClickNumber.subscribe(cnt => this.clickCount = cnt);
     this.share.onClickSum.subscribe(sum => this.sumBasket = sum);
     this.share.onChangeSearchName.subscribe(keypress => this.searchName = keypress);
@@ -33,6 +37,23 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.numberItemsInBasket();
     this.sumInBasket();
+    this.showSignOut();
+  }
+
+  showSignOut() {
+        let admin = JSON.parse(localStorage.getItem('isAdmin'));
+        if (admin) {
+          this.logIn = true;
+          this.adminIcon = true;
+        } else if(admin === false){
+          this.logIn = true;
+          this.userIcon = true;
+        } else if(admin === null){
+          this.userIcon = false;
+          this.adminIcon = false;
+          this.logIn = false;
+
+        }
   }
 
 
