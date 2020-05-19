@@ -1,8 +1,19 @@
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
-
+import { map, finalize } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
+import 'rxjs/add/operator/map'
+import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
+import { IImage } from 'src/app/shared/interfaces/image.interfaces';
+import { ImagesService } from 'src/app/shared/services/images.service';
+import { IBanknote } from 'src/app/shared/interfaces/banknote.interfaces';
+import { Banknote } from 'src/app/shared/classes/banknotes.model';
+import { BanknoteService } from 'src/app/shared/services/banknote.service';
 
 @Component({
   selector: 'app-admin-banknotes',
@@ -10,36 +21,241 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./admin-banknotes.component.scss']
 })
 export class AdminBanknotesComponent implements OnInit {
-  modalRef: BsModalRef;
-  // arrBanknotes: Array<IBanknote> = [];
-  // productCategoryName: string = 'banknotes';
-  // productName: string;
-  // productYear: number;
-  // productDenomination: number;
-  // productDescription: string;
-  // productPrice: number;
-  // productCategoryId: number = 2;
-  // productId: number;
-  // productSignature: string;
-  // productImage: string;
-  // editStatus: boolean;
-
-  // ref: AngularFireStorageReference;
-  // task: AngularFireUploadTask;
-  // uploadState: Observable<string>;
-  // uploadProgress: Observable<number>;
-  // downloadURL: Observable<string>;
-  // searchName: string;
-
-
-  constructor(private modalService: BsModalService) { }
-
-  ngOnInit() {
-
+    modalRef: BsModalRef;
+    formData: Banknote;
+    list: Array<IBanknote>;
+    adminCategories: Array<ICategory>;
+    searchName: string;
+    page: number;
+    id: number;
+    categoryId: number;
+    categoryName: string;
+    name: string;
+    count: number;
+    reserved: number;
+    isAvailable: boolean;
+    signature: string;
+    year: number;
+    denomination: number;
+    description: string;
+    price: number;
+    isVisibleForUsers: boolean;
+    images: Array<IImage> = [];
+    image: IImage;
+    downloadSrc: string;
+    product: IBanknote;
+    totalPages: number;
+    editStatus: boolean;
+    isArrayImages: boolean = false;
+    isImage: boolean;
+  
+  
+  
+    ref: AngularFireStorageReference;
+    task: AngularFireUploadTask;
+    uploadState: Observable<string>;
+    uploadProgress: Observable<number>;
+    downloadURL: Observable<string>;
+    editImageStatus: boolean;
+    editImageReverseStatus: boolean;
+  
+  
+    constructor(private modalService: BsModalService,
+      public service: BanknoteService,
+      private firestore: AngularFirestore,
+      private afStorage: AngularFireStorage,
+      private categoryService: CategoriesService,
+      private imageService: ImagesService) { }
+  
+    ngOnInit() {
+      this.getForAdmin();
+      this.getCategory();
+      this.resetForm();
+    }
+  
+    getCategory() {
+      this.categoryService.getCategories().subscribe(
+        data => {
+          let newData = JSON.stringify(data);
+          this.adminCategories = JSON.parse(newData).data;
+        }
+      );
+    }
+  
+  
+  
+    getForAdmin() {
+      this.service.getBanknotes().subscribe(
+        data => {
+          let newData = JSON.stringify(data)
+          this.list = JSON.parse(newData).data;
+          this.page = JSON.parse(newData).pagination.page;
+          this.totalPages = Math.ceil(JSON.parse(newData).pagination.total / 10);
+        })
+    }
+  
+    selectCategory(event: any): string | number {
+      this.categoryName = event.target.value;
+      this.categoryId = event.target.selectedIndex;
+      return this.categoryName && this.categoryId;
+    }
+  
+    fieldsChange(product) {
+      console.log(product);
+      this.service.updateBanknote(product).subscribe(
+        () => {
+          this.getForAdmin();
+        }
+      );
+    }
+  
+    openModal(template: TemplateRef<any>, product?) {
+      this.modalRef = this.modalService.show(template);
+      this.product = product;
+  
+    }
+  
+    openModalImage(template: TemplateRef<any>, product) {
+      this.modalRef = this.modalService.show(template);
+      this.product = product;
+      this.images = product.images;
+      if (this.images.length > 0) {
+        this.isArrayImages = true;
+      }
+    }
+  
+  
+    resetForm(form?) {
+      if (form != null) {
+        form.resetForm();
+      }
+      this.service.formData = {
+        id: null,
+        categoryId: null,
+        categoryName: '',
+        name: '',
+        count: null,
+        reserved: null,
+        isAvailable: null,
+        year: null,
+        denomination: null,
+        signature:'',
+        description: '',
+        price: null,
+        isVisibleForUsers: false,
+        images: []
+      };
+    }
+  
+    onSubmit(form: NgForm) {
+      const data: IBanknote = Object.assign({}, form.value);
+      if (!this.editStatus) {
+        this.service.postJSONBanknote(data)
+          .subscribe(
+            res => {
+              console.log(res);
+              this.getForAdmin();
+            });
+      } else {
+        this.service.updateBanknote(data).subscribe(
+          () => {
+            this.getForAdmin();
+          }
+        )
+      }
+      this.editStatus = false;
+      this.resetForm();
+    }
+  
+    deleteProduct(product) {
+      this.service.deleteBanknote(product.id).subscribe(
+        () => {
+          this.getForAdmin();
+        }
+      )
+    }
+  
+    addImages(images) {
+      this.images = images;
+      this.imageService.postImage(this.product).subscribe(
+        () => {
+          this.getForAdmin();
+        }
+      );
+  
+    }
+  
+    deleteImage(image) {
+      this.afStorage.storage.refFromURL(image.url).delete();
+      this.images = this.images.filter(obj => {
+        return obj.url !== image.url;
+      })
+      if (image.isTitle && this.images.length > 0) {
+        this.images[0].isTitle = true;
+      }
+      if (image.id != null) {
+        this.imageService.deleteImage(image.id)
+      }
+    }
+  
+    onEdit(product, template) {
+      this.openModal(template, product);
+      this.service.formData = Object.assign({}, product);
+      this.editStatus = true;
+    }
+  
+    public upload(event: any): void {
+      const file = event.target.files[0];
+      const filePath = `images/coins/${this.createUUID()}.${file.type.split('/')[1]}`;
+      this.task = this.afStorage.upload(filePath, file);
+      this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+      this.uploadProgress = this.task.percentageChanges();
+      this.task.snapshotChanges()
+        .pipe(finalize(() => this.downloadURL = this.afStorage.ref(filePath).getDownloadURL()))
+        .subscribe();
+      this.task.then((e) => {
+        this.afStorage.ref(`images/coins/${e.metadata.name}`).getDownloadURL().subscribe(
+          data => {
+            let isTitleValue = this.images.length === 0;
+            let image = { id: null, url: data, isTitle: isTitleValue, productId: this.product.id };
+            this.imageService.postImage(image).subscribe(
+              res => {
+                this.getForAdmin();
+                this.images = res.images;
+              });
+          }
+        );
+      }
+      );
+    }
+  
+    changeStatusTitleImage(image) {
+      image.isTitle = true;
+      for (let elem of this.images) {
+        if (elem.isTitle === true && elem.url != image.url) {
+          elem.isTitle = false;
+          break;
+        }
+      }
+      image.productId = this.product.id;
+      this.imageService.updateImage(image).subscribe(
+        res => {
+          this.getForAdmin();
+          this.images = res.images;
+        }
+      )
+    }
+  
+    private createUUID(): string {
+      let dt = new Date().getTime();
+      const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (dt + Math.random() * 16) % 16 | 0;
+        dt = Math.floor(dt / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+      return uuid;
+    }
+  
+  
   }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
-}
+  

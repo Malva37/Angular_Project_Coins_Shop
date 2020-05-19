@@ -1,18 +1,5 @@
-<div class="container">
-  <!-- <form class="mb-2">
-    <div class="form-row mt-4">
-      <div class="col-11">
-        <input type="text" class="form-control" placeholder="Search">
-      </div>
-
-      <div class="col">
-        <button type="button" class="btn btn-light btn-outline-dark" (click)="openModal(template)">Add</button>
-      </div>
-
-    </div>
-  </form> -->
+<!-- <div class="container">
   <app-banknote-list></app-banknote-list>
-
 </div>
 
 <ng-template #template>
@@ -23,8 +10,277 @@
     </button>
   </div>
   <div class="modal-body">
-    <!-- <app-banknote></app-banknote> -->
     <app-banknote></app-banknote>
+  </div>
+</ng-template> -->
+
+
+
+
+<!--  -->
+<form class="searchAdd">
+  <input type="text" class="searchInput form-control" placeholder="Search" [(ngModel)]="searchName" name="searchName">
+  <button type="button" class="btnAdd" (click)="openModal(template)">Add</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr class="title">
+      <th scope="col">Видима<br>корист.</th>
+      <th scope="col">Назва</th>
+      <th scope="col">Ціна,<br>грн</th>
+      <th scope="col">К-сть,<br>шт.</th>
+      <th scope="col">Рік</th>
+      <th scope="col">Підпис гол.<br>банку</th>
+      <th scope="col">Номінал,<br>грн</th>
+      <th scope="col">Image</th>
+      <th scope="col">Додати, <br>змінити фото</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let banknote of list; let i=index">
+      <td>
+        <input name="isVisibleForUsers" #isVisibleForUsers="ngModel" type="checkbox"
+          [(ngModel)]="banknote.isVisibleForUsers" (change)="fieldsChange(banknote)">
+      </td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.name }}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.price}}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.count}}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.series}}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.year}}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.metal}}</td>
+      <td (click)="onEdit(banknote, template)">{{ banknote.denomination}}</td>
+      <td>
+        <ul *ngFor="let image of banknote.images;">
+          <img *ngIf="(image.isTitle == true)" [attr.src]="image.url" class="card-img-top">
+        </ul>
+        <ul *ngIf="(coin.images.length == '0')" class="noImageSmall card-img-top">
+        </ul>
+      </td>
+      <td>
+        <input type="button" value="Image" (click)="openModalImage(imageBox, banknote)" class="btnImage">
+      </td>
+      <td>
+        <input type="button" value="X" (click)="deleteProduct(banknote)" class="btnDelete">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagesBox">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <!-- <a class="page-link" (click)="paginaAnt()"> -->
+          <a class="page-link">
+          <</a> </li> <li class="page-item">
+            <a class="page-link"> {{ page+1 }}</a>
+      </li>
+      <li class="page-item">
+        <!-- <a class="page-link" (click)="proxPagina()">></a> -->
+        <a class="page-link">></a>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">Total: {{ totalPages }}</span>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+<ng-template #imageBox>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Додай/зміни фото</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modalBody">
+    <form>
+      <div class="form-group" *ngIf="isArrayImages">
+        <table class="imageTable">
+          <thead>
+            <tr class="title">
+              <th scope="col">#</th>
+              <th scope="col">Фото</th>
+              <th scope="col">Головне <br> фото</th>
+              <th scope="col">Видалити</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let image of images; let i=index">
+              <td>{{ i+1 }}</td>
+              <td>
+                <img [attr.src]="image.url" class="littleImage">
+              </td>
+              <td>
+                <input type="radio" name="isTitle" [checked]="image.isTitle" (change)="changeStatusTitleImage(image)">
+              </td>
+              <td>
+                <input type="button" value="x" (click)="deleteImage(image)" class="btnDelete">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <h5 class="card-title">Select a file for upload:</h5>
+        <input class="form-control" type="file" (change)="upload($event)" accept=".png,.jpg">
+        <img class="littleImage" [src]="images" alt="">
+      </div>
+      <div class="form-group">
+        <button type="button" (click)="addImages(images)" class="btn btn-info">Додати фото</button>
+      </div>
+    </form>
   </div>
 </ng-template>
 
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Додай/зміни товар</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modalBody">
+
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+      <input type="hidden" name="categoryName" #categoryName="ngModel" [(ngModel)]="service.formData.categoryName">
+      <input type="hidden" name="reserved" #reserved="ngModel" [(ngModel)]="service.formData.reserved">
+      <input type="hidden" name="isAvailable" #isAvailable="ngModel" [(ngModel)]="service.formData.isAvailable">
+      <input type="hidden" name="isVisibleForUsers" #isVisibleForUsers="ngModel" [(ngModel)]="service.formData.isVisibleForUsers">
+
+      <div class="field">
+        <div class="titleField">Категорія:</div>
+        <select (change)="selectCategory($event)" name="categoryId" class="custom-select" #categoryId="ngModel"
+          [(ngModel)]="service.formData.categoryId" required>
+          <option disabled selected>Choose category</option>
+          <option *ngFor="let item of adminCategories" [value]="item.id">
+            {{item.name}}</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="titleField">Назва товару:</div>
+        <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" required>
+      </div>
+
+      <div class="field">
+        <div class="titleField">Кількість:</div>
+        <input type="number" name="count" #count="ngModel" [(ngModel)]="service.formData.count" class="form-control"
+          pattern="[1-9]{1,}" required>
+
+      </div>
+
+      
+      <div class="field bootstrap-select show-tick open">
+        <div class="titleField">Рік випуску:</div>
+        <select class="custom-select" #year="ngModel" [(ngModel)]="service.formData.year" name="year">
+          <option>1991</option>
+          <option>1992</option>
+          <option>1993</option>
+          <option>1994</option>
+          <option>1995</option>
+          <option>1996</option>
+          <option>1997</option>
+          <option>1998</option>
+          <option>1999</option>
+          <option>2000</option>
+          <option>2001</option>
+          <option>2002</option>
+          <option>2003</option>
+          <option>2004</option>
+          <option>2005</option>
+          <option>2006</option>
+          <option>2007</option>
+          <option>2008</option>
+          <option>2009</option>
+          <option>2010</option>
+          <option>2011</option>
+          <option>2012</option>
+          <option>2013</option>
+          <option>2014</option>
+          <option>2015</option>
+          <option>2016</option>
+          <option>2017</option>
+          <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
+      </div>
+      
+      <div class="form-group bootstrap-select show-tick open">
+        <div class="titleField">Підпис голови банку</div>
+        <select class="custom-select" [(ngModel)]="service.formData.signature" name="signature" #signature="ngModel"
+          required>
+          <!-- <option selected="" value="-1"> — будь-який підпис — </option> -->
+          <option> Матвієнко Володимир Павлович </option>
+          <option> Гетьман Вадим Петрович </option>
+          <option> Ющенко Віктор Андрійович</option>
+          <option> Стельмах Володимир Семенович</option>
+          <option> Тігіпко Сергій Леонідович</option>
+          <option> Арбузов Сергій Геннадійович </option>
+          <option> Соркін Ігор В'ячеславович</option>
+          <option> Кубів Степан Іванович</option>
+          <option> Гонтарева Валерія Олексіївна</option>
+          <option> Смолій Яків Васильович</option>
+        </select>
+      </div>
+
+      <div class="field bootstrap-select show-tick open">
+        <div class="titleField">Номінал</div>
+        <select class="custom-select" #denomination="ngModel" [(ngModel)]="service.formData.denomination"
+          name="denomination">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+          <option>125</option>
+          <option>180</option>
+          <option>200</option>
+          <option>250</option>
+          <option>540</option>
+          <option>1080</option>
+          <option>200000</option>
+          <option>1000000</option>
+          <option>2000000</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="titleField">Ціна:</div>
+        <input type="number" name="price" #price="ngModel" [(ngModel)]="service.formData.price" class="form-control"
+          required>
+      </div>
+
+      <div class="field">
+        <div class="titleField">Опис:</div>
+        <textarea type="text" name="description" #description="ngModel" [(ngModel)]="service.formData.description"
+          class="form-control">
+            </textarea>
+      </div>
+
+      <input type="hidden" name="images" #images="ngModel" [(ngModel)]="service.formData.images">
+
+      <div class="field">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+      </div>
+
+    </form>
+
+
+  </div>
+</ng-template>

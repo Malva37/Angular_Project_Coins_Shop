@@ -1,5 +1,3 @@
-// import { Component, OnInit, TemplateRef } from '@angular/core';
-// import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Coin } from 'src/app/shared/classes/coins.model';
 import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
@@ -7,16 +5,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map, finalize } from 'rxjs/operators';
-import { NgForm, FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { CoinService } from 'src/app/shared/services/coin-for-admin.service';
 import { ICoin } from 'src/app/shared/interfaces/coins.interfaces';
 import 'rxjs/add/operator/map'
-import { element } from 'protractor';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { ICategory } from 'src/app/shared/interfaces/categories.interfaces';
 import { IImage } from 'src/app/shared/interfaces/image.interfaces';
-import { Image } from 'src/app/shared/classes/image.model';
-import { prototype } from 'events';
 import { ImagesService } from 'src/app/shared/services/images.service';
 
 
@@ -118,19 +113,13 @@ export class AdminCoinsComponent implements OnInit {
   openModal(template: TemplateRef<any>, product?) {
     this.modalRef = this.modalService.show(template);
     this.product = product;
-    console.log(this.product);
-
 
   }
 
   openModalImage(template: TemplateRef<any>, product) {
-    debugger
     this.modalRef = this.modalService.show(template);
-    console.log(product);
     this.product = product;
-    // console.log(this.product);
     this.images = product.images;
-    // console.log(this.images);
     if (this.images.length > 0) {
       this.isArrayImages = true;
     }
@@ -161,11 +150,7 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-
     const data: ICoin = Object.assign({}, form.value);
-    console.log(data);
-
     if (!this.editStatus) {
       this.service.postJSONCoin(data)
         .subscribe(
@@ -182,11 +167,9 @@ export class AdminCoinsComponent implements OnInit {
     }
     this.editStatus = false;
     this.resetForm();
-    // this.modalRef = this.modalService.show(template);
   }
 
   deleteProduct(product) {
-    console.log(product);
     this.service.deleteCoin(product.id).subscribe(
       () => {
         this.getForAdmin();
@@ -195,9 +178,6 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   addImages(images) {
-    console.log(this.product);
-    console.log(images);
-
     this.images = images;
     this.imageService.postImage(this.product).subscribe(
       () => {
@@ -208,9 +188,6 @@ export class AdminCoinsComponent implements OnInit {
   }
 
   deleteImage(image) {
-    console.log("delete");
-    console.log(image);
-
     this.afStorage.storage.refFromURL(image.url).delete();
     this.images = this.images.filter(obj => {
       return obj.url !== image.url;
@@ -218,11 +195,9 @@ export class AdminCoinsComponent implements OnInit {
     if (image.isTitle && this.images.length > 0) {
       this.images[0].isTitle = true;
     }
-    console.log(this.images);
     if (image.id != null) {
       this.imageService.deleteImage(image.id)
     }
-
   }
 
   onEdit(product, template) {
@@ -245,16 +220,11 @@ export class AdminCoinsComponent implements OnInit {
         data => {
           let isTitleValue = this.images.length === 0;
           let image = { id: null, url: data, isTitle: isTitleValue, productId: this.product.id };
-          debugger
-          console.log(this.images);
-
           this.imageService.postImage(image).subscribe(
             res => {
-              console.log(res);
               this.getForAdmin();
               this.images = res.images;
             });
-          console.log('post done');
         }
       );
     }
@@ -270,11 +240,8 @@ export class AdminCoinsComponent implements OnInit {
       }
     }
     image.productId = this.product.id;
-    console.log(image);
-    
     this.imageService.updateImage(image).subscribe(
       res => {
-        console.log(res);
         this.getForAdmin();
         this.images = res.images;
       }
