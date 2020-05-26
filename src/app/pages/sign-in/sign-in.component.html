@@ -24,57 +24,66 @@
 
 
   <div *ngIf="signStatus" class='fullRegistration'>
-    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="share.formData.id">
-      <input type="hidden" name="isAdmin" #isAdmin="ngModel" [(ngModel)]="share.formData.isAdmin">
+    <form [formGroup]="form01">
+      <input type="hidden" name="id" formControlName="id">
+      <input type="hidden" name="isAdmin" formControlName="isAdmin">
       <div class="form-group row">
-        <input type="text" class="form-control" name="firstName" #firstName="ngModel"
-          [(ngModel)]="share.formData.firstName" placeholder="Ім'я"
+        <input type="text" class="form-control" name="firstName" formControlName="firstName" placeholder="Ім'я"
           pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}" required>
-        <div *ngIf="firstName.invalid && firstName.touched" class="validation-error">Введіть тільки буквенні символи
+        <div *ngIf="form01.controls.firstName.errors?.pattern" class="validation-error">
+          Введіть тільки буквенні символи
         </div>
       </div>
       <div class="form-group row">
-        <input type="text" class="form-control" name="lastName" #lastName="ngModel"
-          [(ngModel)]="share.formData.lastName" placeholder="Прізвище"
+        <input type="text" class="form-control" name="lastName" formControlName="lastName" placeholder="Прізвище"
           pattern="[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}" required>
-        <div *ngIf="lastName.invalid && lastName.touched" class="validation-error">Введіть тільки буквенні символи</div>
+        <div *ngIf="form01.controls.lastName.errors?.pattern" class="validation-error">
+          Введіть тільки буквенні символи
+        </div>
       </div>
       <div class="form-group row">
-        <input type="text" [textMask]="{mask: phoneMask}" class="form-control" name="phone " #phone="ngModel"
-          [(ngModel)]="share.formData.phone" placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ" required>
+        <input type="text" [textMask]="{mask: phoneMask}" class="form-control" name="phone" formControlName="phone"
+          placeholder="+38(0ХХ)-ХХХ-ХХ-ХХ" required>
       </div>
       <div class="form-group row">
-        <input type="text" class="form-control" name="address" #address="ngModel" [(ngModel)]="share.formData.address"
-          placeholder="Адреса доставки">
+        <input type="text" class="form-control" name="address" formControlName="address" placeholder="Адреса доставки">
+        <div *ngIf="form01.controls.address.errors?.pattern" class="validation-error">
+          Введіть більш детальну адресу
+        </div>
       </div>
+      <form [formGroup]="passwords">
+        <div class="form-group row fieldPassword">
+          <input [type]="show ? 'text' : 'password'" class="form-control" name="password" formControlName="password"
+            placeholder="Пароль не менше 6 символів" required>
+          <span class="passwordEye" (click)="showPassword()"></span>
+        </div>
+        <!-- <div *ngIf="password.invalid && password.touched" class="validation-error">Введіть пароль</div> -->
 
-      <div class="form-group row fieldPassword">
-        <input [type]="show ? 'text' : 'password'" class="form-control" name="password" #password="ngModel"
-          [(ngModel)]="share.formData.password" autocomplete="new-password" placeholder="Пароль не менше 6 символів"
-          required>
-        <span class="passwordEye" (click)="showPassword()"></span>
-      </div>
-      <div *ngIf="password.invalid && password.touched" class="validation-error">Введіть пароль</div>
+
+
+        <div class="form-group row">
+          <input class="form-control" placeholder="Повторіть пароль" name="confirmPassword"
+            formControlName="confirmPassword" required>
+        </div>
+        <!-- <div *ngIf="form01.passwords.password.controls.value != form01.passwords.confirmPassword.controls.value" class="validation-error">Введіть пароль</div> -->
+      </form>
+      <!-- <h4>Valid : {{ changePasswordForm.valid  }}</h4> -->
+      <!-- <div *ngIf="confirmPassword.errors?.equalTo" class="validation-error">Паролі не співпадають</div> -->
+      <!-- <div class="validation-error">Паролі не співпадають</div> -->
+
 
 
       <div class="form-group row">
-        <input class="form-control" placeholder="Повторіть пароль" required>
-      </div>
-      <!-- <div *ngIf="password.invalid && password.touched" class="validation-error">Паролі не співпадають</div> -->
-      <div class="validation-error">Паролі не співпадають</div>
-
-
-
-      <div class="form-group row">
-        <input type="email" class="form-control" pattern="[a-zA-Z0-9-.]+\@{1}[a-z.]+" name="email" #email="ngModel"
-          [(ngModel)]="share.formData.email" placeholder="email" required>
-        <div *ngIf="email.invalid && email.touched" class="validation-error">Ви ввели неіснуючий e-mail</div>
+        <input type="email" class="form-control" name="email" formControlName="email" placeholder="email" required>
+        <div *ngIf="form01.controls.email.errors?.pattern" class="validation-error">
+          Введіть вірний email
+        </div>
       </div>
       <div class="form-group row registrationButton">
         <!-- <button (click)="registrationFull(firstName,lastName,phone,address, password, email)"
           class="btn-sm">Зареєструватися</button> -->
-        <input type="submit" [disabled]="form.invalid" value="Зареєструватись" class="btn btn-lg btn-block btn-info">
+        <input type="button" [disabled]="!form01.valid" (click)="addOrder()" value="Зареєструватись"
+          class="btn btn-lg btn-block btn-info">
       </div>
     </form>
   </div>

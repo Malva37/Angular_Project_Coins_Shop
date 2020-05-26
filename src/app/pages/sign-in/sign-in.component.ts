@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { User } from 'src/app/shared/classes/users.model';
 import { UserCredentials } from 'src/app/shared/classes/userCredentials';
 import { UserServiceService } from 'src/app/shared/services/User.service';
 import { IUserCredentials } from 'src/app/shared/interfaces/userCredentials.interfaces';
-
 
 @Component({
   selector: 'app-sign-in',
@@ -25,17 +24,50 @@ export class SignInComponent implements OnInit {
   address: string;
   isAdmin: boolean = false;
   show: boolean;
+  form01: FormGroup;
 
 
 
   constructor(private service: AuthService,
-    public share: UserServiceService) { }
+    public share: UserServiceService,
+    public builder: FormBuilder) {
+
+    this.form01 = this.builder.group(
+      {
+        id: [null],
+        isAdmin: [null],
+        firstName: [null, [Validators.required, Validators.pattern('[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}')]],
+        lastName: [null, [Validators.required, Validators.pattern('[A-Za-z\u0400-\u04FF][a-z\u0400-\u04FF]{1,19}')]],
+        phone: [null, [Validators.required]],
+        address: [null, [Validators.required, Validators.pattern('[a-zA-Z\u0400-\u04FF0-9-. ,/]{4,}')]],
+        email: [null, [Validators.required, Validators.pattern('[a-zA-Z0-9-.]+\@{1}[a-z.]+')]],
+        passwords:this.builder.group({
+          password: ['', [Validators.required]],
+          confirmPassword: ['', [Validators.required]]
+        },
+          {validators:  this.confirmPasswordValidator}
+        )
+        // password: [null, [Validators.required],],
+        // confirmPassword: new FormControl('', [Validators.required], this.confirmPasswordValidator)
+      })
+  }
 
   ngOnInit() {
     this.resetForm();
     this.show = false;
 
   }
+  confirmPasswordValidator(control: FormControl): { [s: string]: boolean } {
+    console.log(control.value);
+    console.log(this.password);
+    
+    if (control.value == this.password) {
+
+      return { "userName": true };
+    }
+    return null;
+  }
+
 
   resetForm(form?: NgForm) {
     if (form != null) {
@@ -49,6 +81,7 @@ export class SignInComponent implements OnInit {
       phone: '',
       address: '',
       password: '',
+      confirmPassword: '',
       isAdmin: null
     };
     this.share.formDataSm = {
@@ -75,7 +108,7 @@ export class SignInComponent implements OnInit {
     debugger
     const user: IUserCredentials = Object.assign({}, form.value);
     console.log(user);
-    
+
     this.service.postJSONUsers(user);
   }
 
@@ -83,8 +116,8 @@ export class SignInComponent implements OnInit {
     this.signStatus = true;
   }
 
-  registrationFull(firstName, lastName, phone, address, password, email) {
-    let user = new User(1, firstName, lastName, phone, address, password, email, this.isAdmin);
+  registrationFull(firstName, lastName, phone, address, password, confirmPassword, email) {
+    let user = new User(1, firstName, lastName, email, phone, address, password, confirmPassword, this.isAdmin);
     this.service.createUsers(user);
   }
 
